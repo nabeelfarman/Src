@@ -1,0 +1,56 @@
+<div class="saveUpdateBar mat-elevation-z2">
+  <button mat-button class="save" (click)="save()">
+    <mat-icon>save</mat-icon>
+    <span class="ps-2">Save</span>
+  </button>
+  <button mat-button class="save" (click)="reset()">
+    <mat-icon>cached</mat-icon>
+    <span class="ps-2">Reset</span>
+  </button>
+</div>
+<div class="row h-100 p-0">
+  <div class="col-md-4 p-0">
+    <div
+      class="d-flex flex-column justify-content-start h-100 bg-white border"
+    >
+      <h2 class="pt-2 ps-3 pe-3">Add / Update Membership</h2>
+      <hr>
+      <div class="ps-4 pe-3 mh-100" data-simplebar>
+        <mat-form-field class="w-100">
+          <input matInput placeholder="Membership No." [(ngModel)]="formFields[3].value" />
+        </mat-form-field>
+        <mat-form-field class="w-100">
+          <mat-label>Plot Category</mat-label>
+          <mat-select [(ngModel)]="formFields[4].value">
+            <mat-option *ngFor="let item of categoryList" [value]="item.plotCategoryId">
+              {{ item.plotCategoryTitle }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="w-100">
+          <mat-label>Plot Nature</mat-label>
+          <mat-select [(ngModel)]="formFields[5].value">
+            <mat-option *ngFor="let item of natureList" [value]="item.plotNatureID">
+              {{ item.plotNatureTitle }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="w-100">
+          <mat-label>Plot Type</mat-label>
+          <mat-select [(ngModel)]="formFields[6].value">
+            <mat-option *ngFor="let item of typeList" [value]="item.plotTypeId">
+              {{ item.plotTypeTitle }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-8 border p-0">
+    <h2 class="pt-2 pb-2 ps-2">Saved Memberships</h2>
+    <hr>
+    <div class="d-flex flex-column">
+      <society-plot-files-table (eventEmitter)="edit($event, $event)"></society-plot-files-table>
+    </div>
+  </div>
+</div>

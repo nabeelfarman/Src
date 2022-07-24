@@ -1,0 +1,29 @@
+<div class="table-responsive">
+  <table class="table table-striped table-bordered">
+    <thead>
+      <tr>
+        <th class="text-center">Sr#</th>
+        <th>Bank Account Head</th>
+        <th>Bank Name</th>
+        <th>Branch Name</th>
+        <th class="text-center">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of tableData let i = index">
+        <td class="text-center">{{ i+1 }}</td>
+        <td>{{ item.titleofAccount }}</td>
+        <td>{{ item.bankName }}</td>
+        <td>{{ item.branchCode }} - {{item.bankAddress}}</td>
+        <td class="text-center">
+          <span class="text-primary pe-2 cursorPointer border-right-dark" (click)="edit(item)">
+            <mat-icon>edit</mat-icon>
+          </span>
+          <span class="text-danger cursorPointer ps-2 pe-2" (click)="delete(item)">
+            <mat-icon>delete</mat-icon>
+          </span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

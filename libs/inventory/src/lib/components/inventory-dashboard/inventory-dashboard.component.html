@@ -1,0 +1,79 @@
+<div id="main-content">
+  <section class="statis mt-4 ps-3 pe-3 text-center">
+    <div class="row">
+      <div class="col-md-3">
+        <div class="box bg-primary p-3 mat-elevation-z2">
+          <i class="text-white"><mat-icon>local_offer</mat-icon></i>
+          <h3 class="text-white">{{totalTagsCount | number}}</h3>
+          <p class="lead text-white">Total Tags</p>
+        </div>
+      </div>
+      <div class="col-md-3 mb-4">
+        <div class="box bg-success p-3 mat-elevation-z2">
+          <i class="text-white"><mat-icon>view_module</mat-icon> </i>
+          <h3 class="text-white">{{condemnedAssetCount | number}}</h3>
+          <p class="lead text-white">Asset Value</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3 mb-4 mb-md-0">
+        <div class="box bg-warning p-3 text-white mat-elevation-z2">
+          <i class=""><mat-icon>location_city</mat-icon></i>
+          <h3 class="text-white">{{sectionTagsCount | number}}</h3>
+          <p class="lead">Locations</p>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="box bg-danger p-3 text-white mat-elevation-z2">
+          <i class=""><mat-icon>handyman</mat-icon></i>
+          <h3 class="text-white">{{condemnedAssetCount | number}}</h3>
+          <p class="lead">Auctionable Items</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="row">
+  <div class="col-md-8">
+    <div class="ms-3 mat-elevation-z2" [chart]="asset_wise_chart"></div>
+  </div>
+  <div class="col-md-4 pe-4 mat-elevation-z2 bg-white">
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col" class="text-center">Sr#</th>
+            <th scope="col">Location</th>
+            <th scope="col" class="text-center">Tags</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="text-center">1</td>
+            <td>Head Office- Ground Floor</td>
+            <td class="text-center">2,000</td>
+          </tr>
+          <tr>
+            <td class="text-center">2</td>
+            <td>Head Office- 1st Floor</td>
+            <td class="text-center">5,254</td>
+          </tr>
+          <tr>
+            <td class="text-center">3</td>
+            <td>Head Office- 2nd Floor</td>
+            <td class="text-center">6,235</td>
+          </tr>
+          <tr>
+            <td class="text-center">4</td>
+            <td>Head Office- 4th Floor</td>
+            <td class="text-center">500</td>
+          </tr>
+          <tr>
+            <td class="text-center" colspan="2"><strong>Total</strong></td>
+            <td class="text-center"><strong>15,000</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

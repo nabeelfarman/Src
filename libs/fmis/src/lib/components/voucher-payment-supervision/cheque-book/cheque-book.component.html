@@ -1,0 +1,72 @@
+<div class="row">
+  <div class="col-md-3">
+    <mat-form-field class="w-100">
+      <mat-label>Issue Date</mat-label>
+      <input matInput [matDatepicker]="picker" />
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+  </div>
+  <div class="col-md-1">
+    <mat-form-field class="w-100">
+      <mat-label>Spl</mat-label>
+      <mat-select>
+        <mat-option *ngFor="let item of splChr" [value]="item.spl">
+          {{ item.spl }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div class="col-md-3">
+    <mat-form-field class="w-100">
+      <mat-label>First Leaf No.</mat-label>
+      <input matInput />
+    </mat-form-field>
+  </div>
+  <div class="col-md-2">
+    <mat-form-field class="w-100">
+      <mat-label>Total Leafs</mat-label>
+      <mat-select>
+        <mat-option value="one">25</mat-option>
+        <mat-option value="two">100</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div class="col-md-3">
+    <mat-form-field class="w-100">
+      <mat-label>Last Leaf No.</mat-label>
+      <input matInput />
+    </mat-form-field>
+  </div>
+</div>
+<div class="table-responsive">
+  <table class="table table-striped table-bordered">
+    <thead>
+      <tr>
+        <th class="text-center">Sr#</th>
+        <th class="text-center">Issue Date</th>
+        <th class="text-center">First Leaf</th>
+        <th class="text-center">Total Leaf</th>
+        <th class="text-center">Last Leaf</th>
+        <th class="text-center">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="text-center">1</td>
+        <td class="text-center">25-Feb-2021</td>
+        <td class="text-center">021101</td>
+        <td class="text-center">100</td>
+        <td class="text-center">021200</td>
+        <td class="text-center">
+          <span class="text-primary pe-2 cursorPointer border-right-dark">
+            <mat-icon>edit</mat-icon>
+          </span>
+          <span class="text-danger cursorPointer border-right-dark ps-2 pe-2">
+            <mat-icon>delete</mat-icon>
+          </span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

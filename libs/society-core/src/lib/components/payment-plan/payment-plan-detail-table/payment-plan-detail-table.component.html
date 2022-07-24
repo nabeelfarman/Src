@@ -1,0 +1,150 @@
+<div class="table-responsive">
+  <table class="table table-striped table-bordered">
+    <thead>
+      <tr>
+        <th class="text-center">Sr#</th>
+        <th>Payment Nature</th>
+        <th>Installment No.</th>
+        <th class="text-right">Amount</th>
+        <th>Due Date</th>
+        <th class="text-center">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of tableData; let i = index">
+        <td class="text-center">{{ i + 1 }}</td>
+        <td *ngIf="item.editMode == false">{{ item.paymentNatureTitle }}</td>
+        <td *ngIf="item.editMode == true">
+          <select class="form-control" [(ngModel)]="item.paymentNatureID">
+            <option
+              *ngFor="let nature of natureList"
+              [value]="nature.paymentNatureID"
+            >
+              {{ nature.paymentNatureTitle }}
+            </option>
+          </select>
+        </td>
+        <td *ngIf="item.editMode == false">{{ item.installmentTitle }}</td>
+        <td *ngIf="item.editMode == true">
+          <select class="form-control" [(ngModel)]="item.installmentID">
+            <option
+              *ngFor="let install of installmentList"
+              [value]="install.installmentID"
+            >
+              {{ install.installmentTitle }}
+            </option>
+          </select>
+        </td>
+        <td *ngIf="item.editMode == false" class="text-right">
+          {{ item.amount | number }}
+        </td>
+        <td *ngIf="item.editMode == true">
+          <input type="number" class="form-control" [(ngModel)]="item.amount"
+          currencyMask
+          [options]="{ prefix: 'Rs. ', precision: 0, max: 9999999 }" />
+        </td>
+        <td *ngIf="item.editMode == false">{{ item.dueDate | date }}</td>
+        <td *ngIf="item.editMode == true">
+          <!-- <input
+            type="datepicker"
+            class="form-control"
+            [(ngModel)]="item.dueDate"
+          /> -->
+          <div class="my-form-field">
+            <mat-form-field floatLabel="never">
+              <input
+                matInput
+                [matDatepicker]="picker01"
+                [(ngModel)]="item.dueDate"
+              />
+              <mat-datepicker-toggle
+                matSuffix
+                [for]="picker01"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #picker01></mat-datepicker>
+            </mat-form-field>
+          </div>
+        </td>
+        <td class="text-center">
+          <span
+            *ngIf="item.editMode == false"
+            class="text-primary cursorPointer"
+            (click)="edit(item)"
+          >
+            <mat-icon>edit</mat-icon>
+          </span>
+          <span
+            *ngIf="item.editMode == true"
+            class="text-primary cursorPointer"
+            (click)="setPaymentDetailFormFields(item)"
+          >
+            <mat-icon>save</mat-icon>
+          </span>
+          <span class="cursorPointer" (click)="delete(item)">
+            <mat-icon color="warn">delete</mat-icon>
+          </span>
+        </td>
+      </tr>
+      <tr *ngIf="this.paymentID != '' && mode == false">
+        <td class="text-center">0</td>
+        <td>
+          <select class="form-control" [(ngModel)]="formFields[4].value">
+            <option
+              *ngFor="let nature of natureList"
+              [value]="nature.paymentNatureID"
+            >
+              {{ nature.paymentNatureTitle }}
+            </option>
+          </select>
+        </td>
+        <td>
+          <select class="form-control" [(ngModel)]="formFields[5].value">
+            <option
+              *ngFor="let install of installmentList"
+              [value]="install.installmentID"
+            >
+              {{ install.installmentTitle }}
+            </option>
+          </select>
+        </td>
+        <td>
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="formFields[6].value"
+          />
+        </td>
+        <td>
+          <!-- <input
+            data-datepicker=""
+            type="datepicker"
+            class="form-control"
+            [(ngModel)]="formFields[7].value"
+          /> -->
+          <div class="my-form-field">
+            <mat-form-field floatLabel="never">
+              <input
+                matInput
+                [matDatepicker]="picker02"
+                [(ngModel)]="formFields[7].value"
+              />
+              <mat-datepicker-toggle
+                matSuffix
+                [for]="picker02"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #picker02></mat-datepicker>
+            </mat-form-field>
+          </div>
+        </td>
+        <td class="text-center">
+          <span class="text-primary cursorPointer" (click)="save()">
+            <mat-icon>save</mat-icon>
+          </span>
+          <!-- <span class="cursorPointer">
+            <mat-icon color="warn">delete</mat-icon>
+          </span> -->
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

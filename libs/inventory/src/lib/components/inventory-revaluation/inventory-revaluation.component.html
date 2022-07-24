@@ -1,0 +1,96 @@
+<div class="saveUpdateBar border mat-elevation-z2">
+  <button mat-button class="save cursorPointer">
+    <mat-icon>open_in_new</mat-icon>
+    <span class="ps-2">Open Revaluation</span>
+  </button>
+  <button mat-button class="save cursorPointer">
+    <mat-icon>cached</mat-icon>
+    <span class="ps-2">Reset</span>
+  </button>
+  <button
+    mat-button
+    class="save cursorPointer"
+    data-bs-toggle="modal"
+    data-bs-target="#historyModal"
+  >
+    <mat-icon>history</mat-icon>
+    <span class="ps-2">History Log</span>
+  </button>
+</div>
+
+<div class="row no-scroll">
+  <div class="col-md-3 bg-white border">
+    <h2 class="pt-3 ps-4 pe-3">Add Revaluation</h2>
+    <hr />
+    <div class="ps-3 pe-3">
+      <mat-form-field class="w-100">
+        <mat-label>Office / Building</mat-label>
+        <mat-select>
+          <mat-option value="one">Head Quarter</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="w-100">
+        <mat-label>Floor</mat-label>
+        <mat-select>
+          <mat-option value="one">Ground Floor</mat-option>
+          <mat-option value="one">1st Floor</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="w-100">
+        <mat-label>Room / Area</mat-label>
+        <mat-select>
+          <mat-option value="one">Room No. 01</mat-option>
+          <mat-option value="one">Room No. 02</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="w-100">
+        <mat-label>Asset Category</mat-label>
+        <mat-select>
+          <mat-option value="one">Furntiure & Fixture</mat-option>
+          <mat-option value="one">Computers</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="w-100">
+        <mat-label>Asset Description</mat-label>
+        <mat-select>
+          <mat-option value="one">Sofa Set</mat-option>
+          <mat-option value="one">Center Table</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="col-md-9 border p-0">
+    <h2 class="pt-3 ps-3">Item List</h2>
+    <hr />
+    <society-inventory-revaluation-table></society-inventory-revaluation-table>
+  </div>
+</div>
+
+<!-- History Log Modal -->
+<div
+  class="modal fade"
+  id="historyModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+  data-bs-backdrop="false"
+>
+  <div class="modal-dialog modal-md modal-dialog-centered">
+    <div class="modal-content mat-elevation-z20">
+      <div class="modal-header bg-light">
+        <h4 class="modal-title text-primary" id="exampleModalLabel">
+          Re-Valuation History Log
+        </h4>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <society-inventory-revaluation-history></society-inventory-revaluation-history>
+      </div>
+    </div>
+  </div>
+</div>

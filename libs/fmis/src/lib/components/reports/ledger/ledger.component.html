@@ -1,0 +1,93 @@
+<div class="saveUpdateBar border mat-elevation-z2">
+  <button mat-button class="save cursorPointer" (click)="save()">
+    <mat-icon>insert_drive_file</mat-icon>
+    <span class="ps-2">Report</span>
+  </button>
+  <button mat-button class="save cursorPointer" (click)="reset()">
+    <mat-icon>print</mat-icon>
+    <span class="ps-2">Print</span>
+  </button>
+</div>
+
+<div class="row pt-2 bg-white border">
+  <div class="col-md-6">
+    <mat-form-field class="w-100 ps-3">
+      <mat-label>Head of Account</mat-label>
+      <mat-select [(ngModel)]="formFields[0].value">
+        <!-- <mat-option>
+          <ngx-mat-select-search [(ngModel)]="searchHead" [placeholderLabel]="'Search...'"
+            [noEntriesFoundLabel]="'Not found'" name="search"></ngx-mat-select-search>
+        </mat-option>
+        <mat-option
+          *ngFor="let item of coaList | search: 'accountTitle, accountCode': searchHead"
+          [value]="item.coaID"
+        > -->
+        <mat-option
+        *ngFor="let item of coaList"
+        [value]="item.coaID"
+      >
+        {{ item.accountCode }} - {{ item.accountTitle }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div class="col-md-2">
+    <mat-form-field>
+      <mat-label>From Date</mat-label>
+      <input matInput [matDatepicker]="fromDate" [(ngModel)]="formFields[2].value" />
+      <mat-datepicker-toggle matSuffix [for]="fromDate"></mat-datepicker-toggle>
+      <mat-datepicker #fromDate></mat-datepicker>
+    </mat-form-field>
+  </div>
+  <div class="col-md-2">
+    <mat-form-field>
+      <mat-label>To Date</mat-label>
+      <input matInput [matDatepicker]="toDate" [(ngModel)]="formFields[3].value" />
+      <mat-datepicker-toggle matSuffix [for]="toDate"></mat-datepicker-toggle>
+      <mat-datepicker #toDate></mat-datepicker>
+    </mat-form-field>
+  </div>
+</div>
+<!-- <div class="row light-blue-bg border">
+  <div class="col-md-6">
+  </div>
+  <div class="col-md-6">
+    <mat-form-field class="w-100 pe-3">
+      <mat-label>Payer / Payee</mat-label>
+      <mat-select>
+        <mat-option value="one">UBL RDF</mat-option>
+        <mat-option value="two">M/s Shifa International</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+</div> -->
+<society-ledger-table></society-ledger-table>
+<!-- ledger summary footer -->
+<div class="row bg-white border pt-3 pe-3">
+  <div class="offset-md-8 col-md-4">
+    <div class="table-responsive">
+      <table class="table table-bordered">
+        <tbody>
+          <tr>
+            <td class="col-6">
+              <strong class="pull-right">Opening Balance</strong>
+            </td>
+            <td class="col-6"><strong class="pull-right">{{lblOpening | number}}</strong></td>
+          </tr>
+          <tr>
+            <td class="col-6">
+              <strong class="pull-right">Periodic Balance</strong>
+            </td>
+            <td class="col-6"><strong class="pull-right">{{lblPerodic | number}}</strong></td>
+          </tr>
+          <tr>
+            <td class="col-6">
+              <strong class="pull-right">Closing Balance</strong>
+            </td>
+            <td class="col-6"><strong class="pull-right">{{lblClosing | number}}</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

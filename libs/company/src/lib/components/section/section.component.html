@@ -1,0 +1,71 @@
+<div class="row h-100">
+    <div class="col-md-4 h-100">
+        <div 
+            class="d-flex flex-column align-content-center justify-content-center bg-white h-100 w-100 border ps-3 pe-3"
+        >
+
+            <h2 class="text-center pb-2">Create New</h2>
+
+            <mat-form-field class="w-100">
+                <mat-select disableOptionCentering placeholder="Select Company" [(ngModel)]="formFields[3].value" required>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field class="w-100">
+                <input matInput placeholder="Section Title" [(ngModel)]="formFields[5].value">
+            </mat-form-field>
+            
+            <!--Department heading row -->
+            <div class="border-bottom">
+                Select Department
+            </div>
+    
+            <div class="row mt-1">
+                <div class="col-md-12">
+                    <mat-radio-group [(ngModel)]="formFields[4].value">
+                        <ul>
+                            <li class="mt-1" *ngFor="let item of deptList">
+                                <mat-radio-button color="primary" [value]="item.deptCd">
+                                    {{item.deptName}}
+                                </mat-radio-button>
+                            </li>
+                        </ul>
+                    </mat-radio-group>
+                </div>
+            </div>
+
+            <!--Department heading row -->
+            <div class="border-bottom mt-3">
+                Select Branch
+            </div>
+
+            <div class="row mt-1">
+                <div class="col-md-12">
+                    <society-data-branch></society-data-branch>
+                </div>
+            </div>
+
+            <div class="mt-4 d-flex flex-row justify-content-between">
+                <button mat-raised-button class="savebtn" (click)="saveBranches()">Save</button>
+                <button mat-raised-button class="resetbtn">Reset</button>
+                <!-- <button type="button" class="btn btn--3">
+                    <span class="btn__text">Save</span>
+                </button>
+                <button  type="button" class="btn btn--3">
+                    <span class="btn__text">Reset</span>
+                </button> -->
+            </div>
+        </div>
+        
+    </div>
+    <div class="col-md-8 h-100 scroll-verticle pe-4 ps-0" data-simplebar> 
+        <div class="d-flex flex-column">
+            <h2 class="mt-3">Saved Sections</h2>
+            <society-data-table
+                [tableData]="tableData"
+                [colData]="colData"
+                [tablePermission]="permission"
+            ></society-data-table>
+        </div>
+        
+    </div>
+</div>

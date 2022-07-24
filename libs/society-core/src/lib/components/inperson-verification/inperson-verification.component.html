@@ -1,0 +1,435 @@
+<div class="saveUpdateBar border mat-elevation-z2">
+  <button mat-button class="save" (click)="saveInPerson()">
+    <mat-icon>save</mat-icon>
+    <span class="ps-2">Save</span>
+  </button>
+  <button mat-button class="save" (click)="reset()">
+    <mat-icon>cached</mat-icon>
+    <span class="ps-2">Reset</span>
+  </button>
+</div>
+
+<!-- tabs -->
+<mat-tab-group
+  mat-align-tabs="center"
+  [selectedIndex]="tabIndex"
+  (selectedIndexChange)="changeTabHeader($event)"
+>
+  <mat-tab label="Applicant / Member Profile">
+    <div class="row h-100">
+      <div class="col-md-3 bg-white border">
+        <h2 class="pt-2 pb-2 ps-3">Member Personal Info</h2>
+        <hr />
+        <div class="ps-3 pe-3">
+          <mat-radio-group
+            class="d-flex flex-row justify-content-between"
+            aria-label="Select an option"
+            [(ngModel)]="rdbVerify"
+            (ngModelChange)="getPlotFile(rdbVerify)"
+          >
+            <mat-radio-button value="1">Existing Member</mat-radio-button>
+            <mat-radio-button value="2">Transfer Case</mat-radio-button>
+          </mat-radio-group>
+          <hr />
+          <mat-form-field class="w-100">
+            <mat-label>Membership No.</mat-label>
+            <mat-select
+              [(ngModel)]="formFields[3].value"
+              (ngModelChange)="membershipChange(formFields[3].value)"
+            >
+              <mat-option
+                *ngFor="let item of plotList"
+                [value]="item.plotFileId"
+              >
+                {{ item.fileNo }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field class="w-100">
+            <mat-label>Select Member Name</mat-label>
+            <mat-select
+              [(ngModel)]="formFields[4].value"
+              (ngModelChange)="memberChange(formFields[4].value)"
+            >
+              <mat-option
+                *ngFor="let item of memberList"
+                [value]="item.memberProfileId"
+              >
+                <table class="table" *ngIf="rdbVerify == 1">
+                  <tr>
+                    <td class="col-6 text-start">{{ item.memberName }}</td>
+                    <td class="col-6 text-end">{{ item.status }}</td>
+                  </tr>
+                </table>
+                <table class="table" *ngIf="rdbVerify == 2">
+                  <tr>
+                    <td class="col-4 text-start">{{ item.memberName }}</td>
+                    <td class="col-4 text-center">{{ item.mode }}</td>
+                    <td class="col-4 text-end">{{ item.status }}</td>
+                  </tr>
+                </table>
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field class="w-100">
+            <input
+              matInput
+              placeholder="S/D/W Name"
+              [(ngModel)]="formFields[6].value"
+            />
+          </mat-form-field>
+          <mat-form-field class="w-100">
+            <input
+              matInput
+              placeholder="CNIC"
+              [(ngModel)]="formFields[7].value"
+              [textMask]="{ mask: cnicMask }"
+            />
+          </mat-form-field>
+          <mat-form-field class="w-100">
+            <mat-label>Date of Birth</mat-label>
+            <input
+              matInput
+              [matDatepicker]="picker"
+              [(ngModel)]="formFields[8].value"
+            />
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="picker"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+          <mat-form-field class="w-100">
+            <mat-label>In-Person Date</mat-label>
+            <input
+              matInput
+              [matDatepicker]="picker1"
+              [(ngModel)]="formFields[23].value"
+            />
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="picker1"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #picker1></mat-datepicker>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="col-md-3 bg-white border">
+        <h2 class="pt-2 pb-2 ps-2">Contact Info</h2>
+        <hr />
+        <div class="ps-2 pe-2">
+          <mat-form-field class="w-100">
+            <input
+              matInput
+              placeholder="Mobile No"
+              [(ngModel)]="formFields[9].value"
+              [textMask]="{ mask: mobileMask }"
+            />
+          </mat-form-field>
+          <mat-form-field class="w-100">
+            <input
+              matInput
+              placeholder="Email Address"
+              [(ngModel)]="formFields[10].value"
+            />
+          </mat-form-field>
+          <mat-form-field class="w-100">
+            <mat-label>Present Address</mat-label>
+            <textarea matInput [(ngModel)]="formFields[11].value"></textarea>
+          </mat-form-field>
+          <mat-form-field class="w-100">
+            <mat-label>Country</mat-label>
+            <mat-select
+              [(ngModel)]="cmbPresentCountry"
+              (ngModelChange)="getPresentCity(cmbPresentCountry)"
+            >
+              <mat-option
+                *ngFor="let item of countryList"
+                [value]="item.countryId"
+              >
+                {{ item.countryName }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field class="w-100">
+            <mat-label>City</mat-label>
+            <mat-select [(ngModel)]="formFields[12].value">
+              <mat-option
+                *ngFor="let item of presentCityList"
+                [value]="item.cityId"
+              >
+                {{ item.cityName }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field class="w-100">
+            <mat-label>Permanent Address</mat-label>
+            <textarea matInput [(ngModel)]="formFields[13].value"></textarea>
+          </mat-form-field>
+          <mat-form-field class="w-100">
+            <mat-label>Country</mat-label>
+            <mat-select
+              [(ngModel)]="cmbPermanentCountry"
+              (ngModelChange)="getPermanentCity(cmbPermanentCountry)"
+            >
+              <mat-option
+                *ngFor="let item of countryList"
+                [value]="item.countryId"
+              >
+                {{ item.countryName }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field class="w-100">
+            <mat-label>City</mat-label>
+            <mat-select [(ngModel)]="formFields[14].value">
+              <mat-option
+                *ngFor="let item of permanentCityList"
+                [value]="item.cityId"
+              >
+                {{ item.cityName }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="col-md-6 border text-center">
+        <h2 class="pt-2 pb-2 ps-2 pe-2">Client's Picture / Thumb Impression</h2>
+        <hr />
+        <div class="d-flex flex-row justify-content-around">
+          <div class="d-flex flex-column">
+            <div class="d-flex flex-row justify-content-end">
+              <button
+                *ngIf="rdbVerify == 2"
+                mat-raised-button
+                class="savebtn"
+                [disabled]="!formFields[4].value"
+                (click)="checkMemberMode()"
+              >
+                C/O
+              </button>
+            </div>
+            <div class="light-blue-bg picFrame">
+              <webcam
+                [width]="280"
+                [trigger]="triggerObservable"
+                (imageCapture)="handleImage($event)"
+                *ngIf="showWebcam"
+                [videoOptions]="videoOptions"
+                (initError)="handleInitError($event)"
+              ></webcam>
+            </div>
+            <button
+              mat-raised-button
+              class="resetbtn"
+              (click)="triggerSnapshot()"
+            >
+              Take A Picture
+            </button>
+            <!-- <button ion-button class="actionBtn" (click)="toggleWebcam()">
+              Toggle Webcam
+            </button> -->
+          </div>
+          <div class="d-flex flex-column snapshot" *ngIf="image == 'take'">
+            <div class="light-blue-bg picFrame">
+              <img [src]="webcamImage.imageAsDataUrl" width="280" />
+            </div>
+            <mat-card>
+              <p class="nha-orange-text">Client's Picture</p>
+            </mat-card>
+
+            <!-- <button mat-raised-button class="savebtn">Take A Picture</button> -->
+          </div>
+          <div class="d-flex flex-column snapshot" *ngIf="image == 'edit'">
+            <div class="light-blue-bg picFrame">
+              <img [src]="formFields[15].value" width="280" />
+            </div>
+            <mat-card>
+              <p class="nha-orange-text">Client's Picture</p>
+            </mat-card>
+
+            <!-- <button mat-raised-button class="savebtn">Take A Picture</button> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-tab>
+  <mat-tab label="Saved Profile">
+    <society-inperson-verification-table
+      (eventEmitter)="edit($event, $event)"
+    ></society-inperson-verification-table>
+  </mat-tab>
+</mat-tab-group>
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog" data-bs-backdrop="false">
+  <div class="modal-dialog modal-xl mat-elevation-z20">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Modal Header</h4>
+        <button type="button" class="close" data-bs-dismiss="modal">
+          &times;
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-6">
+            <mat-form-field class="w-100">
+              <input
+                matInput
+                placeholder="Name"
+                [(ngModel)]="formFieldsCareOff[3].value"
+              />
+            </mat-form-field>
+            <mat-form-field class="w-100">
+              <input
+                matInput
+                placeholder="S/D/W Name"
+                [(ngModel)]="formFieldsCareOff[4].value"
+              />
+            </mat-form-field>
+            <mat-form-field class="w-100">
+              <input
+                matInput
+                placeholder="CNIC"
+                [(ngModel)]="formFieldsCareOff[5].value"
+              />
+            </mat-form-field>
+            <mat-form-field class="w-100">
+              <input
+                matInput
+                placeholder="Mobile No"
+                [(ngModel)]="formFieldsCareOff[6].value"
+              />
+            </mat-form-field>
+            <mat-form-field class="w-100">
+              <input
+                matInput
+                placeholder="Email Address"
+                [(ngModel)]="formFieldsCareOff[7].value"
+              />
+            </mat-form-field>
+            <mat-form-field class="w-100">
+              <mat-label>Present Address</mat-label>
+              <textarea
+                matInput
+                [(ngModel)]="formFieldsCareOff[8].value"
+              ></textarea>
+            </mat-form-field>
+            <mat-form-field class="w-100">
+              <mat-label>Country</mat-label>
+              <mat-select
+                [(ngModel)]="cmbCOCountry"
+                (ngModelChange)="getCOCity(cmbCOCountry)"
+              >
+                <mat-option
+                  *ngFor="let item of countryList"
+                  [value]="item.countryId"
+                >
+                  {{ item.countryName }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field class="w-100">
+              <mat-label>City</mat-label>
+              <mat-select [(ngModel)]="formFieldsCareOff[9].value">
+                <mat-option
+                  *ngFor="let item of coCityList"
+                  [value]="item.cityId"
+                >
+                  {{ item.cityName }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field class="w-100">
+              <mat-label>Permanent Address</mat-label>
+              <textarea
+                matInput
+                [(ngModel)]="formFieldsCareOff[10].value"
+              ></textarea>
+            </mat-form-field>
+          </div>
+          <div class="col-md-6">
+            <div
+              *ngIf="mode == 'Seller'"
+              class="d-flex flex-row justify-content-around"
+            >
+              <mat-radio-group
+                class="d-flex justify-content-between"
+                aria-label="Select an option"
+                [(ngModel)]="rdbExempt"
+                (ngModelChange)="changeExemptStatus(rdbExempt)"
+              >
+                <mat-radio-button value="1">Exempted</mat-radio-button>
+                <mat-radio-button value="2">Not Exempted</mat-radio-button>
+              </mat-radio-group>
+              <input
+                color="warn"
+                type="file"
+                accept=".pdf"
+                (change)="onFileSelected($event)"
+                [(ngModel)]="formFields[15].value"
+              />
+            </div>
+
+            <div class="light-blue-bg picFrame">
+              <webcam
+                [width]="280"
+                [trigger]="triggerObservable"
+                (imageCapture)="handleImageCO($event)"
+                *ngIf="showWebcam"
+                [videoOptions]="videoOptions"
+                (initError)="handleInitError($event)"
+              ></webcam>
+            </div>
+            <button
+              mat-raised-button
+              class="resetbtn"
+              (click)="triggerSnapshotCO()"
+            >
+              Take A Picture
+            </button>
+            <div *ngIf="image == 'take'">
+              <div class="light-blue-bg picFrame">
+                <img [src]="webcamImageCO.imageAsDataUrl" width="280" />
+              </div>
+              <mat-card>
+                <p class="nha-orange-text">C/o's Picture</p>
+              </mat-card>
+            </div>
+            <div *ngIf="image == 'edit'">
+              <div class="light-blue-bg picFrame">
+                <img [src]="formFieldsCareOff[11].value" width="280" />
+              </div>
+              <mat-card>
+                <p class="nha-orange-text">Client's Picture</p>
+              </mat-card>
+
+              <!-- <button mat-raised-button class="savebtn">Take A Picture</button> -->
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div class="row">
+          <div class="d-flex flex-row justify-content-around">
+            <button
+              mat-raised-button
+              class="savebtn"
+              [disabled]="coStatus"
+              (click)="saveCareOff()"
+            >
+              Save
+            </button>
+            <button mat-raised-button color="warn" (click)="deleteCareOff()">
+              Delete
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<society-pin-modal (pinEventEmitter)="pinStatus($event)"></society-pin-modal>

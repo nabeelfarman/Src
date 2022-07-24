@@ -1,0 +1,123 @@
+<mat-tab-group mat-align-tabs="center">
+  <mat-tab label="Add / Modify" class="h-100">
+    <div class="row bg-white border">
+      <div class="col-md-3">
+        <mat-form-field class="ps-3">
+          <mat-label>Budget Entry date</mat-label>
+          <input matInput [matDatepicker]="picker" />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div class="col-md-3">
+        <mat-form-field>
+          <mat-label>Financial Year</mat-label>
+          <mat-select>
+            <mat-option value="one">2010-2011</mat-option>
+            <mat-option value="two">2011-2012</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-md-3">
+        <div class="d-flex flex-row pt-3">
+          <p class="text-primary">Total Estimates:</p>
+          &nbsp;&nbsp; <strong> Rs. 15,000,0000</strong>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="d-flex flex-row pt-3">
+          <p class="text-primary">Total Revised Estimates:</p>
+          &nbsp;&nbsp; <strong> Rs. 17,000,0000</strong>
+        </div>
+      </div>
+    </div>
+    <h5 class="pt-2 ps-3">Pays & Allowances</h5>
+    <div class="table-responsive">
+      <table class="table table-striped table-bordered">
+        <thead>
+          <tr>
+            <th>Account Code</th>
+            <th>Title</th>
+            <th>Estimate</th>
+            <th>Revised Date</th>
+            <th>Revised Amount</th>
+            <th class="text-center">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <div class="my-form-field">
+                <mat-form-field floatLabel="never">
+                  <mat-label>Select</mat-label>
+                  <mat-select>
+                    <mat-option value="one">71.01.01</mat-option>
+                    <mat-option value="two">71.01.02</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </td>
+            <td>
+              <div class="my-form-field">
+                <mat-form-field floatLabel="never">
+                  <mat-label>Select</mat-label>
+                  <mat-select>
+                    <mat-option value="one">Salaries Officer</mat-option>
+                    <mat-option value="two">Salaries Staff</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </td>
+            <td>
+              <div class="my-form-field">
+                <mat-form-field floatLabel="never">
+                  <mat-label>Estimate</mat-label>
+                  <input matInput />
+                </mat-form-field>
+              </div>
+            </td>
+            <td>
+              <div class="my-form-field">
+                <mat-form-field floatLabel="never">
+                  <input matInput [matDatepicker]="picker01" />
+                  <mat-datepicker-toggle
+                    matSuffix
+                    [for]="picker01"
+                  ></mat-datepicker-toggle>
+                  <mat-datepicker #picker01></mat-datepicker>
+                </mat-form-field>
+              </div>
+            </td>
+            <td>
+              <div class="my-form-field">
+                <mat-form-field floatLabel="never">
+                  <mat-label>Revised Amount</mat-label>
+                  <input matInput />
+                </mat-form-field>
+              </div>
+            </td>
+            <td class="text-center">
+              <span class="text-primary pe-2 cursorPointer border-right-dark">
+                <mat-icon>edit</mat-icon>
+              </span>
+              <span
+                class="text-danger cursorPointer border-right-dark ps-2 pe-2"
+              >
+                <mat-icon>delete</mat-icon>
+              </span>
+              <span class="text-info cursorPointer border-right-dark ps-2 pe-2">
+                <mat-icon>visibility</mat-icon>
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </mat-tab>
+  <mat-tab label="Saved">
+    <society-budget-estimate-table></society-budget-estimate-table>
+  </mat-tab>
+</mat-tab-group>

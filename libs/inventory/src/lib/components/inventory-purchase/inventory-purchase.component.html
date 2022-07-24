@@ -1,0 +1,196 @@
+<div class="saveUpdateBar border mat-elevation-z2">
+  <!-- <button mat-button class="save cursorPointer">
+    <mat-icon>save</mat-icon>
+    <span class="ps-2">Save</span>
+  </button> -->
+  <button mat-button class="save cursorPointer">
+    <mat-icon>cached</mat-icon>
+    <span class="ps-2">Reset</span>
+  </button>
+</div>
+
+<mat-tab-group mat-align-tabs="center">
+  <mat-tab label="Form"
+    ><div class="row">
+      <div class="col-md-3 light-blue-bg border">
+        <h2 class="pt-3 ps-4 pe-3">Purchase Info</h2>
+        <hr />
+
+        <div class="ps-3 pe-3">
+          <mat-form-field class="w-100">
+            <mat-label>Invoice Date</mat-label>
+            <input matInput [matDatepicker]="picker" />
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="picker"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+          <mat-form-field class="w-100">
+            <mat-label>Vendor</mat-label>
+            <mat-select>
+              <mat-option value="one">M/s SN Traders</mat-option>
+              <mat-option value="two">M/s JIM Autos</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field class="w-100">
+            <mat-label>Invoice No.</mat-label>
+            <input matInput />
+          </mat-form-field>
+          <mat-form-field class="w-100">
+            <mat-label>Invoice Amount</mat-label>
+            <input matInput />
+          </mat-form-field>
+          <p class="pt-3"><strong>Scanned Invoice</strong></p>
+          <input color="warn" type="file" accept=".pdf" />
+          <mat-form-field class="w-100">
+            <mat-label>Memo Date</mat-label>
+            <input matInput [matDatepicker]="picker1" />
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="picker1"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #picker1></mat-datepicker>
+          </mat-form-field>
+          <mat-form-field class="w-100">
+            <mat-label>Memo No.</mat-label>
+            <input matInput />
+          </mat-form-field>
+          <p class="pt-3"><strong>Scanned Sanction Memo</strong></p>
+          <input color="warn" type="file" accept=".pdf" />
+          <div class="w-100 d-flex flex-row mt-4 justify-content-between">
+            <button mat-raised-button class="savebtn">Save Purchase</button>
+            <!-- <button mat-raised-button class="resetbtn" (click)="reset()">
+              Reset
+            </button> -->
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 bg-white border">
+        <h2 class="pt-3 ps-3">Item Info</h2>
+        <hr />
+        <div class="ps-3 pe-3">
+          <mat-form-field class="w-100">
+            <mat-label>Custodian</mat-label>
+            <mat-select>
+              <mat-option value="one">President</mat-option>
+              <mat-option value="two">Sect. Finance</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field class="w-100">
+            <mat-label>Location</mat-label>
+            <mat-select>
+              <mat-option value="one">Room No. 01 - First Floor</mat-option>
+              <mat-option value="two">Room No. 02 - First Floor</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field class="w-100">
+            <mat-label>Asset Category</mat-label>
+            <mat-select>
+              <mat-option value="one">Laptop</mat-option>
+              <mat-option value="two">Printer</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <div class="d-flex flex-wrap">
+            <mat-form-field class="pe-2">
+              <mat-label>Make</mat-label>
+              <mat-select>
+                <mat-option value="one">HP</mat-option>
+                <mat-option value="two">Dell</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field class="pe-2">
+              <mat-label>Model</mat-label>
+              <input matInput />
+            </mat-form-field>
+            <mat-form-field class="pe-2">
+              <mat-label>Size</mat-label>
+              <mat-select>
+                <mat-option value="one">Small</mat-option>
+                <mat-option value="two">Medium</mat-option>
+                <mat-option value="two">Large</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field class="pe-2">
+              <mat-label>Generation</mat-label>
+              <mat-select>
+                <mat-option value="one">1st Gen</mat-option>
+                <mat-option value="two">2nd Gen</mat-option>
+                <mat-option value="two">3rd Gen</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field class="pe-2">
+              <mat-label>Processor</mat-label>
+              <mat-select>
+                <mat-option value="one">7.0 Ghz</mat-option>
+                <mat-option value="two">8.0 Ghz</mat-option>
+                <mat-option value="two">9.0 Ghz</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field class="pe-2">
+              <mat-label>RAM</mat-label>
+              <mat-select>
+                <mat-option value="one">4 GB</mat-option>
+                <mat-option value="two">8 GB</mat-option>
+                <mat-option value="two">16 GB</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field class="pe-2">
+              <mat-label>Drive Type</mat-label>
+              <mat-select>
+                <mat-option value="one">HDD</mat-option>
+                <mat-option value="two">8 GB</mat-option>
+                <mat-option value="two">16 GB</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field class="pe-2">
+              <mat-label>HD Size</mat-label>
+              <mat-select>
+                <mat-option value="one">512 GB</mat-option>
+                <mat-option value="two">1 TB</mat-option>
+                <mat-option value="two">2 TB</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <mat-form-field class="w-100">
+            <mat-label>Item Descriptoin</mat-label>
+            <input matInput />
+          </mat-form-field>
+          <div class="row">
+            <div class="col-md-8">
+              <mat-form-field class="w-100">
+                <mat-label>Amount</mat-label>
+                <input matInput />
+                <span matSuffix>Rs.</span>
+              </mat-form-field>
+            </div>
+            <div class="col-md-4">
+              <mat-form-field class="w-100">
+                <mat-label>Qty</mat-label>
+                <input matInput />
+              </mat-form-field>
+            </div>
+          </div>
+          <mat-form-field class="w-100">
+            <mat-label>Description</mat-label>
+            <textarea matInput></textarea>
+          </mat-form-field>
+
+          <div class="w-100 d-flex flex-row mt-4 justify-content-between">
+            <button mat-raised-button class="savebtn">Add Item</button>
+            <!-- <button mat-raised-button class="resetbtn" (click)="reset()">
+              Reset
+            </button> -->
+          </div>
+        </div>
+      </div>
+      <div class="col-md-5 p-0">
+        <h2 class="pt-3 ps-3">Saved Items</h2>
+        <hr />
+        <society-inventory-purchase-item-table></society-inventory-purchase-item-table>
+      </div></div
+  ></mat-tab>
+  <mat-tab label="Table"
+    ><society-inventory-purchase-table></society-inventory-purchase-table
+  ></mat-tab>
+</mat-tab-group>

@@ -1,0 +1,61 @@
+<div class="saveUpdateBar border mat-elevation-z2">
+  <button mat-button class="save cursorPointer">
+    <mat-icon>save</mat-icon>
+    <span class="ps-2">Save</span>
+  </button>
+  <button mat-button class="save cursorPointer">
+    <mat-icon>cached</mat-icon>
+    <span class="ps-2">Reset</span>
+  </button>
+</div>
+
+<div class="row h-100">
+  <div class="col-md-4 h-100">
+    <div
+      class="d-flex flex-column align-content-center justify-content-center bg-white h-100 w-100 border"
+    >
+      <h2 class="text-center pb-2">Create New</h2>
+
+      <!-- account code select box -->
+      <mat-form-field appearance="fill">
+        <mat-label>Type</mat-label>
+        <mat-select>
+          <mat-option value="option">Allowance</mat-option>
+          <mat-option value="option">Deduction</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <!-- account code select box -->
+      <mat-form-field appearance="fill">
+        <mat-label>Account Code</mat-label>
+        <mat-select>
+          <mat-option value="option">Option-01</mat-option>
+          <mat-option value="option">Option-02</mat-option>
+          <mat-option value="option">Option-03</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <!-- payroll title text field -->
+      <mat-form-field appearance="fill">
+        <mat-label>Payroll Title</mat-label>
+        <input matInput />
+      </mat-form-field>
+      <!-- check boxes -->
+      <div
+        class="d-flex flex-column justify-content-center pt-3 pb-3 light-blue-bg border-top border-bottom border-light"
+      >
+        <mat-checkbox class="pl-2" color="primary">Treat as Pay</mat-checkbox>
+        <mat-checkbox class="pl-2">Taxable</mat-checkbox>
+        <mat-checkbox class="pl-2">Excluded from Pay Register</mat-checkbox>
+      </div>
+    </div>
+  </div>
+
+  <!-- col-md-8 table view -->
+  <div class="col-md-8 h-100 scroll-verticle p-0 m-0" data-simplebar>
+    <div class="d-flex flex-column">
+      <h2 class="mt-3">Saved Allowances & Deductions</h2>
+      <society-allow-deduction-table></society-allow-deduction-table>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,49 @@
+<div class="saveUpdateBar border mat-elevation-z2">
+  <button mat-button class="save cursorPointer">
+    <mat-icon>insert_drive_file</mat-icon>
+    <span class="ps-2">Report</span>
+  </button>
+  <button mat-button class="save cursorPointer">
+    <mat-icon>print</mat-icon>
+    <span class="ps-2">Print</span>
+  </button>
+</div>
+
+<div class="main-content h-100">
+  <!-- row-01 -->
+  <div class="row pt-2 bg-white border">
+    <div class="col-md-6">
+      <mat-form-field class="pull-right">
+        <mat-label>Year</mat-label>
+        <mat-select>
+          <mat-option value="one">2020</mat-option>
+          <mat-option value="two">2021</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="col-md-6">
+      <mat-form-field>
+        <mat-label>Month</mat-label>
+        <mat-select>
+          <mat-option value="1">1</mat-option>
+          <mat-option value="2">2</mat-option>
+          <mat-option value="3">3</mat-option>
+          <mat-option value="4">4</mat-option>
+          <mat-option value="5">5</mat-option>
+          <mat-option value="6">6</mat-option>
+          <mat-option value="7">7</mat-option>
+          <mat-option value="8">8</mat-option>
+          <mat-option value="9">9</mat-option>
+          <mat-option value="10">10</mat-option>
+          <mat-option value="11">11</mat-option>
+          <mat-option value="12">12</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+  <!-- end row - 01 -->
+
+  <!-- report -->
+  <society-trial-balance-table></society-trial-balance-table>
+</div>
+<!-- end of main-content -->

@@ -1,0 +1,27 @@
+<div class="saveUpdateBar border mat-elevation-z2">
+  <button mat-button class="save cursorPointer">
+    <mat-icon>insert_drive_file</mat-icon>
+    <span class="ps-2">Report</span>
+  </button>
+  <button mat-button class="save cursorPointer">
+    <mat-icon>print</mat-icon>
+    <span class="ps-2">Print</span>
+  </button>
+</div>
+
+<div class="main-content h-100">
+  <div class="row border">
+    <div class="col-md-12 text-center">
+      <strong>For the year Ended</strong>&nbsp;&nbsp;&nbsp;<mat-form-field>
+        <mat-label>From Date</mat-label>
+        <input matInput [matDatepicker]="fromDate" />
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="fromDate"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #fromDate></mat-datepicker>
+      </mat-form-field>
+    </div>
+  </div>
+  <society-cash-flow-table></society-cash-flow-table>
+</div>

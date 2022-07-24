@@ -1,0 +1,52 @@
+<div class="table-responsive">
+    <div class="d-flex flex-row pe-3">
+      <div class="form-group has-search flex-grow-1">
+        <input type="text" class="form-control" [(ngModel)]="tblSearch" placeholder="Search record" />
+      </div>
+    </div>
+    <div class="d-flex flex-row pt-3 pb-3">
+      <mat-radio-group
+        class="d-flex flex-row justify-content-between"
+        aria-label="Select an option"
+        [(ngModel)]="rdbType"
+        (ngModelChange)="typeChange(rdbType)"
+      >
+        <mat-radio-button class="pe-5" value="1">Activated</mat-radio-button>
+        <mat-radio-button value="2">Not Activated</mat-radio-button>
+      </mat-radio-group>
+    </div>
+    <table class="table table-striped table-bordered">
+      <thead>
+        <tr>
+          <th>Membership No.</th>
+          <th>Name</th>
+          <th>CNIC</th>
+          <th>status</th>
+          <th class="text-center">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of tableData | filter: tblSearch; let i=index">
+          <td>{{item.fileNo}}</td>
+          <td>{{item.memberName}}</td>
+          <td>{{item.memberCNIC}}</td>
+          <td>{{item.isActivated}}</td>
+          <td class="text-center">
+            <span *ngIf="rdbType == 2" class="text-success cursorPointer border-right-dark pe-2" (click)="activeInPerson(item)">
+                <mat-icon>power_settings_new</mat-icon>
+            </span>
+            <span *ngIf="rdbType == 2" class="text-primary cursorPointer border-right-dark pe-2" (click)="edit(item, '1')">
+              <mat-icon>edit</mat-icon>
+            </span>
+            <span class="text-danger cursorPointer ps-2 pe-2" (click)="edit(item, '2')">
+              <mat-icon>delete</mat-icon>
+            </span>
+            <!-- <span class="ps-2">
+              <mat-slide-toggle color="warn"></mat-slide-toggle>
+            </span> -->
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

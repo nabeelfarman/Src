@@ -1,0 +1,170 @@
+<div class="saveUpdateBar border mat-elevation-z2">
+  <button mat-button class="save cursorPointer">
+    <mat-icon>save</mat-icon>
+    <span class="ps-2">Save</span>
+  </button>
+  <button
+    mat-button
+    class="save cursorPointer"
+    data-bs-toggle="modal"
+    data-bs-target="#landAcqDetailModal"
+  >
+    <mat-icon>chrome_reader_mode</mat-icon>
+    <span class="ps-2">Add Detail</span>
+  </button>
+  <button mat-button class="save cursorPointer">
+    <mat-icon>cached</mat-icon>
+    <span class="ps-2">Reset</span>
+  </button>
+</div>
+
+<div class="row h-100">
+  <div class="col-md-4 bg-white border">
+    <h2 class="pt-3 ps-4 pe-3">Land Info</h2>
+    <hr />
+    <div class="ps-3 pe-2">
+      <div class="row">
+        <div class="col-md-6">
+          <mat-form-field class="w-100">
+            <mat-label>Country</mat-label>
+            <mat-select>
+              <mat-option value="one">Pakistan</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-md-6">
+          <mat-form-field class="w-100">
+            <mat-label>City</mat-label>
+            <mat-select>
+              <mat-option value="one">Islamabad</mat-option>
+              <mat-option value="one">Rawalpindi</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <mat-form-field class="w-100">
+        <mat-label>Mauza</mat-label>
+        <mat-select>
+          <mat-option value="one">Chuckal</mat-option>
+          <mat-option value="one">Loi Bhair</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <div class="row">
+        <div class="col-md-6">
+          <mat-form-field class="w-100">
+            <mat-label>Khasra</mat-label>
+            <mat-select>
+              <mat-option value="one">-</mat-option>
+              <mat-option value="one">-</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-md-6">
+          <mat-form-field class="w-100">
+            <mat-label>Khewat</mat-label>
+            <mat-select>
+              <mat-option value="one">-</mat-option>
+              <mat-option value="one">-</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <mat-form-field class="w-100">
+            <mat-label>Khatuji</mat-label>
+            <mat-select>
+              <mat-option value="one">-</mat-option>
+              <mat-option value="one">-</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-md-6">
+          <mat-form-field class="w-100">
+            <mat-label>Qabza</mat-label>
+            <mat-select>
+              <mat-option value="one">-</mat-option>
+              <mat-option value="one">-</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      <mat-form-field class="w-100">
+        <mat-label>Land Area</mat-label>
+        <input matInput />
+        <span matSuffix>sq yard</span>
+      </mat-form-field>
+      <mat-form-field class="w-100">
+        <mat-label>Mutation Date</mat-label>
+        <input matInput [matDatepicker]="picker" />
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field class="w-100">
+        <mat-label>Mutation No.</mat-label>
+        <input matInput />
+        <span matSuffix>sq yard</span>
+      </mat-form-field>
+      <mat-radio-group [(ngModel)]="rdbLand">
+        <mat-radio-button value="1">Vacant Land</mat-radio-button
+        >&nbsp;&nbsp;&nbsp;
+        <mat-radio-button value="2">with Structure</mat-radio-button>
+      </mat-radio-group>
+      <mat-form-field class="w-100" *ngIf="rdbLand == 2">
+        <mat-label>Structure Covered Area</mat-label>
+        <input matInput />
+        <span matSuffix>sq yard</span>
+      </mat-form-field>
+      <p class="pt-3"><strong>Transfer File</strong></p>
+      <hr />
+      <input
+        color="warn"
+        type="file"
+        accept=".pdf"
+        (change)="onFileSelected($event)"
+      />
+    </div>
+  </div>
+  <div class="col-md-8 p-0">
+    <h2 class="pt-3 ps-3">Saved Land Record</h2>
+    <hr />
+    <society-land-acquisition-table></society-land-acquisition-table>
+  </div>
+</div>
+
+<!-- breakup Modal -->
+<div
+  class="modal fade"
+  id="landAcqDetailModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+  data-bs-backdrop="false"
+>
+  <div class="modal-dialog modal-xl modal-dialog-centered">
+    <div class="modal-content mat-elevation-z20">
+      <div class="modal-header bg-light">
+        <h4 class="modal-title text-primary" id="exampleModalLabel">
+          Land Acquisition Detail
+        </h4>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body bg-light">
+        <society-land-acquisition-detail></society-land-acquisition-detail>
+      </div>
+      <div class="modal-footer dark-light-bg">
+        <div class="d-flex flex-row w-100 justify-content-around">
+          <button mat-raised-button class="savebtn">Save</button>
+          <button mat-raised-button class="resetbtn">Reset</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

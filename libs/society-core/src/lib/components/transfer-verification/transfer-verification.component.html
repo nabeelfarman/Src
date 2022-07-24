@@ -1,0 +1,34 @@
+<mat-tab-group mat-align-tabs="center" class="h-100"
+  [selectedIndex]="tabIndex"
+  (selectedIndexChange)="changeTabHeader($event)">
+  <mat-tab label="Inbox" class="h-100">
+    <div class="row vh-100 pe-0 style-3">
+      <div class="col-md-5 light-blue-bg pe-0 border">
+        <society-inbox-table (eventEmitter)="getInboxData($event)"></society-inbox-table>
+      </div>
+      <div class="col-md-7 bg-white border p-0">
+        <h2 class="pt-2 pb-2 ps-3">
+          Verify and Proceed -
+          <span class="text-danger">{{lblMemberShip}}</span>
+        </h2>
+        <hr />
+        <society-transfer-verification-table (callFunctionEvent)="getTransferInbox()"></society-transfer-verification-table>
+      </div>
+    </div>
+  </mat-tab>
+  <mat-tab label="Sent" class="h-100">
+    <div class="row vh-100 pe-0 style-3">
+      <div class="col-md-5 light-blue-bg pe-0 border">
+        <society-sent-table (eventEmitter)="getSentData($event)"></society-sent-table>
+      </div>
+      <div class="col-md-7 bg-white border p-0">
+        <h2 class="pt-2 pb-2 ps-3">
+          Verify and Proceed -
+          <span class="text-danger">{{lblSentMemberShip}}</span>
+        </h2>
+        <hr />
+        <society-sent-transfer-verification-table (functionEventEmitter)="resetSent()"></society-sent-transfer-verification-table>
+      </div>
+    </div>
+  </mat-tab>
+</mat-tab-group>

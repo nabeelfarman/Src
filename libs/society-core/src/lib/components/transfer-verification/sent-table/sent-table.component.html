@@ -1,0 +1,30 @@
+<div class="table-responsive">
+    <div class="d-flex flex-row pe-3">
+      <div class="form-group has-search flex-grow-1">
+        <input type="text" class="form-control" placeholder="Search record" />
+      </div>
+    </div>
+    <table class="table table-striped table-bordered">
+      <thead>
+        <tr>
+          <th class="text-center">Sr#</th>
+          <th>Date</th>
+          <th>Membership No.</th>
+          <th class="text-center">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of sentTableData let i=index">
+          <td class="text-center">{{i+1}}</td>
+          <td>{{item.transferDate | date: 'dd-MMM-YYYY'}}</td>
+          <td>{{item.memberShipNo}}</td>
+          <td class="text-center">
+            <span class="text-primary pe-2 cursorPointer" (click)="getSentData(item)">
+              <mat-icon>visibility</mat-icon>
+            </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

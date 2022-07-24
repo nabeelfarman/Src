@@ -1,0 +1,31 @@
+export class InPersonInterface {
+    newInpersonId = '0';
+    spType = '';
+    userid = '';
+    newinPersonCareofId = '';
+    memberProfileId = '';
+    plotFileId = '';
+    transferId = '';
+    memberType = '';
+    memberName = '';
+    inpersonDate = '';
+    sDWofName = '';
+    memberCNIC = '';
+    memberDOB = '';
+    // phoneNo1 = '';
+    // phoneNo2 = '';
+    mobileNo1 = '';
+    // mobileNo2 = '';
+    email = '';
+    presentAddress = '';
+    presentAddresscityId = '';
+    permanentAddress = '';
+    permanentAddresscityId = '';
+    // memberRemarks = '';
+    memberPicturePath = '';
+    memberPicture = '';
+    memberPictureExtension = '';
+    fingerPrint1 = '';
+    fingerPrint2 = '';
+    memberMode = '';
+}

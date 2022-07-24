@@ -1,0 +1,99 @@
+/* Set indicator position */
+#wrapper {
+  background-color: #3f3e3e;
+}
+#loading-indicator  {
+  position: absolute;
+  width: 300px;
+  height: 200px;
+  z-index: 15;
+  top: 50%;
+  left: 50%;
+  margin: -100px 0 0 -150px;
+}
+.sp {
+    width: 32px;
+    height: 32px;
+    clear: both;
+  margin: 20px auto;
+}
+.sp-bars {
+    position: relative;
+    width: 10px;
+    border: 1px #000 solid;
+    background-color: #212121;
+    -webkit-animation: spBars 0.5s infinite linear;
+    animation: spBars 0.5s infinite linear;
+}
+
+.sp-bars:after, .sp-bars:before {
+    content:'';
+    position: absolute;
+    width: inherit;
+    height: inherit;
+    border: inherit;
+    background-color: inherit;
+    top: -1px;
+}
+.sp-bars:before {
+    left: -20px;
+    -webkit-animation: spBarsBefore 0.5s infinite linear;
+    animation: spBarsBefore 0.5s infinite linear;
+}
+.sp-bars:after {
+    right: -20px;
+    -webkit-animation: spBarsAfter 0.5s infinite linear;
+    animation: spBarsAfter 0.5s infinite linear;
+}
+@keyframes spBarsBefore {
+    0% {
+        transform: scale(1,1);
+    }
+    25% {
+        transform: scale(1,1.25);
+    }
+    50% {
+        transform: scale(1,0.75);
+    }
+    75% {
+        transform: scale(1,1);
+    }
+    100% {
+        transform: scale(1,1);
+    }
+}
+@keyframes spBars {
+    0% {
+        transform: scale(1,1);
+    }
+    25% {
+        transform: scale(1,1);
+    }
+    50% {
+        transform: scale(1,1.25);
+    }
+    75% {
+        transform: scale(1,1);
+    }
+    100% {
+        transform: scale(1,1);
+    }
+}
+@keyframes spBarsAfter {
+    0% {
+        transform: scale(1,1);
+    }
+    25% {
+        transform: scale(1,1);
+    }
+    50% {
+        transform: scale(1,0.75);
+    }
+    75% {
+        transform: scale(1,1.25);
+    }
+    100% {
+        transform: scale(1,1);
+    }
+}
+/* END Loading Indicator Bars */

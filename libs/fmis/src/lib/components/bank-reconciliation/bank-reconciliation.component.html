@@ -1,0 +1,53 @@
+<div class="saveUpdateBar border mat-elevation-z2">
+  <button mat-button class="save cursorPointer">
+    <mat-icon>insert_drive_file</mat-icon>
+    <span class="ps-2">Report</span>
+  </button>
+  <button mat-button class="save cursorPointer">
+    <mat-icon>print</mat-icon>
+    <span class="ps-2">Print</span>
+  </button>
+</div>
+
+<div class="row pt-2 bg-white border">
+  <div class="col-md-6">
+    <mat-form-field class="pull-right">
+      <mat-label>From Date</mat-label>
+      <input matInput [matDatepicker]="fromDate" />
+      <mat-datepicker-toggle matSuffix [for]="fromDate"></mat-datepicker-toggle>
+      <mat-datepicker #fromDate></mat-datepicker>
+    </mat-form-field>
+  </div>
+  <div class="col-md-6">
+    <mat-form-field>
+      <mat-label>To Date</mat-label>
+      <input matInput [matDatepicker]="toDate" />
+      <mat-datepicker-toggle matSuffix [for]="toDate"></mat-datepicker-toggle>
+      <mat-datepicker #toDate></mat-datepicker>
+    </mat-form-field>
+  </div>
+</div>
+
+<!-- both statements -->
+<div class="row pt-3 h-75">
+  <div class="offset-md-1 col-md-5">
+    <div
+      class="bg-white mr-2 border mat-elevation-z1"
+      style="max-height: 100%; min-height: 100%"
+    >
+      <society-reconciliation-cash-book-table></society-reconciliation-cash-book-table>
+    </div>
+  </div>
+  <div class="col-md-5">
+    <div
+      class="bg-white ml-2 border mat-elevation-z1"
+      style="max-height: 100%; min-height: 100%"
+    >
+      <society-reconciliation-bank-statement-table></society-reconciliation-bank-statement-table>
+    </div>
+  </div>
+</div>
+
+<div class="container mt-3 bg-white mat-elevation-z1">
+  <society-bank-reconciliation-table></society-bank-reconciliation-table>
+</div>

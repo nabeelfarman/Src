@@ -1,0 +1,47 @@
+<div class="saveUpdateBar border mat-elevation-z2">
+  <button mat-button class="save cursorPointer" (click)="save()">
+    <mat-icon>supervisor_account</mat-icon>
+    <span class="ps-2">Supervise</span>
+  </button>
+  <button mat-button class="save cursorPointer" (click)="reset()">
+    <mat-icon>cached</mat-icon>
+    <span class="ps-2">Reset</span>
+  </button>
+</div>
+
+<div class="row pt-2 pb-2 light-blue-bg white border">
+  <div class="offset-md-3 col-md-2">
+    <mat-form-field class="w-100">
+      <mat-label>Voucher Type</mat-label>
+      <mat-select>
+        <mat-option value="one">Payment Voucher</mat-option>
+        <mat-option value="two">Receipt Voucher</mat-option>
+        <mat-option value="two">Adjustment Voucher</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div class="col-md-2">
+    <mat-form-field class="w-100">
+      <mat-label>Voucher Date</mat-label>
+      <input matInput [matDatepicker]="picker" [(ngModel)]="dtpVoucherDate" (ngModelChange)="getUnsupervisedTransaction(dtpVoucherDate)" />
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+  </div>
+  <div class="col-md-2">
+    <mat-form-field class="w-100">
+      <mat-label>Voucher No</mat-label>
+      <mat-select [(ngModel)]="formFields[0].value" (ngModelChange)="getVoucherDetail(formFields[0].value)">
+        <mat-option
+          *ngFor="let item of voucherList"
+          [value]="item.trnId"
+        >
+        {{ item.voucherNo }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+</div>
+
+<!-- voucher entry view -->
+<society-voucher-entry-view></society-voucher-entry-view>

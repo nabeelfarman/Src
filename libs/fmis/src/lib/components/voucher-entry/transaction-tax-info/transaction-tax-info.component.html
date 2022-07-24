@@ -1,0 +1,112 @@
+<mat-tab-group>
+  <mat-tab label="Income Tax">
+    <div class="row mt-3">
+      <div class="col-md-6">
+        <strong class="pull-right">Gross Amount</strong>
+      </div>
+      <div class="col-md-6">
+        <strong>Rs. 15,000</strong>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <mat-form-field class="w-100">
+          <mat-label>Tax Section</mat-label>
+          <mat-select [(ngModel)]="cmbTax"
+            (ngModelChange)="onTaxChange(cmbTax)"
+          >
+            <mat-option
+              *ngFor="let item of taxList"
+              [value]="item.taxId"
+            >
+              {{ item.taxSection }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <mat-label class="me-2 fw-bold">Payment Nature: </mat-label>
+        <mat-label>{{lblNature}}</mat-label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <mat-radio-group aria-label="Select an option">
+          <mat-radio-button value="1">Filer</mat-radio-button>&nbsp;&nbsp;&nbsp;
+          <mat-radio-button value="2">non-Filer</mat-radio-button>
+        </mat-radio-group>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <strong class="pull-right text-danger"> Tax Rate </strong>
+      </div>
+      <div class="col-md-6"><strong class="text-danger">7 %</strong></div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <strong class="pull-right text-primary"> Tax Amount </strong>
+      </div>
+      <div class="col-md-6">
+        <strong class="text-primary">Rs. 750</strong>
+      </div>
+    </div>
+  </mat-tab>
+  <!-- <mat-tab label="Sale Tax">
+    <div class="row mt-3">
+      <div class="col-md-6">
+        <strong class="pull-right">Gross Amount</strong>
+      </div>
+      <div class="col-md-6">
+        <strong>Rs. 15,000</strong>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <mat-form-field class="w-100">
+          <mat-label>Tax Section</mat-label>
+          <mat-select [(ngModel)]="formFields[6].value"
+            (ngModelChange)="onTaxChange(formFields[6].value)"
+          >
+            <mat-option
+              *ngFor="let item of taxList"
+              [value]="item.taxId"
+            >
+              {{ item.taxSection }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <mat-label class="me-2 fw-bold">Payment Nature: </mat-label>
+        <mat-label>{{lblNature}}</mat-label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <mat-radio-group aria-label="Select an option">
+          <mat-radio-button value="1">Filer</mat-radio-button>&nbsp;&nbsp;&nbsp;
+          <mat-radio-button value="2">non-Filer</mat-radio-button>
+        </mat-radio-group>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <strong class="pull-right text-danger"> Tax Rate </strong>
+      </div>
+      <div class="col-md-6"><strong class="text-danger">17 %</strong></div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <strong class="pull-right text-primary"> Tax Amount </strong>
+      </div>
+      <div class="col-md-6">
+        <strong class="text-primary">Rs. 500</strong>
+      </div>
+    </div>
+  </mat-tab> -->
+</mat-tab-group>

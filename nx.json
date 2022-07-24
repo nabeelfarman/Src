@@ -1,0 +1,105 @@
+{
+  "implicitDependencies": {
+    "package.json": {
+      "dependencies": "*",
+      "devDependencies": "*"
+    },
+    ".eslintrc.json": "*"
+  },
+  "affected": {
+    "defaultBase": "master"
+  },
+  "npmScope": "society",
+  "tasksRunnerOptions": {
+    "default": {
+      "runner": "@nrwl/workspace/tasks-runners/default",
+      "options": {
+        "cacheableOperations": ["build", "lint", "test", "e2e"]
+      }
+    }
+  },
+  "projects": {
+    "society": {
+      "tags": []
+    },
+    "society-e2e": {
+      "tags": [],
+      "implicitDependencies": ["society"]
+    },
+    "auth": {
+      "tags": []
+    },
+    "layouts": {
+      "tags": []
+    },
+    "material": {
+      "tags": []
+    },
+    "shared-services-auth": {
+      "tags": []
+    },
+    "shared-services-data": {
+      "tags": []
+    },
+    "ui": {
+      "tags": []
+    },
+    "shared-environments": {
+      "tags": []
+    },
+    "shared-models": {
+      "tags": []
+    },
+    "shared-helpers-field-validations": {
+      "tags": []
+    },
+    "shared-helpers-guards": {
+      "tags": []
+    },
+    "shared-helpers-interceptors": {
+      "tags": []
+    },
+    "umis": {
+      "tags": []
+    },
+    "shared-services-global-data": {
+      "tags": []
+    },
+    "company": {
+      "tags": []
+    },
+    "blocks": {
+      "tags": []
+    },
+    "shared-interface": {
+      "tags": []
+    },
+    "umis-blocks": {
+      "tags": []
+    },
+    "cmis-blocks": {
+      "tags": []
+    },
+    "shared-helpers-jwt-interceptor": {
+      "tags": []
+    },
+    "society-core": {
+      "tags": []
+    },
+    "fmis": {
+      "tags": []
+    },
+    "payroll": {
+      "tags": []
+    },
+    "land": {
+      "tags": []
+    },
+    "inventory": {
+      "tags": []
+    },
+    "web-part": {
+      "tags": []
+    }
+  }
+}

@@ -1,0 +1,24 @@
+<div class="saveUpdateBar border mat-elevation-z2">
+  <button mat-button class="save cursorPointer">
+    <mat-icon>insert_drive_file</mat-icon>
+    <span class="ps-2">online Transfer</span>
+  </button>
+  <button
+    mat-button
+    class="save cursorPointer"
+    data-bs-toggle="modal"
+    data-bs-target="#chqBookModal"
+  >
+    <mat-icon>print</mat-icon>
+    <span class="ps-2">Cheque Book</span>
+  </button>
+</div>
+
+<mat-tab-group mat-align-tabs="center" class="vh-100">
+  <mat-tab label="Payments">
+    <society-voucher-payments></society-voucher-payments>
+  </mat-tab>
+  <mat-tab label="Receipts">
+    <society-receipt-supervision></society-receipt-supervision>
+  </mat-tab>
+</mat-tab-group>

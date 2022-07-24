@@ -1,0 +1,139 @@
+<div id="main-content">
+  <section class="statis mt-4 ps-3 pe-3 text-center">
+    <div class="row">
+      <div class="col-md-3">
+        <div class="box bg-primary p-3 mat-elevation-z2">
+          <i class="text-white"><mat-icon>api</mat-icon></i>
+          <h3 class="text-white">555,000 SY</h3>
+          <p class="lead text-white">Total Land</p>
+        </div>
+      </div>
+      <div class="col-md-3 mb-4">
+        <div class="box bg-success p-3 mat-elevation-z2">
+          <i class="text-white"><mat-icon>lock</mat-icon> </i>
+          <h3 class="text-white">300,000 SY</h3>
+          <p class="lead text-white">Occupied</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3 mb-4 mb-md-0">
+        <div class="box bg-warning p-3 text-white mat-elevation-z2">
+          <i class=""><mat-icon>language</mat-icon></i>
+          <h3 class="text-white">100,000 SY</h3>
+          <p class="lead">Plots</p>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="box bg-danger p-3 text-white mat-elevation-z2">
+          <i class=""><mat-icon>payments</mat-icon></i>
+          <h3 class="text-white">2.0 million</h3>
+          <p class="lead">Liabilities</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="row">
+  <div class="col-md-3 ps-4 text-center">
+    <h4 class="">Occupied / Total Area</h4>
+    <div class="d-flex flex-row justify-content-center">
+      <div class="circle-progress">
+        <span class="title timer" data-from="0" data-to="55" data-speed="1800"
+          >55</span
+        >
+        <div class="overlay"></div>
+        <div class="left"></div>
+        <div class="right"></div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3 text-center">
+    <h4 class="">Plotting / Occupied</h4>
+    <div class="d-flex flex-row justify-content-center">
+      <div class="circle-progress">
+        <span class="title timer" data-from="0" data-to="55" data-speed="1800"
+          >73</span
+        >
+        <div class="overlay"></div>
+        <div class="left"></div>
+        <div class="right"></div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3 text-center">
+    <h4 class="">Possession / Plotting</h4>
+    <div class="d-flex flex-row justify-content-center">
+      <div class="circle-progress">
+        <span class="title timer" data-from="0" data-to="55" data-speed="1800"
+          >49</span
+        >
+        <div class="overlay"></div>
+        <div class="left"></div>
+        <div class="right"></div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3 pe-4 text-center">
+    <h4 class="">Constructed / Possession</h4>
+    <div class="d-flex flex-row justify-content-center">
+      <div class="circle-progress">
+        <span class="title timer" data-from="0" data-to="15" data-speed="1800"
+          >15</span
+        >
+        <div class="overlay"></div>
+        <div class="left"></div>
+        <div class="right"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-4 ps-4">
+    <div class="bg-white border mat-elevation-z2 h-100">
+      <h4 class="text-center pt-2">Occupied Land Detail</h4>
+      <hr />
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th class="text-center" scope="col">Sr #</th>
+              <th scope="col">Mauza Name</th>
+              <th scope="col"><div class="pull-right">Total Area</div></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-center">1</td>
+              <td>Chuchkaal</td>
+              <td><div class="pull-right">1,000 SY</div></td>
+            </tr>
+            <tr>
+              <td class="text-center">2</td>
+              <td>Loi Bhair</td>
+              <td><div class="pull-right">2,500 SY</div></td>
+            </tr>
+            <tr>
+              <td class="text-center">3</td>
+              <td>Domaili</td>
+              <td><div class="pull-right">2,275 SY</div></td>
+            </tr>
+            <tr>
+              <td class="text-center">4</td>
+              <td>Musa Town</td>
+              <td><div class="pull-right">1,235 SY</div></td>
+            </tr>
+            <tr>
+              <td class="text-center">5</td>
+              <td>Dhok Paracha</td>
+              <td><div class="pull-right">5,632 SY</div></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-8 pe-4">
+    <div class="mat-elevation-z2" [chart]="due_payments_chart"></div>
+  </div>
+</div>

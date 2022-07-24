@@ -1,0 +1,93 @@
+<div class="row h-100">
+  <!-- first 02 columns -->
+  <div class="col-md-2 p-0 orange-bg">
+    <div
+      class="d-flex flex-column h-100 justify-content-center align-items-center"
+    >
+      <h2 class="text-black text-center pb-2 w-100 border-bottom border-dark">
+        Rule LOGS
+      </h2>
+
+      <div class="side-nav-container">
+        <div class="side-nav-link">
+          <div class="text">New Log</div>
+        </div>
+        <div class="side-nav-link">
+          <div class="text">01-Jul-2020</div>
+        </div>
+        <div class="side-nav-link">
+          <div class="text">01-Jul-2019</div>
+        </div>
+        <div class="side-nav-link">
+          <div class="text">01-Jul-2018</div>
+        </div>
+        <div class="side-nav-link">
+          <div class="text">01-Jul-2017</div>
+        </div>
+        <div class="side-nav-link">
+          <div class="text">01-Jul-2016</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- mid 08 columns -->
+  <div class="col-md-8 h-100 scroll-verticle" data-simplebar>
+    <h2 class="text-center pt-2 pb-2 w-100">House Rent Allowance</h2>
+    <mat-divider></mat-divider>
+    <mat-radio-group
+      [(ngModel)]="rdbRule"
+      aria-label="Select an option"
+      class="d-flex flex-row justify-content-between pt-2 pb-2"
+    >
+      <mat-radio-button value="1">BPS Only</mat-radio-button>
+      <mat-radio-button value="2">BPS & Designation</mat-radio-button>
+      <mat-radio-button value="3">Basic Pay Range</mat-radio-button>
+      <mat-radio-button value="4">Pay Slabs</mat-radio-button>
+      <!-- <mat-radio-button value="5">Formula</mat-radio-button> -->
+    </mat-radio-group>
+    <!-- radio options -->
+    <div class="row">
+      <div class="col-md-12">
+        <society-bps-only *ngIf="rdbRule == '1'"></society-bps-only>
+        <society-bps-designation
+          *ngIf="rdbRule == '2'"
+        ></society-bps-designation>
+        <society-pay-range *ngIf="rdbRule == '3'"></society-pay-range>
+        <society-pay-slabs *ngIf="rdbRule == '4'"></society-pay-slabs>
+      </div>
+    </div>
+  </div>
+
+  <!-- end 02 columns -->
+  <div class="col-md-2 light-blue-bg border p-0">
+    <div
+      class="d-flex flex-column h-100 justify-content-center align-items-center"
+    >
+      <h2 class="text-black text-center pb-2 w-100 border-bottom border-dark">
+        Titles
+      </h2>
+
+      <div class="side-nav-container-white">
+        <div class="side-nav-link">
+          <div class="text"><span class="text-danger">New Log</span></div>
+        </div>
+        <div class="side-nav-link">
+          <div class="text">House Rent Allowance</div>
+        </div>
+        <div class="side-nav-link">
+          <div class="text">Conveyance Allowance</div>
+        </div>
+        <div class="side-nav-link">
+          <div class="text">HQ Allowance</div>
+        </div>
+        <div class="side-nav-link">
+          <div class="text">Utilites Allowance</div>
+        </div>
+        <div class="side-nav-link">
+          <div class="text">Medical Allowance</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

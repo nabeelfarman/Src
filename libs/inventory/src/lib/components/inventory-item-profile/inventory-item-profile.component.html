@@ -1,0 +1,156 @@
+<div class="saveUpdateBar border mat-elevation-z2">
+  <!-- <button mat-button class="save cursorPointer">
+    <mat-icon>save</mat-icon>
+    <span class="ps-2">Save</span>
+  </button> -->
+  <button mat-button class="save cursorPointer">
+    <mat-icon>cached</mat-icon>
+    <span class="ps-2">Reset</span>
+  </button>
+</div>
+
+<div class="row h-100">
+  <div class="col-md-3 bg-white border">
+    <h2 class="pt-3 ps-3">Search Item</h2>
+    <hr />
+    <div class="ps-3 pe-3">
+      <div class="d-flex flex-row">
+        <mat-form-field class="flex-grow-1">
+          <mat-label>Tag No.</mat-label>
+          <mat-select>
+            <mat-option value="one">SSECHS.SecFIN.F&F.SFA.1</mat-option>
+            <mat-option value="two">SSECHS.SecFIN.F&F.SFA.2</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <button mat-mini-fab color="primary">
+          <mat-icon>search</mat-icon>
+        </button>
+      </div>
+
+      <h4 class="pt-3">Filter Tags Advance Searh</h4>
+      <mat-divider> </mat-divider>
+      <mat-form-field class="w-100">
+        <mat-label>Building</mat-label>
+        <mat-select>
+          <mat-option value="one">Head Office</mat-option>
+          <mat-option value="two">Lahore Branch</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="w-100">
+        <mat-label>Floor</mat-label>
+        <mat-select>
+          <mat-option value="one">Ground Floor</mat-option>
+          <mat-option value="two">1st Floor</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="w-100">
+        <mat-label>Room / Area</mat-label>
+        <mat-select>
+          <mat-option value="one">Room No. 01</mat-option>
+          <mat-option value="two">Room No. 02</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="col-md-3 border">
+    <h2 class="pt-3 ps-3">Item Info</h2>
+    <hr />
+    <mat-card class="example-card">
+      <mat-card-title>SSECHS.SecFIN.F&F.SFA.1</mat-card-title>
+      <mat-card-subtitle>Sofa Set</mat-card-subtitle>
+      <mat-card-content>
+        <p>Furniture & Fixture</p>
+        <p>
+          Head Quarter, Ground Floor, Room No. 01 under Custody of Manager
+          Accounts
+        </p>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="example-card mt-3">
+      <mat-card-title>Item Specification</mat-card-title>
+      <!-- <mat-card-subtitle>Sofa Set</mat-card-subtitle> -->
+      <mat-card-content>
+        <div class="d-flex flex-wrap">
+          <div class="ps-3 ps-3"><em>make:</em>Branded</div>
+          <div class="ps-3 ps-3"><em>model:</em>2018</div>
+          <div class="ps-3 ps-3"><em>size:</em>3 Seater</div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <div class="col-md-3 orange-bg border">
+    <h2 class="pt-3 ps-3">Item Value</h2>
+    <hr />
+
+    <mat-card class="example-card">
+      <mat-card-title>Purchase Info</mat-card-title>
+      <mat-card-subtitle>M/s SN Trader</mat-card-subtitle>
+      <mat-card-content>
+        <p><em>Purchase Date: </em><strong>01-Jul-2018</strong></p>
+        <p>
+          <em>Cost of Item: </em> <strong>Rs. 15,000/-</strong>,
+          <em>Total Deprecated Value: </em> <strong>Rs. 10,000 /-</strong>,
+          <em>Current Value: </em><strong>Rs. 5,000/-</strong>
+        </p>
+        <p><em>Depreciation Methor: </em> <strong>Straight Line</strong></p>
+        <p><em>Depreciation Rate: </em> <strong>10%</strong></p>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="example-card mt-3">
+      <mat-card-title>Depreciation Details</mat-card-title>
+
+      <mat-card-content>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th><div class="pull-right">Amount</div></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>30-Jun-2019</th>
+              <th><div class="pull-right">1,500</div></th>
+            </tr>
+            <tr>
+              <th>30-Jun-2020</th>
+              <th><div class="pull-right">1,500</div></th>
+            </tr>
+            <tr>
+              <th>30-Jun-2021</th>
+              <th><div class="pull-right">1,500</div></th>
+            </tr>
+          </tbody>
+        </table>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <div class="col-md-3 border">
+    <h2 class="pt-3 ps-3">Revaluation Info</h2>
+    <hr />
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th><div class="pull-right">Amount</div></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th>30-Jun-2019</th>
+          <th><div class="pull-right">12,000</div></th>
+        </tr>
+        <tr>
+          <th>30-Jun-2020</th>
+          <th><div class="pull-right">10,000</div></th>
+        </tr>
+        <tr>
+          <th>30-Jun-2021</th>
+          <th><div class="pull-right">9,000</div></th>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

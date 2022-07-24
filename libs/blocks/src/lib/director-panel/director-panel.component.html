@@ -1,0 +1,136 @@
+<div class="d-flex flex-row justify-content-between mt-2">
+  <h2>Management Committee</h2>
+</div>
+<mat-expansion-panel hideToggle class="me-2" *ngFor="let item of itemList">
+  <mat-expansion-panel-header>
+    <mat-panel-title class="d-flex flex-row justify-content-between">
+      <div *ngIf="item.designationId == ''">Add Director</div>
+      <div *ngIf="item.designationId != ''">{{ item.designationName }}</div>
+    </mat-panel-title>
+  </mat-expansion-panel-header>
+  <!-- Title row -->
+  <div class="row">
+    <div class="col-md-12">
+      <mat-form-field class="w-100">
+        <mat-select
+          disableOptionCentering
+          placeholder="Select Partner Title"
+          [(ngModel)]="item.designationId"
+          required
+        >
+          <mat-option
+            *ngFor="let items of designationList"
+            [value]="items.designationID"
+          >
+            {{ items.designationName }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <!-- Director name row -->
+  <div class="row">
+    <div class="col-md-12">
+      <mat-form-field class="w-100">
+        <input
+          matInput
+          placeholder="Director's Name"
+          [(ngModel)]="item.partnerTitle"
+        />
+      </mat-form-field>
+    </div>
+  </div>
+
+  <!-- CNIC row -->
+  <div class="row">
+    <div class="col-md-12">
+      <mat-form-field class="w-100">
+        <input
+          matInput
+          placeholder="CNIC Number"
+          [(ngModel)]="item.cnicNo"
+          [textMask]="{ mask: cnicMask }"
+        />
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <mat-form-field class="w-100">
+        <textarea
+          matInput
+          placeholder="Address"
+          [(ngModel)]="item.partnerAddress"
+          required
+        ></textarea>
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <mat-form-field class="w-100">
+        <mat-select
+          disableOptionCentering
+          placeholder="Select Country"
+          [(ngModel)]="item.countryid"
+          (ngModelChange)="getCity(item.countryid)"
+          required
+        >
+          <mat-option
+            *ngFor="let items of countryList"
+            [value]="items.countryId"
+          >
+            {{ items.countryName }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="col-md-6">
+      <mat-form-field class="w-100">
+        <mat-select
+          disableOptionCentering
+          placeholder="Select City"
+          [(ngModel)]="item.cityId"
+          required
+        >
+          <mat-option *ngFor="let items of cityList" [value]="items.cityId">
+            {{ items.cityName }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <mat-form-field class="w-100">
+        <input
+          matInput
+          placeholder="Mobile Number"
+          maxlength="11"
+          [(ngModel)]="item.partnerCellNo"
+          [textMask]="{ mask: mobileMask }"
+        />
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <mat-form-field class="w-100">
+        <input matInput placeholder="Email" [(ngModel)]="item.partnerEmail" />
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="mt-4 d-flex flex-row justify-content-between">
+        <button mat-raised-button class="savebtn" (click)="save(item)">
+          Save
+        </button>
+        <button mat-raised-button class="resetbtn">Reset</button>
+      </div>
+    </div>
+  </div>
+</mat-expansion-panel>

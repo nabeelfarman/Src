@@ -1,0 +1,211 @@
+<div class="saveUpdateBar border mat-elevation-z2">
+  <button mat-button class="save cursorPointer" (click)="save()">
+    <mat-icon>save</mat-icon>
+    <span class="ps-2">Save</span>
+  </button>
+  <button mat-button class="save cursorPointer" (click)="reset()">
+    <mat-icon>cached</mat-icon>
+    <span class="ps-2">Reset</span>
+  </button>
+</div>
+<mat-tab-group mat-align-tabs="center">
+  <mat-tab label="Add / Modify">
+    <div class="row">
+      <div class="col-md-5 bg-white border">
+        <div class="h2 pt-3 ps-3 pe-3">Item Info</div>
+        <hr />
+        <div class="ps-3 pe-3">
+          <div class="row">
+            <div class="col-md-6">
+              <mat-form-field class="w-100">
+                <mat-label>Custodian</mat-label>
+                <mat-select
+                  [(ngModel)]="formFields[3].value"
+                >
+                  <mat-option
+                    *ngFor="let item of custodyList"
+                    [value]="item.memberProfileId"
+                  >
+                    {{ item.memberName }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col-md-6">
+              <mat-form-field class="w-100">
+                <mat-label>Section</mat-label>
+                <mat-select
+                  [(ngModel)]="formFields[3].value"
+                >
+                  <mat-option
+                    *ngFor="let item of branchList"
+                    [value]="item.sectionId"
+                  >
+                    {{ item.sectionTitle }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+          <mat-form-field class="w-100">
+            <mat-label>Location</mat-label>
+            <input matInput [(ngModel)]="formFields[4].value"/>
+          </mat-form-field>
+          <mat-form-field class="w-100">
+            <mat-label>Asset Category</mat-label>
+            <mat-select
+                  [(ngModel)]="formFields[5].value"
+                >
+                  <mat-option
+                    *ngFor="let item of assetCategoryList"
+                    [value]="item.assetCatID"
+                  >
+                    {{ item.assetCatDescription }}
+                  </mat-option>
+                </mat-select>
+          </mat-form-field>
+          <mat-form-field class="w-100">
+            <mat-label>Item Descriptoin</mat-label>
+            <input matInput [(ngModel)]="formFields[6].value"/>
+          </mat-form-field>
+          <div class="d-flex flex-wrap">
+            <mat-form-field class="pe-2">
+              <mat-label>Make</mat-label>
+              <input matInput [(ngModel)]="formFields[7].value"/>
+            </mat-form-field>
+            <mat-form-field class="pe-2">
+              <mat-label>Model</mat-label>
+              <input matInput [(ngModel)]="formFields[8].value"/>
+            </mat-form-field>
+            <mat-form-field class="pe-2">
+              <mat-label>Size</mat-label>
+              <input matInput [(ngModel)]="formFields[9].value"/>
+            </mat-form-field>
+            <mat-form-field class="pe-2">
+              <mat-label>Generation</mat-label>
+              <input matInput [(ngModel)]="formFields[10].value"/>
+            </mat-form-field>
+            <mat-form-field class="pe-2">
+              <mat-label>Processor</mat-label>
+              <input matInput [(ngModel)]="formFields[11].value"/>
+            </mat-form-field>
+            <mat-form-field class="pe-2">
+              <mat-label>RAM</mat-label>
+              <input matInput [(ngModel)]="formFields[12].value"/>
+            </mat-form-field>
+            <mat-form-field class="pe-2">
+              <mat-label>Drive Type</mat-label>
+              <input matInput [(ngModel)]="formFields[13].value"/>
+            </mat-form-field>
+            <mat-form-field class="pe-2">
+              <mat-label>HD Size</mat-label>
+              <input matInput [(ngModel)]="formFields[14].value"/>
+            </mat-form-field>
+          </div>
+          <mat-form-field class="w-100">
+            <mat-label>Item Condition</mat-label>
+            <mat-select [(ngModel)]="formFields[20].value">
+              <mat-option value="excellent">Excellent</mat-option>
+              <mat-option value="good">Good</mat-option>
+              <mat-option value="average">Average</mat-option>
+              <mat-option value="poor">Poor</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <div class="d-flex flex-wrap pt-2 pb-3">
+            <mat-slide-toggle color="warn" [(ngModel)]="formFields[21].value" [disabled]="disableUsable" (change)="setCondemned()">Useable</mat-slide-toggle>
+            <mat-slide-toggle color="warn" [(ngModel)]="formFields[22].value" [disabled]="disableServiceable">Serviceable</mat-slide-toggle>
+            <mat-slide-toggle color="warn" [(ngModel)]="formFields[23].value" [disabled]="disableCondemned">Comdemned</mat-slide-toggle>
+            <mat-slide-toggle color="warn" [(ngModel)]="formFields[24].value" (change)="setMissingYes()">Missing</mat-slide-toggle>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 light-blue-bg border">
+        <h2 class="pt-3 ps-3">Purchase Info</h2>
+        <hr />
+        <div class="ps-3 pe-3">
+          <div class="row">
+            <div class="col-md-6">
+              <mat-form-field class="w-100">
+                <mat-label>Purchase Date</mat-label>
+                <input matInput [matDatepicker]="picker2" [(ngModel)]="formFields[25].value" />
+                <mat-datepicker-toggle
+                  matSuffix
+                  [for]="picker2"
+                ></mat-datepicker-toggle>
+                <mat-datepicker #picker2></mat-datepicker>
+              </mat-form-field>
+            </div>
+            <div class="col-md-6">
+              <mat-form-field class="w-100">
+                <mat-label>Amount</mat-label>
+                <input matInput [(ngModel)]="formFields[26].value" />
+                <span matSuffix>Rs.</span>
+              </mat-form-field>
+              <!-- <mat-form-field class="w-100">
+                <mat-label>Memo Date</mat-label>
+                <input matInput [matDatepicker]="picker3" />
+                <mat-datepicker-toggle
+                  matSuffix
+                  [for]="picker3"
+                ></mat-datepicker-toggle>
+                <mat-datepicker #picker3></mat-datepicker>
+              </mat-form-field> -->
+            </div>
+          </div>
+          <!-- <mat-form-field class="w-100">
+            <mat-label>Memo No.</mat-label>
+            <input matInput />
+          </mat-form-field> -->
+          <mat-form-field class="w-100">
+            <mat-label>Remarks</mat-label>
+            <textarea matInput [(ngModel)]="formFields[27].value"></textarea>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="col-md-3 border">
+        <div class="row">
+          <div class="col-md-6">
+            <h2 class="pt-3 ps-3">Tags</h2>
+          </div>
+          <div class="col-md-6">
+            <div class="pull-right pt-3 pe-2">
+              <button
+                mat-mini-fab
+                color="primary"
+                aria-label="Example icon button with a menu icon"
+              >
+                <mat-icon>print</mat-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+        <hr />
+        <div class="pe-3">
+          <mat-card class="mb-3">
+            <mat-card-title class="text-center text-dark"
+              >SSECHS.SecFIN.F&F.SFA.1</mat-card-title
+            >
+          </mat-card>
+          <mat-card class="mb-3">
+            <mat-card-title class="text-center text-dark"
+              >SSECHS.SecFIN.F&F.SFA.1</mat-card-title
+            >
+          </mat-card>
+          <mat-card class="mb-3">
+            <mat-card-title class="text-center text-dark"
+              >SSECHS.SecFIN.F&F.SFA.1</mat-card-title
+            >
+          </mat-card>
+          <mat-card class="mb-3">
+            <mat-card-title class="text-center text-dark"
+              >SSECHS.SecFIN.F&F.SFA.1</mat-card-title
+            >
+          </mat-card>
+        </div>
+      </div>
+    </div>
+  </mat-tab>
+  <mat-tab label="Saved">
+    <society-inventory-entry-table></society-inventory-entry-table>
+  </mat-tab>
+</mat-tab-group>

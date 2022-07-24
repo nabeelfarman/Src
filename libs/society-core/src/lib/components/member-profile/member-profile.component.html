@@ -1,0 +1,391 @@
+<div class="saveUpdateBar mat-elevation-z2">
+  <button mat-button class="save" (click)="saveMemberProfile()">
+    <mat-icon>save</mat-icon>
+    <span class="ps-2">Save</span>
+  </button>
+  <button mat-button class="save" (click)="reset()">
+    <mat-icon>cached</mat-icon>
+    <span class="ps-2">Reset</span>
+  </button>
+</div>
+<mat-tab-group
+  mat-align-tabs="center"
+  [selectedIndex]="tabIndex"
+  (selectedIndexChange)="changeTabHeader($event)"
+>
+  <mat-tab label="Member Profiles">
+    <div class="row h-100">
+      <div class="d-flex flex-column justify-content-between">
+        <div class="row h-100">
+          <div class="col-md-3 bg-white">
+            <h2 class="pt-2 pb-2 ps-3 border-bottom">Member Personal Info</h2>
+            <society-image-uploading
+              [imageUrl]="memberPic"
+            ></society-image-uploading>
+            <div class="d-flex flex-column ps-3 pe-3">
+              <mat-radio-group
+                class="d-flex justify-content-between"
+                aria-label="Select an option"
+                [(ngModel)]="rdbMember"
+                (ngModelChange)="typeChange(rdbMember)"
+              >
+                <mat-radio-button checked="true" value="1"
+                  >New Member</mat-radio-button
+                >
+                <mat-radio-button value="2">Already Exist</mat-radio-button>
+              </mat-radio-group>
+              <mat-form-field class="w-100" *ngIf="rdbMember == '2'">
+                <mat-label>Select Member Name</mat-label>
+                <mat-select
+                  [(ngModel)]="formFields[0].value"
+                  (ngModelChange)="memberChange(formFields[0].value)"
+                >
+                  <mat-option
+                    *ngFor="let item of memberList"
+                    [value]="item.memberProfileId"
+                  >
+                    {{ item.memberName }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field class="w-100" *ngIf="rdbMember == '1'">
+                <input
+                  matInput
+                  placeholder="Name"
+                  [(ngModel)]="formFields[6].value"
+                />
+              </mat-form-field>
+              <mat-form-field class="w-100">
+                <input
+                  matInput
+                  placeholder="S/D/W Name"
+                  [(ngModel)]="formFields[8].value"
+                />
+              </mat-form-field>
+              <mat-radio-group
+                class="d-flex justify-content-between"
+                aria-label="Select an option"
+                [(ngModel)]="rdbCnic"
+                (ngModelChange)="typeChangeCnic()"
+              >
+                <mat-radio-button checked="true" value="1"
+                  >Old CNIC</mat-radio-button
+                >
+                <mat-radio-button value="2">New CNIC</mat-radio-button>
+              </mat-radio-group>
+              <mat-form-field class="w-100" *ngIf="rdbCnic == '1'">
+                <input
+                  matInput
+                  placeholder="Old CNIC"
+                  [(ngModel)]="formFields[9].value"
+                  maxlength="13"
+                  (keyup)="setCnicData()"
+                />
+              </mat-form-field>
+              <mat-form-field class="w-100" *ngIf="rdbCnic == '2'">
+                <input
+                  matInput
+                  placeholder="New CNIC"
+                  [(ngModel)]="formFields[9].value"
+                  maxlength="15"
+                  (keyup)="setCnicData()"
+                />
+              </mat-form-field>
+              <mat-form-field class="w-100">
+                <input
+                  matInput
+                  placeholder="Designation"
+                  maxlength="50"
+                  [(ngModel)]="formFields[10].value"
+                />
+              </mat-form-field>
+              <mat-form-field class="w-100">
+                <input
+                  matInput
+                  placeholder="BPS"
+                  [(ngModel)]="formFields[11].value"
+                  [textMask]="{ mask: bpsMask }"
+                />
+              </mat-form-field>
+              <mat-form-field>
+                <mat-label>Date of Birth</mat-label>
+                <input
+                  matInput
+                  [matDatepicker]="picker"
+                  [(ngModel)]="formFields[12].value"
+                />
+                <mat-datepicker-toggle
+                  matSuffix
+                  [for]="picker"
+                ></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="col-md-3 bg-white border">
+            <h2 class="pt-2 pb-2 ps-3 border-bottom">Contact Info</h2>
+            <div class="d-flex flex-column ps-2 pe-2">
+              <mat-form-field class="w-100">
+                <input
+                  matInput
+                  placeholder="Phone No"
+                  [(ngModel)]="formFields[13].value"
+                  [textMask]="{ mask: phoneMask }"
+                />
+              </mat-form-field>
+              <mat-form-field class="w-100">
+                <input
+                  matInput
+                  placeholder="Mobile No"
+                  [(ngModel)]="formFields[15].value"
+                  [textMask]="{ mask: mobileMask }"
+                />
+              </mat-form-field>
+              <mat-form-field class="w-100">
+                <input
+                  matInput
+                  placeholder="Email Address"
+                  [(ngModel)]="formFields[17].value"
+                />
+              </mat-form-field>
+              <mat-form-field class="w-100">
+                <mat-label>Present Address</mat-label>
+                <textarea
+                  matInput
+                  [(ngModel)]="formFields[18].value"
+                ></textarea>
+              </mat-form-field>
+              <div class="d-flex flex-row">
+                <mat-form-field>
+                  <mat-label>Country</mat-label>
+                  <mat-select
+                    [(ngModel)]="cmbPresentCountry"
+                    (ngModelChange)="getPresentCity(cmbPresentCountry)"
+                  >
+                    <mat-option
+                      *ngFor="let item of countryList"
+                      [value]="item.countryId"
+                    >
+                      {{ item.countryName }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <mat-form-field class="ms-2 w-100">
+                  <mat-label>City</mat-label>
+                  <mat-select [(ngModel)]="formFields[19].value">
+                    <mat-option>
+                      <ngx-mat-select-search [(ngModel)]="searchPresentCity" 
+                        [noEntriesFoundLabel]="'Not found'" placeholderLabel="Search..." name="search">
+                      </ngx-mat-select-search>
+                    </mat-option>
+                    <mat-option
+                      *ngFor="let item of presentCityList | search: 'cityName': searchPresentCity"
+                      [value]="item.cityId"
+                    >
+                      {{ item.cityName }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <mat-form-field>
+                <mat-label>Permanent Address</mat-label>
+                <textarea
+                  matInput
+                  [(ngModel)]="formFields[20].value"
+                ></textarea>
+              </mat-form-field>
+              <div class="d-flex flex-row">
+                <mat-form-field>
+                  <mat-label>Country</mat-label>
+                  <mat-select
+                    [(ngModel)]="cmbPermanentCountry"
+                    (ngModelChange)="getPermanentCity(cmbPermanentCountry)"
+                  >
+                    <mat-option
+                      *ngFor="let item of countryList"
+                      [value]="item.countryId"
+                    >
+                      {{ item.countryName }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <mat-form-field class="w-100 ms-2">
+                  <mat-label>City</mat-label>
+                  <mat-select [(ngModel)]="formFields[21].value">
+                    <mat-option>
+                      <ngx-mat-select-search [(ngModel)]="searchPermanentCity" 
+                        [noEntriesFoundLabel]="'Not found'" placeholderLabel="Search..." name="search">
+                      </ngx-mat-select-search>
+                    </mat-option>
+                    <mat-option
+                      *ngFor="let item of permanentCityList | search: 'cityName': searchPermanentCity"
+                      [value]="item.cityId"
+                    >
+                      {{ item.cityName }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <h2 class="pt-2 pb-2 ps-3 border-bottom">Nominee Info</h2>
+              <mat-form-field class="w-100">
+                <input
+                  matInput
+                  placeholder="Next to Kin / relation"
+                  [(ngModel)]="formFields[32].value"
+                />
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="col-md-3 light-blue-bg border p-0">
+            <h2 class="pt-2 pb-2 ps-2 border-bottom">Membership Info</h2>
+            <div class="ps-2 pe-2">
+              <mat-form-field class="w-100">
+                <mat-label>Membership Date</mat-label>
+                <input
+                  matInput
+                  [matDatepicker]="picker1"
+                  [(ngModel)]="formFields[24].value"
+                />
+                <mat-datepicker-toggle
+                  matSuffix
+                  [for]="picker1"
+                ></mat-datepicker-toggle>
+                <mat-datepicker #picker1></mat-datepicker>
+              </mat-form-field>
+
+              <mat-form-field class="w-100">
+                <mat-label>search Membership No.</mat-label>
+                <mat-select
+                  [(ngModel)]="formFields[3].value"
+                  (ngModelChange)="membershipChange(formFields[3].value)"
+                >
+                  <mat-option>
+                    <ngx-mat-select-search [(ngModel)]="searchMembership" 
+                      [noEntriesFoundLabel]="'Not found'" placeholderLabel="Search..." name="search">
+                    </ngx-mat-select-search>
+                  </mat-option>
+                  <mat-option
+                    *ngFor="let item of plotList 
+                            | search: 'fileNo': searchMembership"
+                    [value]="item.plotFileId"
+                  >
+                  <!-- <mat-option
+                    *ngFor="let item of plotList"
+                    [value]="item.plotFileId"
+                  > -->
+                    {{ item.fileNo }}
+                  </mat-option>
+                </mat-select>
+                <!-- <input matInput [(ngModel)]="formFields[25].value" />
+                <button
+                  mat-raised-button
+                  color="warn"
+                  matSuffix
+                  [attr.aria-label]="'Hide password'"
+                  [attr.aria-pressed]=""
+                  (click)="searchMembership()"
+                > -->
+                  <!-- <mat-icon>search</mat-icon>
+                </button> -->
+              </mat-form-field>
+              <p class="pt-3 sunred-text">Plot Category</p>
+              <p>
+                <strong>{{ lblCategory }}</strong>
+              </p>
+              <hr />
+              <p class="pt-3 sunred-text">Plot Nature</p>
+              <p>
+                <strong>{{ lblNature }}</strong>
+              </p>
+              <hr />
+              <p class="pt-3 sunred-text">Plot Type</p>
+              <p>
+                <strong>{{ lblType }}</strong>
+              </p>
+              <hr />
+              <div class="d-flex flex-row">
+                <input
+                  color="warn"
+                  type="file"
+                  accept=".pdf"
+                  (change)="onFileSelected($event)"
+                  [(ngModel)]="this.formFields[29].value"
+                />
+              </div>
+              <hr />
+              <div *ngIf="editMode == true" class="d-flex flex-row mt-2 bg-dark-light pb-4 pt-4 ps-3">
+                <label
+                  class="cursorPointer fs-5 fw-bold royal-blue-text"
+                  color="warn"
+                  (click)='openPDFFile()'
+                  data-bs-toggle="modal"
+                  data-bs-target="#pdfModal"
+                  ><u>Open PDF File</u>
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3 light-blue-bg border p-0">
+            <h2 class="pt-2 pb-2 ps-2 border-bottom">Payment Plan</h2>
+            <div class="ps-2 pe-3">
+              <mat-form-field class="w-100">
+                <mat-label>Payment Plan</mat-label>
+                <mat-select
+                  [(ngModel)]="formFields[4].value"
+                  (ngModelChange)="setPaymentPlanInfo(formFields[4].value)"
+                >
+                  <mat-option
+                    *ngFor="let item of paymentList"
+                    [value]="item.paymentPlanID"
+                  >
+                    {{ item.paymentPlanTitle }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <div *ngFor="let item of paymentDetailList">
+                <p class="pt-3 sunred-text">
+                  {{ item.installmentTitle }} / Due Date
+                </p>
+                <p>
+                  <strong
+                    >Rs. {{ item.amount | number }} /
+                    {{ item.dueDate | date: 'dd-MMM-YYYY' }}</strong
+                  >
+                </p>
+                <hr />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </mat-tab>
+  <mat-tab label="Saved Profiles">
+    <society-member-profile-table
+      (eventEmitter)="edit($event, $event)"
+    ></society-member-profile-table>
+  </mat-tab>
+</mat-tab-group>
+
+
+
+
+
+
+
+<!-- Modal -->
+<div id="pdfModal" class="modal fade" role="dialog" data-bs-backdrop="false">
+  <div class="modal-dialog modal-lg mat-elevation-z20">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">PDF Viewer</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div id="div1" style="width:100%;height:400px;"></div>
+      </div>
+    </div>
+  </div>
+</div>

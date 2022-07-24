@@ -1,0 +1,30 @@
+<div class="table-responsive">
+  <table class="table table-striped table-bordered">
+    <thead>
+      <tr>
+        <th class="text-center">Sr#</th>
+        <th>Main GroupTitle</th>
+        <th>Sub Group Title</th>
+        <th>Type</th>
+        <th class="text-center">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      
+      <tr *ngFor="let item of tableData let i = index">
+        <td class="text-center">{{ i+1 }}</td>
+        <td>{{ item.mainGroup }}</td>
+        <td>{{ item.subGroup }}</td>
+        <td>{{ item.coaType }}</td>
+        <td class="text-center">
+          <span class="text-primary pe-2 cursorPointer border-right-dark" (click)="edit(item, '1')">
+            <mat-icon>edit</mat-icon>
+          </span>
+          <span class="text-danger cursorPointer ps-2 pe-2" (click)="edit(item, '2')">
+            <mat-icon>delete</mat-icon>
+          </span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

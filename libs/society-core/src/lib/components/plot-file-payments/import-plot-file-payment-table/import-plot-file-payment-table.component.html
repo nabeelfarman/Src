@@ -1,0 +1,36 @@
+<div class="table-responsive">
+  <table class="table table-striped table-bordered">
+    <thead>
+      <tr>
+        <th class="text-center">Sr#</th>
+        <th>Tnx Date</th>
+        <th>Branch Code</th>
+        <th>Branch Name</th>
+        <th>Member Name</th>
+        <th>Membership No</th>
+        <th>Member CNIC</th>
+        <th>Contact No</th>
+        <th>Slip No</th>
+        <th>Reference No</th>
+        <th>Account Head</th>
+        <th>Amount</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of tableData let i=index">
+        <td class="text-center">{{i+1}}</td>
+        <td>{{item.receiptDate | date:'dd-MMM-YYYY'}}</td>
+        <td>{{item.CollectionBranchCode}}</td>
+        <td>{{item.CollectionBranchName}}</td>
+        <td>{{item.MemberName}}</td>
+        <td>{{item.plotFileId}}</td>
+        <td>{{item.MemberCNIC}}</td>
+        <td>{{item.PhoneNo1}}</td>
+        <td>{{item.DepositSlipNo}}</td>
+        <td>{{item.ReferenceNO}}</td>
+        <td>{{item.accountTitle}}</td>
+        <td>{{item.Amount | number}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

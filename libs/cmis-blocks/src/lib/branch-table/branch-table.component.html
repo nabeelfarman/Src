@@ -1,0 +1,30 @@
+<div class="table-responsive">
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th >Branch Title</th>
+                <th class="text-center" [hidden]="!isWrite && !isDelete">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let record of tableData; let i=index">
+                <td>{{record.branchTitle}}</td>
+                <td class="text-center" [hidden]="!isWrite && !isDelete">
+                    <span
+                        *ngIf="record.editMode == false" [hidden]="!isWrite" (click)="sendData()" class="text-primary cursorPointer"
+                    >
+                        <mat-icon>edit</mat-icon>
+                    </span>
+                    <span
+                        class="text-danger cursorPointer" [hidden]="!isDelete"
+                    >
+                        <mat-icon>delete</mat-icon>
+                    </span>
+                    <span [hidden]="!isDelete">
+                        <mat-slide-toggle color="warn"></mat-slide-toggle>
+                    </span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

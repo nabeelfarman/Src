@@ -1,0 +1,107 @@
+<div class="saveUpdateBar border mat-elevation-z2">
+  <button mat-button class="save cursorPointer" (click)="save()">
+    <mat-icon>save</mat-icon>
+    <span class="ps-2">Save</span>
+  </button>
+  <button mat-button class="save cursorPointer" (click)="reset()">
+    <mat-icon>cached</mat-icon>
+    <span class="ps-2">Reset</span>
+  </button>
+</div>
+
+<div class="row no-scroll">
+  <div class="col-md-3 bg-white border">
+    <h2 class="pt-3 ps-4 pe-3">Add / Modify</h2>
+    <hr />
+    <div class="ps-3 pe-3">
+      <mat-form-field class="w-100">
+        <mat-label>Account Category</mat-label>
+        <mat-select [(ngModel)]="formFields[3].value">
+          <mat-option
+            *ngFor="let item of accountCategoryList"
+            [value]="item.accountsCatID"
+          >
+            {{ item.accountsCategory }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="w-100">
+        <mat-label>Asset Category Name</mat-label>
+        <input matInput [(ngModel)]="formFields[4].value" />
+      </mat-form-field>
+      <mat-form-field class="w-100">
+        <mat-label>Asset Category Code</mat-label>
+        <input matInput [(ngModel)]="formFields[5].value" />
+      </mat-form-field>
+      <!-- <mat-form-field class="w-100">
+        <mat-label>Affect Date</mat-label>
+        <input matInput [matDatepicker]="picker" />
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field> -->
+      <mat-form-field class="w-100">
+        <mat-label>Depreciation Method</mat-label>
+        <mat-select [(ngModel)]="formFields[6].value">
+          <mat-option value="1">Straight Line</mat-option>
+          <!-- <mat-option value="2">Dimishing</mat-option> -->
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="w-100">
+        <mat-label>Depreciation Rate</mat-label>
+        <input matInput [(ngModel)]="formFields[7].value" />
+      </mat-form-field>
+      <!-- <mat-form-field class="w-100">
+        <mat-label>Description</mat-label>
+        <textarea matInput></textarea>
+      </mat-form-field> -->
+    </div>
+  </div>
+  <div class="col-md-9 p-0">
+    <h2 class="pt-3 ps-3">Saved Depreciation Rates</h2>
+    <hr />
+    <society-inventory-depreciation-rates-table
+      (eventEmitter)="edit($event)"
+    ></society-inventory-depreciation-rates-table>
+  </div>
+</div>
+
+<!-- breakup Modal -->
+<div
+  class="modal fade"
+  id="specModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+  data-bs-backdrop="false"
+>
+  <div class="modal-dialog modal-md modal-dialog-centered">
+    <div class="modal-content mat-elevation-z20">
+      <div class="modal-header bg-light">
+        <h4 class="modal-title text-primary" id="exampleModalLabel">
+          Computer Monitor Specifications
+        </h4>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <mat-selection-list #shoes>
+          <mat-list-option class="border"> Model </mat-list-option>
+          <mat-list-option class="border"> Size </mat-list-option>
+          <mat-list-option class="border"> Made </mat-list-option>
+          <mat-list-option class="border"> RAM </mat-list-option>
+          <mat-list-option class="border"> HDD </mat-list-option>
+        </mat-selection-list>
+      </div>
+      <div class="modal-footer dark-light-bg">
+        <div class="d-flex flex-row w-100 justify-content-around">
+          <button mat-raised-button class="savebtn">Save</button>
+          <button mat-raised-button class="resetbtn">Reset</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

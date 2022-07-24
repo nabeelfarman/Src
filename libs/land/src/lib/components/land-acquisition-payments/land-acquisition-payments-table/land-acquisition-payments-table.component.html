@@ -1,0 +1,77 @@
+<mat-form-field class="ps-2 pe-4 bg-white w-100">
+  <mat-label>Search</mat-label>
+  <input matInput />
+  <mat-icon matSuffix>search</mat-icon>
+</mat-form-field>
+<div class="table-responsive">
+  <table class="table table-striped table-bordered">
+    <thead>
+      <tr>
+        <th class="text-center">Sr#</th>
+        <th class="text-center">Due Date</th>
+        <th class="text-center">Transfer No.</th>
+        <th>Mauza</th>
+        <th>Owner of Land</th>
+        <th><div class="pull-right">Payable Amount</div></th>
+        <th><div class="pull-right">Due Amount</div></th>
+        <th class="text-center">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="text-center">1</td>
+        <td class="text-center">16-Jan-2022</td>
+        <td class="text-center">15302</td>
+        <td>Loi Bhair</td>
+        <td>Nabeel Ahmed Khan</td>
+        <td><div class="pull-right">1,500,000</div></td>
+        <td><div class="pull-right">1,000,000</div></td>
+        <td class="text-center">
+          <span
+            class="text-success pe-2 cursorPointer border-right-dark"
+            data-bs-toggle="modal"
+            data-bs-target="#detailsModal"
+          >
+            <mat-icon>article</mat-icon>
+          </span>
+          <span class="text-primary pe-2 ps-2 cursorPointer border-right-dark">
+            <mat-icon>edit</mat-icon>
+          </span>
+          <span class="text-danger cursorPointer ps-2 pe-2">
+            <mat-icon>delete</mat-icon>
+          </span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- payment detail Modal -->
+<div
+  class="modal fade"
+  id="detailsModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+  data-bs-backdrop="false"
+>
+  <div class="modal-dialog modal-xl modal-dialog-centered">
+    <div class="modal-content mat-elevation-z20">
+      <div class="modal-header bg-light">
+        <h4 class="modal-title text-primary" id="exampleModalLabel">
+          Payment Details
+        </h4>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body bg-light">
+        <society-land-acquisition-payments-detail></society-land-acquisition-payments-detail>
+      </div>
+      <div class="modal-footer dark-light-bg"></div>
+    </div>
+  </div>
+</div>

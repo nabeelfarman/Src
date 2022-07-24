@@ -1,0 +1,32 @@
+<div class="saveUpdateBar border mat-elevation-z2">
+  <button mat-button class="save cursorPointer" (click)="save()">
+    <mat-icon>save</mat-icon>
+    <span class="ps-2">Save</span>
+  </button>
+  <button mat-button class="save cursorPointer" (click)="reset()">
+    <mat-icon>cached</mat-icon>
+    <span class="ps-2">Reset</span>
+  </button>
+</div>
+<div class="row vh-100 no-scroll">
+  <div class="col-md-4 bg-white border">
+    <h2 class="pt-3 ps-4 pe-3">Add / Modify</h2>
+    <hr />
+    <div class="ps-4 pe-3">
+      <mat-form-field class="w-100">
+        <mat-label>Main Group Title</mat-label>
+        <input matInput />
+      </mat-form-field>
+      <mat-form-field class="w-100">
+        <mat-label>Description</mat-label>
+        <textarea matInput></textarea>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="col-md-8 p-0">
+    <h2 class="pt-2">Saved Record</h2>
+    <hr />
+    <society-main-group-table></society-main-group-table>
+  </div>
+</div>

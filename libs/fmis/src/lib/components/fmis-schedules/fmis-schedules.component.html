@@ -1,0 +1,70 @@
+<div class="saveUpdateBar border mat-elevation-z2">
+  <button mat-button class="save cursorPointer">
+    <mat-icon>insert_drive_file</mat-icon>
+    <span class="ps-2">Report</span>
+  </button>
+  <button mat-button class="save cursorPointer">
+    <mat-icon>print</mat-icon>
+    <span class="ps-2">Print</span>
+  </button>
+</div>
+
+<div class="main-content h-100">
+  <div class="row pt-2 bg-white border">
+    <div class="col-md-6">
+      <mat-form-field class="pull-right">
+        <mat-label>From Date</mat-label>
+        <input matInput [matDatepicker]="fromDate" />
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="fromDate"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #fromDate></mat-datepicker>
+      </mat-form-field>
+    </div>
+    <div class="col-md-6">
+      <mat-form-field>
+        <mat-label>To Date</mat-label>
+        <input matInput [matDatepicker]="toDate" />
+        <mat-datepicker-toggle matSuffix [for]="toDate"></mat-datepicker-toggle>
+        <mat-datepicker #toDate></mat-datepicker>
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="row light-blue-bg border">
+    <div class="col-md-4 ps-4">
+      <mat-form-field class="w-100 pe-3">
+        <mat-label>Head of Account</mat-label>
+        <mat-select>
+          <mat-option value="one">71.01.01 - Salaries to Officer</mat-option>
+          <mat-option value="two"
+            >58.01.00 - Income Tax Deducted from Staff</mat-option
+          >
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="col-md-4 text-center">
+      <mat-radio-group aria-label="Select an option">
+        <mat-radio-button value="1" class="pt-3"
+          >Employees Schedules</mat-radio-button
+        >
+        &nbsp;&nbsp;
+        <mat-radio-button value="2" class="pt-3"
+          >External Parties</mat-radio-button
+        >
+      </mat-radio-group>
+    </div>
+    <div class="col-md-4">
+      <mat-form-field class="w-100 pe-3">
+        <mat-label>Party Title</mat-label>
+        <mat-select>
+          <mat-option value="one">M/s Ali Hospital</mat-option>
+          <mat-option value="two">M/s Shifa International</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <!-- schedule table -->
+  <society-fmis-schedule-table></society-fmis-schedule-table>
+</div>

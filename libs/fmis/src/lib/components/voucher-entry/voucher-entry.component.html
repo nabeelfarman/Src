@@ -1,0 +1,165 @@
+<div class="saveUpdateBar border mat-elevation-z2">
+  <button mat-button class="save cursorPointer" (click)="save()">
+    <mat-icon>save</mat-icon>
+    <span class="ps-2">Save</span>
+  </button>
+  <button mat-button class="save cursorPointer" (click)="reset()">
+    <mat-icon>cached</mat-icon>
+    <span class="ps-2">Reset</span>
+  </button>
+  <button mat-button class="save cursorPointer" (click)="print()">
+    <mat-icon>print</mat-icon>
+    <span class="ps-2">Print</span>
+  </button>
+</div>
+<mat-tab-group mat-align-tabs="center" class="h-100">
+  <mat-tab label="Add / Modify" class="h-100">
+    <div class="row bg-white border pt-2">
+      <div class="col-md-6">
+        <div class="d-flex flex-row justify-content-end">
+          <mat-form-field>
+            <mat-label>Voucher Type</mat-label>
+            <mat-select [(ngModel)]="formFields[3].value">
+              <mat-option
+                *ngFor="let item of voucherTypeList"
+                [value]="item.trnTypeId"
+              >
+                {{ item.trnType }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <mat-form-field>
+          <mat-label>Voucher Date</mat-label>
+          <input matInput [matDatepicker]="picker" [(ngModel)]="formFields[4].value" />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row light-blue-bg border">
+      <div class="col-md-4">
+        <mat-form-field class="w-100 ps-3">
+          <mat-label>Bank Account</mat-label>
+          <mat-select [(ngModel)]="cmbBank" (ngModelChange)="bankChange(cmbBank)">
+            <mat-option
+              *ngFor="let item of bankList"
+              [value]="item.bankId"
+            >
+              {{ item.accountTitle }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-md-4">
+        <div class="d-flex flex-row h-100 justify-content-center">
+          <p class="pt-1">
+            <strong class="h1 text-danger">19,050</strong
+            ><sup class="text-dark">Amount</sup>
+          </p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <mat-form-field class="w-100 pe-3">
+          <mat-label>Pay to</mat-label>
+          <mat-select [(ngModel)]="formFields[5].value">
+            <mat-option
+              *ngFor="let item of externalList"
+              [value]="item.memberProfileId"
+            >
+              {{ item.memberName }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+    <society-voucher-entry-table [bankID]="bankID" [lblTax]="lblTax"></society-voucher-entry-table>
+
+    <div class="row bg-white border pt-2">
+      <div class="col-md-12 ps-3 pe-3">
+        <mat-form-field class="w-100">
+          <mat-label>Description</mat-label>
+          <textarea matInput [(ngModel)]="formFields[6].value"></textarea>
+        </mat-form-field>
+      </div>
+    </div>
+  </mat-tab>
+  <mat-tab label="Saved" class="h-100">
+    <society-saved-voucher-table></society-saved-voucher-table>
+  </mat-tab>
+</mat-tab-group>
+
+<!-- breakup Modal -->
+<div
+  class="modal fade"
+  id="breakupModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+  data-bs-backdrop="false"
+>
+  <div class="modal-dialog modal-xl modal-dialog-centered">
+    <div class="modal-content mat-elevation-z20">
+      <div class="modal-header bg-light">
+        <h4 class="modal-title text-primary" id="exampleModalLabel">
+          Transaction Breakup - 71.01.01 - Pay to Officers
+        </h4>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <society-voucher-entry-breakup></society-voucher-entry-breakup>
+      </div>
+      <div class="modal-footer dark-light-bg">
+        <div class="d-flex flex-row w-100 justify-content-around">
+          <button mat-raised-button class="savebtn">Save</button>
+          <button mat-raised-button class="resetbtn">Reset</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- tax calculation -->
+<div
+  class="modal fade"
+  id="taxModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+  data-bs-backdrop="false"
+>
+  <div class="modal-dialog modal-md modal-dialog-centered">
+    <div class="modal-content mat-elevation-z20">
+      <div class="modal-header bg-light">
+        <h4 class="modal-title text-primary" id="exampleModalLabel">
+          Tax Info
+        </h4>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <society-transaction-tax-info></society-transaction-tax-info>
+      </div>
+      <div class="modal-footer dark-light-bg">
+        <div class="d-flex flex-row w-100 justify-content-around">
+          <button mat-raised-button class="savebtn" (click)="saveTax()">Save</button>
+          <button mat-raised-button class="resetbtn">Reset</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

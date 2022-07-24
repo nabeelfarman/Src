@@ -1,0 +1,36 @@
+
+<!-- Modal -->
+<div id="pinModal" class="modal fade" role="dialog" data-bs-backdrop="false">
+    <div class="modal-dialog modal-md mat-elevation-z20">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Verify User</h4>
+          <button type="button" class="close" data-bs-dismiss="modal">
+            &times;
+          </button>
+        </div>
+        <div class="modal-body">
+            <mat-form-field class="w-100">
+                <input
+                    type="password"
+                    matInput
+                    placeholder="Enter Pin"
+                    [(ngModel)]="txtPin"
+                />
+            </mat-form-field>
+            
+        </div>
+        <div class="modal-footer">
+          <div class="row">
+            <div class="d-flex flex-row justify-content-around">
+              <button mat-raised-button class="savebtn" (click)="verifyPin()">
+                OK
+              </button>
+              <button mat-raised-button color="warn" (click)="reset()">Reset</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

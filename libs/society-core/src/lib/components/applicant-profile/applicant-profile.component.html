@@ -1,0 +1,191 @@
+<div class="saveUpdateBar mat-elevation-z2">
+  <button mat-button class="save" (click)="saveApplicantProfile()">
+    <mat-icon>save</mat-icon>
+    <span class="ps-2">Save</span>
+  </button>
+  <button mat-button class="save" (click)="reset()">
+    <mat-icon>cached</mat-icon>
+    <span class="ps-2">Reset</span>
+  </button>
+</div>
+<div class="row h-100 p-0">
+  <div class="col-md-6 p-0 border">
+    <h2 class="pt-2 ps-3 pe-3">Personal Info</h2>
+    <div class="row h-100 bg-white">
+      <div class="col-md-6 border-right-dark">
+        <div class="d-flex flex-column justify-content-between h-100">
+          <div class="flex-grow-1 pt-3 ps-4 pe-3">
+            <mat-form-field class="w-100">
+              <mat-label>Name</mat-label>
+              <input matInput [(ngModel)]="formFields[3].value" />
+            </mat-form-field>
+            <mat-form-field class="w-100">
+              <mat-label>S/W/D Name</mat-label>
+              <input matInput [(ngModel)]="formFields[5].value" />
+            </mat-form-field>
+            <mat-radio-group
+              class="d-flex justify-content-between"
+              aria-label="Select an option"
+              [(ngModel)]="rdbCnic"
+              (ngModelChange)="typeChangeCnic()"
+            >
+              <mat-radio-button checked="true" value="1"
+                >Old CNIC</mat-radio-button
+              >
+              <mat-radio-button value="2">New CNIC</mat-radio-button>
+            </mat-radio-group>
+            <mat-form-field class="w-100" *ngIf="rdbCnic == '1'">
+              <input
+                matInput
+                placeholder="Old CNIC"
+                [(ngModel)]="formFields[6].value"
+                maxlength="13"
+                (keyup)="setCnicData()"
+              />
+            </mat-form-field>
+            <mat-form-field class="w-100" *ngIf="rdbCnic == '2'">
+              <input
+                matInput
+                placeholder="New CNIC"
+                [(ngModel)]="formFields[6].value"
+                maxlength="15"
+                (keyup)="setCnicData()"
+              />
+            </mat-form-field>
+            <!-- <mat-form-field class="w-100">
+              <mat-label>CNIC</mat-label>
+              <input
+                matInput
+                [(ngModel)]="formFields[6].value"
+                [textMask]="{ mask: cnicMask }"
+              />
+            </mat-form-field> -->
+            <mat-form-field class="w-100">
+              <mat-label>Date of Birth</mat-label>
+              <input
+                matInput
+                [(ngModel)]="formFields[7].value"
+                [matDatepicker]="picker"
+              />
+              <mat-datepicker-toggle
+                matSuffix
+                [for]="picker"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field class="w-100">
+              <mat-label>Phone No.</mat-label>
+              <input
+                matInput
+                [(ngModel)]="formFields[8].value"
+                [textMask]="{ mask: phoneMask }"
+              />
+            </mat-form-field>
+            <mat-form-field class="w-100">
+              <mat-label>Mobile No.</mat-label>
+              <input
+                matInput
+                [(ngModel)]="formFields[10].value"
+                [textMask]="{ mask: mobileMask }"
+              />
+            </mat-form-field>
+            <mat-form-field class="w-100">
+              <mat-label>Email</mat-label>
+              <input matInput [(ngModel)]="formFields[12].value" />
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="d-flex flex-column justify-content-between h-100">
+          <div class="flex-grow-1 ps-2 pe-2">
+            <mat-form-field class="w-100">
+              <mat-label>Present Address</mat-label>
+              <textarea matInput [(ngModel)]="formFields[13].value"></textarea>
+            </mat-form-field>
+            <mat-form-field class="w-100">
+              <mat-label>Country</mat-label>
+              <mat-select
+                [(ngModel)]="cmbPresentCountry"
+                (ngModelChange)="getPresentCity(cmbPresentCountry)"
+              >
+                <mat-option
+                  *ngFor="let item of countryList"
+                  [value]="item.countryId"
+                >
+                  {{ item.countryName }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field class="w-100">
+              <mat-label>City</mat-label>
+              <mat-select [(ngModel)]="formFields[14].value">
+                <mat-option>
+                  <ngx-mat-select-search [(ngModel)]="searchPresentCity" 
+                    [noEntriesFoundLabel]="'Not found'" placeholderLabel="Search..." name="search">
+                  </ngx-mat-select-search>
+                </mat-option>
+                <mat-option
+                  *ngFor="let item of presentCityList | search: 'cityName': searchPresentCity"
+                  [value]="item.cityId"
+                >
+                  {{ item.cityName }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field class="w-100">
+              <mat-label>Parmanent Address</mat-label>
+              <textarea matInput [(ngModel)]="formFields[15].value"></textarea>
+            </mat-form-field>
+            <mat-form-field class="w-100">
+              <mat-label>Country</mat-label>
+              <mat-select
+                [(ngModel)]="cmbPermanentCountry"
+                (ngModelChange)="getPermanentCity(cmbPermanentCountry)"
+              >
+                <mat-option
+                  *ngFor="let item of countryList"
+                  [value]="item.countryId"
+                >
+                  {{ item.countryName }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field class="w-100">
+              <mat-label>City</mat-label>
+              <mat-select [(ngModel)]="formFields[16].value">
+                <mat-option>
+                  <ngx-mat-select-search [(ngModel)]="searchPermanentCity" 
+                    [noEntriesFoundLabel]="'Not found'" placeholderLabel="Search..." name="search">
+                  </ngx-mat-select-search>
+                </mat-option>
+                <mat-option
+                  *ngFor="let item of permanentCityList | search: 'cityName': searchPermanentCity"
+                  [value]="item.cityId"
+                >
+                  {{ item.cityName }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <h2 class="pt-2 pb-2 ps-3 border-bottom">Nominee Info</h2>
+            <mat-form-field class="w-100">
+              <input
+                matInput
+                placeholder="Next to Kin"
+                [(ngModel)]="formFields[17].value"
+              />
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <h2 class="pt-2 pb-2 ps-2 border-bottom">Saved Applicants</h2>
+    <div class="d-flex flex-column">
+      <society-member-profile-table
+        (eventEmitter)="edit($event, $event)"
+      ></society-member-profile-table>
+    </div>
+  </div>
+</div>

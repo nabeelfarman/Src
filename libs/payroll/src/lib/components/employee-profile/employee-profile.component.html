@@ -1,0 +1,157 @@
+<div class="saveUpdateBar border mat-elevation-z2">
+  <button mat-button class="save cursorPointer" (click)="save()">
+    <mat-icon>save</mat-icon>
+    <span class="ps-2">Save</span>
+  </button>
+  <button mat-button class="save cursorPointer" (click)="reset()">
+    <mat-icon>cached</mat-icon>
+    <span class="ps-2">Reset</span>
+  </button>
+</div>
+
+<div class="row h-100 p-0">
+  <div class="col-md-5 p-0 border">
+    <div class="row h-100 bg-white">
+      <div class="col-md-6 border-right-dark">
+        <div class="d-flex flex-column justify-content-between h-100">
+          <h2 class="pt-2 ps-3 pe-3">Personal Info</h2>
+          <hr />
+          <div class="flex-grow-1 pt-3 ps-4 pe-3">
+            <mat-form-field class="w-100">
+              <mat-label>Name</mat-label>
+              <input matInput [(ngModel)]="formFields[3].value" />
+            </mat-form-field>
+            <mat-form-field class="w-100">
+              <mat-label>S/W/D Name</mat-label>
+              <input matInput [(ngModel)]="formFields[4].value" />
+            </mat-form-field>
+            <mat-form-field class="w-100">
+              <mat-label>CNIC</mat-label>
+              <input matInput [(ngModel)]="formFields[5].value" [textMask]="{ mask: cnicMask }" />
+            </mat-form-field>
+            <mat-form-field class="w-100">
+              <mat-label>Date of Birth</mat-label>
+              <input matInput [matDatepicker]="picker" [(ngModel)]="formFields[6].value" />
+              <mat-datepicker-toggle
+                matSuffix
+                [for]="picker"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field class="w-100">
+              <mat-label>Joining Date</mat-label>
+              <input matInput [matDatepicker]="picker2" [(ngModel)]="formFields[7].value" />
+              <mat-datepicker-toggle
+                matSuffix
+                [for]="picker2"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #picker2></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field class="w-100">
+              <mat-label>Retirement Date</mat-label>
+              <input matInput [matDatepicker]="picker3" [(ngModel)]="formFields[8].value" />
+              <mat-datepicker-toggle
+                matSuffix
+                [for]="picker3"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #picker3></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field class="w-100">
+              <mat-label>BPS - Designation</mat-label>
+              <mat-select [(ngModel)]="formFields[9].value">
+                <mat-option
+                  *ngFor="let item of designationList"
+                  [value]="item.designationID"
+                >
+                {{ item.bps }} - {{ item.designationName }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="d-flex flex-column justify-content-between h-100">
+          <h2 class="pt-2 ps-3 pe-3">Contact Info</h2>
+          <hr />
+          <div class="flex-grow-1 ps-2 pe-2">
+            <mat-form-field class="w-100">
+              <mat-label>Present Address</mat-label>
+              <textarea matInput [(ngModel)]="formFields[10].value"></textarea>
+            </mat-form-field>
+            <mat-form-field class="w-100">
+              <mat-label>Country</mat-label>
+              <mat-select
+                [(ngModel)]="cmbPresentCountry"
+                (ngModelChange)="getPresentCity(cmbPresentCountry)"
+              >
+                <mat-option
+                  *ngFor="let item of countryList"
+                  [value]="item.countryId"
+                >
+                  {{ item.countryName }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field class="w-100">
+              <mat-label>City</mat-label>
+              <mat-select [(ngModel)]="formFields[11].value">
+                <mat-option
+                  *ngFor="let item of presentCityList"
+                  [value]="item.cityId"
+                >
+                  {{ item.cityName }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field class="w-100">
+              <mat-label>Parmanent Address</mat-label>
+              <textarea matInput [(ngModel)]="formFields[12].value"></textarea>
+            </mat-form-field>
+            <mat-form-field class="w-100">
+              <mat-label>Country</mat-label>
+              <mat-select
+                [(ngModel)]="cmbPermanentCountry"
+                (ngModelChange)="getPermanentCity(cmbPermanentCountry)"
+              >
+                <mat-option
+                  *ngFor="let item of countryList"
+                  [value]="item.countryId"
+                >
+                  {{ item.countryName }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field class="w-100">
+              <mat-label>City</mat-label>
+              <mat-select [(ngModel)]="formFields[13].value">
+                <mat-option
+                  *ngFor="let item of permanentCityList"
+                  [value]="item.cityId"
+                >
+                  {{ item.cityName }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field class="w-100">
+              <mat-label>Mobile No.</mat-label>
+              <input matInput [(ngModel)]="formFields[14].value" [textMask]="{ mask: mobileMask }" />
+            </mat-form-field>
+            <mat-form-field class="w-100">
+              <mat-label>Email</mat-label>
+              <input matInput [(ngModel)]="formFields[15].value" />
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-7">
+    <h2 class="pt-2 pb-2 ps-2 border-bottom">Saved Record</h2>
+    <hr />
+    <div class="d-flex flex-column">
+      <society-employee-profile-table
+      (eventEmitter)="edit($event)"></society-employee-profile-table>
+    </div>
+  </div>
+</div>

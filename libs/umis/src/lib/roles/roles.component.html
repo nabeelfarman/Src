@@ -1,0 +1,216 @@
+<div class="saveUpdateBar border mat-elevation-z2">
+  <button mat-button class="save cursorPointer" (click)="saveRole()">
+    <mat-icon>save</mat-icon>
+    <span class="ps-2">Save</span>
+  </button>
+  <button mat-button class="save cursorPointer" (click)="reset()">
+    <mat-icon>cached</mat-icon>
+    <span class="ps-2">Reset</span>
+  </button>
+</div>
+<div class="h-100" data-simplebar="">
+  <mat-tab-group
+    mat-align-tabs="center"
+    class="h-100"
+    [selectedIndex]="tabIndex"
+    (selectedIndexChange)="changeTabHeader($event)"
+  >
+    <mat-tab label="Create Role" class="h-100">
+      <div
+        class="ps-3 pe-3 d-flex flex-column justify-content-between"
+        style="height: 80vh"
+      >
+        <!-- role Title and Description -->
+        <div class="row pt-2">
+          <div class="col-md-3">
+            <mat-form-field class="w-100">
+              <mat-label>Role Title</mat-label>
+              <input matInput [(ngModel)]="formFields[3].value" />
+            </mat-form-field>
+          </div>
+          <div class="col-md-9">
+            <mat-form-field class="w-100">
+              <mat-label>Role Description</mat-label>
+              <input
+                matInput
+                #input
+                maxlength="120"
+                [(ngModel)]="formFields[4].value"
+              />
+              <mat-hint align="end"
+                >{{ input.value?.length || 0 }}/120</mat-hint
+              >
+            </mat-form-field>
+          </div>
+        </div>
+        <!-- end row -01 main-->
+
+        <!-- row 02 main -->
+        <div class="row flex-fill">
+          <!-- edit role -->
+          <div class="col-md-6 bg-white border pt-2">
+            <div class="d-flex flex-column w-100">
+              <mat-form-field class="w-100">
+                <mat-label>Select Module</mat-label>
+                <mat-select
+                  [(ngModel)]="cmbModule"
+                  (ngModelChange)="setMenuData(cmbModule)"
+                >
+                  <mat-option
+                    *ngFor="let module of selectedModule"
+                    [value]="module.applicationModuleId"
+                  >
+                    {{ module.applicationModuleTitle }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <div class="w-100">
+                <table class="table table-striped">
+                  <thead class="thead-dark">
+                    <tr>
+                      <th>Menu items</th>
+                      <th>Read</th>
+                      <th>Write</th>
+                      <th>Delete</th>
+                      <th>All</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of menuList">
+                      <td>{{ item.menuTitle }}</td>
+                      <td>
+                        <input
+                          type="checkbox"
+                          (change)="
+                            addToSelectedModulesList(
+                              item,
+                              item.read,
+                              item.write,
+                              item.delete,
+                              item.all
+                            )
+                          "
+                          value="{{ item.read }}"
+                          [(ngModel)]="item.read"
+                        />
+                      </td>
+                      <td>
+                        <input
+                          type="checkbox"
+                          (change)="
+                            addToSelectedModulesList(
+                              item,
+                              item.read,
+                              item.write,
+                              item.delete,
+                              item.all
+                            )
+                          "
+                          value="{{ item.write }}"
+                          [(ngModel)]="item.write"
+                        />
+                      </td>
+                      <td>
+                        <input
+                          type="checkbox"
+                          (change)="
+                            addToSelectedModulesList(
+                              item,
+                              item.read,
+                              item.write,
+                              item.delete,
+                              item.all
+                            )
+                          "
+                          value="{{ item.delete }}"
+                          [(ngModel)]="item.delete"
+                        />
+                      </td>
+                      <td>
+                        <input
+                          type="checkbox"
+                          (change)="
+                            addToSelectedModulesList(
+                              item,
+                              item.read,
+                              item.write,
+                              item.delete,
+                              item.all
+                            )
+                          "
+                          value="{{ item.all }}"
+                          [(ngModel)]="item.all"
+                        />
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- pills view -->
+          <div class="col-md-6">
+            <div class="w-100 ms-3">
+              <h4 class="text-center pt-3 border-bottom border-2">
+                Selected Modules
+              </h4>
+              <div *ngFor="let module of tempModuleList">
+                <div class="card w-100 h-25" data-simplebar>
+                  <div class="card-header w-100">
+                    {{ module.applicationModuleTitle }}
+                  </div>
+                  <div class="card-body d-flex flex-wrap">
+                    <div
+                      *ngFor="let item of module.tempMenuList"
+                      class="me-3 pb-2 pt-3"
+                    >
+                      <div
+                        *ngIf="
+                          item.read || item.write || item.delete || item.all
+                        "
+                      >
+                        <div
+                          class="d-flex flex-row pb-2 justify-content-around"
+                        >
+                          <div *ngIf="item.read || item.all">
+                            <span matBadge="R" matBadgeOverlap="false"></span>
+                          </div>
+                          <div *ngIf="item.write || item.all">
+                            <span matBadge="W" matBadgeOverlap="false"></span>
+                          </div>
+                          <div *ngIf="item.delete || item.all">
+                            <span matBadge="D" matBadgeOverlap="false"></span>
+                          </div>
+                          <span
+                            matBadge="X"
+                            matBadgeColor="warn"
+                            matBadgeOverlap="false"
+                          ></span>
+                        </div>
+                        <div
+                          class="ps-3 pe-3 pt-1 pb-1 cardTxtYellow mat-elevation-z5"
+                        >
+                          <small>{{ item.menuTitle }}</small>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </mat-tab>
+    <mat-tab label="Roles List">
+      <div class="ps-3 pe-3" style="height: 80vh">
+        <h2 class="mt-3">Saved Application Roles</h2>
+        <society-roles-table
+          (eventEmitter)="edit($event)"
+        ></society-roles-table>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</div>

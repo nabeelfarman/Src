@@ -1,0 +1,14 @@
+<mat-drawer-container class="layout-sideNav-container" autosize>
+  <div class="layout-sidenav-content">
+    <society-topnav (drawerToggle)="drawer.toggle()"></society-topnav>
+    <section class="main-content style-3">
+      <router-outlet></router-outlet>
+    </section>
+    <!-- <society-footer></society-footer> -->
+  </div>
+
+  <mat-drawer #drawer class="layout-sidenav-nav" mode="side">
+    <society-sidenav></society-sidenav>
+  </mat-drawer>
+  <society-footer></society-footer>
+</mat-drawer-container>

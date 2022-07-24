@@ -1,0 +1,147 @@
+<div class="h-100">
+  <mat-tab-group mat-align-tabs="center"
+  [selectedIndex]="tabIndex"
+  (selectedIndexChange)="changeTabHeader($event)">
+    <mat-tab label="Add Transfer" class="h-100">
+      <mat-stepper linear #stepper class="border bg-transparent">
+        <mat-step editable="true">
+          <ng-template matStepLabel>Create Transfer</ng-template>
+          <div class="row h-100">
+            <div class="col-md-3 bg-white border">
+              <mat-form-field class="w-100">
+                <mat-label>Transfer Date</mat-label>
+                <input matInput [matDatepicker]="picker" [(ngModel)]="formFieldsTransfer[3].value" />
+                <mat-datepicker-toggle
+                  matSuffix
+                  [for]="picker"
+                ></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+              <!-- ngx search should be there -->
+              <mat-form-field class="w-100">
+                <mat-label>Membership No.</mat-label>
+                <mat-select [(ngModel)]="formFieldsTransfer[4].value" (ngModelChange)="membershipChange(formFieldsTransfer[4].value)">
+                  <mat-option
+                    *ngFor="let item of plotList"
+                    [value]="item.plotFileId"
+                  >
+                    {{ item.fileNo }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field class="w-100">
+                <mat-label>Mark To</mat-label>
+                <mat-select [(ngModel)]="formFieldsTransfer[5].value" (ngModelChange)="userChange(formFieldsTransfer[5].value)">
+                  <mat-option
+                    *ngFor="let item of userList"
+                    [value]="item.userID"
+                  >
+                  <table class="table">
+                    <tr>
+                      <td class="text-left col-6">
+                        {{ item.empName }}
+                      </td>
+                      <td class="text-right col-6">
+                        {{ item.designationName }}
+                      </td>
+                    </tr>
+                  </table>
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <div class="d-flex justify-content-end">
+                <button mat-raised-button class="savebtn" (click)="saveTransfer(stepper)">
+                  Next <mat-icon>arrow_forward</mat-icon>
+                </button>
+              </div>
+            </div>
+            <div class="col-md-3 light-blue-bg border">
+              <div class="d-flex flex-column justify-content-center">
+                <p class="pt-3 sunred-text">Plot Category</p>
+                <p><strong>{{lblCategory}}</strong></p>
+                <hr />
+                <p class="pt-3 sunred-text">Plot Nature</p>
+                <p><strong>{{lblNature}}</strong></p>
+                <hr />
+                <p class="pt-3 sunred-text">Plot Type</p>
+                <p><strong>{{lblType}}</strong></p>
+                <hr />
+              </div>
+            </div>
+            <div class="col-md-6 p-0">
+              <h2 class="pt-2 pb-2 ps-2">Membership Payments Detail</h2>
+              <hr />
+              <society-membership-payments-detail></society-membership-payments-detail>
+            </div>
+          </div>
+        </mat-step>
+        <mat-step editable="true"
+          ><ng-template matStepLabel>Add Applicant</ng-template>
+          <div class="row h-100">
+            <div class="col-md-3 bg-white border">
+              <h2 class="pt-2 pb-2 ps-2">Add Applicant against Transfer</h2>
+              <hr />
+              <p class="pt-3 sunred-text">Membership No.</p>
+              <p><strong>{{lblMembershipNo}}</strong></p>
+              <hr />
+              <p class="pt-3 sunred-text">Transfer Date</p>
+              <p><strong>{{lblTransferDate | date:'dd-MMM-YYYY'}}</strong></p>
+              <hr />
+              <mat-form-field class="w-100">
+                <mat-label>Applicant Name</mat-label>
+                <mat-select [(ngModel)]="formFieldsApplicant[4].value" (ngModelChange)="applicantChange(formFieldsApplicant[4].value)">
+                  <mat-option
+                    *ngFor="let item of applicantList"
+                    [value]="item.memberProfileId"
+                  >
+                    {{ item.memberName }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <div class="d-flex justify-content-between">
+                <button mat-raised-button class="resetbtn" (click)="resetAll(stepper)">
+                  <mat-icon>arrow_backward</mat-icon>
+                  Back
+                </button>
+                <button mat-raised-button class="savebtn" (click)="saveApplicant()">Save</button>
+              </div>
+            </div>
+            <div class="col-md-3 light-blue-bg border">
+              <h2 class="pt-2 pb-2 ps-2">Applicant Info</h2>
+              <hr />
+              <p class="pt-3 sunred-text">S/D/W Name</p>
+              <p>
+                <strong>{{lblSDWName}}</strong>
+              </p>
+              <hr />
+              <p class="pt-3 sunred-text">CNIC No.</p>
+              <p>
+                <strong>{{lblAppCNIC}}</strong>
+              </p>
+              <hr />
+              <p class="pt-3 sunred-text">Date of Birth</p>
+              <p>
+                <strong>{{lblAPPDOB | date: 'dd-MMM-YYYY'}}</strong>
+              </p>
+              <hr />
+              <p class="pt-3 sunred-text">Address</p>
+              <p>
+                <strong>{{lblAPPAddress}}</strong>
+              </p>
+              <hr />
+            </div>
+            <div class="col-md-6 border">
+              <h2 class="pt-2 pb-2 ps-2">Applicants</h2>
+              <hr />
+              <society-create-transfer-applicants (eventEmitterApplicant)="editApplicant($event, $event)"></society-create-transfer-applicants>
+            </div>
+          </div>
+        </mat-step> </mat-stepper
+    ></mat-tab>
+    <mat-tab label="Saved Transfers">
+      <h2 class="pt-2 pb-2 ps-2">Saved Transfers</h2>
+      <hr />
+      <society-create-transfer-table (eventEmitter)="edit($event, $event)"></society-create-transfer-table>
+    </mat-tab>
+  </mat-tab-group>
+</div>

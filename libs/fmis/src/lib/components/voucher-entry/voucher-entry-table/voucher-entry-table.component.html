@@ -1,0 +1,87 @@
+<div class="table-responsive">
+  <table class="table table-striped table-bordered">
+    <thead>
+      <tr>
+        <th scope="col">Account Head</th>
+        <th scope="col">Party Title</th>
+        <th scope="col" class="text-right">Debit</th>
+        <th scope="col" class="text-right">Credit</th>
+        <th scope="col" class="text-center">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <div class="my-form-field">
+            <mat-form-field class="w-100" floatLabel="never">
+              <mat-label>Select</mat-label>
+              <mat-select [(ngModel)]="formFields[3].value">
+                <!-- <mat-option value="one">71.01.01 - Pay to Officer</mat-option>
+                <mat-option value="two">71.01.02 - Pay to Staff</mat-option> -->
+                <mat-option
+                  *ngFor="let item of coaList"
+                  [value]="item.coaID"
+                >
+                  {{ item.accountTitle }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </td>
+        <td>
+          <div class="my-form-field">
+            <mat-form-field class="w-100" floatLabel="never">
+              <mat-label>Select</mat-label>
+              <mat-select [(ngModel)]="formFields[4].value">
+                <mat-option
+                  *ngFor="let item of partyList"
+                  [value]="item.memberProfileId"
+                >
+                  {{ item.memberName }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </td>
+        <td>
+          <div class="my-form-field">
+            <mat-form-field class="w-100" floatLabel="never">
+              <mat-label>Debit</mat-label>
+              <input class="text-right" matInput [(ngModel)]="formFields[5].value" />
+            </mat-form-field>
+          </div>
+        </td>
+        <td>
+          <div class="my-form-field">
+            <mat-form-field class="w-100" floatLabel="never">
+              <mat-label class="pull-right">Credit</mat-label>
+              <input matInput class="text-right" [(ngModel)]="formFields[6].value" />
+            </mat-form-field>
+          </div>
+        </td>
+        <td class="text-center">
+          <span class="text-success pe-2 cursorPointer border-right-dark" (click)="save()">
+            <mat-icon>save</mat-icon>
+          </span>
+          <span
+            class="text-primary cursorPointer border-right-dark ps-2 pe-2" (click)="openModal()"
+          >
+            <mat-icon matTooltip="tax calculations">functions</mat-icon>
+            <sup>tax</sup>
+          </span>
+          <span class="text-danger cursorPointer border-right-dark ps-2 pe-2">
+            <mat-icon>delete</mat-icon>
+          </span>
+        </td>
+      </tr>
+      <tr class="light-blue-bg border">
+        <td colspan="2">
+          <strong class="pull-right pe-3">Total Voucher Amount</strong>
+        </td>
+        <td><strong class="pull-right">500,000</strong></td>
+        <td><strong class="pull-right">500,000</strong></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+</div>

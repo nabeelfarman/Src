@@ -1,0 +1,66 @@
+<div class="saveUpdateBar border mat-elevation-z2">
+  <button mat-button class="save cursorPointer">
+    <mat-icon>save</mat-icon>
+    <span class="ps-2">Save</span>
+  </button>
+  <button mat-button class="save cursorPointer">
+    <mat-icon>cached</mat-icon>
+    <span class="ps-2">Reset</span>
+  </button>
+</div>
+
+<div class="row no-scroll m-0">
+  <div class="col-md-8 p-0">
+    <h2 class="pt-3 ps-4 pe-3">Due Payments</h2>
+    <hr />
+
+    <society-land-acquisition-payments-table></society-land-acquisition-payments-table>
+  </div>
+  <div class="col-md-4 orange-bg border">
+    <h2 class="pt-3 ps-4 pe-3">Land Payment</h2>
+    <hr />
+    <div class="bg-white mat-elevation-z2 rounded p-2 mt-2">
+      <h5>Nabeel Ahmed Khan</h5>
+      <hr />
+      <div class="row">
+        <div class="col-md-6">
+          <small>S/o Farman Khan</small>
+        </div>
+        <div class="col-md-6">
+          <div class="pull-right"><small>61101-5128215-1</small></div>
+        </div>
+      </div>
+    </div>
+    <div class="bg-white mat-elevation-z2 rounded p-2 mt-2">
+      <h5>
+        <span class="text-dark">Transfer No. </span><strong>15302</strong>
+      </h5>
+      <hr />
+      <div class="row">
+        <div class="col-md-4">
+          <small>Loi Bhair</small>
+        </div>
+        <div class="col-md-4 text-center">
+          <small>200 sqYard</small>
+        </div>
+        <div class="col-md-4">
+          <div class="pull-right"><small>with Structure</small></div>
+        </div>
+      </div>
+    </div>
+    <div class="bg-white mat-elevation-z2 rounded p-2 mt-2">
+      <h5>Payment</h5>
+      <hr />
+      <mat-form-field class="w-100">
+        <mat-label>Payment Date</mat-label>
+        <input matInput [matDatepicker]="picker" />
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field class="w-100">
+        <mat-label>Amount</mat-label>
+        <input matInput />
+      </mat-form-field>
+    </div>
+  </div>
+</div>

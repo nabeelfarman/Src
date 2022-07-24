@@ -1,0 +1,209 @@
+<div class="bg-white border pt-2">
+  <!-- row - 01-->
+  <div class="row">
+    <div class="col-md-5 ps-3">
+      <mat-form-field class="w-100">
+        <mat-label>Bank Account Head</mat-label>
+        <mat-select>
+          <mat-option value="one">Allied Bank Account No. 2323-2</mat-option>
+          <mat-option value="two">Allied Bank Account No. 3232-5</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="col-md-3">
+      <mat-form-field class="w-100">
+        <mat-label>Cheque Books</mat-label>
+        <mat-select>
+          <mat-option value="one">021101-021200</mat-option>
+          <mat-option value="two">025101-025200</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="col-md-4">
+      <blockquote class="blockquote text-center text-primary">
+        <p>Allied Bank, G-9 Markaz Branch, Islamabad</p>
+        <footer class="blockquote-footer">
+          (2323-2) <cite title="Source Title">Account No.</cite>
+        </footer>
+      </blockquote>
+    </div>
+  </div>
+  <!-- end row-01-->
+</div>
+<!-- row -02 -->
+<div class="table-responsive">
+  <table class="table table-striped table-bordered">
+    <thead>
+      <tr>
+        <th class="col-1 text-center">Cheque No</th>
+        <th class="col-2 text-center">Cheque Date</th>
+        <th class="col-5">Pay To</th>
+        <th class="col-2 text-right"><span class="pull-right">Amount</span></th>
+        <th class="col-2 text-center">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="col-1 text-center">021101</td>
+        <td class="col-2 text-center">25-Feb-2021</td>
+        <td class="col-5">M/s Ali Hospital</td>
+        <td class="col-2"><span class="pull-right">15,000</span></td>
+        <td class="col-2 text-center">
+          <span
+            class="text-danger pe-2 cursorPointer border-right-dark"
+            data-bs-toggle="modal"
+            data-bs-target="#voucherListModal"
+          >
+            <mat-icon matTooltip="voucher payment"
+              >auto_awesome_motion</mat-icon
+            >
+          </span>
+          <span class="text-primary pe-2 ps-2 cursorPointer">
+            <mat-icon>edit</mat-icon>
+          </span>
+        </td>
+      </tr>
+      <tr>
+        <td class="col-1 text-center">021102</td>
+        <td class="col-2">
+          <div class="my-form-field">
+            <mat-form-field floatLabel="never">
+              <input matInput [matDatepicker]="picker01" />
+              <mat-datepicker-toggle
+                matSuffix
+                [for]="picker01"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #picker01></mat-datepicker>
+            </mat-form-field>
+          </div>
+        </td>
+        <td class="col-5"></td>
+        <td class="col-2"></td>
+        <td class="col-2 text-center">
+          <span
+            class="text-danger pe-2 cursorPointer border-right-dark"
+            data-bs-toggle="modal"
+            data-bs-target="#voucherListModal"
+          >
+            <mat-icon matTooltip="voucher payment"
+              >auto_awesome_motion</mat-icon
+            >
+          </span>
+          <span class="text-primary pe-2 ps-2 cursorPointer">
+            <mat-icon>edit</mat-icon>
+          </span>
+        </td>
+      </tr>
+      <tr>
+        <td class="col-1 text-center">021103</td>
+        <td class="col-2">
+          <div class="my-form-field">
+            <mat-form-field floatLabel="never">
+              <input matInput [matDatepicker]="picker01" />
+              <mat-datepicker-toggle
+                matSuffix
+                [for]="picker01"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #picker01></mat-datepicker>
+            </mat-form-field>
+          </div>
+        </td>
+        <td class="col-5"></td>
+        <td class="col-2"></td>
+        <td class="col-2 text-center">
+          <span
+            class="text-danger pe-2 cursorPointer border-right-dark"
+            data-bs-toggle="modal"
+            data-bs-target="#voucherListModal"
+          >
+            <mat-icon matTooltip="voucher payment"
+              >auto_awesome_motion</mat-icon
+            >
+          </span>
+          <span class="text-primary pe-2 ps-2 cursorPointer">
+            <mat-icon>edit</mat-icon>
+          </span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Voucher Payments Modal -->
+<div
+  class="modal fade"
+  id="voucherListModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+  data-bs-backdrop="false"
+>
+  <div class="modal-dialog modal-xl modal-dialog-centered">
+    <div class="modal-content mat-elevation-z20">
+      <div class="modal-header bg-light">
+        <h4 class="modal-title text-primary" id="exampleModalLabel">
+          Pay Vouchers against Cheque No.
+          <strong class="text-danger">021102</strong> on
+          <strong class="text-danger">25-Feb-2021</strong>
+        </h4>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <society-voucher-payments-list></society-voucher-payments-list>
+      </div>
+      <div class="modal-footer dark-light-bg">
+        <div class="d-flex flex-row w-100 justify-content-between">
+          <button mat-raised-button class="savebtn">Save</button>
+          <button mat-raised-button class="resetbtn">Reset</button>
+          <button mat-raised-button color="warn" data-bs-dismiss="modal">
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Cheque Book Modal -->
+<div
+  class="modal fade"
+  id="chqBookModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+  data-bs-backdrop="false"
+>
+  <div class="modal-dialog modal-xl modal-dialog-centered">
+    <div class="modal-content mat-elevation-z20">
+      <div class="modal-header bg-light">
+        <h4 class="modal-title text-primary" id="exampleModalLabel">
+          Allied Bank
+          <strong class="text-danger">Account No. 2332-2</strong>
+        </h4>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <society-cheque-book></society-cheque-book>
+      </div>
+      <div class="modal-footer dark-light-bg">
+        <div class="d-flex flex-row w-100 justify-content-between">
+          <button mat-raised-button class="savebtn">Save</button>
+          <button mat-raised-button class="resetbtn">Reset</button>
+          <button mat-raised-button color="warn" data-bs-dismiss="modal">
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

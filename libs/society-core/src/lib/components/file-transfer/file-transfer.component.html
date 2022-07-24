@@ -1,0 +1,148 @@
+<div class="saveUpdateBar border mat-elevation-z2">
+  <button mat-button class="save" (click)="saveCompleteTransfer()">
+    <mat-icon>save</mat-icon>
+    <span class="ps-2">Save</span>
+  </button>
+  <button mat-button class="save" (click)="reset()">
+    <mat-icon>cached</mat-icon>
+    <span class="ps-2">Reset</span>
+  </button>
+  <button mat-button class="save">
+    <mat-icon>print</mat-icon>
+    <span class="ps-2">Print</span>
+  </button>
+</div>
+
+<!-- tabs -->
+
+<mat-tab-group mat-align-tabs="center">
+  <mat-tab label="Transfer File">
+    <div class="row vh-100 no-scroll">
+      <div class="d-flex justify-content-around">
+        <mat-form-field>
+          <mat-label>Membership No.</mat-label>
+          <mat-select
+            [(ngModel)]="formFields[0].value"
+            (ngModelChange)="membershipChange(formFields[0].value)"
+          >
+            <mat-option
+              *ngFor="let item of memberShipList"
+              [value]="item.transferId"
+            >
+              <table class="table">
+                <tr>
+                  <td class="text-left col-6">
+                    {{ item.fileNo }}
+                  </td>
+                  <td class="text-right col-6">
+                    {{ item.applicant }}
+                  </td>
+                </tr>
+              </table>
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Transfer Date</mat-label>
+          <input
+            matInput
+            [matDatepicker]="picker"
+            [(ngModel)]="formFields[4].value"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div class="row h-100">
+        <div class="col-md-6 pb-4 pt-0 pe-0 border">
+          <h2 class="pt-2 pb-2 ps-3">Seller's Detail</h2>
+          <hr />
+          <society-seller-details
+            (sellerEventEmitter)="sendInfo($event)"
+            (modalValEmitter)="modalValConfig($event)"
+          ></society-seller-details>
+        </div>
+        <div class="col-md-6 border light-blue-bg">
+          <h2 class="pt-2 pb-2 ps-3">Buyer's Detail</h2>
+          <hr />
+          <society-buyer-details
+            (buyerEventEmitter)="sendInfo($event)"
+            (modalValEmitter)="modalValConfig($event)"
+          ></society-buyer-details>
+        </div>
+      </div>
+    </div>
+  </mat-tab>
+  <mat-tab label="Saved Transfers">
+    <society-file-transfer-table></society-file-transfer-table>
+  </mat-tab>
+</mat-tab-group>
+
+<!-- Modal In Person -->
+<div
+  id="inPersonModal"
+  class="modal fade"
+  role="dialog"
+  data-bs-backdrop="false"
+>
+  <div class="modal-dialog modal-xl mat-elevation-z20">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">In-Person Verification</h4>
+        <button
+          type="button"
+          class="close"
+          data-bs-dismiss="modal"
+          (click)="changeTransferMember()"
+        >
+          &times;
+        </button>
+      </div>
+      <div class="modal-body">
+        <!-- <div *ngIf="modalVal == 1"> -->
+        <society-inperson-verification></society-inperson-verification>
+        <!-- </div> -->
+        <!-- <div *ngIf="modalVal == 2">
+          <society-transfer-letter></society-transfer-letter>
+        </div> -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Transfer Letter -->
+<div
+  id="transferLetterModal"
+  class="modal fade"
+  role="dialog"
+  data-bs-backdrop="false"
+>
+  <div class="modal-dialog modal-xl mat-elevation-z20">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Transfer Letter</h4>
+        <button
+          type="button"
+          class="close"
+          data-bs-dismiss="modal"
+          (click)="changeTransferMember()"
+        >
+          &times;
+        </button>
+      </div>
+      <div class="modal-body">
+        <!-- <div *ngIf="modalVal == 1"> -->
+        <society-transfer-letter></society-transfer-letter>
+        <!-- </div> -->
+        <!-- <div *ngIf="modalVal == 2">
+          <society-transfer-letter></society-transfer-letter>
+        </div> -->
+      </div>
+    </div>
+  </div>
+</div>

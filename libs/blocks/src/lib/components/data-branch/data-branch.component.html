@@ -1,0 +1,7 @@
+<ul>
+    <li class="mt-1" *ngFor="let item of locationList">
+        <mat-checkbox color="primary" [checked]="item.status">
+            {{item.locationName}}
+        </mat-checkbox>
+    </li>
+</ul>

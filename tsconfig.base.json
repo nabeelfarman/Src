@@ -1,0 +1,61 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "rootDir": ".",
+    "types": ["jquery"],
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "es2015",
+    "module": "esnext",
+    "lib": ["es2017", "dom"],
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@society/auth": ["libs/auth/src/index.ts"],
+      "@society/layouts": ["libs/layouts/src/index.ts"],
+      "@society/material": ["libs/material/src/index.ts"],
+      "@society/shared/services/auth": [
+        "libs/shared/services/auth/src/index.ts"
+      ],
+      "@society/shared/services/data": [
+        "libs/shared/services/data/src/index.ts"
+      ],
+      "@society/ui": ["libs/ui/src/index.ts"],
+      "@society/shared/environments": ["libs/shared/environments/src/index.ts"],
+      "@society/shared/models": ["libs/shared/models/src/index.ts"],
+      "@society/shared/helpers/field-validations": [
+        "libs/shared/helpers/field-validations/src/index.ts"
+      ],
+      "@society/shared/helpers/guards": [
+        "libs/shared/helpers/guards/src/index.ts"
+      ],
+      "@society/shared/helpers/interceptors": [
+        "libs/shared/helpers/interceptors/src/index.ts"
+      ],
+      "@society/umis": ["libs/umis/src/index.ts"],
+      "@society/shared/services/global-data": [
+        "libs/shared/services/global-data/src/index.ts"
+      ],
+      "@society/company": ["libs/company/src/index.ts"],
+      "@society/blocks": ["libs/blocks/src/index.ts"],
+      "@society/shared/interface": ["libs/shared/interface/src/index.ts"],
+      "@society/umis-blocks": ["libs/umis-blocks/src/index.ts"],
+      "@society/cmis-blocks": ["libs/cmis-blocks/src/index.ts"],
+      "@society/shared/helpers/jwt-interceptor": [
+        "libs/shared/helpers/jwt-interceptor/src/index.ts"
+      ],
+      "@society/society-core": ["libs/society-core/src/index.ts"],
+      "@society/fmis": ["libs/fmis/src/index.ts"],
+      "@society/payroll": ["libs/payroll/src/index.ts"],
+      "@society/land": ["libs/land/src/index.ts"],
+      "@society/inventory": ["libs/inventory/src/index.ts"],
+      "@society/web-part": ["libs/web-part/src/index.ts"]
+    }
+  },
+  "exclude": ["node_modules", "tmp"]
+}

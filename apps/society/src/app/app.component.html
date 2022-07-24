@@ -1,0 +1,12 @@
+<!-- <ng-container *ngIf="globalDataService.isLoading$ | async">
+  <div id="loading-indicator ">
+    <div class="sp sp-bars"></div>
+  <div>Loading...</div>
+  </div>
+</ng-container> -->
+<div *ngIf="loaderService.isLoading | async" class="loader-container">
+  <div class="dot dot-1"></div>
+  <div class="dot dot-2"></div>
+  <div class="dot dot-3"></div>
+</div>
+<router-outlet></router-outlet>

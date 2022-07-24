@@ -1,0 +1,219 @@
+<div class="d-flex flex-column justify-content-lg-between h-100">
+  <div class="flex-grow-1">
+    <div class="row h-100 p-0">
+      <div class="col-md-3 p-0">
+        <div class="d-flex flex-column bg-white border h-100">
+          <h2 class="pt-2 ps-3 pe-3">Membership Info</h2>
+          <hr />
+          <div class="ps-4 pe-3">
+            <mat-form-field class="w-100">
+              <mat-label>search Membership No.</mat-label>
+              <input matInput type="number" [(ngModel)]="txtMembershipSearch" />
+              <button
+                mat-raised-button
+                color="warn"
+                matSuffix
+                [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]=""
+                (click)="searchMembership()"
+              >
+                <mat-icon>search</mat-icon>
+              </button>
+            </mat-form-field>
+            <mat-form-field class="w-100">
+              <mat-label>Membership Date</mat-label>
+              <input
+                matInput
+                [matDatepicker]="picker"
+                [(ngModel)]="formFields[3].value"
+              />
+              <mat-datepicker-toggle
+                matSuffix
+                [for]="picker"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field class="w-100">
+              <mat-label>Acquisition Type</mat-label>
+              <mat-select [(ngModel)]="formFields[5].value">
+                <mat-option
+                  *ngFor="let item of acquisitionList"
+                  [value]="item.acquistionTypeId"
+                >
+                  {{ item.acquisitionTypeTitle }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <div class="card w-100 bg-light" style="height: 100px">
+              <h5 class="card-body">
+                <div class="card-title">Plot Information</div>
+              </h5>
+              <div class="d-flex flex-row justify-content-between">
+                <p>{{ lblCategory }}</p>
+                &nbsp;&nbsp; - &nbsp;&nbsp;
+                <p>{{ lblNature }}</p>
+                -&nbsp;&nbsp;
+                <p>{{ lblType }}</p>
+              </div>
+            </div>
+            <br />
+            
+            <div class="d-flex flex-row">
+              <input
+                color="warn"
+                type="file"
+                accept=".pdf"
+                (change)="onFileSelected($event)"
+                [(ngModel)]="this.formFields[9].value"
+              />
+            </div>
+            <hr />
+            <div *ngIf="editMode == true" class="d-flex flex-column mt-2 bg-dark-light pb-4 pt-4 ps-3">
+              <label
+                class="cursorPointer fs-5 fw-bold royal-blue-text"
+                color="warn"
+                (click)='openPDFFile()'
+                data-bs-toggle="modal"
+                data-bs-target="#pdfModal"
+                >
+                <u>Open PDF File</u>
+              </label>
+            </div>
+            <!-- payment Plan -->
+            <div class="ps-2 pe-3">
+              <mat-form-field class="w-100">
+                <mat-label>Payment Plan</mat-label>
+                <mat-select
+                  [(ngModel)]="formFields[6].value"
+                  (ngModelChange)="setPaymentPlanInfo(formFields[6].value)"
+                >
+                  <mat-option
+                    *ngFor="let item of paymentList"
+                    [value]="item.paymentPlanID"
+                  >
+                    {{ item.paymentPlanTitle }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <div *ngFor="let item of paymentDetailList">
+                <p class="pt-3 sunred-text">
+                  {{ item.installmentTitle }} / Due Date
+                </p>
+                <p>
+                  <strong
+                    >Rs. {{ item.amount | number }} /
+                    {{ item.dueDate | date: 'dd-MMM-YYYY' }}</strong
+                  >
+                </p>
+                <hr />
+              </div>
+            </div>
+            <!-- end payment Plan -->
+            <!-- <p class="pt-3 sunred-text">Plot Category</p>
+            <p></p>
+            <hr />
+            <p class="pt-3 sunred-text">Plot Nature</p>
+            <p></p>
+            <hr />
+            <p class="pt-3 sunred-text">Plot Type</p>
+            <p></p> -->
+          </div>
+          <div class="d-flex flex-row pt-2 ps-4">
+            <button mat-raised-button class="resetbtn" (click)="reset()">
+              Reset
+            </button>
+            <button mat-raised-button class=" ms-2 savebtn" data-bs-toggle="modal" data-bs-target="#addApplicantModal">
+              Add Applicant
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 p-0">
+        <div class="d-flex flex-column light-blue-bg border h-100">
+          <h2 class="pt-2 ps-2">Society Member Info</h2>
+          <hr />
+          <!-- <div class="ps-2 pe-2">
+            <mat-form-field class="w-100">
+              <mat-label>Member Name</mat-label>
+              <mat-select [(ngModel)]="formFields[6].value" (ngModelChange)="setMemberInfo(formFields[6].value)">
+                <mat-option
+                  *ngFor="let item of memberList"
+                  [value]="item.memberProfileId"
+                >
+                  {{ item.memberName }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <p class="pt-3 sunred-text">S/D/W Name</p>
+            <p><strong>{{lblSDWofName}}</strong></p>
+            <hr />
+            <p class="pt-3 sunred-text">CNIC No.</p>
+            <p><strong>{{lblCNIC}}</strong></p>
+            <hr />
+            <p class="pt-3 sunred-text">Date of Birth</p>
+            <p><strong>{{lblDOB | date}}</strong></p>
+            <hr />
+            <p class="pt-3 sunred-text">Address</p>
+            <p><strong>{{lblAddress}}</strong></p>
+            <hr />
+          </div> -->
+          <div class="ps-2 pe-2">
+            <society-membership-group
+              (eventEmitterGroup)="saveMemberPlotFile($event, $event)"
+            ></society-membership-group>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 p-0">
+        <div class="d-flex flex-column border h-100">
+          <h2 class="pt-2 ps-2 pe-2">Saved Memberships</h2>
+          <hr />
+          <society-member-plot-file-table
+            (eventEmitter)="edit($event)"
+          ></society-member-plot-file-table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- <div class="d-flex justify-content-around pt-2 pb-2 border dark-light-bg"> -->
+  <!-- <button mat-raised-button class="savebtn" (click)="saveMemberPlotFile()">
+      Save
+    </button>
+    <button mat-raised-button class="resetbtn" (click)="reset()">Reset</button> -->
+  <!-- </div> -->
+</div>
+
+
+
+<!-- Modal -->
+<div id="addApplicantModal" class="modal fade" role="dialog" data-bs-backdrop="false">
+  <div class="modal-dialog modal-xl mat-elevation-z20">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Add Applicant</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="getMember()" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <society-applicant-profile
+        ></society-applicant-profile>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div id="pdfModal" class="modal fade" role="dialog" data-bs-backdrop="false">
+  <div class="modal-dialog modal-lg mat-elevation-z20">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">PDF Viewer</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div id="div1" style="width:100%;height:400px;"></div>
+      </div>
+    </div>
+  </div>
+</div>

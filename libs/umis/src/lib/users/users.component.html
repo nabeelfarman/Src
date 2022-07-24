@@ -1,0 +1,78 @@
+<div class="saveUpdateBar border mat-elevation-z2">
+  <button mat-button class="save cursorPointer" (click)="saveUser()">
+    <mat-icon>save</mat-icon>
+    <span class="ps-2">Save</span>
+  </button>
+  <button mat-button class="save cursorPointer" (click)="reset()">
+    <mat-icon>cached</mat-icon>
+    <span class="ps-2">Reset</span>
+  </button>
+</div>
+<div class="row h-100">
+  <div class="col col-4 bg-white border ps-4 pe-3">
+    <h2 class="mt-2">User Credentials</h2>
+    <div>
+      <mat-form-field class="w-100">
+        <input
+          matInput
+          placeholder="Full Name"
+          [(ngModel)]="formFields[3].value"
+        />
+      </mat-form-field>
+
+      <mat-form-field class="w-100">
+        <input
+          matInput
+          placeholder="Email Address"
+          [(ngModel)]="formFields[4].value"
+        />
+      </mat-form-field>
+
+      <mat-form-field class="w-100">
+        <input
+          matInput
+          placeholder="Password"
+          [(ngModel)]="formFields[5].value"
+          type="password"
+        />
+      </mat-form-field>
+
+      <mat-form-field class="w-100">
+        <input
+          matInput
+          placeholder="Confirm Password"
+          [(ngModel)]="formFields[6].value"
+          type="password"
+        />
+      </mat-form-field>
+
+      <mat-form-field class="w-100">
+        <mat-select
+          disableOptionCentering
+          placeholder="Role Name"
+          [(ngModel)]="formFields[7].value"
+        >
+          <mat-option *ngFor="let role of rolesList" [value]="role.roleId">
+            {{ role.roleTitle }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <!-- <div class="w-100 d-flex flex-row justify-content-between">
+      <button mat-raised-button class="savebtn" (click)="saveUser()">
+        Save
+      </button>
+      <button mat-raised-button class="resetbtn" (click)="reset()">
+        Reset
+      </button>
+    </div> -->
+  </div>
+  <div class="col col-8">
+    <div class="d-flex flex-column">
+      <h2 class="mt-2">Application Users</h2>
+      <society-users-table
+        (eventEmitter)="edit($event, $event)"
+      ></society-users-table>
+    </div>
+  </div>
+</div>

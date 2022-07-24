@@ -1,0 +1,32 @@
+<div class="table-responsive">
+  <table class="table table-striped table-bordered">
+    <thead>
+      <tr>
+        <th class="text-center">Sr#</th>
+        <th>Name</th>
+        <th>CNIC</th>
+        <th>S/W/D Name</th>
+        <th class="text-center">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of tableData; let i=index">
+        <td class="text-center">{{i+1}}</td>
+        <td>{{item.memberName}}</td>
+        <td>{{item.memberCNIC}}</td>
+        <td>{{item.SDWofName}}</td>
+        <td class="text-center">
+          <span class="text-primary pe-2 cursorPointer border-right-dark" (click)="editApplicant(item, '1')">
+            <mat-icon>edit</mat-icon>
+          </span>
+          <span class="pe-2 text-danger cursorPointer border-right-dark" (click)="editApplicant(item, '2')">
+            <mat-icon>delete</mat-icon>
+          </span>
+          <span class="ps-2">
+            <mat-slide-toggle color="warn"></mat-slide-toggle>
+          </span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,91 @@
+<div class="saveUpdateBar border mat-elevation-z2">
+  <button mat-button class="save cursorPointer" (click)="save()">
+    <mat-icon>save</mat-icon>
+    <span class="ps-2">Save</span>
+  </button>
+  <button mat-button class="save cursorPointer" (click)="reset()">
+    <mat-icon>cached</mat-icon>
+    <span class="ps-2">Reset</span>
+  </button>
+</div>
+
+<div class="row no-scroll">
+  <div class="col-md-3 bg-white border">
+    <h2 class="pt-3 ps-4 pe-3">Land Info</h2>
+    <hr />
+    <div class="ps-3 pe-2">
+      <mat-form-field class="w-100">
+        <mat-label>Plot Category</mat-label>
+        <mat-select [(ngModel)]="formFields[3].value">
+          <mat-option
+            *ngFor="let item of plotCategoryList"
+            [value]="item.plotCategoryId"
+          >
+            {{ item.plotCategoryTitle }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="w-100">
+        <mat-label>Plot Nature</mat-label>
+        <mat-select [(ngModel)]="formFields[4].value">
+          <mat-option
+            *ngFor="let item of plotNatureList"
+            [value]="item.plotNatureID"
+          >
+            {{ item.plotNatureTitle }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="w-100">
+        <mat-label>Plot Type</mat-label>
+        <mat-select [(ngModel)]="formFields[5].value">
+          <mat-option
+            *ngFor="let item of plotTypeList"
+            [value]="item.plotTypeId"
+          >
+            {{ item.plotTypeTitle }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="w-100">
+        <mat-label>Block/ Sector</mat-label>
+        <mat-select [(ngModel)]="formFields[6].value">
+          <mat-option
+            *ngFor="let item of societyBlockList"
+            [value]="item.societyBlockID"
+          >
+            {{ item.block }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div class="row">
+        <div class="col-md-6">
+          <mat-form-field class="w-100">
+            <mat-label>Street #</mat-label>
+            <input matInput [(ngModel)]="formFields[7].value" />
+          </mat-form-field>
+        </div>
+        <div class="col-md-6">
+          <mat-form-field class="w-100">
+            <mat-label>Plot #</mat-label>
+            <input matInput [(ngModel)]="formFields[8].value" />
+          </mat-form-field>
+        </div>
+      </div>
+      <section class="example-section">
+        <mat-checkbox class="example-margin" [(ngModel)]="formFields[9].value" value="formFields[9].value">Alloted</mat-checkbox><br />
+        <mat-checkbox class="example-margin" [(ngModel)]="formFields[10].value" value="formFields[10].value">Possession</mat-checkbox><br />
+        <mat-checkbox class="example-margin" [(ngModel)]="formFields[11].value" value="formFields[11].value">Under Construction</mat-checkbox
+        ><br />
+        <mat-checkbox class="example-margin" [(ngModel)]="formFields[12].value" value="formFields[12].value">Structure</mat-checkbox>
+      </section>
+    </div>
+  </div>
+  <div class="col-md-9 p-0">
+    <h2 class="pt-3 ps-3">Saved Plots</h2>
+    <hr />
+    <society-land-ploting-table
+    (eventEmitter)="edit($event)"
+    ></society-land-ploting-table>
+  </div>
+</div>

@@ -1,0 +1,59 @@
+<div class="saveUpdateBar border mat-elevation-z2">
+  <button mat-button class="save cursorPointer">
+    <mat-icon>save</mat-icon>
+    <span class="ps-2">Save</span>
+  </button>
+  <button mat-button class="save cursorPointer">
+    <mat-icon>cached</mat-icon>
+    <span class="ps-2">Reset</span>
+  </button>
+</div>
+
+<div class="row no-scroll">
+  <div class="col-md-3 bg-white border">
+    <h2 class="pt-3 ps-4 pe-3">Add / Modify</h2>
+    <hr />
+    <div class="ps-3 pe-3">
+      <mat-form-field class="w-100">
+        <mat-label>Country</mat-label>
+        <mat-select>
+          <mat-option value="one">Pakistan</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="w-100">
+        <mat-label>City</mat-label>
+        <mat-select>
+          <mat-option value="one">Islamabad</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="w-100">
+        <mat-label>Building</mat-label>
+        <mat-select>
+          <mat-option value="one">Head Office</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="w-100">
+        <mat-label>Floor No.</mat-label>
+        <mat-select>
+          <mat-option value="one">01</mat-option>
+          <mat-option value="one">02</mat-option>
+          <mat-option value="one">03</mat-option>
+          <mat-option value="one">04</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="w-100">
+        <mat-label>Room / Area No.</mat-label>
+        <input matInput />
+      </mat-form-field>
+      <mat-form-field class="w-100">
+        <mat-label>Description</mat-label>
+        <textarea matInput></textarea>
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="col-md-9 p-0">
+    <h2 class="pt-3 ps-3">Saved Locations</h2>
+    <hr />
+    <society-inventory-locations-table></society-inventory-locations-table>
+  </div>
+</div>

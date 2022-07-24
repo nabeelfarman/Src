@@ -1,0 +1,78 @@
+<div class="saveUpdateBar mat-elevation-z2">
+  <button mat-button class="save" (click)="save()">
+    <mat-icon>save</mat-icon>
+    <span class="ps-2">Save</span>
+  </button>
+  <button mat-button class="save" (click)="reset()">
+    <mat-icon>cached</mat-icon>
+    <span class="ps-2">Reset</span>
+  </button>
+</div>
+<mat-tab-group mat-align-tabs="center" [selectedIndex]="tabIndex" (selectedIndexChange)="changeTabHeader($event)">
+  <mat-tab label="Add / New">
+    <div class="row vh-100 no-scroll">
+      <!-- Add / update -->
+      <div class="col-md-3 bg-white border">
+        <h2 class="pt-2 pb-2 ps-3 border-bottom">Add / Modify</h2>
+        <div class="d-flex flex-column ps-3 pe-3">
+          <mat-form-field class="example-full-width">
+            <mat-label>Payment Plan Date</mat-label>
+            <input matInput [matDatepicker]="picker" [(ngModel)]="formFields[3].value" />
+            <mat-datepicker-toggle matSuffix [for]="picker">
+            </mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Plot Category</mat-label>
+            <mat-select [(ngModel)]="formFields[4].value" (ngModelChange)="getHistoryLog(formFields[4].value, formFields[5].value, formFields[6].value)">
+              <mat-option *ngFor="let item of categoryList" [value]="item.plotCategoryId">
+                {{ item.plotCategoryTitle }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Plot Nature</mat-label>
+            <mat-select [(ngModel)]="formFields[5].value" (ngModelChange)="getHistoryLog(formFields[4].value, formFields[5].value, formFields[6].value)">
+              <mat-option *ngFor="let item of natureList" [value]="item.plotNatureID">
+                {{ item.plotNatureTitle }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Plot Type</mat-label>
+            <mat-select [(ngModel)]="formFields[6].value" (ngModelChange)="getHistoryLog(formFields[4].value, formFields[5].value, formFields[6].value)">
+              <mat-option *ngFor="let item of typeList" [value]="item.plotTypeId">
+                {{ item.plotTypeTitle }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field class="w-100">
+            <input matInput placeholder="Payment Plan Title" [(ngModel)]="formFields[7].value" />
+          </mat-form-field>
+          <mat-form-field class="w-100">
+            <mat-label>description</mat-label>
+            <textarea matInput [(ngModel)]="formFields[8].value"></textarea>
+          </mat-form-field>
+
+        </div>
+      </div>
+      <div class="col-md-7">
+        <h2 class="pt-2 pb-2 ps-3 border-bottom">Payment Plan Details</h2>
+        <society-payment-plan-detail-table></society-payment-plan-detail-table>
+      </div>
+      <div class="col-md-2 light-blue-bg border p-0">
+        <h2 class="pt-2 pb-2 ps-3 text-center border-bottom">History Log</h2>
+        <div class="pt-5">
+          <div class="d-flex flex-column justify-content-center" *ngFor="let item of logList;">
+            <button mat-button class="border-top border-info" (click)="editPlan(item)">
+              {{item.paymentPlanDate | date:"dd-MMM-YYYY"}} -- {{item.plotCategoryTitle}}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-tab>
+  <mat-tab label="Saved Record"
+    ><society-payment-plan-table (eventEmitter)="edit($event, $event)"></society-payment-plan-table
+  ></mat-tab>
+</mat-tab-group>

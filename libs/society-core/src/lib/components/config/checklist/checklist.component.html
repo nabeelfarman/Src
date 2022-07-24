@@ -1,0 +1,63 @@
+<div class="saveUpdateBar border mat-elevation-z2">
+  <button mat-button class="save" (click)="saveCheckList()">
+    <mat-icon>save</mat-icon>
+    <span class="ps-2">Save</span>
+  </button>
+  <button mat-button class="save" (click)="reset()">
+    <mat-icon>cached</mat-icon>
+    <span class="ps-2">Reset</span>
+  </button>
+</div>
+<div class="row h-100 p-0">
+  <div class="col-md-3 p-0 bg-white">
+    <div class="d-flex flex-column justify-content-between">
+      <h2 class="pt-2 pb-2 ps-3 pe-3">Add / Update Check List Item</h2>
+      <hr />
+      <div class="ps-4 pe-3 flex-grow-1">
+        <mat-form-field class="w-100">
+          <mat-label>Type</mat-label>
+          <mat-select [(ngModel)]="formFields[3].value">
+            <mat-option *ngFor="let item of checkListTypeList" [value]="item.checkListType">
+              {{item.checkListType}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="w-100">
+          <mat-label>Check List Title</mat-label>
+          <input matInput [(ngModel)]="formFields[4].value" />
+        </mat-form-field>
+        <mat-form-field class="w-100">
+          <mat-label>Designation</mat-label>
+          <mat-select [(ngModel)]="formFields[5].value">
+            <mat-option *ngFor="let item of designationList" [value]="item.designationID">
+              {{item.designationName}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <p class="sunred-text pt-2">File Required?</p>
+        <hr />
+        <mat-radio-group
+          class="d-flex justify-content-between"
+          aria-label="Select an option" [(ngModel)]="formFields[6].value"
+        >
+          <mat-radio-button value="true">Required</mat-radio-button>
+          <mat-radio-button value="false">Not Required</mat-radio-button>
+        </mat-radio-group>
+        <p class="sunred-text pt-5">Is Exempted?</p>
+        <hr />
+        <mat-radio-group
+          class="d-flex justify-content-between"
+          aria-label="Select an option" [(ngModel)]="formFields[7].value"
+        >
+          <mat-radio-button value="true">Yes</mat-radio-button>
+          <mat-radio-button value="false">No</mat-radio-button>
+        </mat-radio-group>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-9 border p-0">
+    <h2 class="pt-2 pb-2 ps-2">Saved Check List Items</h2>
+    <hr />
+    <society-checklist-table (eventEmitter)="edit($event, $event)"></society-checklist-table>
+  </div>
+</div>

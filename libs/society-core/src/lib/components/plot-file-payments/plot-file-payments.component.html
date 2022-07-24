@@ -1,0 +1,198 @@
+<mat-tab-group
+  mat-align-tabs="center"
+  [selectedIndex]="tabIndex"
+  (selectedIndexChange)="changeTabHeader($event)"
+>
+  <mat-tab label="Plot File Payments">
+    <div class="saveUpdateBar border mat-elevation-z2">
+      <button mat-button class="save" (click)="saveplotFilePayment(1)">
+        <mat-icon>save</mat-icon>
+        <span class="ps-2">Save</span>
+      </button>
+      <button mat-button class="save" (click)="reset()">
+        <mat-icon>cached</mat-icon>
+        <span class="ps-2">Reset</span>
+      </button>
+    </div>
+    <div class="row vh-100">
+      <div class="col-md-3 border bg-white">
+        <h2 class="pt-2 ps-3">Membership Info</h2>
+        <hr />
+        <div class="ps-3 pe-3">
+          <mat-form-field class="w-100">
+            <mat-label>Membership No.</mat-label>
+            <mat-select
+              [(ngModel)]="formFieldsSingle[3].value"
+              (ngModelChange)="membershipChange(formFieldsSingle[3].value)"
+            >
+              <mat-option>
+                <ngx-mat-select-search [(ngModel)]="searchFile" 
+                  [noEntriesFoundLabel]="'Not found'" placeholderLabel="Search..." name="search">
+                </ngx-mat-select-search>
+              </mat-option>
+              <mat-option
+                *ngFor="let item of plotList | search: 'fileNo': searchFile"
+                [value]="item.plotFileId"
+              >
+                {{ item.fileNo }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field class="w-100">
+            <mat-label>Member Name</mat-label>
+            <mat-select
+              [(ngModel)]="formFieldsSingle[4].value"
+              (ngModelChange)="memberChange(formFieldsSingle[4].value)"
+            >
+              <mat-option
+                *ngFor="let item of memberList"
+                [value]="item.memberProfileId"
+              >
+                {{ item.memberName }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <p class="pt-3 sunred-text">Plot Category</p>
+          <p>
+            <strong>{{ lblCategory }}</strong>
+          </p>
+          <hr />
+          <p class="pt-3 sunred-text">Plot Nature</p>
+          <p>
+            <strong>{{ lblNature }}</strong>
+          </p>
+          <hr />
+          <p class="pt-3 sunred-text">Plot Type</p>
+          <p>
+            <strong>{{ lblType }}</strong>
+          </p>
+          <hr />
+        </div>
+      </div>
+      <div class="col-md-3 border light-blue-bg">
+        <div class="d-flex flex-column justify-content-center">
+          <h2 class="pt-2 ps-3">Payment Info</h2>
+          <hr />
+          <mat-form-field class="w-100">
+            <mat-label>Payment Date</mat-label>
+            <input
+              matInput
+              [matDatepicker]="picker"
+              [(ngModel)]="formFieldsSingle[5].value"
+            />
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="picker"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+          <mat-form-field class="w-100">
+            <mat-label>Bank Name</mat-label>
+            <mat-select
+              [(ngModel)]="formFieldsSingle[6].value"
+              (ngModelChange)="bankChange(formFieldsSingle[6].value)"
+            >
+              <mat-option *ngFor="let item of bankList" [value]="item.bankId">
+                {{ item.titleofAccount }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field class="w-100">
+            <mat-label>Deposit Slip No.</mat-label>
+            <input matInput [(ngModel)]="formFieldsSingle[7].value" />
+          </mat-form-field>
+          <mat-form-field class="w-100">
+            <mat-label>Reference No.</mat-label>
+            <input matInput [(ngModel)]="formFieldsSingle[8].value" />
+          </mat-form-field>
+          <mat-form-field class="w-100">
+            <mat-label>Account Head</mat-label>
+            <mat-select [(ngModel)]="formFieldsSingle[9].value">
+              <mat-option
+                *ngFor="let item of accountHeadList"
+                [value]="item.coaID"
+              >
+                {{ item.accountTitle }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field class="w-100">
+            <input
+              matInput
+              placeholder="Amount"
+              [(ngModel)]="formFieldsSingle[10].value"
+              currencyMask
+              [options]="{ prefix: 'Rs. ', precision: 0, max: 9999999 }"
+            />
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="col-md-6 border">
+        <h2 class="pt-2 ps-2">Membership Payments Detail</h2>
+        <hr />
+        <society-membership-payments-detail></society-membership-payments-detail>
+      </div>
+    </div>
+  </mat-tab>
+  <mat-tab label="Import Payments">
+    <div class="saveUpdateBar border mat-elevation-z2">
+      <button mat-button class="save" (click)="saveplotFilePayment(2)">
+        <mat-icon>save</mat-icon>
+        <span class="ps-2">Save</span>
+      </button>
+      <button mat-button class="save" (click)="resetImport()">
+        <mat-icon>cached</mat-icon>
+        <span class="ps-2">Reset</span>
+      </button>
+    </div>
+    <div class="d-flex flex-column">
+      <h2 class="pt-2 ps-3">Import Membership Payments</h2>
+      <hr />
+      <div class="row bg-white">
+        <div class="col-md-2 offset-md-3">
+          <mat-form-field>
+            <mat-label>Payment Date</mat-label>
+            <input
+              matInput
+              [matDatepicker]="picker1"
+              [(ngModel)]="formFieldsMultiple[3].value"
+            />
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="picker1"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #picker1></mat-datepicker>
+          </mat-form-field>
+        </div>
+        <div class="col-md-2">
+          <mat-form-field>
+            <mat-label>Bank Name</mat-label>
+            <mat-select [(ngModel)]="formFieldsMultiple[4].value">
+              <mat-option *ngFor="let item of bankList" [value]="item.bankId">
+                {{ item.nameofBank }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-md-5">
+          <!-- <p class="pe-3 text-danger">Import Bank Statement</p> -->
+          <input
+            #filName
+            class="pt-3"
+            type="file"
+            accept=".xlsx"
+            (change)="onFileSelected($event)"
+          />
+        </div>
+      </div>
+      <society-import-plot-file-payment-table></society-import-plot-file-payment-table>
+    </div>
+  </mat-tab>
+  <mat-tab label="Saved Payments">
+    <h2 class="pt-2 ps-2">Membership Payments Detail</h2>
+    <hr />
+    <society-saved-plot-file-payment-table
+      (eventEmitter)="edit($event)"
+    ></society-saved-plot-file-payment-table>
+  </mat-tab>
+</mat-tab-group>

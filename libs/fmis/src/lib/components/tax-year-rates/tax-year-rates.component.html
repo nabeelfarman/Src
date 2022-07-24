@@ -1,0 +1,90 @@
+<div class="saveUpdateBar border mat-elevation-z2">
+  <button mat-button class="save cursorPointer">
+    <mat-icon>save</mat-icon>
+    <span class="ps-2">Save</span>
+  </button>
+  <button mat-button class="save cursorPointer">
+    <mat-icon>cached</mat-icon>
+    <span class="ps-2">Reset</span>
+  </button>
+</div>
+
+<div class="row h-100">
+  <div class="col-md-4 h-100 bg-white border">
+    <h2 class="pt-3 ps-4 pe-3">Add / Modify</h2>
+    <hr />
+    <div class="row">
+      <div class="col-md-6">
+        <mat-form-field class="w-100 ps-2">
+          <mat-label>Tax Year</mat-label>
+          <mat-select>
+            <mat-option value="one">2019</mat-option>
+            <mat-option value="two">2020</mat-option>
+            <mat-option value="three">2021</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-md-6">
+        <mat-form-field class="w-100">
+          <mat-label>Affect Date</mat-label>
+          <input matInput [matDatepicker]="picker" />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <mat-form-field class="w-100 ps-2">
+          <mat-label>Tax Section</mat-label>
+          <mat-select>
+            <mat-option value="one">153(1)(a)/1</mat-option>
+            <mat-option value="two">153(1)(a)/2</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-md-6">
+        <p class="mt-3"><span class="text-danger">IRIS Code: </span>6400101</p>
+      </div>
+    </div>
+    <h5 class="ps-2">Payment Nature</h5>
+    <hr />
+    <p class="ps-2"><strong>Payment on supplies of goods</strong></p>
+
+    <mat-form-field class="w-100 ps-2">
+      <mat-label>Business Nature</mat-label>
+      <mat-select>
+        <mat-option value="one">Individual / Association of Persons</mat-option>
+        <mat-option value="two">Partnership Firm</mat-option>
+        <mat-option value="three">Company</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-radio-group aria-label="Select an option" class="ps-2">
+      <mat-radio-button value="1">Resident</mat-radio-button>&nbsp;&nbsp;&nbsp;
+      <mat-radio-button value="2">non-Resident</mat-radio-button>
+    </mat-radio-group>
+
+    <div class="row">
+      <div class="col-md-6">
+        <mat-form-field class="w-100 ps-2">
+          <mat-label>Filer Rate</mat-label>
+          <input matInput />
+        </mat-form-field>
+      </div>
+      <div class="col-md-6">
+        <mat-form-field class="w-100">
+          <mat-label>non-Filer Rate</mat-label>
+          <input matInput />
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-8">
+    <h2 class="pt-3 ps-4 pe-3">Saved Tax Year Rates</h2>
+    <hr />
+    <society-tax-year-rates-table></society-tax-year-rates-table>
+  </div>
+</div>

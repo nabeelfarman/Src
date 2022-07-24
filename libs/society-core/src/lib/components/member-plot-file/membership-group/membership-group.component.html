@@ -1,0 +1,58 @@
+<mat-expansion-panel hideToggle  *ngFor="let item of itemList">
+  <mat-expansion-panel-header>
+    <mat-panel-title class="d-flex flex-row justify-content-between">
+      <div *ngIf="item.memberName == ''">Add Member / Applicant</div>
+      <div *ngIf="item.memberName != ''">{{item.memberName}}</div>
+    </mat-panel-title>
+  </mat-expansion-panel-header>
+  <div class="ps-2 pe-2">
+    <mat-form-field class="w-100">
+      <mat-label>Name</mat-label>
+      <mat-select [(ngModel)]="item.memberID" (ngModelChange)="setMemberInfo(item.memberID)">
+        <!-- <mat-select> -->
+          <mat-option>
+            <ngx-mat-select-search [(ngModel)]="searchMember" 
+              [noEntriesFoundLabel]="'Not found'" placeholderLabel="Search..." name="search">
+            </ngx-mat-select-search>
+          </mat-option>
+          <mat-option
+          *ngFor="let obj of memberList | search: 'memberName': searchMember"
+          [value]="obj.memberProfileId"
+        >
+        <table class="table">
+          <tr>
+            <td class="text-left col-10">
+              {{ obj.memberName }}
+            </td>
+            <td class="text-center col-2">
+              {{ obj.memberType }}
+            </td>
+          </tr>
+        </table>
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <p class="pt-3 sunred-text">S/D/W Name</p>
+    <p><strong>{{item.sdwName}}</strong></p>
+    <hr />
+    <p class="pt-3 sunred-text">CNIC No.</p>
+    <p><strong>{{item.cnic}}</strong></p>
+    <hr />
+    <p class="pt-3 sunred-text">Date of Birth</p>
+    <p><strong>{{item.DOB | date}}</strong></p>
+    <hr />
+    <p class="pt-3 sunred-text">Address</p>
+    <p><strong>{{item.address}}</strong></p>
+    <hr />
+  </div>
+
+  <div class="d-flex justify-content-around">
+    <button mat-raised-button class="savebtn" (click)="saveMemberPlotFile(item, 'save')">
+      Save
+    </button>
+    <button mat-raised-button class="resetbtn" (click)="saveMemberPlotFile(item, 'delete')">
+      Delete
+    </button>
+  </div>
+</mat-expansion-panel>
+<!-- <button mat-raised-button color="warn"><mat-icon>add</mat-icon></button> -->

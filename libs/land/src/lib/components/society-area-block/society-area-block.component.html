@@ -1,0 +1,33 @@
+<div class="saveUpdateBar border mat-elevation-z2">
+  <button mat-button class="save cursorPointer" (click)="save()">
+    <mat-icon>save</mat-icon>
+    <span class="ps-2">Save</span>
+  </button>
+  <button mat-button class="save cursorPointer" (click)="reset()">
+    <mat-icon>cached</mat-icon>
+    <span class="ps-2">Reset</span>
+  </button>
+</div>
+
+<div class="row no-scroll">
+  <div class="col-md-4 bg-white border">
+    <h2 class="pt-3 ps-4 pe-3">Add / Modify</h2>
+    <hr />
+    <div class="ps-3 pe-2">
+      <mat-form-field class="w-100">
+        <mat-label>Block / Sector Title</mat-label>
+        <input matInput [(ngModel)]="formFields[3].value" />
+      </mat-form-field>
+      <mat-form-field class="w-100">
+        <mat-label>Description</mat-label>
+        <textarea matInput [(ngModel)]="formFields[4].value"></textarea>
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="col-md-8 p-0">
+    <h2 class="pt-3 ps-3">Saved Record</h2>
+    <hr />
+    <society-society-area-block-table
+    (eventEmitter)="edit($event)"></society-society-area-block-table>
+  </div>
+</div>
