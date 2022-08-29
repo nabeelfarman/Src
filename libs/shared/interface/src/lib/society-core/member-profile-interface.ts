@@ -32,4 +32,6 @@ export class MemberProfileInterface {
     applicationEDoc = '';
     applicationEdocExtenstion = '';
     nextofKin = '';
+    affectDate = '';
+    referenceID = '';
 }

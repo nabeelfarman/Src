@@ -1,12 +1,7 @@
 <div class="table-responsive">
   <div class="d-flex flex-row pe-3">
     <div class="form-group has-search flex-grow-1">
-      <input
-        type="text"
-        class="form-control"
-        [(ngModel)]="tblSearch"
-        placeholder="Search record"
-      />
+      <input type="text" class="form-control" [(ngModel)]="tblSearch" placeholder="Search record" />
     </div>
     <button mat-raised-button color="warn" (click)="tblSearch = ''">
       Show All
@@ -30,16 +25,13 @@
         <!-- <td>{{item.memberCNIC}}</td> -->
         <td>{{ item.isActivated }}</td>
         <td class="text-center">
-          <span
-            class="text-primary cursorPointer border-right-dark pe-2"
-            (click)="edit(item, '1')"
-          >
+          <span class="text-success cursorPointer border-right-dark pe-2" (click)="print(item)">
+            <mat-icon>print</mat-icon>
+          </span>
+          <span class="text-primary cursorPointer border-right-dark pe-2" (click)="edit(item, '1')">
             <mat-icon>edit</mat-icon>
           </span>
-          <span
-            class="text-danger cursorPointer border-right-dark ps-2 pe-2"
-            (click)="edit(item, '2')"
-          >
+          <span class="text-danger cursorPointer border-right-dark ps-2 pe-2" (click)="edit(item, '2')">
             <mat-icon>delete</mat-icon>
           </span>
           <span class="ps-2">

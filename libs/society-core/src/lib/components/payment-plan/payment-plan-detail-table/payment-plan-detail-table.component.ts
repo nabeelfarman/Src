@@ -21,7 +21,8 @@ export class PaymentPlanDetailTableComponent implements OnInit {
     paymentNatureId: '',
     installmentId: '',
     amount: '',
-    duedate: '',
+    durationID: '',
+    // duedate: '',
   };
 
   formFields: MyFormField[] = [
@@ -68,15 +69,36 @@ export class PaymentPlanDetailTableComponent implements OnInit {
       required: true,
     },
     {
-      value: this.pageFields.duedate,
-      msg: 'select date',
-      type: 'date',
+      value: this.pageFields.durationID,
+      msg: 'select duration',
+      type: 'selectBox',
       required: true,
     },
+    // {
+    //   value: this.pageFields.duedate,
+    //   msg: 'select date',
+    //   type: 'date',
+    //   required: true,
+    // },
   ];
 
   natureList:any = [];
   installmentList:any = [];
+
+  durationList: any = [
+    {
+    durationID: '1',
+    durationName: '1 Month',
+    },
+    {
+      durationID: '3',
+      durationName: '3 Month',
+    },
+    {
+      durationID: '6',
+      durationName: '6 Month',
+    },
+  ];
 
   paymentID = '';
   mode = false;
@@ -107,6 +129,7 @@ export class PaymentPlanDetailTableComponent implements OnInit {
   getInstallment(){
     this.dataService.getHttp('society-api/PaymentPlan/getInstallmentsHeader', '').subscribe((response: any) => {
       this.installmentList = response;
+      console.log(response);
     }, (error: any) => {
       console.log(error);
     });
@@ -138,20 +161,21 @@ export class PaymentPlanDetailTableComponent implements OnInit {
     this.formFields[4].value = item.paymentNatureID.toString();
     this.formFields[5].value = item.installmentID.toString();
     this.formFields[6].value = item.amount;
-    this.formFields[7].value = item.dueDate.toString();
+    this.formFields[7].value = item.durationID;
+    // this.formFields[7].value = item.dueDate.toString();
 
     this.save();
   }
 
   save(){
 
-    if(this.tableData.length > 0){
-      var val = this.tableData.length - 1;
-      if(this.formFields[7].value < new Date(this.tableData[val].dueDate))
-      {
-        this.valid.apiErrorResponse('invalid date');return;
-      }
-    }
+    // if(this.tableData.length > 0){
+    //   var val = this.tableData.length - 1;
+    //   if(this.formFields[7].value < new Date(this.tableData[val].dueDate))
+    //   {
+    //     this.valid.apiErrorResponse('invalid date');return;
+    //   }
+    // }
     
     this.formFields[3].value = this.paymentID;
     

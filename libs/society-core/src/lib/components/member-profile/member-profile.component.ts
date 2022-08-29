@@ -29,6 +29,19 @@ export class MemberProfileComponent implements OnInit {
   searchPresentCity: string = '';
   searchPermanentCity: string = '';
 
+  
+  lblPMemberName: string = '';
+  lblPSDWName: string = '';
+  lblPCNIC: string = '';
+  lblPMobile: string = '';
+  lblPAddress: string = '';
+  lblPMembershipDate: string = '';
+  lblPMembershipNo: string = '';
+  lblPCategory: string = '';
+  lblPNature: string = '';
+  lblPType: string = '';
+  lblPPaymentPlan: string = '';
+
   pageFields: MemberProfileInterface = {
     newMemberProfileId: '0',
     spType: '',
@@ -63,6 +76,8 @@ export class MemberProfileComponent implements OnInit {
     applicationEDoc: '',
     applicationEdocExtenstion: '',
     nextofKin: '',
+    affectDate: '',
+    referenceID: '',
   };
 
   formFields: MyFormField[] = [
@@ -264,6 +279,18 @@ export class MemberProfileComponent implements OnInit {
       type: 'textbox',
       required: false,
     },
+    {
+      value: this.pageFields.affectDate,
+      msg: 'select affect date',
+      type: 'date',
+      required: true,
+    },
+    {
+      value: this.pageFields.referenceID,
+      msg: 'select reference',
+      type: 'selectbox',
+      required: false,
+    },
   ];
 
   memberPic: any;
@@ -284,6 +311,7 @@ export class MemberProfileComponent implements OnInit {
   tempCityList: any = [];
   plotFileList: any = [];
   memberList: any = [];
+  referenceList: any = [];
 
   error: any;
 
@@ -312,6 +340,7 @@ export class MemberProfileComponent implements OnInit {
     // this.getPaymentPlans();
     this.getCountry();
     this.getCity();
+    this.getReference();
 
     // default value of radio button
     this.rdbMember = '1';
@@ -322,6 +351,17 @@ export class MemberProfileComponent implements OnInit {
     this.dataService.getHttp('company-api/Company/getCountry', '').subscribe(
       (response: any) => {
         this.countryList = response;
+      },
+      (error: any) => {
+        console.log(error);
+      }
+    );
+  }
+
+  getReference() {
+    this.dataService.getHttp('society-api/MemberProfile/getReference', '').subscribe(
+      (response: any) => {
+        this.referenceList = response;
       },
       (error: any) => {
         console.log(error);
@@ -405,6 +445,11 @@ export class MemberProfileComponent implements OnInit {
   }
 
   setPaymentPlanInfo(item: any) {
+    // if(this.formFields[33].value == ''){
+    //   this.valid.apiInfoResponse('select affect date');
+    //   this.formFields[4].value = '';
+    //   return;
+    // }
     this.dataService
       .getHttp(
         'society-api/PaymentPlan/getPaymentPlanDetail?paymentPlanID=' + item,
@@ -413,6 +458,36 @@ export class MemberProfileComponent implements OnInit {
       .subscribe(
         (response: any) => {
           this.paymentDetailList = response;
+          // this.paymentDetailList = [];
+          // var affectDate = new Date();
+          // var tempDate = this.formFields[33].value;
+          // for(var i = 0; i < response.length; i++){
+          //   if(i > 0){
+          //     if(response[0].durationID == 1){
+          //       affectDate = new Date(tempDate.setMonth(tempDate.getMonth()+1))
+          //     }else if(response[0].durationID == 2){
+          //       affectDate = new Date(tempDate.setMonth(tempDate.getMonth()+3))
+          //     }else{
+          //       affectDate = new Date(tempDate.setMonth(tempDate.getMonth()+6))
+          //     }
+          //   }
+          //   else{
+          //     affectDate = this.formFields[33].value;
+          //   }
+          //   this.paymentDetailList.push({
+          //     amount: response[i].amount,
+          //     coaID: response[i].coaID,
+          //     dueDate: affectDate,
+          //     editMode: response[i].editMode,
+          //     installmentID: response[i].installmentID,
+          //     installmentTitle: response[i].installmentTitle,
+          //     isDeleted: response[i].isDeleted,
+          //     paymentNatureID: response[i].paymentNatureID,
+          //     paymentNatureTitle: response[i].paymentNatureTitle,
+          //     paymentPlanDetailId: response[i].paymentPlanDetailId,
+          //     paymentPlanID: response[i].paymentPlanID
+          //   })
+          // }
         },
         (error: any) => {
           console.log(error);
@@ -659,6 +734,15 @@ export class MemberProfileComponent implements OnInit {
     if (this.formFields[21].value == '') {
       this.formFields[21].value = '0';
     }
+    if (this.formFields[10].value == '') {
+      this.formFields[10].value = '0';
+    }
+    if (this.formFields[11].value == '') {
+      this.formFields[11].value = '0';
+    }
+    if (this.formFields[34].value == '') {
+      this.formFields[34].value = '0';
+    }
     // alert(this.formFields[21].value);return
     this.formFields[26].value = this.imageUpload.image;
     this.formFields[28].value = this.imageUpload.imageExt;
@@ -701,6 +785,7 @@ export class MemberProfileComponent implements OnInit {
       )
       .subscribe(
         (response: any[]) => {
+          console.log(response)
           if (response[0].includes('Success') == true) {
             if (this.formFields[0].value > 0) {
               this.valid.apiInfoResponse('Record updated successfully');
@@ -863,5 +948,30 @@ export class MemberProfileComponent implements OnInit {
 
   changeTabHeader(tabNum: any) {
     this.tabIndex = tabNum;
+  }
+
+  print(item: any){
+    
+    this.lblPMemberName = item.memberName;
+    this.lblPSDWName = item.sdWofName;
+    this.lblPCNIC = item.memberCNIC;
+    this.lblPMobile = item.mobileNo1;
+    this.lblPAddress = item.presentAddress;
+    this.lblPMembershipDate = item.memberShipDate;
+    this.lblPMembershipNo = item.fileNo;
+    
+    var data = this.plotList.filter(
+      (x: { plotFileId: any }) =>
+        x.plotFileId == parseInt(item.plotfileId)
+    );
+
+    if (data.length > 0) {
+      this.lblPCategory = data[0].plotCategoryTitle;
+      this.lblPNature = data[0].plotNatureTitle;
+      this.lblPType = data[0].plotTypeTitle;
+    }
+
+    setTimeout(()=>this.globalService.printData('#print-member'), 200);
+
   }
 }

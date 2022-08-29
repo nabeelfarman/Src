@@ -101,7 +101,7 @@ export class PaymentPlanComponent implements OnInit {
       msg: 'enter payment plan description',
       type: 'textBox',
       required: true,
-    },
+    }
   ];
 
   tabIndex = 0;

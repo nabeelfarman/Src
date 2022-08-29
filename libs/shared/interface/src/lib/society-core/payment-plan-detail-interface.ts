@@ -3,7 +3,8 @@ export class PaymentPlanDetailInterface {
     paymentPlanId = '';
     installmentId = '';
     paymentNatureId = '';
-    duedate = '';
+    durationID = '';
+    // duedate = '';
     amount = '';
     userId = '';
     spType = '';

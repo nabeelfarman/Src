@@ -24,7 +24,8 @@
           </mat-form-field>
           <mat-form-field>
             <mat-label>Plot Category</mat-label>
-            <mat-select [(ngModel)]="formFields[4].value" (ngModelChange)="getHistoryLog(formFields[4].value, formFields[5].value, formFields[6].value)">
+            <mat-select [(ngModel)]="formFields[4].value"
+              (ngModelChange)="getHistoryLog(formFields[4].value, formFields[5].value, formFields[6].value)">
               <mat-option *ngFor="let item of categoryList" [value]="item.plotCategoryId">
                 {{ item.plotCategoryTitle }}
               </mat-option>
@@ -32,7 +33,8 @@
           </mat-form-field>
           <mat-form-field>
             <mat-label>Plot Nature</mat-label>
-            <mat-select [(ngModel)]="formFields[5].value" (ngModelChange)="getHistoryLog(formFields[4].value, formFields[5].value, formFields[6].value)">
+            <mat-select [(ngModel)]="formFields[5].value"
+              (ngModelChange)="getHistoryLog(formFields[4].value, formFields[5].value, formFields[6].value)">
               <mat-option *ngFor="let item of natureList" [value]="item.plotNatureID">
                 {{ item.plotNatureTitle }}
               </mat-option>
@@ -40,7 +42,8 @@
           </mat-form-field>
           <mat-form-field>
             <mat-label>Plot Type</mat-label>
-            <mat-select [(ngModel)]="formFields[6].value" (ngModelChange)="getHistoryLog(formFields[4].value, formFields[5].value, formFields[6].value)">
+            <mat-select [(ngModel)]="formFields[6].value"
+              (ngModelChange)="getHistoryLog(formFields[4].value, formFields[5].value, formFields[6].value)">
               <mat-option *ngFor="let item of typeList" [value]="item.plotTypeId">
                 {{ item.plotTypeTitle }}
               </mat-option>
@@ -72,7 +75,7 @@
       </div>
     </div>
   </mat-tab>
-  <mat-tab label="Saved Record"
-    ><society-payment-plan-table (eventEmitter)="edit($event, $event)"></society-payment-plan-table
-  ></mat-tab>
+  <mat-tab label="Saved Record">
+    <society-payment-plan-table (eventEmitter)="edit($event, $event)"></society-payment-plan-table>
+  </mat-tab>
 </mat-tab-group>

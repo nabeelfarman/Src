@@ -20,8 +20,8 @@ export class PlotsComponent implements OnInit {
     spType: '',
     userId: '',
     plotCategoryId: '',
-    plotNatureId: '',
     plotTypeId: '',
+    plotNatureId: '',
     streetNo: '',
     plotNo: '',
     block: '',
@@ -125,13 +125,13 @@ export class PlotsComponent implements OnInit {
   getPlotNature(){
     this.dataService.getHttp('society-api/PlotNature/getPlotNature', '').subscribe((response: any) => {
       this.plotNatureList = response;
+      console.log(response)
     }, (error: any) => {
       console.log(error);
     });
   }
 
   savePlots() {
-    this.formFields[5].value = '1';
 
     this.dataService
       .savetHttp(

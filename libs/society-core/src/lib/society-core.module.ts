@@ -5,6 +5,7 @@ import { MaterialModule } from '@society/material';
 import { RouterModule, Route } from '@angular/router';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { NgxCurrencyModule } from 'ngx-currency';
+import { NgxPrintModule } from 'ngx-print';
 
 import { PlotCategoryComponent } from './components/config/plot-category/plot-category.component';
 import { PlotCategoryTableComponent } from './components/config/plot-category/plot-category-table/plot-category-table.component';
@@ -68,6 +69,7 @@ import { SearchPipe } from '@society/shared/interface';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import { PlotAllotmentComponent } from './components/plot-allotment/plot-allotment.component';
 import { PlotAllotmentTableComponent } from './components/plot-allotment/plot-allotment-table/plot-allotment-table.component';
+import { MemberProfilePrintComponent } from './components/member-profile/member-profile-print/member-profile-print.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -115,6 +117,7 @@ export const societyCoreRoutes: Route[] = [
     NgxCurrencyModule,
     PerfectScrollbarModule,
     NgxMatSelectSearchModule,
+    NgxPrintModule,
   ],
   declarations: [
     PlotCategoryComponent,
@@ -169,6 +172,7 @@ export const societyCoreRoutes: Route[] = [
     SearchPipe,
     PlotAllotmentComponent,
     PlotAllotmentTableComponent,
+    MemberProfilePrintComponent,
   ],
   exports: [
     PlotCategoryTableComponent,
@@ -201,7 +205,8 @@ export const societyCoreRoutes: Route[] = [
     TransferLetterComponent,
     SavedPlotFilePaymentTableComponent,
     PlotAllotmentTableComponent,
-    ApplicantProfileComponent
+    ApplicantProfileComponent,
+    MemberProfilePrintComponent,
   ],
   providers: [
     {
