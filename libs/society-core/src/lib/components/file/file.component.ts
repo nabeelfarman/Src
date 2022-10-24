@@ -1,41 +1,34 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { NG_ASYNC_VALIDATORS } from '@angular/forms';
 import { SharedHelpersFieldValidationsModule } from '@society/shared/helpers/field-validations';
-import { MyFormField, PlotsInterface } from '@society/shared/interface';
+import { FileInterface, MyFormField } from '@society/shared/interface';
 import { SharedServicesDataModule } from '@society/shared/services/data';
 import { SharedServicesGlobalDataModule } from '@society/shared/services/global-data';
-import { PlotsTableComponent } from './plots-table/plots-table.component';
+import { FileTableComponent } from './file-table/file-table.component';
 
 @Component({
-  selector: 'society-plots',
-  templateUrl: './plots.component.html',
-  styleUrls: ['./plots.component.scss'],
+  selector: 'society-file',
+  templateUrl: './file.component.html',
+  styleUrls: ['./file.component.scss']
 })
-export class PlotsComponent implements OnInit {
-  
-  @ViewChild(PlotsTableComponent) plotsTable: any;
+export class FileComponent implements OnInit {
 
-  pageFields: PlotsInterface = {
-    plotID: '0',
+  @ViewChild(FileTableComponent) fileTable: any;
+
+  pageFields: FileInterface = {
+    fileID: '0',
     spType: '',
     userID: '',
-    plotName: '',
-    plotShortName: '',
-    plotDescription: '',
-    plotLongitude: '',
-    plotLateitude: '',
-    plotCategoryId: '',
-    plotTypeId: '',
-    plotNatureId: '',
-    plotBlockID: '',
-    plotSubBlockID: '',
-    plotSize: '',
+    fileName: '',
+    fileDescription: '',
+    fileCatagoryID: '',
+    fileTypeID: '',
+    fileNatureID: '',
+    IsActive: '',
   };
-
-
+  
   formFields: MyFormField[] = [
     {
-      value: this.pageFields.plotID,
+      value: this.pageFields.fileID,
       msg: '',
       type: 'hidden',
       required: false,
@@ -53,76 +46,47 @@ export class PlotsComponent implements OnInit {
       required: false,
     },
     {
-      value: this.pageFields.plotName,
-      msg: 'enter plot name',
+      value: this.pageFields.fileName,
+      msg: 'enter file name',
       type: 'textbox',
       required: true,
     },
     {
-      value: this.pageFields.plotShortName,
-      msg: 'enter plot short name',
+      value: this.pageFields.fileDescription,
+      msg: 'enter file description',
       type: 'textbox',
-      required: true,
-    },
-    {
-      value: this.pageFields.plotDescription,
-      msg: 'enter description',
-      type: 'textBox',
       required: false,
     },
     {
-      value: this.pageFields.plotLateitude,
-      msg: 'enter latitude',
-      type: 'textBox',
-      required: false,
-    },
-    {
-      value: this.pageFields.plotLongitude,
-      msg: 'enter longitude',
-      type: 'textBox',
-      required: false,
-    },
-    {
-      value: this.pageFields.plotCategoryId,
-      msg: 'select plot category',
-      type: 'selectbox',
-      required: true,
-    },
-    {
-      value: this.pageFields.plotTypeId,
-      msg: 'select plot type',
-      type: 'selectbox',
-      required: true,
-    },
-    {
-      value: this.pageFields.plotNatureId,
-      msg: 'select plot nature',
+      value: this.pageFields.fileCatagoryID,
+      msg: 'select category',
       type: 'selectBox',
       required: true,
     },
     {
-      value: this.pageFields.plotBlockID,
-      msg: 'select block',
-      type: 'slectBox',
-      required: false,
-    },
-    {
-      value: this.pageFields.plotSubBlockID,
-      msg: 'select sub block',
+      value: this.pageFields.fileTypeID,
+      msg: 'select type',
       type: 'selectBox',
-      required: false,
+      required: true,
     },
     {
-      value: this.pageFields.plotSize,
-      msg: 'enter plot size',
-      type: 'textBox',
+      value: this.pageFields.fileNatureID,
+      msg: 'select nature',
+      type: 'selectBox',
       required: true,
+    },
+    {
+      value: this.pageFields.IsActive,
+      msg: 'select plot',
+      type: 'textBox',
+      required: false,
     },
   ];
 
   plotCategoryList: any = [];
   plotTypeList: any = [];
   plotNatureList: any = [];
+  plotList: any = [];
 
   error: any;
 
@@ -133,8 +97,10 @@ export class PlotsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.globalService.setHeaderTitle('Plots');
+    this.globalService.setHeaderTitle('File');
     this.formFields[2].value = this.globalService.getUserId().toString();
+
+    this.getPlots();
 
     this.getPlotCategory();
     this.getPlotType();
@@ -165,22 +131,33 @@ export class PlotsComponent implements OnInit {
     });
   }
 
-  savePlots() {
-    this.formFields[11].value = '1';
-    this.formFields[12].value = '1';
+  getPlots(){
+    this.dataService.getHttp('core-api/getPlot', '').subscribe((response: any) => {
+      this.plotList = response;
+    }, (error: any) => {
+      console.log(error);
+    });
+  }
+
+  save(){
+    
+    // if(this.formFields[5].value == ''){
+    //   this.formFields[5].value = '';
+    // }
+    this.formFields[8].value = false;
 
     if (this.formFields[0].value > 0) {
       this.dataService
       .savetHttp(
         this.pageFields,
         this.formFields,
-        'core-api/updateplot'
+        'core-api/updatefile'
       )
       .subscribe(
         (response: any) => {
           if (response.msg == "Data Updated Successfully") {
             this.valid.apiInfoResponse('Record updated successfully');
-            this.plotsTable.getPlots();
+            this.fileTable.getFile();
             this.reset();
           } else {
             this.valid.apiErrorResponse(response.msg);
@@ -196,13 +173,13 @@ export class PlotsComponent implements OnInit {
       .savetHttp(
         this.pageFields,
         this.formFields,
-        'core-api/insertplot'
+        'core-api/insertfile'
       )
       .subscribe(
         (response: any) => {
           if (response.msg == "Data Saved Successfully") {
             this.valid.apiInfoResponse('Record saved successfully');
-            this.plotsTable.getPlots();
+            this.fileTable.getFile();
             this.reset();
           } else {
             this.valid.apiErrorResponse(response.msg);
@@ -220,24 +197,16 @@ export class PlotsComponent implements OnInit {
   reset() {
     this.formFields = this.valid.resetFormFields(this.formFields);
     this.formFields[0].value = '0';
+    this.formFields[4].value = '';
   }
     
   edit(item: any) {
-
-    // console.log(item);return;
-    this.formFields[0].value = item.plotID;
-    this.formFields[3].value = item.plotName;
-    this.formFields[4].value = item.plotShortName;
-    this.formFields[5].value = item.plotDescription;
-    this.formFields[6].value = item.plotLateitude;
-    this.formFields[7].value = item.plotLongitude;
-    this.formFields[8].value = item.plotCatagoryID;
-    this.formFields[9].value = item.plotTypeID;
-    this.formFields[10].value = item.plotNatureID;
-    this.formFields[11].value = item.plotBlockID;
-    this.formFields[12].value = item.plotSubBlockID;
-    this.formFields[13].value = item.plotSize;
+    this.formFields[0].value = item.fileID;
+    this.formFields[3].value = item.fileName;
+    this.formFields[4].value = item.fileDescription;
+    this.formFields[5].value = item.fileCatagoryID;
+    this.formFields[6].value = item.fileTypeID;
+    this.formFields[7].value = item.fileNatureID;
     
   }
-
 }

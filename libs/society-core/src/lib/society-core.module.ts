@@ -70,6 +70,12 @@ import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import { PlotAllotmentComponent } from './components/plot-allotment/plot-allotment.component';
 import { PlotAllotmentTableComponent } from './components/plot-allotment/plot-allotment-table/plot-allotment-table.component';
 import { MemberProfilePrintComponent } from './components/member-profile/member-profile-print/member-profile-print.component';
+import { CustomerProfileComponent } from './components/customer-profile/customer-profile.component';
+import { CustomerProfileTableComponent } from './components/customer-profile/customer-profile-table/customer-profile-table.component';
+import { FileComponent } from './components/file/file.component';
+import { FileTableComponent } from './components/file/file-table/file-table.component';
+import { SrcPaymentPlanComponent } from './components/src-payment-plan/src-payment-plan.component';
+import { SrcPaymentPlanTableComponent } from './components/src-payment-plan/src-payment-plan-table/src-payment-plan-table.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -81,8 +87,10 @@ export const societyCoreRoutes: Route[] = [
   { path: 'plotPaymentNatures', component: PlotPaymentNaturesComponent },
   { path: 'plotNatures', component: PlotNaturesComponent },
   { path: 'plot', component: PlotsComponent },
-  { path: 'paymentPlan', component: PaymentPlanComponent },
-  { path: 'memberProfile', component: MemberProfileComponent },
+  // { path: 'paymentPlan', component: PaymentPlanComponent },
+  { path: 'paymentPlan', component: SrcPaymentPlanComponent },
+  // { path: 'memberProfile', component: MemberProfileComponent },
+  { path: 'memberProfile', component: CustomerProfileComponent },
   { path: 'memberPlotFile', component: MemberPlotFileComponent },
   { path: 'plotFiles', component: PlotFilesComponent },
   { path: 'applicantProfile', component: ApplicantProfileComponent },
@@ -93,6 +101,7 @@ export const societyCoreRoutes: Route[] = [
   { path: 'fileTransfer', component: FileTransferComponent },
   { path: 'plotFilePayment', component: PlotFilePaymentsComponent },
   { path: 'coreDashboard', component: CoreDashboardComponent },
+  { path: 'file', component: FileComponent },
   {
     path: 'membershipPaymentRpt',
     component: MembershipPaymentsReportComponent,
@@ -173,6 +182,12 @@ export const societyCoreRoutes: Route[] = [
     PlotAllotmentComponent,
     PlotAllotmentTableComponent,
     MemberProfilePrintComponent,
+    CustomerProfileComponent,
+    CustomerProfileTableComponent,
+    FileComponent,
+    FileTableComponent,
+    SrcPaymentPlanComponent,
+    SrcPaymentPlanTableComponent,
   ],
   exports: [
     PlotCategoryTableComponent,
@@ -207,6 +222,9 @@ export const societyCoreRoutes: Route[] = [
     PlotAllotmentTableComponent,
     ApplicantProfileComponent,
     MemberProfilePrintComponent,
+    CustomerProfileTableComponent,
+    FileTableComponent,
+    SrcPaymentPlanTableComponent,
   ],
   providers: [
     {

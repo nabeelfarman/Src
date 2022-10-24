@@ -1,0 +1,71 @@
+<div class="saveUpdateBar border mat-elevation-z2">
+  <button mat-button class="save cursorPointer" (click)="save()">
+    <mat-icon>save</mat-icon>
+    <span class="ps-2">Save</span>
+  </button>
+  <button mat-button class="save cursorPointer" (click)="reset()">
+    <mat-icon>cached</mat-icon>
+    <span class="ps-2">Reset</span>
+  </button>
+</div>
+<div class="row no-scroll">
+  <!-- Add / update -->
+  <div class="col-md-4 bg-white border">
+    <h2 class="pt-2 pb-2 ps-3 border-bottom">Add / Modify</h2>
+    <div class="row">
+      <div class="d-flex flex-column ps-3 pe-3">
+        <mat-form-field class="w-100">
+          <mat-label>File Name</mat-label>
+          <input matInput [(ngModel)]="formFields[3].value" />
+        </mat-form-field>
+        <mat-form-field class="w-100">
+          <mat-label>Description</mat-label>
+          <input matInput [(ngModel)]="formFields[4].value" />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Plot Category</mat-label>
+          <mat-select [(ngModel)]="formFields[5].value">
+            <!-- <mat-option>
+                <ngx-mat-select-search [(ngModel)]="searchLocation" [placeholderLabel]="'Search...'"
+                  [noEntriesFoundLabel]="'Not found'" name="search"></ngx-mat-select-search>
+              </mat-option> -->
+            <mat-option *ngFor="let item of plotCategoryList" [value]="item.plotCategoryId">
+              {{ item.plotCategoryTitle }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Plot Type</mat-label>
+          <mat-select [(ngModel)]="formFields[6].value">
+            <!-- <mat-option>
+                <ngx-mat-select-search [(ngModel)]="searchLocation" [placeholderLabel]="'Search...'"
+                  [noEntriesFoundLabel]="'Not found'" name="search"></ngx-mat-select-search>
+              </mat-option> -->
+            <mat-option *ngFor="let item of plotTypeList" [value]="item.plotTypeId">
+              {{ item.plotTypeTitle }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Plot Nature</mat-label>
+          <mat-select [(ngModel)]="formFields[7].value">
+            <!-- <mat-option>
+                <ngx-mat-select-search [(ngModel)]="searchLocation" [placeholderLabel]="'Search...'"
+                  [noEntriesFoundLabel]="'Not found'" name="search"></ngx-mat-select-search>
+              </mat-option> -->
+            <mat-option *ngFor="let item of plotNatureList" [value]="item.plotNatureID">
+              {{ item.plotNatureTitle }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+  <!-- saved record -->
+  <div class="col-md-8 p-0">
+    <h2 class="pt-2 pb-2 ps-2 border-bottom">Saved Records</h2>
+    <div class="d-flex flex-column">
+      <society-file-table (eventEmitter)="edit($event)"></society-file-table>
+    </div>
+  </div>
+</div>

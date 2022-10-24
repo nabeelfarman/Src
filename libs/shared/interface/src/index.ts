@@ -54,6 +54,10 @@ export * from './lib/society-core/plot-file-payment-single-interface';
 export * from './lib/society-core/plot-file-payment-multiple-interface';
 export * from './lib/society-core/plot-allotment-interface';
 
+export * from './lib/society-core/customer-interface';
+export * from './lib/society-core/file-interface';
+export * from './lib/society-core/src-payment-interface';
+
 //export society core table classes
 export * from './lib/society-core/society-core-tables/plot-type-for-list-interface';
 export * from './lib/society-core/society-core-tables/plot-nature-for-list-interface';

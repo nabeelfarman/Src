@@ -1,54 +1,59 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { SharedHelpersFieldValidationsModule } from '@society/shared/helpers/field-validations';
-import { MyFormField, PlotsForListInterface } from '@society/shared/interface';
+import { MyFormField } from '@society/shared/interface';
 import { SharedServicesDataModule } from '@society/shared/services/data';
 import { SharedServicesGlobalDataModule } from '@society/shared/services/global-data';
 
 @Component({
-  selector: 'society-plots-table',
-  templateUrl: './plots-table.component.html',
-  styleUrls: ['./plots-table.component.scss']
+  selector: 'society-customer-profile-table',
+  templateUrl: './customer-profile-table.component.html',
+  styleUrls: ['./customer-profile-table.component.scss']
 })
-export class PlotsTableComponent implements OnInit {
+export class CustomerProfileTableComponent implements OnInit {
 
   @Output() eventEmitter = new EventEmitter();
 
+  tblSearch: any = '';
+  tableData: any = [];
+
   error: any;
-  tableData: any =[];
-  
+
   constructor(
     private dataService: SharedServicesDataModule,
     private globalService: SharedServicesGlobalDataModule,
     private valid: SharedHelpersFieldValidationsModule
-  ) { }
+  ) {}
 
   ngOnInit(): void {
-    this.getPlots()
+    this.getParty();
   }
-  
-  getPlots(){
-    this.dataService.getHttp('core-api/getPlot', '').subscribe((response: any) => {
-      this.tableData = response;
-      console.log(response)
-    }, (error: any) => {
-      console.log(error);
-    });
+
+  getParty() {
+    this.dataService.getHttp('core-api/getparty', '').subscribe(
+      (response: any) => {
+        this.tableData = response;
+      },
+      (error: any) => {
+        console.log(error);
+      }
+    );
   }
-  
+
   edit(item: any){
     this.eventEmitter.emit(item);
   }
 
   delete(item: any){
+        
     var pageFields = {
-      plotID: '0',
+      PartyID: '0',
       spType: '',
       UserID:''
     };
 
     var formFields: MyFormField[] = [
       {
-        value: pageFields.plotID,
+        value: pageFields.PartyID,
         msg: '',
         type: 'hidden',
         required: false,
@@ -67,7 +72,7 @@ export class PlotsTableComponent implements OnInit {
       },
     ];
     
-    formFields[0].value = item.plotID;
+    formFields[0].value = item.partyID;
     formFields[1].value = "delete";
     formFields[2].value = this.globalService.getUserId().toString();
 
@@ -75,13 +80,13 @@ export class PlotsTableComponent implements OnInit {
       .deleteHttp(
         pageFields,
         formFields,
-        'core-api/deleteplot'
+        'core-api/deleteparty'
       )
       .subscribe(
         (response: any) => {
           if(response.msg == "Data Deleted Successfully"){
             this.valid.apiInfoResponse('Record deleted successfully');
-            this.getPlots();
+            this.getParty();
             // this.eventEmitterDelete.emit(item);
           }else{
             this.valid.apiErrorResponse(response.msg);
