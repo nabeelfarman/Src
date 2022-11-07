@@ -38,8 +38,7 @@ export class LoginComponent implements OnInit {
       (response: any) => {
         console.log(response)
         if (response.length > 0) {
-          this.logoImg = environment.imageSavedPath + 'company/' +
-                            response[0].companyShortName + '.png';
+          this.logoImg = environment.imageSavedPath + 'company/' + response[0].companyShortName + '.png';
         }
       },
       (error: any) => {
@@ -76,7 +75,7 @@ export class LoginComponent implements OnInit {
           (error) => {
             // console.log(error);
             // this.error = error.error.message;
-            this.toastr.apiErrorResponse('user name or password in invalid');
+            this.toastr.apiErrorResponse('user name or password invalid');
           }
         );
     }
