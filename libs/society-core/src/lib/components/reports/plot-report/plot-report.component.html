@@ -1,0 +1,43 @@
+<div class="saveUpdateBar border mat-elevation-z2">
+  <button mat-button class="save" (click)="printReport('#print-summary')">
+    <mat-icon>print</mat-icon>
+    <span class="ps-2">Report</span>
+  </button>
+</div>
+
+<div class="container bg-white mt-4" id="print-summary">
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <img [src]="logoImg" alt="" width="250" height="200" />
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <h2 class="pt-3">Shama Royal City</h2>
+      <h4>Plots Report</h4>
+    </div>
+  </div>
+  <hr />
+  <div class="table table table-responsive pt-5">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Sr #</th>
+          <th>Plot Name</th>
+          <th class="text-center">Plot Short Name</th>
+          <th class="text-end">Plot Size</th>
+          <th class="text-end">Plot Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of plotList;let i = index;">
+          <td>{{i + 1}}</td>
+          <td>{{item.plotName}}</td>
+          <td class="text-center">{{item.plotShortName}}</td>
+          <td class="text-end">{{item.plotSize}}</td>
+          <td class="text-end">{{item.plotDescription}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

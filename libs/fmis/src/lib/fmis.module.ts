@@ -63,6 +63,9 @@ import { ChartModule } from 'angular-highcharts';
 // import { SearchPipe } from '@society/shared/interface';
 // import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { SocietyCoreModule } from '@society/society-core';
+import { CustomerBalanceSheetComponent } from './components/reports/customer-balance-sheet/customer-balance-sheet.component';
+import { InstallmentVoucherComponent } from './components/installment-voucher/installment-voucher.component';
+import { InstallmentVoucherTableComponent } from './components/installment-voucher/installment-voucher-table/installment-voucher-table.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -80,7 +83,8 @@ export const fmisRoutes: Route[] = [
   { path: 'trialRpt', component: TrialBalanceComponent },
   { path: 'cashBookRpt', component: CashBookComponent },
   { path: 'paySup', component: VoucherPaymentSupervisionComponent },
-  { path: 'sch', component: FmisSchedulesComponent },
+  // { path: 'sch', component: FmisSchedulesComponent },
+  { path: 'instvouch', component: InstallmentVoucherComponent },
   { path: 'incStat', component: IncomeStatementComponent },
   { path: 'balSheet', component: BalanceSheetComponent },
   { path: 'cashFlow', component: CashFlowComponent },
@@ -90,6 +94,7 @@ export const fmisRoutes: Route[] = [
   { path: 'parties', component: ExternalPartiesComponent },
   { path: 'sup', component: VoucherSupervisionComponent },
   { path: 'dashboard', component: FmisDashboardComponent },
+  { path: 'rptbalancesheet', component: CustomerBalanceSheetComponent },
 ];
 
 @NgModule({
@@ -157,6 +162,9 @@ export const fmisRoutes: Route[] = [
     VoucherSupervisionComponent,
     VoucherEntryViewComponent,
     FmisDashboardComponent,
+    CustomerBalanceSheetComponent,
+    InstallmentVoucherComponent,
+    InstallmentVoucherTableComponent,
     // SearchPipe
   ],
   exports: [
@@ -190,6 +198,7 @@ export const fmisRoutes: Route[] = [
     ExternalPartiesComponent,
     ExternalPartiesTableComponent,
     VoucherEntryViewComponent,
+    InstallmentVoucherTableComponent,
   ],
   providers: [
     {

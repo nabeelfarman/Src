@@ -28,6 +28,8 @@ export * from './lib/fmis/voucher-interface';
 export * from './lib/fmis/voucher-modal-interface';
 export * from './lib/fmis/voucher-table-interface';
 
+export * from './lib/fmis/installment-voucher-interface';
+
 //export society core classes
 export * from './lib/society-core/plot-type-interface';
 export * from './lib/society-core/plot-nature-interface';
@@ -57,6 +59,9 @@ export * from './lib/society-core/plot-allotment-interface';
 export * from './lib/society-core/customer-interface';
 export * from './lib/society-core/file-interface';
 export * from './lib/society-core/src-payment-interface';
+export * from './lib/society-core/ownership-file-interface';
+export * from './lib/society-core/transfer-plot-interface';
+export * from './lib/society-core/map-plot-interface';
 
 //export society core table classes
 export * from './lib/society-core/society-core-tables/plot-type-for-list-interface';

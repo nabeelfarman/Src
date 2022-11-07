@@ -28,7 +28,7 @@ export class BankInfoTableComponent implements OnInit {
   }
 
   getBankAccount(){
-    this.dataService.getHttp('fmis-api/BankAccount/getBankAccount', '').subscribe((response: any) => {
+    this.dataService.getHttp('core-api/getbank', '').subscribe((response: any) => {
       this.tableData = response;
     }, (error: any) => {
       console.log(error);
@@ -42,14 +42,14 @@ export class BankInfoTableComponent implements OnInit {
   
   delete(item: any){
     var pageFields = {
-      newBankId: '0',
+      BankID: '0',
       spType: '',
-      userId: '',
+      UserID: '',
     };
 
     var formFields: MyFormField[] = [
       {
-        value: pageFields.newBankId,
+        value: pageFields.BankID,
         msg: '',
         type: 'hidden',
         required: false,
@@ -61,29 +61,29 @@ export class BankInfoTableComponent implements OnInit {
         required: false,
       },
       {
-        value: pageFields.userId,
+        value: pageFields.UserID,
         msg: '',
         type: 'hidden',
         required: false,
       },
     ];
 
-    formFields[0].value = item.bankId;
+    formFields[0].value = item.bankID;
     formFields[2].value = this.globalService.getUserId().toString();
 
     this.dataService
       .deleteHttp(
         pageFields,
         formFields,
-        'fmis-api/BankAccount/saveBanks'
+        'core-api/DeleteBank'
       )
       .subscribe(
-        (response: any[]) => {
-          if(response[0].includes('Success') == true){
+        (response: any) => {
+          if(response.msg == "Data Deleted Successfully"){
             this.valid.apiInfoResponse('Record deleted successfully');
             this.getBankAccount();
           }else{
-            this.valid.apiErrorResponse(response[0]);
+            this.valid.apiErrorResponse(response.msg);
           }
           
         },

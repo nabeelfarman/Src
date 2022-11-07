@@ -76,6 +76,16 @@ import { FileComponent } from './components/file/file.component';
 import { FileTableComponent } from './components/file/file-table/file-table.component';
 import { SrcPaymentPlanComponent } from './components/src-payment-plan/src-payment-plan.component';
 import { SrcPaymentPlanTableComponent } from './components/src-payment-plan/src-payment-plan-table/src-payment-plan-table.component';
+import { FileOwnershipComponent } from './components/file-ownership/file-ownership.component';
+import { FileOwnershipTableComponent } from './components/file-ownership/file-ownership-table/file-ownership-table.component';
+import { TransferPlotComponent } from './components/transfer-plot/transfer-plot.component';
+import { MapPlotComponent } from './components/map-plot/map-plot.component';
+import { PlotReportComponent } from './components/reports/plot-report/plot-report.component';
+import { FileReportComponent } from './components/reports/file-report/file-report.component';
+import { CustomerReportComponent } from './components/reports/customer-report/customer-report.component';
+import { UnsoldReportComponent } from './components/reports/unsold-report/unsold-report.component';
+import { SoldFileReportComponent } from './components/reports/sold-file-report/sold-file-report.component';
+import { AdvertisementCompanyReportComponent } from './components/reports/advertisement-company-report/advertisement-company-report.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -84,32 +94,41 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 export const societyCoreRoutes: Route[] = [
   { path: 'plotCategory', component: PlotCategoryComponent },
   { path: 'plotTypes', component: PlotTypeComponent },
-  { path: 'plotPaymentNatures', component: PlotPaymentNaturesComponent },
+  // { path: 'plotPaymentNatures', component: PlotPaymentNaturesComponent },
   { path: 'plotNatures', component: PlotNaturesComponent },
   { path: 'plot', component: PlotsComponent },
   // { path: 'paymentPlan', component: PaymentPlanComponent },
   { path: 'paymentPlan', component: SrcPaymentPlanComponent },
   // { path: 'memberProfile', component: MemberProfileComponent },
+  { path: 'ownerfile', component: FileOwnershipComponent },
   { path: 'memberProfile', component: CustomerProfileComponent },
-  { path: 'memberPlotFile', component: MemberPlotFileComponent },
-  { path: 'plotFiles', component: PlotFilesComponent },
-  { path: 'applicantProfile', component: ApplicantProfileComponent },
-  { path: 'checkList', component: ChecklistComponent },
-  { path: 'createTrans', component: CreateTransferComponent },
-  { path: 'transVerification', component: TransferVerificationComponent },
-  { path: 'inpersonVerification', component: InpersonVerificationComponent },
-  { path: 'fileTransfer', component: FileTransferComponent },
-  { path: 'plotFilePayment', component: PlotFilePaymentsComponent },
+  // { path: 'memberPlotFile', component: MemberPlotFileComponent },
+  // { path: 'plotFiles', component: PlotFilesComponent },
+  // { path: 'applicantProfile', component: ApplicantProfileComponent },
+  // { path: 'checkList', component: ChecklistComponent },
+  // { path: 'createTrans', component: CreateTransferComponent },
+  // { path: 'transVerification', component: TransferVerificationComponent },
+  // { path: 'inpersonVerification', component: InpersonVerificationComponent },
+  { path: 'fileTransfer', component: TransferPlotComponent },
+  // { path: 'fileTransfer', component: FileTransferComponent },
+  // { path: 'plotFilePayment', component: PlotFilePaymentsComponent },
   { path: 'coreDashboard', component: CoreDashboardComponent },
   { path: 'file', component: FileComponent },
-  {
-    path: 'membershipPaymentRpt',
-    component: MembershipPaymentsReportComponent,
-  },
-  {
-    path: 'plotAllotment',
-    component: PlotAllotmentComponent,
-  },
+  { path: 'mapplot', component: MapPlotComponent },
+  { path: 'rptplot', component: PlotReportComponent },
+  { path: 'rptfile', component: FileReportComponent },
+  { path: 'rptcustomer', component: CustomerReportComponent },
+  { path: 'rptunsoldfile', component: UnsoldReportComponent },
+  { path: 'rptsoldfile', component: SoldFileReportComponent },
+  { path: 'rptadvcompany', component: AdvertisementCompanyReportComponent },
+  // {
+  //   path: 'membershipPaymentRpt',
+  //   component: MembershipPaymentsReportComponent,
+  // },
+  // {
+  //   path: 'plotAllotment',
+  //   component: PlotAllotmentComponent,
+  // },
 ];
 
 @NgModule({
@@ -188,6 +207,16 @@ export const societyCoreRoutes: Route[] = [
     FileTableComponent,
     SrcPaymentPlanComponent,
     SrcPaymentPlanTableComponent,
+    FileOwnershipComponent,
+    FileOwnershipTableComponent,
+    TransferPlotComponent,
+    MapPlotComponent,
+    PlotReportComponent,
+    FileReportComponent,
+    CustomerReportComponent,
+    UnsoldReportComponent,
+    SoldFileReportComponent,
+    AdvertisementCompanyReportComponent,
   ],
   exports: [
     PlotCategoryTableComponent,
@@ -225,6 +254,7 @@ export const societyCoreRoutes: Route[] = [
     CustomerProfileTableComponent,
     FileTableComponent,
     SrcPaymentPlanTableComponent,
+    FileOwnershipTableComponent,
   ],
   providers: [
     {

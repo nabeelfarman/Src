@@ -1,15 +1,13 @@
 export class BankInfoInterface {
-    newBankId = '0';
-    coaID = '0';
-    bankTypeID = '0';
-    bankNameID = '0';
-    titleofAccount = '';
-    description = '';
-    accountNo = '';
-    branchCode = '';
-    branchName = '';
-    openingDate = '';
-    openingBalance = '';
+    BankID = '0';
+    BankName = '';
+    BankAlias = '';
+    BankAccountTitle = '';
+    BankAccountNo = '';
+    BranchName = '';
+    BranchCode = '';
+    BankAddress = '';
+    BankDescription = '';
     spType = '';
-    userId = '';
+    UserID = '';
 }

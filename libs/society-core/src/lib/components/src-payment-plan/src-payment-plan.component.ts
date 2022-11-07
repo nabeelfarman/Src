@@ -102,7 +102,6 @@ export class SrcPaymentPlanComponent implements OnInit {
         console.log(error);
       }
     );
-
   }
 
   getInstallmentType(){
@@ -147,6 +146,10 @@ export class SrcPaymentPlanComponent implements OnInit {
   reset(){
     this.formFields = this.valid.resetFormFields(this.formFields);
     this.formFields[0].value = '0';
+    this.formFields[4].value = '';
+    this.paymentPlanTable.tableData = [];
+    this.cmbInstallment = '';
+    this.txtAmount = 0;
   }
 
   addPaymentPlan(){

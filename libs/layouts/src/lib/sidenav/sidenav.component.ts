@@ -70,8 +70,6 @@ export class SidenavComponent implements OnInit {
           var found = false;
           this.menuList = [];
 
-          // console.log(response);
-
           for (var i = 0; i < response.length; i++) {
             if (this.menuList.length == 0) {
               this.menuList.push({
@@ -89,60 +87,63 @@ export class SidenavComponent implements OnInit {
                 children: [],
               });
             } else {
-              for (var j = 0; j < response.length; j++) {
-                if (found == true) {
-                  j = response.length + 1;
-                } else {
-                  if (response[j].parentMenuId != 0) {
-                    var data = this.menuList.filter(
-                      (x: { menuId: any }) =>
-                        x.menuId == response[j].parentMenuId
-                    );
-                    if (menuChild.length == 0) {
-                      if (data.length == 0) {
-                        parentId = response[j].parentMenuId;
-
-                        menuChild.push({
-                          applicationModuleId: response[j].applicationModuleId,
-                          applicationModuleTitle:
-                            response[j].applicationModuleTitle,
-                          delete: response[j].delete,
-                          menuId: response[j].menuId,
-                          menuSeq: response[j].menuSeq,
-                          menuTitle: response[j].menuTitle,
-                          parentMenuId: response[j].parentMenuId,
-                          parentRoute: response[j].parentRoute,
-                          read: response[j].read,
-                          routeTitle: response[j].routeTitle,
-                          write: response[j].write,
-                        });
-                      }
-                    } else {
-                      var item = menuChild.filter(
-                        (m: { parentMenuId: any }) =>
-                          m.parentMenuId == response[j].parentMenuId
+              if(menuChild.length == 0){
+                for (var j = 0; j < response.length; j++) {
+                  if (found == true) {
+                    j = response.length + 1;
+                  } else {
+                    if (response[j].parentMenuId != 0) {
+                      var data = this.menuList.filter(
+                        (x: { menuId: any }) =>
+                          x.menuId == response[j].parentMenuId
                       );
-                      if (item.length > 0) {
-                        menuChild.push({
-                          applicationModuleId: response[j].applicationModuleId,
-                          applicationModuleTitle:
-                            response[j].applicationModuleTitle,
-                          delete: response[j].delete,
-                          menuId: response[j].menuId,
-                          menuSeq: response[j].menuSeq,
-                          menuTitle: response[j].menuTitle,
-                          parentMenuId: response[j].parentMenuId,
-                          parentRoute: response[j].parentRoute,
-                          read: response[j].read,
-                          routeTitle: response[j].routeTitle,
-                          write: response[j].write,
-                        });
+                      if (menuChild.length == 0) {
+                        if (data.length == 0) {
+                          parentId = response[j].parentMenuId;
+  
+                          menuChild.push({
+                            applicationModuleId: response[j].applicationModuleId,
+                            applicationModuleTitle:
+                              response[j].applicationModuleTitle,
+                            delete: response[j].delete,
+                            menuId: response[j].menuId,
+                            menuSeq: response[j].menuSeq,
+                            menuTitle: response[j].menuTitle,
+                            parentMenuId: response[j].parentMenuId,
+                            parentRoute: response[j].parentRoute,
+                            read: response[j].read,
+                            routeTitle: response[j].routeTitle,
+                            write: response[j].write,
+                          });
+                        }
+                      } else {
+                        var item = menuChild.filter(
+                          (m: { parentMenuId: any }) =>
+                            m.parentMenuId == response[j].parentMenuId
+                        );
+                        if (item.length > 0) {
+                          menuChild.push({
+                            applicationModuleId: response[j].applicationModuleId,
+                            applicationModuleTitle:
+                              response[j].applicationModuleTitle,
+                            delete: response[j].delete,
+                            menuId: response[j].menuId,
+                            menuSeq: response[j].menuSeq,
+                            menuTitle: response[j].menuTitle,
+                            parentMenuId: response[j].parentMenuId,
+                            parentRoute: response[j].parentRoute,
+                            read: response[j].read,
+                            routeTitle: response[j].routeTitle,
+                            write: response[j].write,
+                          });
+                        }
                       }
                     }
                   }
                 }
+  
               }
-
+              
               if (response[i].parentMenuId == 0) {
                 if (parentId == response[i].menuId) {
                   this.menuList.push({
