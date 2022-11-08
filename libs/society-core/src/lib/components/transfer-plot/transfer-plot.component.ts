@@ -112,7 +112,7 @@ export class TransferPlotComponent implements OnInit {
       )
       .subscribe(
         (response: any) => {
-          if (response.msg == "File Transfer Successfully") {
+          if (response.msg == "File Transferred Successfully") {
             this.valid.apiInfoResponse('Record saved successfully');
             this.reset();
           } else {

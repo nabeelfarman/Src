@@ -10,7 +10,9 @@ import { SharedServicesGlobalDataModule } from '@society/shared/services/global-
   styleUrls: ['./file-table.component.scss']
 })
 export class FileTableComponent implements OnInit {
-
+  
+  tblSearch: any = '';
+  
   @Output() eventEmitter = new EventEmitter();
 
   error: any;
@@ -29,6 +31,7 @@ export class FileTableComponent implements OnInit {
   getFile(){
     this.dataService.getHttp('core-api/getFile', '').subscribe((response: any) => {
       this.tableData = response;
+      console.log(response)
     }, (error: any) => {
       console.log(error);
     });

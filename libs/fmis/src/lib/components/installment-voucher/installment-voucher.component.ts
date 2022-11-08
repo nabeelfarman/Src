@@ -29,6 +29,7 @@ export class InstallmentVoucherComponent implements OnInit {
     InvoiceDescription: '',
     CoaID: '',
     Amount: '',
+    BankReceiptNo: ''
   };
 
 
@@ -99,6 +100,12 @@ export class InstallmentVoucherComponent implements OnInit {
       type: 'number',
       required: true,
     },
+    {
+      value: this.pageFields.BankReceiptNo,
+      msg: 'enter amount',
+      type: 'number',
+      required: false,
+    },
   ];
 
   partyList: any = [];
@@ -140,6 +147,11 @@ export class InstallmentVoucherComponent implements OnInit {
   }
   
   getPartyFile(item: any){
+    this.fileList = [];
+    this.paymentPlanList = [];
+    this.lblInstallmentAmount = 0;
+    this.lblPaidAmount = 0;
+
     this.dataService.getHttp('core-api/GetPartyFile?partyid=' + item, '').subscribe((response: any) => {
       this.fileList = response;
     }, (error: any) => {
@@ -148,6 +160,7 @@ export class InstallmentVoucherComponent implements OnInit {
   }
   
   getPaymentPlan(item: any){
+    this.paymentPlanList = [];
     this.dataService.getHttp('core-api/GetFilePaymentPlan?fileid=' + item, '').subscribe((response: any) => {
       this.paymentPlanList = response;
     }, (error: any) => {
@@ -181,6 +194,9 @@ export class InstallmentVoucherComponent implements OnInit {
     if(this.formFields[9].value == 2){
       if(this.formFields[7].value == ''){
         this.valid.apiInfoResponse('select bank');
+        return;
+      }else if(this.formFields[11].value == ''){
+        this.valid.apiInfoResponse('enter bank receipt no');
         return;
       }
     }else{
@@ -220,6 +236,8 @@ export class InstallmentVoucherComponent implements OnInit {
     this.formFields[9].value = '1';
     this.lblInstallmentAmount = 0;
     this.lblPaidAmount = 0;
-  }
+    this.fileList = [];
+    this.paymentPlanList = [];
+}
   
 }

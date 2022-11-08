@@ -58,7 +58,7 @@ export class MapPlotComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.globalService.setHeaderTitle("Ownership File");
+    this.globalService.setHeaderTitle("Map Plots");
 
     this.formFields[2].value = this.globalService.getUserId().toString();
 
@@ -94,11 +94,11 @@ export class MapPlotComponent implements OnInit {
       .savetHttp(
         this.pageFields,
         this.formFields,
-        'core-api/Inserttransfer'
+        'core-api/mapplot'
       )
       .subscribe(
         (response: any) => {
-          if (response.msg == "File Transfer Successfully") {
+          if (response.msg == "Plot Mapped Successfully") {
             this.valid.apiInfoResponse('Record saved successfully');
             this.reset();
           } else {

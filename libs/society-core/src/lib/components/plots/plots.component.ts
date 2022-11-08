@@ -224,7 +224,6 @@ export class PlotsComponent implements OnInit {
     
   edit(item: any) {
 
-    // console.log(item);return;
     this.formFields[0].value = item.plotID;
     this.formFields[3].value = item.plotName;
     this.formFields[4].value = item.plotShortName;
