@@ -4,6 +4,7 @@ import { MyFormField, PlotTypeInterface } from '@society/shared/interface';
 import { SharedServicesDataModule } from '@society/shared/services/data';
 import { SharedServicesGlobalDataModule } from '@society/shared/services/global-data';
 import { PlotTypeTableComponent } from './plot-type-table/plot-type-table.component';
+import Swal from "sweetalert2/dist/sweetalert2.js";
 
 @Component({
   selector: 'society-plot-type',
@@ -110,27 +111,41 @@ export class PlotTypeComponent implements OnInit {
     
     if(obj.num == '2')
     {
-      this.dataService
-      .deleteHttp(
-        this.pageFields,
-        this.formFields,
-        'society-api/PlotType/savePlotType'
-      )
-      .subscribe(
-        (response: any[]) => {
-          if(response[0].includes('Success') == true){
-            this.valid.apiInfoResponse('Record deleted successfully');
-            this.plotTypeTable.getPlotType();
-            this.reset();
-          }else{
-            this.valid.apiErrorResponse(response[0]);
-          }
-        },
-        (error: any) => {
-          this.error = error;
-          this.valid.apiErrorResponse(this.error);
+      Swal.fire({
+        title: "Do you want to delete record?",
+        text: "",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Yes",
+        cancelButtonText: "No",
+      }).then((result: any) => {
+        if (result.value) {
+          this.dataService
+          .deleteHttp(
+            this.pageFields,
+            this.formFields,
+            'society-api/PlotType/savePlotType'
+          )
+          .subscribe(
+            (response: any[]) => {
+              if(response[0].includes('Success') == true){
+                this.valid.apiInfoResponse('Record deleted successfully');
+                this.plotTypeTable.getPlotType();
+                this.reset();
+              }else{
+                this.valid.apiErrorResponse(response[0]);
+              }
+            },
+            (error: any) => {
+              this.error = error;
+              this.valid.apiErrorResponse(this.error);
+            }
+          );
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+          Swal.fire("Cancelled", "", "error");
         }
-      );
+      });
+    
     }
   }
 
