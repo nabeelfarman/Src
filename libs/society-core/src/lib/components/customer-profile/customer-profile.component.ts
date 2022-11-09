@@ -196,6 +196,9 @@ export class CustomerProfileComponent implements OnInit {
   reset(){
     this.formFields = this.valid.resetFormFields(this.formFields);
     this.formFields[0].value = '0';
+    this.formFields[7].value = '';
+    this.formFields[8].value = '';
+    this.formFields[11].value = '';
   }
 
   setCnicData() {

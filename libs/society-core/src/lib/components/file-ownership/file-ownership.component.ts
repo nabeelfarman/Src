@@ -276,6 +276,9 @@ export class FileOwnershipComponent implements OnInit {
           if(this.paymentDetailList[i].installmentTypeID == this.cmbInstallment){
             found = true;
             i = this.paymentDetailList.length + 1;
+          }else if(this.paymentDetailList[i].dueDate >= this.datePipe.transform(this.dtpDueDate, 'yyyy-MM-dd')){
+            this.valid.apiInfoResponse('date is not correct');
+            return;
           }
         }
         if(found == false){
