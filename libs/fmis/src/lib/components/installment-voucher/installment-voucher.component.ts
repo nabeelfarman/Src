@@ -130,6 +130,14 @@ export class InstallmentVoucherComponent implements OnInit {
     this.getBank();
   }
 
+  // getInstallmentDetail(){
+  //   this.dataService.getHttp('core-api/GetSavedInstallmentDetail', '').subscribe((response: any) => {
+  //     this.bankList = response;
+  //   }, (error: any) => {
+  //     console.log(error);
+  //   });
+  // }
+
   getBank(){
     this.dataService.getHttp('core-api/getbank', '').subscribe((response: any) => {
       this.bankList = response;
@@ -238,6 +246,9 @@ export class InstallmentVoucherComponent implements OnInit {
     this.lblPaidAmount = 0;
     this.fileList = [];
     this.paymentPlanList = [];
+    this.formFields[11].value = "";
+    this.formFields[7].value = ''
+
 }
   
 }

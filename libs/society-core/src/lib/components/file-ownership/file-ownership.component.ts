@@ -223,7 +223,7 @@ export class FileOwnershipComponent implements OnInit {
       .savetHttp(
         this.pageFields,
         this.formFields,
-        'core-api/Insertowership'
+        'core-api/InsertOwnerShip'
       )
       .subscribe(
         (response: any) => {

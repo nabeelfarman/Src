@@ -115,6 +115,7 @@ export class TransferPlotComponent implements OnInit {
           if (response.msg == "File Transferred Successfully") {
             this.valid.apiInfoResponse('Record saved successfully');
             this.reset();
+            
           } else {
             this.valid.apiErrorResponse(response.msg);
           }
