@@ -9,10 +9,14 @@
   </button>
 </div>
 
+
+
 <div class="row h-100">
   <div class="col-md-4 h-100 bg-white border">
     <h2 class="pt-3 ps-4 pe-3">Add / Modify</h2>
     <hr />
+
+
     <div class="row">
       <div class="col-md-6">
         <mat-form-field class="w-100 ms-2">
@@ -22,11 +26,12 @@
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
       </div>
+
       <div class="col-md-6">
         <mat-form-field class="w-100">
           <mat-label>Party Name</mat-label>
           <mat-select [(ngModel)]="formFields[4].value"
-            (ngModelChange)="getPartyFile(formFields[4].value); getRemainingAmount(formFields[4].value, formFields[5].value, formFields[6].value)">
+            (ngModelChange)="getPartyFile(formFields[4].value);">
             <mat-option *ngFor="let item of partyList" [value]="item.partyID">
               {{item.partyName}}
             </mat-option>
@@ -34,12 +39,14 @@
         </mat-form-field>
       </div>
     </div>
+
+
+
     <div class="row">
       <div class="col-md-6">
         <mat-form-field class="w-100 ms-2">
           <mat-label>Party File</mat-label>
-          <mat-select [(ngModel)]="formFields[5].value"
-            (ngModelChange)="getPaymentPlan(formFields[5].value); getRemainingAmount(formFields[4].value, formFields[5].value, formFields[6].value)">
+          <mat-select [(ngModel)]="formFields[5].value" (ngModelChange)="getPaymentPlan(formFields[5].value);">
             <mat-option *ngFor="let item of fileList" [value]="item.fileID">
               {{item.fileName}}
             </mat-option>
@@ -58,6 +65,8 @@
         </mat-form-field>
       </div>
     </div>
+
+
 
     <mat-form-field class="w-100 ms-2">
       <textarea matInput placeholder="Invoice Decription" [(ngModel)]="formFields[8].value"></textarea>
@@ -80,12 +89,13 @@
         <h3>{{lblPaidAmount}}</h3>
       </div>
     </div>
-    <mat-radio-group aria-label="Select an option" class="ps-2" [(ngModel)]="formFields[9].value">
+
+    <mat-radio-group aria-label="Select an option" class="ps-2" [(ngModel)]="formFields[9].value" style="padding: 15px;">
       <mat-radio-button value="1">Cash</mat-radio-button>&nbsp;&nbsp;&nbsp;
       <mat-radio-button value="2">Bank</mat-radio-button>
     </mat-radio-group>
 
-    <div class="row" *ngIf="formFields[9].value == 2">
+    <div class="row" *ngIf="formFields[9].value == 2" style="margin-top: 15px;">
       <div class="col-md-6">
         <mat-form-field class="w-100">
           <mat-label>Bank</mat-label>
@@ -103,7 +113,7 @@
       </div>
     </div>
 
-    <mat-form-field class="w-100 ms-2">
+    <mat-form-field class="w-100 ms-2" style="margin-top: 15px;">
       <input matInput placeholder="Amount" [(ngModel)]="formFields[10].value" />
     </mat-form-field>
   </div>

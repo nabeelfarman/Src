@@ -1,3 +1,4 @@
+import { ThrowStmt } from '@angular/compiler';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { SharedHelpersFieldValidationsModule } from '@society/shared/helpers/field-validations';
 import { InstallmentVoucherInterface, MyFormField } from '@society/shared/interface';
@@ -159,6 +160,8 @@ export class InstallmentVoucherComponent implements OnInit {
     this.paymentPlanList = [];
     this.lblInstallmentAmount = 0;
     this.lblPaidAmount = 0;
+    this.formFields[5].value = "";
+    this.formFields[6].value = "";
 
     this.dataService.getHttp('core-api/GetPartyFile?partyid=' + item, '').subscribe((response: any) => {
       this.fileList = response;
@@ -169,6 +172,8 @@ export class InstallmentVoucherComponent implements OnInit {
   
   getPaymentPlan(item: any){
     this.paymentPlanList = [];
+    this.formFields[6].value = "";
+
     this.dataService.getHttp('core-api/GetFilePaymentPlan?fileid=' + item, '').subscribe((response: any) => {
       this.paymentPlanList = response;
     }, (error: any) => {
@@ -182,7 +187,7 @@ export class InstallmentVoucherComponent implements OnInit {
       // alert(fileID)
       // alert(paymentPlanID)
       this.dataService.getHttp('core-api/GetInstallmentRemainingAmount?partyid=' + partyID + '&fileid=' + fileID + '&installmenttypeid=' + paymentPlanID, '').subscribe((response: any) => {
-        console.log(response);
+        //console.log(response);
         this.lblPaidAmount = response[0].amount;
         this.formFields[10].value = this.lblInstallmentAmount - response[0].amount;
       }, (error: any) => {
