@@ -4,13 +4,23 @@
     <span class="ps-2">Report</span>
   </button>
 </div>
+<div class="container">
+  <mat-form-field class="w-25">
+    <mat-label>File</mat-label>
+    <mat-select [(ngModel)]="cmbFile" (ngModelChange)="getFilePayment()">
+      <mat-option *ngFor="let item of fileList" [value]="item.fileID">
+        {{item.fileName}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
 
 <div class="container bg-white mt-4" id="print-summary">
   <div class="row">
     <div class="col-md-6 text-left">
       <div class="h1Report txtDarkGrey">SARDAR Associates</div>
       <div class="h1Report txtDarkGrey mb-3">Shama Group of Companies</div>
-      <h2 class="mt-5">File Report</h2>
+      <h2 class="mt-5">File Payment Detail Report</h2>
       <!-- <div class="h4Report"><b>{{dtpFromDate | date:'dd-MM-yyyy'}} to {{dtpToDate | date:'dd-MM-yyyy'}}</b></div> -->
     </div>
     <div class="col-md-6 text-right">
@@ -20,13 +30,10 @@
   </div>
   <!-- <div class="row">
     <div class="col-md-12 text-center">
-      <img [src]="logoImg" alt="" width="250" height="200" />
     </div>
-  </div>
-  <div class="row">
+</div> -->
+  <!-- <div class="row">
     <div class="col-md-12 text-center">
-      <h2 class="pt-3">Shama Royal City</h2>
-      <h4>File Report</h4>
     </div>
   </div> -->
   <hr />
@@ -35,15 +42,25 @@
       <thead>
         <tr>
           <th>Sr #</th>
+          <th>Customer Name</th>
           <th>File Name</th>
-          <th class="text-end">File Description</th>
+          <th>Installemnt Type</th>
+          <th class="text-end">Mobile</th>
+          <th class="text-end">CNIC</th>
+          <th class="text-end">Amount</th>
+          <th class="text-end">paid</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let item of fileList;let i = index;">
+        <tr *ngFor="let item of filePaymentList;let i = index;">
           <td>{{i + 1}}</td>
+          <td>{{item.partyName}}</td>
           <td>{{item.fileName}}</td>
-          <td class="text-end">{{item.fileDescription}}</td>
+          <td>{{item.installmentTypeName}}</td>
+          <td class="text-end">{{item.mobile}}</td>
+          <td class="text-end">{{item.partyCNIC}}</td>
+          <td class="text-end">{{item.amount}}</td>
+          <td class="text-end">{{item.paid}}</td>
         </tr>
       </tbody>
     </table>

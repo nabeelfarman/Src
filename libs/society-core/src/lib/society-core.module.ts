@@ -87,6 +87,8 @@ import { UnsoldReportComponent } from './components/reports/unsold-report/unsold
 import { SoldFileReportComponent } from './components/reports/sold-file-report/sold-file-report.component';
 import { AdvertisementCompanyReportComponent } from './components/reports/advertisement-company-report/advertisement-company-report.component';
 import { TransferPlotTableComponent } from './components/transfer-plot/transfer-plot-table/transfer-plot-table.component';
+import { MapPlotTableComponent } from './components/map-plot/map-plot-table/map-plot-table.component';
+import { FilePaymentDetailComponent } from './components/reports/file-payment-detail/file-payment-detail.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -122,6 +124,7 @@ export const societyCoreRoutes: Route[] = [
   { path: 'rptunsoldfile', component: UnsoldReportComponent },
   { path: 'rptsoldfile', component: SoldFileReportComponent },
   { path: 'rptadvcompany', component: AdvertisementCompanyReportComponent },
+  { path: 'rptfilepay', component: FilePaymentDetailComponent },
   // {
   //   path: 'membershipPaymentRpt',
   //   component: MembershipPaymentsReportComponent,
@@ -219,6 +222,8 @@ export const societyCoreRoutes: Route[] = [
     SoldFileReportComponent,
     AdvertisementCompanyReportComponent,
     TransferPlotTableComponent,
+    MapPlotTableComponent,
+    FilePaymentDetailComponent,
   ],
   exports: [
     PlotCategoryTableComponent,
@@ -258,6 +263,8 @@ export const societyCoreRoutes: Route[] = [
     SrcPaymentPlanTableComponent,
     FileOwnershipTableComponent,
     TransferPlotTableComponent,
+    MapPlotTableComponent,
+    // SearchPipe
   ],
   providers: [
     {

@@ -60,12 +60,15 @@ import { VoucherSupervisionComponent } from './components/voucher-supervision/vo
 import { VoucherEntryViewComponent } from './components/voucher-supervision/voucher-entry-view/voucher-entry-view.component';
 import { FmisDashboardComponent } from './components/fmis-dashboard/fmis-dashboard.component';
 import { ChartModule } from 'angular-highcharts';
-// import { SearchPipe } from '@society/shared/interface';
+
+import { SearchPipe } from '@society/shared/interface';
 // import { Ng2SearchPipeModule } from 'ng2-search-filter';
+
 import { SocietyCoreModule } from '@society/society-core';
 import { CustomerBalanceSheetComponent } from './components/reports/customer-balance-sheet/customer-balance-sheet.component';
 import { InstallmentVoucherComponent } from './components/installment-voucher/installment-voucher.component';
 import { InstallmentVoucherTableComponent } from './components/installment-voucher/installment-voucher-table/installment-voucher-table.component';
+
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -199,6 +202,7 @@ export const fmisRoutes: Route[] = [
     ExternalPartiesTableComponent,
     VoucherEntryViewComponent,
     InstallmentVoucherTableComponent,
+    // SearchPipe
   ],
   providers: [
     {
