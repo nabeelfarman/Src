@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { SharedServicesDataModule } from '@society/shared/services/data';
+import { SharedServicesGlobalDataModule } from '@society/shared/services/global-data';
+import { InstallmentVoucherReportComponent } from '../installment-voucher-report/installment-voucher-report.component';
 
 @Component({
   selector: 'society-installment-voucher-table',
@@ -8,12 +10,15 @@ import { SharedServicesDataModule } from '@society/shared/services/data';
 })
 export class InstallmentVoucherTableComponent implements OnInit {
 
+  @ViewChild(InstallmentVoucherReportComponent) installmentReport: any;
+
   tblSearch: any = '';
 
   tableData: any = [];
 
   constructor(
     private dataService: SharedServicesDataModule,
+    private globalService: SharedServicesGlobalDataModule,
     ) { }
 
   ngOnInit(): void {
@@ -28,4 +33,22 @@ export class InstallmentVoucherTableComponent implements OnInit {
     });
   }
 
+  printData(printSection: string, item: any){
+
+    console.log(item);
+
+    
+    this.installmentReport.lblInvoiceNo = item.invoiceNo;
+    this.installmentReport.lblInvoiceDate = item.invoiceDate;
+    this.installmentReport.lblFileName = item.fileName;
+    this.installmentReport.lblOwnerName = item.partyName;
+    this.installmentReport.lblAmount = item.amount;
+    this.installmentReport.lblInstallmentType = item.installmentTypeName;
+    this.installmentReport.lblPaymentNature = item.paymentNature;
+    this.installmentReport.lblBankReceipt = item.bankReceiptNo;
+    this.installmentReport.lblBankName = item.bankName;
+    
+    setTimeout(() => this.globalService.printData(printSection), 200);
+
+  }
 }

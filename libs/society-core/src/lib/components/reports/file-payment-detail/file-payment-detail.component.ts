@@ -11,6 +11,11 @@ import { environment } from 'apps/society/src/environments/environment';
 })
 export class FilePaymentDetailComponent implements OnInit {
 
+  lblPartyName: any = '';
+  lblFileName: any = '';
+  lblMobile: any = '';
+  lblCNIC: any = '';
+
   logoImg: any = '';
   cmbFile: any = '';
 
@@ -48,15 +53,24 @@ export class FilePaymentDetailComponent implements OnInit {
   getFilePayment(){
     this.dataService.getHttp('core-api/GetFilePaymentDetail?fileid=' + this.cmbFile, '').subscribe((response: any) => {
       this.filePaymentList = response;
+      
+      this.lblPartyName = response[0].partyName;
+      this.lblFileName = response[0].fileName;
+      this.lblCNIC = response[0].partyCNIC;
+      this.lblMobile = response[0].mobile;
     }, (error: any) => {
       console.log(error);
     });
   }
   
   getFile(){
+    this.lblPartyName = '';
+    this.lblFileName = '';
+    this.lblCNIC = '';
+    this.lblMobile = '';
+
     this.dataService.getHttp('core-api/getFile', '').subscribe((response: any) => {
       this.fileList = response;
-      console.log(response)
     }, (error: any) => {
       console.log(error);
     });

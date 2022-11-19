@@ -19,6 +19,7 @@
         <th>Payment Nature</th>
         <th>Bank Name</th>
         <th>Amount</th>
+        <th>Action</th>
       </tr>
     </thead>
     <tbody>
@@ -33,7 +34,12 @@
         <td>{{ item.paymentNature }}</td>
         <td>{{ item.bankName }}</td>
         <td>{{ item.amount }}</td>
+        <td class="cursorPointer">
+          <mat-icon (click)="printData('#print-summary', item)">print</mat-icon>
+        </td>
       </tr>
     </tbody>
   </table>
 </div>
+
+<society-installment-voucher-report class="d-none" id="print-summary"></society-installment-voucher-report>

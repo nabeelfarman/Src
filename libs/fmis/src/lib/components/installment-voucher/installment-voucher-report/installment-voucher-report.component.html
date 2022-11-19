@@ -1,0 +1,64 @@
+<div class="container bg-white mt-4" id="print-summary">
+  <div class="row mb-2">
+    <div class="col-md-6 text-left">
+      <img class="mt-2" src="assets/ui/company/shama.png" width="200px" />
+      <!-- <div class="h4Report"><b>{{dtpFromDate | date:'dd-MM-yyyy'}} to {{dtpToDate | date:'dd-MM-yyyy'}}</b></div> -->
+    </div>
+    <div class="col-md-6 text-right">
+      <div class="d-flex flex-column align-items-center">
+        <div class="h1Report txtDarkGrey">SARDAR Associates</div>
+        <div class="h1Report txtDarkGrey">Shama Group of Companies</div>
+        <h2 class="mt-3">Installment Voucher</h2>
+      </div>
+    </div>
+  </div>
+  <hr />
+  <div class="row">
+    <div class="col-md-6">
+      <label class="h1Report txtDarkGrey mt-1 me-2">Invoice No:</label>
+      <label class="h1 mt-1 me-2">{{lblInvoiceNo}}</label>
+    </div>
+    <div class="col-md-6 text-end">
+      <label class="h1Report txtDarkGrey mt-1 me-2">Invoice Date:</label>
+      <label class="h1Report mt-1 me-2">{{lblInvoiceDate | date: 'yyyy-MM-dd'}}</label>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <label class="h1Report txtDarkGrey mt-1 me-2">File Name:</label>
+      <label class="h1Report mt-1">{{lblFileName}}</label>
+    </div>
+    <div class="col-md-6">
+      <label class="h1Report txtDarkGrey mt-1 me-2">Owner Name:</label>
+      <label class="h1Report mt-1">{{lblOwnerName}}</label>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <label class="h1Report txtDarkGrey mb-1 me-2">Amount:</label>
+      <label class="h1 mb-1 bgAmount">{{lblAmount | number}}</label>
+    </div>
+    <div class="col-md-6">
+      <label class="h1Report txtDarkGrey mb-1 me-2">Payment Nature:</label>
+      <label class="h1 mb-1">{{lblPaymentNature}}</label>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <label class="h1Report txtDarkGrey mb-1 me-2">Installment Type:</label>
+      <label class="h1Report mb-1">{{lblInstallmentType}}</label>
+    </div>
+  </div>
+  <div class="row" *ngIf="lblPaymentNature == 'Bank'">
+    <div class="col-md-12">
+      <label class="h1Report txtDarkGrey mb-1 me-2">Bank Receipt No:</label>
+      <label class="h1Report mb-1">{{lblBankReceipt}}</label>
+    </div>
+  </div>
+  <div class="row" *ngIf="lblPaymentNature == 'Bank'">
+    <div class="col-md-12">
+      <label class="h1Report txtDarkGrey mb-1 me-2">Bank Name:</label>
+      <label class="h1Report mb-1">{{lblBankName}}</label>
+    </div>
+  </div>

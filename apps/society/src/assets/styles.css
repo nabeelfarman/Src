@@ -8051,9 +8051,9 @@ textarea.form-control-lg {
   display: inline-flex !important;
 }
 
-.d-none {
+/* .d-none {
   display: none !important;
-}
+} */
 
 .shadow {
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;

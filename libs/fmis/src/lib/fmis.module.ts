@@ -68,6 +68,7 @@ import { SocietyCoreModule } from '@society/society-core';
 import { CustomerBalanceSheetComponent } from './components/reports/customer-balance-sheet/customer-balance-sheet.component';
 import { InstallmentVoucherComponent } from './components/installment-voucher/installment-voucher.component';
 import { InstallmentVoucherTableComponent } from './components/installment-voucher/installment-voucher-table/installment-voucher-table.component';
+import { InstallmentVoucherReportComponent } from './components/installment-voucher/installment-voucher-report/installment-voucher-report.component';
 
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -168,6 +169,7 @@ export const fmisRoutes: Route[] = [
     CustomerBalanceSheetComponent,
     InstallmentVoucherComponent,
     InstallmentVoucherTableComponent,
+    InstallmentVoucherReportComponent,
     // SearchPipe
   ],
   exports: [
@@ -202,6 +204,7 @@ export const fmisRoutes: Route[] = [
     ExternalPartiesTableComponent,
     VoucherEntryViewComponent,
     InstallmentVoucherTableComponent,
+    InstallmentVoucherReportComponent,
     // SearchPipe
   ],
   providers: [

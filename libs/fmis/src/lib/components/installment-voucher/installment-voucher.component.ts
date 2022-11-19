@@ -4,6 +4,8 @@ import { SharedHelpersFieldValidationsModule } from '@society/shared/helpers/fie
 import { InstallmentVoucherInterface, MyFormField } from '@society/shared/interface';
 import { SharedServicesDataModule } from '@society/shared/services/data';
 import { SharedServicesGlobalDataModule } from '@society/shared/services/global-data';
+import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
+import { InstallmentVoucherReportComponent } from './installment-voucher-report/installment-voucher-report.component';
 import { InstallmentVoucherTableComponent } from './installment-voucher-table/installment-voucher-table.component';
 
 @Component({
@@ -13,10 +15,14 @@ import { InstallmentVoucherTableComponent } from './installment-voucher-table/in
 })
 export class InstallmentVoucherComponent implements OnInit {
 
+  
+  public config: PerfectScrollbarConfigInterface = {};
+
   lblInstallmentAmount: any = 0;
   lblPaidAmount: any = 0;
 
   @ViewChild(InstallmentVoucherTableComponent) installmentTable: any;
+  @ViewChild(InstallmentVoucherReportComponent) installmentReport: any;
 
   pageFields: InstallmentVoucherInterface = {
     InvoiceDate: '',
@@ -202,7 +208,8 @@ export class InstallmentVoucherComponent implements OnInit {
     this.lblInstallmentAmount = data[0].amount;
   }
 
-  save() {
+  save(printSection: string) {
+
     this.formFields[3].value = 1;
     if(this.formFields[9].value == 2){
       if(this.formFields[7].value == ''){
@@ -230,7 +237,39 @@ export class InstallmentVoucherComponent implements OnInit {
         if (response.msg == "Data Saved Successfully") {
           this.valid.apiInfoResponse('Record saved successfully');
           // this.bankTable.getBankAccount();
+          
+          var nature = '';
+          if(this.formFields[9].value == '1'){
+            nature = 'Cash';
+          }else if(this.formFields[9].value == '2'){
+            nature = 'Bank';
+            var bankData = this.bankList.filter((x: {bankID: any}) => x.bankID == this.formFields[7].value);
+          }
+
+          var fileData = this.fileList.filter((x: {fileID: any}) => x.fileID == this.formFields[5].value);
+          var ownerData = this.partyList.filter((x: {partyID: any}) => x.partyID == this.formFields[4].value);
+          var installmentData = this.paymentPlanList.filter((x: {installmentTypeID: any}) => x.installmentTypeID == this.formFields[6].value);
+
+
+
+          this.installmentReport.lblInvoiceNo = response.invNo;
+          this.installmentReport.lblInvoiceDate = this.formFields[0].value;
+          this.installmentReport.lblFileName = fileData[0].fileName;
+          this.installmentReport.lblOwnerName = ownerData[0].partyName;
+          this.installmentReport.lblAmount = this.formFields[10].value;
+          this.installmentReport.lblInstallmentType = installmentData[0].installmentTypeName;
+          this.installmentReport.lblPaymentNature = nature;
+          
+          if(this.formFields[9].value == '2'){
+            this.installmentReport.lblBankReceipt = this.formFields[11].value;
+              this.installmentReport.lblBankName = bankData[0].bankName;
+
+          }
+        
+          
+          setTimeout(() => this.globalService.printData(printSection), 200);
           this.reset();
+
         } else {
           this.valid.apiErrorResponse(response.msg);
         }
