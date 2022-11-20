@@ -18,6 +18,10 @@ export class VoucherEntryComponent implements OnInit {
   
   bankID: string = '';
   lblTax: string = '';
+  
+  lblTableLength: any = 0;
+
+  rdbType: any = '';
   cmbBank: string = '';
   // cmbTax: string = '';
 
@@ -33,56 +37,91 @@ export class VoucherEntryComponent implements OnInit {
 
   
   pageFields: VoucherInterface = {
-    newTEmpTrnDEtailID: '0',
+    InvType: '',
     spType: '',
-    userId: '',
-    trnTypeId: '',
-    trnDate: '',
-    beneficiaryId: '',
-    trnDescription: '',
+    UserID: '',
+    BranchID: '',
+    InvoiceDate: '0',
+    ProjectID: '',
+    BankID: '',
+    BankReceiptNo: '',
+    PartyID: '',
+    InvoiceDetail: '',
+    InvoiceDescription: '',
+    Amount: '',
   };
   
   formFields: MyFormField[] = [
     {
-      value: this.pageFields.newTEmpTrnDEtailID,
-      msg: '',
-      type: '',
-      required: false,
-    },
-    {
-      value: this.pageFieldsModal.spType,
-      msg: '',
-      type: 'hidden',
-      required: false,
-    },
-    {
-      value: this.pageFieldsModal.userId,
-      msg: '',
-      type: 'hidden',
-      required: false,
-    },
-    {
-      value: this.pageFields.trnTypeId,
+      value: this.pageFields.InvType,
       msg: 'select voucher type',
       type: 'selectbox',
       required: true,
     },
     {
-      value: this.pageFields.trnDate,
+      value: this.pageFields.spType,
+      msg: '',
+      type: 'hidden',
+      required: false,
+    },
+    {
+      value: this.pageFields.UserID,
+      msg: '',
+      type: 'hidden',
+      required: false,
+    },
+    {
+      value: this.pageFields.BranchID,
+      msg: 'select branch',
+      type: 'selectbox',
+      required: true,
+    },
+    {
+      value: this.pageFields.InvoiceDate,
       msg: 'select voucher date',
       type: 'date',
       required: true,
     },
     {
-      value: this.pageFields.beneficiaryId,
-      msg: 'select pay to',
+      value: this.pageFields.ProjectID,
+      msg: 'select project',
       type: 'selectbox',
       required: true,
     },
     {
-      value: this.pageFields.trnDescription,
-      msg: '',
-      type: '',
+      value: this.pageFields.BankID,
+      msg: 'select bank',
+      type: 'selectbox',
+      required: false,
+    },
+    {
+      value: this.pageFields.BankReceiptNo,
+      msg: 'enter bank receipt no',
+      type: 'textbox',
+      required: false,
+    },
+    {
+      value: this.pageFields.PartyID,
+      msg: 'select party',
+      type: 'selectbox',
+      required: true,
+    },
+    {
+      value: this.pageFields.InvoiceDetail,
+      msg: 'enter debit or credit amount data',
+      type: 'textbox',
+      required: true,
+    },
+    {
+      value: this.pageFields.InvoiceDescription,
+      msg: 'enter description',
+      type: 'textbox',
+      required: true,
+    },
+    {
+      value: this.pageFields.Amount,
+      msg: 'enter amount',
+      type: 'textbox',
       required: false,
     },
   ];
@@ -142,9 +181,28 @@ export class VoucherEntryComponent implements OnInit {
   //   taxId: '',
   // };
 
-  voucherTypeList: any = [];
+  voucherTypeList: any = [
+    {
+      trnTypeId: 'Pay',
+      trnType: 'Payment'
+    },
+    {
+      trnTypeId: 'Rec',
+      trnType: 'Receipt'
+    },
+    {
+      trnTypeId: 'PayAdj',
+      trnType: 'Payment Adjustment'
+    },
+    {
+      trnTypeId: 'Rec',
+      trnType: 'Receipt Adjustment'
+    },
+  ];
+
+  projectList: any = [];
   bankList: any = [];
-  externalList: any = [];
+  partyList: any = [];
 
   error: any;
 
@@ -159,30 +217,40 @@ export class VoucherEntryComponent implements OnInit {
     this.formFieldsModal[2].value = this.globalService.getUserId().toString();
     this.formFields[2].value = this.globalService.getUserId().toString();
 
-    this.getVoucherType();
+    this.rdbType = 'Cash';
     this.getBankAccount();
-    this.getExternalParties();
-  }
-
-  getVoucherType(){
-    this.dataService.getHttp('fmis-api/Voucher/getVoucherType', '').subscribe((response: any) => {
-      this.voucherTypeList = response;
-    }, (error: any) => {
-      console.log(error);
-    });
+    this.getProject();
   }
 
   getBankAccount(){
-  this.dataService.getHttp('fmis-api/BankAccount/getBankAccount', '').subscribe((response: any) => {
+  this.dataService.getHttp('core-api/getBank', '').subscribe((response: any) => {
     this.bankList = response;
     }, (error: any) => {
       console.log(error);
     });
   }
   
+  getProject(){
+    this.dataService.getHttp('core-api/getProject', '').subscribe((response: any) => {
+      this.projectList = response;
+      }, (error: any) => {
+        console.log(error);
+      });
+    }
+
   getExternalParties(){
-    this.dataService.getHttp('fmis-api/ExternalParties/getExternalParties', '').subscribe((response: any) => {
-      this.externalList = response.reverse();
+    this.dataService.getHttp('core-api/GetVoucherParty?VoucherType=' + this.formFields[0].value, '').subscribe((response: any) => {
+      this.voucherMainTbl.partyList = response.reverse();
+      this.partyList = response.reverse();
+    }, (error: any) => {
+      console.log(error);
+    });
+  }
+  
+  getChartOfAccount(){
+    this.dataService.getHttp('core-api/GetVouchercoa?VoucherType=' + this.formFields[0].value + '&AmountType=' + this.rdbType, '').subscribe((response: any) => {
+      this.voucherMainTbl.coaList = response.reverse();
+
     }, (error: any) => {
       console.log(error);
     });
@@ -192,30 +260,45 @@ export class VoucherEntryComponent implements OnInit {
     this.bankID = item;
   }
 
+  checkTableLength(item: any){
+    this.lblTableLength = item;
+  }
+
   save() {
 
     // this.lblTax = "Success";
     this.formFields[1].value = 'Save';
+    this.formFields[3].value = '1';
+    this.formFields[11].value = '0';
 
-    if(this.lblTax == ''){
-      this.valid.apiErrorResponse('enter tax information');return;
+    if(this.rdbType == 'Cash'){
+      this.formFields[6].value = '0';
+    }else if(this.rdbType == 'Bank'){
+      if(this.formFields[6].value == ''){
+        this.valid.apiInfoResponse('select bank');return;
+      }else if(this.formFields[7].value == ''){
+        this.valid.apiInfoResponse('enter  bank receipt no');return;
+      }
     }
 
-    if(this.voucherMainTbl.lblTransaction == ''){
-      this.valid.apiErrorResponse('enter transaction');return;
+    if(this.voucherMainTbl.tableData.length > 0){
+      this.formFields[9].value = JSON.stringify(this.voucherMainTbl.tableData);
+    }
+
+    if(this.voucherMainTbl.lblDebit != this.voucherMainTbl.lblCredit){
+      this.valid.apiInfoResponse('debit and credit amount not matched');return;
     }
 
     this.dataService
     .savetHttp(
       this.pageFields,
       this.formFields,
-      'fmis-api/Voucher/saveVoucher'
+      'core-api/InsertVoucher'
     )
     .subscribe(
-      (response: any[]) => {
-        if(response[0].includes('Success') == true){
+      (response: any) => {
+        if(response.msg == 'Data Saved Successfully'){
           this.valid.apiInfoResponse('record added successfully');
-          // this.plotsTable.getPlots();
           this.reset();
         }else{
           this.valid.apiErrorResponse(response.toString());
@@ -289,6 +372,12 @@ export class VoucherEntryComponent implements OnInit {
     this.voucherMainTbl.bankID = '';
     this.voucherMainTbl.lblTax = '';
     this.voucherMainTbl.lblTransaction = '';
+    this.voucherMainTbl.lblDebit = '0';
+    this.voucherMainTbl.lblCredit = '0';
+    this.voucherMainTbl.tableData = [];
+    this.voucherMainTbl.coaList = [];
+    this.voucherMainTbl.partyList = [];
+    this.partyList = [];
   
   }
   

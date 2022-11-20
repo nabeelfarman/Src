@@ -15,76 +15,93 @@
 <mat-tab-group mat-align-tabs="center" class="h-100">
   <mat-tab label="Add / Modify" class="h-100">
     <div class="row bg-white border pt-2">
-      <div class="col-md-6">
+      <div class="col-md-5">
         <div class="d-flex flex-row justify-content-end">
-          <mat-form-field>
+          <mat-form-field class="w-50">
             <mat-label>Voucher Type</mat-label>
-            <mat-select [(ngModel)]="formFields[3].value">
-              <mat-option
-                *ngFor="let item of voucherTypeList"
-                [value]="item.trnTypeId"
-              >
+            <mat-select [(ngModel)]="formFields[0].value" (ngModelChange)="getChartOfAccount(); getExternalParties();"
+              [disabled]="lblTableLength > 0">
+              <mat-option *ngFor="let item of voucherTypeList" [value]="item.trnTypeId">
                 {{ item.trnType }}
               </mat-option>
             </mat-select>
           </mat-form-field>
         </div>
       </div>
-      <div class="col-md-6">
-        <mat-form-field>
+      <div class="col-md-2">
+        <div class="d-flex flex-row justify-content-center">
+          <mat-radio-group aria-label="Select an option" [(ngModel)]="rdbType" class="ps-2" style="padding: 15px;"
+            [disabled]="lblTableLength > 0">
+            <mat-radio-button value="Cash">Cash</mat-radio-button>&nbsp;&nbsp;&nbsp;
+            <mat-radio-button value="Bank">Bank</mat-radio-button>
+          </mat-radio-group>
+        </div>
+      </div>
+      <div class="col-md-5">
+        <mat-form-field class="w-50">
           <mat-label>Voucher Date</mat-label>
           <input matInput [matDatepicker]="picker" [(ngModel)]="formFields[4].value" />
-          <mat-datepicker-toggle
-            matSuffix
-            [for]="picker"
-          ></mat-datepicker-toggle>
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
+      </div>
+    </div>
+    <div class="row bg-white border pt-2">
+      <div class="col-md-12">
+        <div class="d-flex flex-row justify-content-center">
+          <mat-form-field class="w-50">
+            <mat-label>Project</mat-label>
+            <mat-select [(ngModel)]="formFields[5].value">
+              <mat-option *ngFor="let item of projectList" [value]="item.projectID">
+                {{ item.projectName }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
       </div>
     </div>
     <div class="row light-blue-bg border">
       <div class="col-md-4">
         <mat-form-field class="w-100 ps-3">
           <mat-label>Bank Account</mat-label>
-          <mat-select [(ngModel)]="cmbBank" (ngModelChange)="bankChange(cmbBank)">
-            <mat-option
-              *ngFor="let item of bankList"
-              [value]="item.bankId"
-            >
-              {{ item.accountTitle }}
+          <mat-select [(ngModel)]="formFields[6].value" (ngModelChange)="bankChange(cmbBank)"
+            [disabled]="rdbType == 'Cash'">
+            <mat-option *ngFor="let item of bankList" [value]="item.bankID">
+              {{ item.bankName }} - {{ item.bankAccountNo }}
             </mat-option>
           </mat-select>
         </mat-form-field>
       </div>
       <div class="col-md-4">
-        <div class="d-flex flex-row h-100 justify-content-center">
+        <mat-form-field class="w-100" floatLabel="never">
+          <mat-label>Bank Receipt No</mat-label>
+          <input class="text-right" matInput [(ngModel)]="formFields[7].value" [disabled]="rdbType == 'Cash'" />
+        </mat-form-field>
+        <!-- <div class="d-flex flex-row h-100 justify-content-center">
           <p class="pt-1">
-            <strong class="h1 text-danger">19,050</strong
-            ><sup class="text-dark">Amount</sup>
+            <strong class="h1 text-danger">19,050</strong>
+            <sup class="text-dark">Amount</sup>
           </p>
-        </div>
+        </div> -->
       </div>
       <div class="col-md-4">
         <mat-form-field class="w-100 pe-3">
-          <mat-label>Pay to</mat-label>
-          <mat-select [(ngModel)]="formFields[5].value">
-            <mat-option
-              *ngFor="let item of externalList"
-              [value]="item.memberProfileId"
-            >
-              {{ item.memberName }}
+          <mat-label>Party</mat-label>
+          <mat-select [(ngModel)]="formFields[8].value">
+            <mat-option *ngFor="let item of partyList" [value]="item.partyID">
+              {{ item.partyName }}
             </mat-option>
           </mat-select>
         </mat-form-field>
       </div>
     </div>
-    <society-voucher-entry-table [bankID]="bankID" [lblTax]="lblTax"></society-voucher-entry-table>
+    <society-voucher-entry-table (eventEmitter)="checkTableLength($event)"></society-voucher-entry-table>
 
     <div class="row bg-white border pt-2">
       <div class="col-md-12 ps-3 pe-3">
         <mat-form-field class="w-100">
           <mat-label>Description</mat-label>
-          <textarea matInput [(ngModel)]="formFields[6].value"></textarea>
+          <textarea matInput [(ngModel)]="formFields[10].value"></textarea>
         </mat-form-field>
       </div>
     </div>
@@ -95,26 +112,15 @@
 </mat-tab-group>
 
 <!-- breakup Modal -->
-<div
-  class="modal fade"
-  id="breakupModal"
-  tabindex="-1"
-  aria-labelledby="exampleModalLabel"
-  aria-hidden="true"
-  data-bs-backdrop="false"
->
+<div class="modal fade" id="breakupModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+  data-bs-backdrop="false">
   <div class="modal-dialog modal-xl modal-dialog-centered">
     <div class="modal-content mat-elevation-z20">
       <div class="modal-header bg-light">
         <h4 class="modal-title text-primary" id="exampleModalLabel">
           Transaction Breakup - 71.01.01 - Pay to Officers
         </h4>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        ></button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <society-voucher-entry-breakup></society-voucher-entry-breakup>
@@ -130,26 +136,15 @@
 </div>
 
 <!-- tax calculation -->
-<div
-  class="modal fade"
-  id="taxModal"
-  tabindex="-1"
-  aria-labelledby="exampleModalLabel"
-  aria-hidden="true"
-  data-bs-backdrop="false"
->
+<div class="modal fade" id="taxModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+  data-bs-backdrop="false">
   <div class="modal-dialog modal-md modal-dialog-centered">
     <div class="modal-content mat-elevation-z20">
       <div class="modal-header bg-light">
         <h4 class="modal-title text-primary" id="exampleModalLabel">
           Tax Info
         </h4>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        ></button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <society-transaction-tax-info></society-transaction-tax-info>

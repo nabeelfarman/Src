@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { SharedHelpersFieldValidationsModule } from '@society/shared/helpers/field-validations';
 import { MyFormField, VoucherTableInterface } from '@society/shared/interface';
 import { SharedServicesDataModule } from '@society/shared/services/data';
@@ -13,9 +13,16 @@ declare var $: any;
 })
 export class VoucherEntryTableComponent implements OnInit {
 
-  @Input() bankID: any;
-  @Input() lblTax: any;
+  @Output() eventEmitter = new EventEmitter();
+
   lblTransaction: string = '';
+  lblDebit: any = 0;
+  lblCredit: any = 0;
+
+  cmbAccHead: any = '';
+  cmbPartyTo: any = '';
+  txtDebit: any = 0;
+  txtCredit: any = 0;
 
   pageFields: VoucherTableInterface = {
     bankId: '',
@@ -75,6 +82,8 @@ export class VoucherEntryTableComponent implements OnInit {
   coaList: any = [];
   partyList: any = [];
 
+  tableData: any = [];
+
   error: any;
 
   constructor(
@@ -85,68 +94,50 @@ export class VoucherEntryTableComponent implements OnInit {
 
   ngOnInit(): void {
     this.formFields[2].value = this.globalService.getUserId().toString();
-
-    this.getChartOfAccount();
-    this.getExternalParties();
-  }
-
-  getChartOfAccount(){
-    this.dataService.getHttp('fmis-api/ChartOfAccount/getChartOfAccount', '').subscribe((response: any) => {
-      this.coaList = response.reverse();
-    }, (error: any) => {
-      console.log(error);
-    });
-  }
-  
-  getExternalParties(){
-    this.dataService.getHttp('fmis-api/ExternalParties/getExternalParties', '').subscribe((response: any) => {
-      this.partyList = response.reverse();
-    }, (error: any) => {
-      console.log(error);
-    });
   }
 
   save(){
+    // alert(this.txtCredit)
+    // alert(this.txtDebit)
+    if(this.cmbAccHead == ''){
+      this.valid.apiErrorResponse("select account head");return;
+    }else if(this.cmbPartyTo == ''){
+      this.valid.apiErrorResponse("select party to");return;
+    }else if(this.txtDebit == 0 && this.txtCredit == 0){
+      this.valid.apiErrorResponse("enter debit or credit amount");return;
+    }else{
+      var partyData = this.partyList.filter((x: { partyID: any }) => x.partyID == this.cmbPartyTo);
+      var coaData = this.coaList.filter((x: { coaID: any }) => x.coaID == this.cmbAccHead)
+      
+      this.tableData.push({
+        COAID: this.cmbAccHead,
+        accHead: coaData[0].coaTitle,
+        PartyID: this.cmbPartyTo,
+        partyName: partyData[0].partyName,
+        Debit: this.txtDebit,
+        Credit: this.txtCredit,
+      });
 
-    if(this.lblTax == ""){
-      this.valid.apiErrorResponse("enter tax info");
-      return;
+      this.eventEmitter.emit(this.tableData.length);
+
+      this.lblDebit += this.txtDebit;
+      this.lblCredit += this.txtCredit;
+
+      this.cmbAccHead = '';
+      this.cmbPartyTo = '';
+      this.txtCredit = 0;
+      this.txtDebit = 0;
     }
+  }
 
-    if(this.formFields[5].value == "" && this.formFields[6].value == ""){
-      this.valid.apiErrorResponse('enter debit'); return;
-    }else if(this.formFields[5].value == "" && this.formFields[6].value != ""){
-      this.formFields[5].value = '0';
-    }else if(this.formFields[5].value != "" && this.formFields[6].value == ""){
-      this.formFields[6].value = '0';
-    }
+  remove(index: any){
+    
+    this.lblDebit -= this.tableData[index].Debit;
+    this.lblCredit -= this.tableData[index].Credit;
+    
+    this.tableData.splice(index, 1);
 
-    this.formFields[0].value = this.bankID;
-    this.formFields[1].value = "insert"
-
-    this.dataService
-    .savetHttp(
-      this.pageFields,
-      this.formFields,
-      'fmis-api/Voucher/saveVoucher'
-    )
-    .subscribe(
-      (response: any[]) => {
-        if(response[0].includes('Voucher No Created') == true){
-          this.valid.apiInfoResponse('record added successfully');
-          // this.plotsTable.getPlots();
-          this.lblTransaction = 'Success';
-          this.reset();
-        }else{
-          this.valid.apiErrorResponse(response.toString());
-        }
-      },
-      (error: any) => {
-        this.error = error;
-        this.valid.apiErrorResponse(this.error);
-      }
-    );
-
+    this.eventEmitter.emit(this.tableData.length);
   }
 
   openModal(){

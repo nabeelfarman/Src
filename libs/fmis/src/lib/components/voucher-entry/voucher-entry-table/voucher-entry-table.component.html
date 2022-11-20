@@ -3,9 +3,9 @@
     <thead>
       <tr>
         <th scope="col">Account Head</th>
-        <th scope="col">Party Title</th>
-        <th scope="col" class="text-right">Debit</th>
-        <th scope="col" class="text-right">Credit</th>
+        <th scope="col">Party To</th>
+        <th scope="col" class="text-end">Debit</th>
+        <th scope="col" class="text-end">Credit</th>
         <th scope="col" class="text-center">Actions</th>
       </tr>
     </thead>
@@ -15,14 +15,11 @@
           <div class="my-form-field">
             <mat-form-field class="w-100" floatLabel="never">
               <mat-label>Select</mat-label>
-              <mat-select [(ngModel)]="formFields[3].value">
+              <mat-select [(ngModel)]="cmbAccHead">
                 <!-- <mat-option value="one">71.01.01 - Pay to Officer</mat-option>
                 <mat-option value="two">71.01.02 - Pay to Staff</mat-option> -->
-                <mat-option
-                  *ngFor="let item of coaList"
-                  [value]="item.coaID"
-                >
-                  {{ item.accountTitle }}
+                <mat-option *ngFor="let item of coaList" [value]="item.coaID">
+                  {{ item.coaTitle }}
                 </mat-option>
               </mat-select>
             </mat-form-field>
@@ -32,12 +29,9 @@
           <div class="my-form-field">
             <mat-form-field class="w-100" floatLabel="never">
               <mat-label>Select</mat-label>
-              <mat-select [(ngModel)]="formFields[4].value">
-                <mat-option
-                  *ngFor="let item of partyList"
-                  [value]="item.memberProfileId"
-                >
-                  {{ item.memberName }}
+              <mat-select [(ngModel)]="cmbPartyTo">
+                <mat-option *ngFor="let item of partyList" [value]="item.partyID">
+                  {{ item.partyName }}
                 </mat-option>
               </mat-select>
             </mat-form-field>
@@ -46,8 +40,8 @@
         <td>
           <div class="my-form-field">
             <mat-form-field class="w-100" floatLabel="never">
-              <mat-label>Debit</mat-label>
-              <input class="text-right" matInput [(ngModel)]="formFields[5].value" />
+              <mat-label class="pull-right">Debit</mat-label>
+              <input class="text-right" type="number" matInput [(ngModel)]="txtDebit" />
             </mat-form-field>
           </div>
         </td>
@@ -55,21 +49,30 @@
           <div class="my-form-field">
             <mat-form-field class="w-100" floatLabel="never">
               <mat-label class="pull-right">Credit</mat-label>
-              <input matInput class="text-right" [(ngModel)]="formFields[6].value" />
+              <input matInput class="text-right" type="number" [(ngModel)]="txtCredit" />
             </mat-form-field>
           </div>
         </td>
         <td class="text-center">
-          <span class="text-success pe-2 cursorPointer border-right-dark" (click)="save()">
+          <span class="text-success pe-2 cursorPointer" (click)="save()">
             <mat-icon>save</mat-icon>
           </span>
-          <span
-            class="text-primary cursorPointer border-right-dark ps-2 pe-2" (click)="openModal()"
-          >
+          <!-- <span class="text-primary cursorPointer border-right-dark ps-2 pe-2" (click)="openModal()">
             <mat-icon matTooltip="tax calculations">functions</mat-icon>
             <sup>tax</sup>
           </span>
           <span class="text-danger cursorPointer border-right-dark ps-2 pe-2">
+            <mat-icon>delete</mat-icon>
+          </span> -->
+        </td>
+      </tr>
+      <tr *ngFor="let item of tableData; let i = index;">
+        <td>{{item.accHead}}</td>
+        <td>{{item.partyName}}</td>
+        <td class="text-end">{{item.Debit}}</td>
+        <td class="text-end">{{item.Credit}}</td>
+        <td class="text-center">
+          <span class="text-danger cursorPointer ps-2 pe-2" (click)="remove(i)">
             <mat-icon>delete</mat-icon>
           </span>
         </td>
@@ -78,8 +81,8 @@
         <td colspan="2">
           <strong class="pull-right pe-3">Total Voucher Amount</strong>
         </td>
-        <td><strong class="pull-right">500,000</strong></td>
-        <td><strong class="pull-right">500,000</strong></td>
+        <td><strong class="pull-right">{{lblDebit}}</strong></td>
+        <td><strong class="pull-right">{{lblCredit}}</strong></td>
         <td></td>
       </tr>
     </tbody>

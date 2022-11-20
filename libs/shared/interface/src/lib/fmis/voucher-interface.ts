@@ -1,9 +1,14 @@
 export class VoucherInterface {
-    newTEmpTrnDEtailID  = '0';
-    trnDate = '';
-    beneficiaryId = '';
-    trnTypeId = '';
-    trnDescription = '';
+    InvoiceDate  = '';
+    BranchID = '';
+    PartyID = '';
+    BankID = '';
+    ProjectID = '';
+    InvType = '';
+    InvoiceDescription = '';
+    BankReceiptNo = '';
+    Amount = '';
+    InvoiceDetail = '';
     spType = '';
-    userId = '';
+    UserID = '';
 }

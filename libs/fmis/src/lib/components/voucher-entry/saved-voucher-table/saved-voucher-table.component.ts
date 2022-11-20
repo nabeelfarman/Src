@@ -19,16 +19,16 @@ export class SavedVoucherTableComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getUnpaidTransaction();
+    // this.getUnpaidTransaction();
   }
 
-  getUnpaidTransaction(){
-    this.dataService.getHttp('fmis-api/VoucherPayment/getUnpaidTransaction', '').subscribe((response: any) => {
-      this.tableData = response;
-    }, (error: any) => {
-      console.log(error);
-    });
-  }
+  // getUnpaidTransaction(){
+  //   this.dataService.getHttp('fmis-api/VoucherPayment/getUnpaidTransaction', '').subscribe((response: any) => {
+  //     this.tableData = response;
+  //   }, (error: any) => {
+  //     console.log(error);
+  //   });
+  // }
   
   edit(item: any, num: any){
     this.eventEmitter.emit({item, num});
