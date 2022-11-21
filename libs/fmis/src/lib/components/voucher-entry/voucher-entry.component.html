@@ -31,7 +31,7 @@
       <div class="col-md-2">
         <div class="d-flex flex-row justify-content-center">
           <mat-radio-group aria-label="Select an option" [(ngModel)]="rdbType" class="ps-2" style="padding: 15px;"
-            [disabled]="lblTableLength > 0">
+            [disabled]="lblTableLength > 0" (change)="getChartOfAccount()">
             <mat-radio-button value="Cash">Cash</mat-radio-button>&nbsp;&nbsp;&nbsp;
             <mat-radio-button value="Bank">Bank</mat-radio-button>
           </mat-radio-group>
@@ -107,7 +107,7 @@
     </div>
   </mat-tab>
   <mat-tab label="Saved" class="h-100">
-    <society-saved-voucher-table></society-saved-voucher-table>
+    <society-saved-voucher-table (eventEmitterDelete)="delete($event)"></society-saved-voucher-table>
   </mat-tab>
 </mat-tab-group>
 

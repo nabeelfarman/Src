@@ -98,17 +98,23 @@ export class VoucherEntryTableComponent implements OnInit {
 
   save(){
     // alert(this.txtCredit)
-    // alert(this.txtDebit)
     if(this.cmbAccHead == ''){
       this.valid.apiErrorResponse("select account head");return;
     }else if(this.cmbPartyTo == ''){
       this.valid.apiErrorResponse("select party to");return;
     }else if(this.txtDebit == 0 && this.txtCredit == 0){
       this.valid.apiErrorResponse("enter debit or credit amount");return;
+    }else if(this.txtDebit != 0 && this.txtCredit != 0){
+      this.valid.apiErrorResponse("one amount must be zero");return;
     }else{
       var partyData = this.partyList.filter((x: { partyID: any }) => x.partyID == this.cmbPartyTo);
       var coaData = this.coaList.filter((x: { coaID: any }) => x.coaID == this.cmbAccHead)
       
+      for(var i = 0; i < this.tableData.length; i++){
+        if(this.tableData[i].COAID == this.cmbAccHead){
+          this.valid.apiInfoResponse('accound head already exist.');return;
+        }
+      }
       this.tableData.push({
         COAID: this.cmbAccHead,
         accHead: coaData[0].coaTitle,

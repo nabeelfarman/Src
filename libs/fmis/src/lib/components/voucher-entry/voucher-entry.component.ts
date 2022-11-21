@@ -3,6 +3,7 @@ import { SharedHelpersFieldValidationsModule } from '@society/shared/helpers/fie
 import { MyFormField, VoucherInterface, VoucherModalInterface } from '@society/shared/interface';
 import { SharedServicesDataModule } from '@society/shared/services/data';
 import { SharedServicesGlobalDataModule } from '@society/shared/services/global-data';
+import { SavedVoucherTableComponent } from './saved-voucher-table/saved-voucher-table.component';
 import { TransactionTaxInfoComponent } from './transaction-tax-info/transaction-tax-info.component';
 import { VoucherEntryTableComponent } from './voucher-entry-table/voucher-entry-table.component';
 
@@ -13,6 +14,7 @@ import { VoucherEntryTableComponent } from './voucher-entry-table/voucher-entry-
 })
 export class VoucherEntryComponent implements OnInit {
 
+  @ViewChild(SavedVoucherTableComponent) voucherTbl: any;
   @ViewChild(VoucherEntryTableComponent) voucherMainTbl: any;
   @ViewChild(TransactionTaxInfoComponent) tranTax: any;
   
@@ -220,11 +222,20 @@ export class VoucherEntryComponent implements OnInit {
     this.rdbType = 'Cash';
     this.getBankAccount();
     this.getProject();
+    this.getSavedVoucher();
   }
 
   getBankAccount(){
   this.dataService.getHttp('core-api/getBank', '').subscribe((response: any) => {
     this.bankList = response;
+    }, (error: any) => {
+      console.log(error);
+    });
+  }
+  
+  getSavedVoucher(){
+    this.dataService.getHttp('core-api/GetSavedVoucherDetail', '').subscribe((response: any) => {
+      this.voucherTbl.tableData = response;
     }, (error: any) => {
       console.log(error);
     });
@@ -260,6 +271,7 @@ export class VoucherEntryComponent implements OnInit {
     this.bankID = item;
   }
 
+
   checkTableLength(item: any){
     this.lblTableLength = item;
   }
@@ -282,6 +294,23 @@ export class VoucherEntryComponent implements OnInit {
     }
 
     if(this.voucherMainTbl.tableData.length > 0){
+      var found = false;
+      // var foundBank = false;
+
+      for(var i = 0; i < this.voucherMainTbl.tableData.length; i++){
+        if(this.voucherMainTbl.tableData[i].COAID == '2' && this.rdbType == 'Cash'){
+          found = true;
+          i = this.voucherMainTbl.tableData.length + 1;
+        }else if(this.voucherMainTbl.tableData[i].COAID != '3' && this.rdbType == 'Bank'){
+          found = true;
+          i = this.voucherMainTbl.tableData.length + 1;
+        }
+      }
+
+      if(found == false){
+        this.valid.apiInfoResponse('enter cash or bank in voucher detail');return;
+      }
+
       this.formFields[9].value = JSON.stringify(this.voucherMainTbl.tableData);
     }
 
@@ -378,10 +407,16 @@ export class VoucherEntryComponent implements OnInit {
     this.voucherMainTbl.coaList = [];
     this.voucherMainTbl.partyList = [];
     this.partyList = [];
+    
+    this.lblTableLength = 0;
   
   }
   
   resetTrans(){}
 
   print() {}
+
+  delete(item: any){
+    this.getSavedVoucher();
+  }
 }
