@@ -329,6 +329,7 @@ export class VoucherEntryComponent implements OnInit {
         if(response.msg == 'Data Saved Successfully'){
           this.valid.apiInfoResponse('record added successfully');
           this.reset();
+          this.getSavedVoucher();
         }else{
           this.valid.apiErrorResponse(response.toString());
         }
