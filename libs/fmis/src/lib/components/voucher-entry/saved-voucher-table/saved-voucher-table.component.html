@@ -24,6 +24,9 @@
           <span class="text-danger cursorPointer ps-2 pe-2" (click)="delete(item)" *ngIf="item.approvedStatus == false">
             <mat-icon>delete</mat-icon>
           </span>
+          <span class="text-success cursorPointer ps-2 pe-2" (click)="printData(item)">
+            <mat-icon>print</mat-icon>
+          </span>
         </td>
       </tr>
     </tbody>

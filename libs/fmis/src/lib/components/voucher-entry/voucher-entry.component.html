@@ -1,15 +1,11 @@
 <div class="saveUpdateBar border mat-elevation-z2">
-  <button mat-button class="save cursorPointer" (click)="save()">
+  <button mat-button class="save cursorPointer" (click)="save('#print-summary')">
     <mat-icon>save</mat-icon>
     <span class="ps-2">Save</span>
   </button>
   <button mat-button class="save cursorPointer" (click)="reset()">
     <mat-icon>cached</mat-icon>
     <span class="ps-2">Reset</span>
-  </button>
-  <button mat-button class="save cursorPointer" (click)="print()">
-    <mat-icon>print</mat-icon>
-    <span class="ps-2">Print</span>
   </button>
 </div>
 <mat-tab-group mat-align-tabs="center" class="h-100">
@@ -107,9 +103,12 @@
     </div>
   </mat-tab>
   <mat-tab label="Saved" class="h-100">
-    <society-saved-voucher-table (eventEmitterDelete)="delete($event)"></society-saved-voucher-table>
+    <society-saved-voucher-table (eventEmitterDelete)="delete($event)" (eventEmitterPrint)="printData($event)">
+    </society-saved-voucher-table>
   </mat-tab>
 </mat-tab-group>
+
+<society-installment-voucher-print class="d-none" id="print-summary"></society-installment-voucher-print>
 
 <!-- breakup Modal -->
 <div class="modal fade" id="breakupModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"

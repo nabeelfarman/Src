@@ -1,0 +1,28 @@
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'society-installment-voucher-print',
+  templateUrl: './installment-voucher-print.component.html',
+  styleUrls: ['./installment-voucher-print.component.scss']
+})
+export class InstallmentVoucherPrintComponent implements OnInit {
+
+  lblVoucherType: any = '';
+  lblVoucherDate: any = '';
+  lblAccountType: any = '';
+  lblProject: any = '';
+  lblBank: any = '';
+  lblBankReceipt: any = '';
+  lblParty: any = '';
+  
+  lblDebit: any = 0;
+  lblCredit: any = 0;
+
+  tableData: any = [];
+
+  constructor() { }
+
+  ngOnInit(): void {
+  }
+
+}

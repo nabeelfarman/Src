@@ -126,8 +126,8 @@ export class VoucherEntryTableComponent implements OnInit {
 
       this.eventEmitter.emit(this.tableData.length);
 
-      this.lblDebit += this.txtDebit;
-      this.lblCredit += this.txtCredit;
+      this.lblDebit = parseInt(this.lblDebit) + parseInt(this.txtDebit);
+      this.lblCredit = parseInt(this.lblCredit) + parseInt(this.txtCredit);
 
       this.cmbAccHead = '';
       this.cmbPartyTo = '';

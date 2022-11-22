@@ -16,8 +16,8 @@ declare var $: any;
 export class SavedVoucherTableComponent implements OnInit {
 
   @Output() eventEmitterDelete = new EventEmitter();
+  @Output() eventEmitterPrint = new EventEmitter();
 
-  
   public config: PerfectScrollbarConfigInterface = {};
 
   tableData: any = [];
@@ -111,4 +111,11 @@ export class SavedVoucherTableComponent implements OnInit {
       });
   }
 
+  printData(item: any){
+    this.dataService.getHttp('core-api/GetSpecificVocherDetail?InvoiceNo=' + item.invoiceNo, '').subscribe((response: any) => {
+      this.eventEmitterPrint.emit({item, response});
+    }, (error: any) => {
+      console.log(error);
+    });
+  }
 }
