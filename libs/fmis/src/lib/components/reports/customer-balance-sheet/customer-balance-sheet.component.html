@@ -30,72 +30,72 @@
   <!---------------------------- table start --------------------------->
 
 
-<!--header -->
-<div class="row border-1-black mt-4">
-  <div class="col-md-1 text-center height-27">
-    <label class="mt-1"><b>Sr. #</b></label>
+  <!--header -->
+  <div class="row border-1-black mt-4">
+    <div class="col-md-1 text-center height-27">
+      <label class="mt-1"><b>Sr. #</b></label>
+    </div>
+
+    <div class="col-md-4 border-left-black text-center">
+      <label class="mt-1"><b>Party Name</b></label>
+    </div>
+
+    <div class="col-md-3 border-left-black text-center">
+      <label class="mt-1"><b>CNIC</b></label>
+    </div>
+
+    <div class="col-md-2 border-left-black text-center">
+      <label class="mt-1"><b>Mobile</b></label>
+    </div>
+
+    <div class="col-md-2 border-left-black text-center">
+      <label class="mt-1"><b>Balance</b></label>
+    </div>
+
   </div>
 
-  <div class="col-md-4 border-left-black text-center">
-    <label class="mt-1"><b>Party Name</b></label>
-  </div>
-  
-  <div class="col-md-3 border-left-black text-center">
-    <label class="mt-1"><b>CNIC</b></label>
-  </div>
+  <!--detail -->
+  <div class="row border-1-black" *ngFor="let item of balanceSheetList; let i = index;" style="margin-top: -1;">
+    <div class="col-md-1 text-center height-27">
+      <label class="mt-1">{{i + 1}}</label>
+    </div>
 
-  <div class="col-md-2 border-left-black text-center">
-    <label class="mt-1"><b>Mobile</b></label>
-  </div>
+    <div class="col-md-4 border-left-black">
+      <label class="mt-1">{{item.partyName}}</label>
+    </div>
 
-  <div class="col-md-2 border-left-black text-center">
-    <label class="mt-1"><b>Balance</b></label>
-  </div>
+    <div class="col-md-3 border-left-black text-center">
+      <label class="mt-1">{{item.partyCNIC}}</label>
+    </div>
 
-</div>
+    <div class="col-md-2 border-left-black text-center">
+      <label class="mt-1">{{item.mobile}}</label>
+    </div>
 
-<!--detail -->
-<div class="row border-1-black" *ngFor="let item of balanceSheetList; let i = index;" style="margin-top: -1;">
-  <div class="col-md-1 text-center height-27">
-    <label class="mt-1">{{i + 1}}</label>
-  </div>
+    <div class="col-md-2 border-left-black text-center">
+      <label class="mt-1">{{item.balance}}</label>
+    </div>
 
-  <div class="col-md-3 border-left-black">
-    <label class="mt-1">{{item.partyName}}</label>
-  </div>
-
-  <div class="col-md-4 border-left-black text-center">
-    <label class="mt-1">{{item.partyCNIC}}</label>
-  </div>
-  
-  <div class="col-md-2 border-left-black text-center">
-    <label class="mt-1">{{item.mobile}}</label>
-  </div>
-
-  <div class="col-md-2 border-left-black text-right">
-    <label class="mt-1">{{item.balance}}</label>
-  </div>
-
-</div>
-
-
-<!--footer -->
-<div class="row border-1-black mt-2">
-  <div class="col-md-1 text-center height-27">
-    <label class="mt-1"></label>
   </div>
 
 
-  <div class="col-md-9 text-left">
-    <label class="mt-1">TOTAL BALANCE</label>
+  <!--footer -->
+  <div class="row border-1-black mt-2">
+    <div class="col-md-1 text-center height-27">
+      <label class="mt-1"></label>
+    </div>
+
+
+    <div class="col-md-9 text-left">
+      <label class="mt-1">TOTAL BALANCE</label>
+    </div>
+
+    <div class="col-md-2 border-left-black text-right">
+      <label class="mt-1"></label>
+    </div>
+
   </div>
 
-  <div class="col-md-2 border-left-black text-right">
-    <label class="mt-1"></label>
-  </div>
-
-</div>
-
-<!------------------------------------- Table END -------------------------------------------------->
+  <!------------------------------------- Table END -------------------------------------------------->
 
 </div>
