@@ -5,39 +5,97 @@
   </button>
 </div>
 
+
+
+
 <div class="container bg-white mt-4" id="print-summary">
+
   <div class="row">
     <div class="col-md-12 text-center">
-      <img [src]="logoImg" alt="" width="250" height="200" />
+      <img [src]="logoImg" alt="Logo Loading" width="125px" />
     </div>
   </div>
   <div class="row">
     <div class="col-md-12 text-center">
-      <h2 class="pt-3">Shama Royal City</h2>
-      <h4>Customer Balance Sheet Report</h4>
+      <h2 class="pt-1">SHAMA ROYAL CITY</h2>
+      <h4>Customers Balances</h4>
     </div>
   </div>
+
+
+
   <hr />
-  <div class="table table table-responsive pt-5">
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>Sr #</th>
-          <th>Party Name</th>
-          <th>CNIC</th>
-          <th>Mobile</th>
-          <th class="text-end">Balance</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let item of balanceSheetList;let i = index;">
-          <td>{{i + 1}}</td>
-          <td>{{item.partyName}}</td>
-          <td>{{item.partyCNIC}}</td>
-          <td>{{item.mobile}}</td>
-          <td class="text-end">{{item.balance}}</td>
-        </tr>
-      </tbody>
-    </table>
+
+
+  <!---------------------------- table start --------------------------->
+
+
+<!--header -->
+<div class="row border-1-black mt-4">
+  <div class="col-md-1 text-center height-27">
+    <label class="mt-1"><b>Sr. #</b></label>
   </div>
+
+  <div class="col-md-4 border-left-black text-center">
+    <label class="mt-1"><b>Party Name</b></label>
+  </div>
+  
+  <div class="col-md-3 border-left-black text-center">
+    <label class="mt-1"><b>CNIC</b></label>
+  </div>
+
+  <div class="col-md-2 border-left-black text-center">
+    <label class="mt-1"><b>Mobile</b></label>
+  </div>
+
+  <div class="col-md-2 border-left-black text-center">
+    <label class="mt-1"><b>Balance</b></label>
+  </div>
+
+</div>
+
+<!--detail -->
+<div class="row border-1-black" *ngFor="let item of balanceSheetList; let i = index;" style="margin-top: -1;">
+  <div class="col-md-1 text-center height-27">
+    <label class="mt-1">{{i + 1}}</label>
+  </div>
+
+  <div class="col-md-3 border-left-black">
+    <label class="mt-1">{{item.partyName}}</label>
+  </div>
+
+  <div class="col-md-4 border-left-black text-center">
+    <label class="mt-1">{{item.partyCNIC}}</label>
+  </div>
+  
+  <div class="col-md-2 border-left-black text-center">
+    <label class="mt-1">{{item.mobile}}</label>
+  </div>
+
+  <div class="col-md-2 border-left-black text-right">
+    <label class="mt-1">{{item.balance}}</label>
+  </div>
+
+</div>
+
+
+<!--footer -->
+<div class="row border-1-black mt-2">
+  <div class="col-md-1 text-center height-27">
+    <label class="mt-1"></label>
+  </div>
+
+
+  <div class="col-md-9 text-left">
+    <label class="mt-1">TOTAL BALANCE</label>
+  </div>
+
+  <div class="col-md-2 border-left-black text-right">
+    <label class="mt-1"></label>
+  </div>
+
+</div>
+
+<!------------------------------------- Table END -------------------------------------------------->
+
 </div>

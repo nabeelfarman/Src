@@ -114,80 +114,80 @@
 
 
 
-        <!---------------------------- table start --------------------------->
+<!---------------------------- table start --------------------------->
 
 
-  <!--header -->
-  <div class="row border-1-black mt-4">
-    <div class="col-md-1 text-center height-27">
-      <label class="mt-1"><b>Sr. #</b></label>
-    </div>
-
-    <div class="col-md-3 border-left-black text-center">
-      <label class="mt-1"><b>Account Head</b></label>
-    </div>
-
-    <div class="col-md-4 border-left-black text-center">
-      <label class="mt-1"><b>Party</b></label>
-    </div>
-    
-    <div class="col-md-2 border-left-black text-center">
-      <label class="mt-1"><b>Debit</b></label>
-    </div>
-
-    <div class="col-md-2 border-left-black text-center">
-      <label class="mt-1"><b>Credit</b></label>
-    </div>
-
+<!--header -->
+<div class="row border-1-black mt-4">
+  <div class="col-md-1 text-center height-27">
+    <label class="mt-1"><b>Sr. #</b></label>
   </div>
+
+  <div class="col-md-3 border-left-black text-center">
+    <label class="mt-1"><b>Account Head</b></label>
+  </div>
+
+  <div class="col-md-4 border-left-black text-center">
+    <label class="mt-1"><b>Party</b></label>
+  </div>
+  
+  <div class="col-md-2 border-left-black text-center">
+    <label class="mt-1"><b>Debit</b></label>
+  </div>
+
+  <div class="col-md-2 border-left-black text-center">
+    <label class="mt-1"><b>Credit</b></label>
+  </div>
+
+</div>
 
 <!--detail -->
-  <div class="row border-1-black" *ngFor="let item of tableData; let i = index;" style="margin-top: -1;">
-    <div class="col-md-1 text-center height-27">
-      <label class="mt-1">{{i + 1}}</label>
-    </div>
-
-    <div class="col-md-3 border-left-black">
-      <label class="mt-1">{{item.accHead}}</label>
-    </div>
-
-    <div class="col-md-4 border-left-black">
-      <label class="mt-1">{{item.partyName}}</label>
-    </div>
-    
-    <div class="col-md-2 border-left-black text-right">
-      <label class="mt-1">{{item.Debit}}</label>
-    </div>
-
-    <div class="col-md-2 border-left-black text-right">
-      <label class="mt-1">{{item.Credit}}</label>
-    </div>
-
+<div class="row border-1-black" *ngFor="let item of tableData; let i = index;" style="margin-top: -1;">
+  <div class="col-md-1 text-center height-27">
+    <label class="mt-1">{{i + 1}}</label>
   </div>
+
+  <div class="col-md-3 border-left-black">
+    <label class="mt-1">{{item.accHead}}</label>
+  </div>
+
+  <div class="col-md-4 border-left-black">
+    <label class="mt-1">{{item.partyName}}</label>
+  </div>
+  
+  <div class="col-md-2 border-left-black text-right">
+    <label class="mt-1">{{item.Debit}}</label>
+  </div>
+
+  <div class="col-md-2 border-left-black text-right">
+    <label class="mt-1">{{item.Credit}}</label>
+  </div>
+
+</div>
 
 
 <!--footer -->
-  <div class="row border-1-black mt-2">
-    <div class="col-md-1 text-center height-27">
-      <label class="mt-1"></label>
-    </div>
-
-
-    <div class="col-md-7 text-left">
-      <label class="mt-1">VOUCHER TOTAL</label>
-    </div>
-    
-    <div class="col-md-2 border-left-black text-right">
-      <label class="mt-1">{{lblDebit}}</label>
-    </div>
-
-    <div class="col-md-2 border-left-black text-right">
-      <label class="mt-1">{{lblCredit}}</label>
-    </div>
-
+<div class="row border-1-black mt-2">
+  <div class="col-md-1 text-center height-27">
+    <label class="mt-1"></label>
   </div>
 
-  <!------------------------------------- Table END -------------------------------------------------->
+
+  <div class="col-md-7 text-left">
+    <label class="mt-1">VOUCHER TOTAL</label>
+  </div>
+  
+  <div class="col-md-2 border-left-black text-right">
+    <label class="mt-1">{{lblDebit}}</label>
+  </div>
+
+  <div class="col-md-2 border-left-black text-right">
+    <label class="mt-1">{{lblCredit}}</label>
+  </div>
+
+</div>
+
+<!------------------------------------- Table END -------------------------------------------------->
 
 
   <br/>
