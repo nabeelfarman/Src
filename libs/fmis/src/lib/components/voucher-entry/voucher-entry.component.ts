@@ -451,8 +451,15 @@ export class VoucherEntryComponent implements OnInit {
     if(item.item.bankID > 0){
       var bankData = this.bankList.filter((x:{bankID: any}) => x.bankID == item.item.bankID);
 
-      this.voucherPrint.lblBank = bankData[0].bankName + ' - ' + bankData[0].bankAccountNo;
-      this.voucherPrint.lblBankReceipt = item.item.bankReceiptNo;
+      this.voucherPrint.lblBank = bankData[0].bankName; // + ' (' + bankData[0].bankAccountNo + ')';
+
+      if(item.item.bankReceiptNo == '' || item.item.bankReceiptNo == null){
+        this.voucherPrint.lblBankReceipt = '-';
+      }
+      else {
+        this.voucherPrint.lblBankReceipt = item.item.bankReceiptNo;
+      }
+      
 
       this.voucherPrint.lblAccountType = 'Bank';
 
@@ -463,6 +470,13 @@ export class VoucherEntryComponent implements OnInit {
     this.voucherPrint.lblVoucherType = item.item.invType;
     this.voucherPrint.lblVoucherDate = item.item.invoiceDate; 
     this.voucherPrint.lblParty = item.item.partyName;
+    
+    if(item.item.invoiceDescription == '' || item.item.invoiceDescription == null){
+      this.voucherPrint.lblDescription = '-';
+    }
+    else {
+      this.voucherPrint.lblDescription = item.item.invoiceDescription;
+    }
 
     if(projectData.length > 0){
       this.voucherPrint.lblProject = projectData[0].projectName;

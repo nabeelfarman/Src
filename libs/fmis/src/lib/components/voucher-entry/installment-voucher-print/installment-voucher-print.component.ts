@@ -20,6 +20,8 @@ export class InstallmentVoucherPrintComponent implements OnInit {
 
   tableData: any = [];
 
+  lblDescription: any = '';
+
   constructor() { }
 
   ngOnInit(): void {

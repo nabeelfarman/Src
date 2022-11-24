@@ -37,6 +37,13 @@ export class InstallmentVoucherTableComponent implements OnInit {
 
     console.log(item);
 
+    if(item.invoiceDescription == '' || item.invoiceDescription == null){
+      item.invoiceDescription = '-';
+    }
+
+    if(item.bankReceiptNo == '' || item.bankReceiptNo == null){
+      item.bankReceiptNo = '-';
+    }
     
     this.installmentReport.lblInvoiceNo = item.invoiceNo;
     this.installmentReport.lblInvoiceDate = item.invoiceDate;
@@ -47,7 +54,9 @@ export class InstallmentVoucherTableComponent implements OnInit {
     this.installmentReport.lblPaymentNature = item.paymentNature;
     this.installmentReport.lblBankReceipt = item.bankReceiptNo;
     this.installmentReport.lblBankName = item.bankName;
-    
+    this.installmentReport.lblDescription = item.invoiceDescription;
+  
+
     setTimeout(() => this.globalService.printData(printSection), 200);
 
   }

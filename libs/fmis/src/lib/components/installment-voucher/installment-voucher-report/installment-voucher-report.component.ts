@@ -16,6 +16,7 @@ export class InstallmentVoucherReportComponent implements OnInit {
   lblInstallmentType: any = '';
   lblBankReceipt: any = '';
   lblBankName: any = '';
+  lblDescription: any = '';
 
   constructor() { }
 

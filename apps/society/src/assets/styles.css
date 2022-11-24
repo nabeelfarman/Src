@@ -70,6 +70,7 @@ html {
   box-sizing: inherit;
 }
 
+
 .container {
   width: 100%;
   padding-right: 15px;
@@ -483,6 +484,12 @@ th {
 .mb-2{
   margin-bottom: 2em;
 }
+.mb-3{
+  margin-bottom: 3em;
+}
+.mb-{
+  margin-bottom: 4em;
+}
 .pt-1{
   padding-top: 0.5em;
 }
@@ -506,9 +513,16 @@ th {
   padding: 0 !important;
 }
 
+
+
 .borderBottom {
   border-bottom: 4px solid black !important;
 }
+
+.borderBottomB1 {
+  border-bottom: 1px solid black !important;
+}
+
 .borderRight {
   border-right: 1px solid #ccc;
 }
@@ -561,28 +575,33 @@ th {
   font-size: 1.5em !important;
   font-weight: 500 !important;
   padding-bottom: 2px !important;
+  color: #000;
 }
 
 .h2Report {
   font-size: 1.5em !important;
   font-weight: 300 !important;
   padding-bottom: 2px !important;
+  color: #000;
 }
 
 .h3Report {
   font-size: 1.2em !important;
   font-weight: 400 !important;
   padding-bottom: 2px !important;
+  color: #000;
 }
 .h4Report {
   font-size: 1em !important;
   font-weight: 600 !important;
   padding-bottom: 2px !important;
+  color: #000;
 }
 .h5Report {
   font-size: 0.8em !important;
   font-weight: 600 !important;
   padding-bottom: 2px !important;
+  color: #000;
 }
 
 .h1Total{
@@ -695,7 +714,7 @@ div.divFooter .label {
 
 /********************* background and text color ***********************/
 .txtDarkGrey{
-  color: #565845 !important;
+  color: #32332e !important;
 }
 /* .bgGreen{
   border-bottom: 2px double #565845 !important;
@@ -848,10 +867,9 @@ body {
 
 hr {
   margin: 1rem 0;
-  color: inherit;
+  color: #0b5ed7;
   border: 0;
-  border-top: 1px solid;
-  opacity: 0.25;
+  border-top: 1px solid #084298;
 }
 
 h6, .h6, h5, .h5, h4, .h4, h3, .h3, h2, .h2, h1, .h1 {
@@ -8879,6 +8897,32 @@ textarea.form-control-lg {
   padding-bottom: 3rem !important;
 }
 
+
+.pr-1 {
+  padding-right: 1px !important;
+}
+
+.pr-2 {
+  padding-right: 2px !important;
+}
+
+.pr-3 {
+  padding-right: 3px !important;
+}
+
+.pr-4 {
+  padding-right: 4px !important;
+}
+
+.pr-5 {
+  padding-right: 5px !important;
+}
+
+.width-100{
+  width: 100% !important;
+}
+
+
 .ps-0 {
   padding-left: 0 !important;
 }
@@ -12634,3 +12678,28 @@ textarea.form-control-lg {
 }
 
 /*# sourceMappingURL=bootstrap.css.map */
+
+
+
+
+
+.rptcontainer{
+  border: 1px solid black !important;
+}
+
+.border-1-black{
+  border: 1px solid black !important
+}
+
+.border-left-black{
+  border-left: 1px solid black !important
+}
+
+label{
+  color: #000 !important;
+  font-size: 12px;
+}
+
+.height-27{
+  height: 27px !important;
+}
