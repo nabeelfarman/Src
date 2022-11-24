@@ -17,8 +17,8 @@
   </div>
   <div class="row">
     <div class="col-md-12 text-center">
-      <h2 class="pt-1">SHAMA ROYAL CITY</h2>
-      <h4>Customers Balances</h4>
+      <h2 class="pt-1 clrBlack">SHAMA ROYAL CITY</h2>
+      <h4 class="clrBlack">Customers Balances</h4>
     </div>
   </div>
 
@@ -31,7 +31,7 @@
 
 
   <!--header -->
-  <div class="row border-1-black mt-4">
+  <div class="row border-1-black mt-4 ml-1 me-1">
     <div class="col-md-1 text-center height-27">
       <label class="mt-1"><b>Sr. #</b></label>
     </div>
@@ -55,7 +55,7 @@
   </div>
 
   <!--detail -->
-  <div class="row border-1-black" *ngFor="let item of balanceSheetList; let i = index;" style="margin-top: -1;">
+  <div class="row border-1-black ml-1 me-1" *ngFor="let item of balanceSheetList; let i = index;" style="margin-top: -1 !important;">
     <div class="col-md-1 text-center height-27">
       <label class="mt-1">{{i + 1}}</label>
     </div>
@@ -72,16 +72,15 @@
       <label class="mt-1">{{item.mobile}}</label>
     </div>
 
-    <div class="col-md-2 border-left-black text-center">
+    <div class="col-md-2 border-left-black text-right">
       <label class="mt-1">{{item.balance}}</label>
     </div>
 
   </div>
 
-
   <!--footer -->
-  <div class="row border-1-black mt-2">
-    <div class="col-md-1 text-center height-27">
+  <div class="row border-1-black mt-2 ml-1 me-1">
+    <div class="col-md-1 text-right height-27">
       <label class="mt-1"></label>
     </div>
 

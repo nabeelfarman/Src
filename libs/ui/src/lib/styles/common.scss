@@ -524,7 +524,57 @@ button.mat-raised-button.uploadbtn{
 
 
 
+.txtDarkGrey{
+  color: #32332e !important;
+}
+
+
+.h1Report {
+  font-size: 1.5em !important;
+  font-weight: 500 !important;
+  padding-bottom: 2px !important;
+  color: #000;
+}
+
+.h2Report {
+  font-size: 1.5em !important;
+  font-weight: 300 !important;
+  padding-bottom: 2px !important;
+  color: #000;
+}
+
+.h3Report {
+  font-size: 1.2em !important;
+  font-weight: 400 !important;
+  padding-bottom: 2px !important;
+  color: #000;
+}
+.h4Report {
+  font-size: 1em !important;
+  font-weight: 600 !important;
+  padding-bottom: 2px !important;
+  color: #000;
+}
+.h5Report {
+  font-size: 0.8em !important;
+  font-weight: 600 !important;
+  padding-bottom: 2px !important;
+  color: #000;
+}
+
+.text-right {
+  text-align: right !important;
+}
+
+hr {
+  margin: 1rem 0;
+  color: #0b5ed7;
+  border: 0;
+  border-top: 1px solid #084298;
+}
+
 /*****************************Adnan css ****************************/
+
 
 .rptcontainer{
   border: 1px solid black !important;
@@ -545,4 +595,20 @@ label{
 
 .height-27{
   height: 27px !important;
+}
+
+.ml-1{
+  margin-left: 1px !important;
+}
+
+.clrBlack{
+  color: #000 !important;
+}
+
+.borderBottomB1 {
+  border-bottom: 1px solid black !important;
+}
+
+.width-100{
+  width: 100% !important;
 }

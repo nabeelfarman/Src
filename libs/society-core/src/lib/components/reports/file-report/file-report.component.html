@@ -5,47 +5,88 @@
   </button>
 </div>
 
-<div class="container bg-white mt-4" id="print-summary">
+
+
+<div class="container bg-white mt-4" id="print-summary">  
+
   <div class="row">
-    <div class="col-md-6 text-left">
-      <div class="h1Report txtDarkGrey">SARDAR Associates</div>
-      <div class="h1Report txtDarkGrey mb-3">Shama Group of Companies</div>
-      <h2 class="mt-5">File Report</h2>
-      <!-- <div class="h4Report"><b>{{dtpFromDate | date:'dd-MM-yyyy'}} to {{dtpToDate | date:'dd-MM-yyyy'}}</b></div> -->
-    </div>
-    <div class="col-md-6 text-right">
-      <!-- <img [src]="logoImg" alt="" width="250" height="200" /> -->
-      <img src="assets/ui/company/shama.png" width="300px" />
-    </div>
-  </div>
-  <!-- <div class="row">
     <div class="col-md-12 text-center">
-      <img [src]="logoImg" alt="" width="250" height="200" />
+      <img [src]="logoImg" alt="Logo Loading" width="125px" />
     </div>
   </div>
   <div class="row">
     <div class="col-md-12 text-center">
-      <h2 class="pt-3">Shama Royal City</h2>
-      <h4>File Report</h4>
+      <h2 class="pt-1 clrBlack">SHAMA ROYAL CITY</h2>
+      <h4 class="clrBlack">Files Detail</h4>
     </div>
-  </div> -->
+  </div>
+  
+
   <hr />
-  <div class="table table table-responsive pt-5">
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>Sr #</th>
-          <th>File Name</th>
-          <th class="text-end">File Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let item of fileList;let i = index;">
-          <td>{{i + 1}}</td>
-          <td>{{item.fileName}}</td>
-          <td class="text-end">{{item.fileDescription}}</td>
-        </tr>
-      </tbody>
-    </table>
+
+
+  <!---------------------------- table start --------------------------->
+
+
+  <!--header -->
+  <div class="row border-1-black mt-4 ml-1 me-1">
+    <div class="col-md-1 text-center height-27">
+      <label class="mt-1"><b>Sr. #</b></label>
+    </div>
+
+    <div class="col-md-2 border-left-black text-center">
+      <label class="mt-1"><b>File Name</b></label>
+    </div>
+
+    <div class="col-md-2 border-left-black text-center">
+      <label class="mt-1"><b>Nature</b></label>
+    </div>
+
+    <div class="col-md-2 border-left-black text-center">
+      <label class="mt-1"><b>Type</b></label>
+    </div>
+    
+    <div class="col-md-2 border-left-black text-center">
+      <label class="mt-1"><b>Size</b></label>
+    </div>
+
+    <div class="col-md-3 border-left-black text-center">
+      <label class="mt-1"><b>Description</b></label>
+    </div>
+
   </div>
+
+  <!--detail -->
+  <div class="row border-1-black ml-1 me-1" *ngFor="let item of fileList; let i = index;" style="margin-top: -1 !important;">
+    <div class="col-md-1 text-center height-27">
+      <label class="mt-1">{{i + 1}}</label>
+    </div>
+
+    <div class="col-md-2 border-left-black">
+      <label class="mt-1">{{item.fileName}}</label>
+    </div>
+
+    <div class="col-md-2 border-left-black">
+      <label class="mt-1">{{item.plotNatureTitle}}</label>
+    </div>
+
+    <div class="col-md-2 border-left-black">
+      <label class="mt-1">{{item.plotTypeTitle}}</label>
+    </div>
+
+    <div class="col-md-2 border-left-black">
+      <label class="mt-1">{{item.plotCategoryTitle}}</label>
+    </div>
+
+    <div class="col-md-3 border-left-black">
+      <label class="mt-1">{{item.fileDescription}}</label>
+    </div>
+
+  </div>
+
+
+  <!------------------------------------- Table END -------------------------------------------------->
+
+
+
 </div>

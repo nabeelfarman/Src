@@ -5,53 +5,91 @@
   </button>
 </div>
 
+
 <div class="container bg-white mt-4" id="print-summary">
+  
+    
   <div class="row">
-    <div class="col-md-6 text-left">
-      <div class="h1Report txtDarkGrey">SARDAR Associates</div>
-      <div class="h1Report txtDarkGrey mb-3">Shama Group of Companies</div>
-      <h2 class="mt-5">Customer Report</h2>
-      <!-- <div class="h4Report"><b>{{dtpFromDate | date:'dd-MM-yyyy'}} to {{dtpToDate | date:'dd-MM-yyyy'}}</b></div> -->
-    </div>
-    <div class="col-md-6 text-right">
-      <!-- <img [src]="logoImg" alt="" width="250" height="200" /> -->
-      <img src="assets/ui/company/shama.png" width="300px" />
+    <div class="col-md-12 text-center">
+      <img [src]="logoImg" alt="Logo Loading" width="125px" />
     </div>
   </div>
-  <!-- <div class="row">
+  <div class="row">
     <div class="col-md-12 text-center">
+      <h2 class="pt-1 clrBlack">SHAMA ROYAL CITY</h2>
+      <h4 class="clrBlack">Custommers Report</h4>
     </div>
-</div> -->
-  <!-- <div class="row">
-    <div class="col-md-12 text-center">
-    </div>
-  </div> -->
+  </div>
+
+
+
   <hr />
-  <div class="table table table-responsive pt-5">
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>Sr #</th>
-          <th>Customer Name</th>
-          <th>CNIC</th>
-          <th class="text-end">Mobile 1</th>
-          <th class="text-end">Mobile 2</th>
-          <th>Email</th>
-          <th class="text-end">Address</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let item of partyList;let i = index;">
-          <td>{{i + 1}}</td>
-          <td>{{item.partyName}}</td>
-          <td>{{item.partyCNIC}}</td>
-          <td class="text-end">{{item.mobile}}</td>
-          <td class="text-end">{{item.mobile2}}</td>
-          <td>{{item.email}}</td>
-          <td class="text-end">{{item.partyAddress}}</td>
-          <!-- <td class="text-end">{{item.mobile2}}</td> -->
-        </tr>
-      </tbody>
-    </table>
+
+
+
+<!---------------------------- table start --------------------------->
+
+
+  <!--header -->
+  <div class="row border-1-black mt-4 ml-1 me-1">
+    <div class="col-md-1 text-center height-27">
+      <label class="mt-1"><b>Sr. #</b></label>
+    </div>
+
+    <div class="col-md-2 border-left-black text-center">
+      <label class="mt-1"><b>Customer Name</b></label>
+    </div>
+
+    <div class="col-md-2 border-left-black text-center">
+      <label class="mt-1"><b>CNIC</b></label>
+    </div>
+
+    <div class="col-md-2 border-left-black text-center">
+      <label class="mt-1"><b>Contact No.</b></label>
+    </div>
+    
+    <div class="col-md-1 border-left-black text-center">
+      <label class="mt-1"><b>Heir</b></label>
+    </div>
+
+    <div class="col-md-4 border-left-black text-center">
+      <label class="mt-1"><b>Address</b></label>
+    </div>
+
+    
+
   </div>
+
+  <!--detail -->
+  <div class="row border-1-black ml-1 me-1" *ngFor="let item of partyList; let i = index;" style="margin-top: -1 !important;">
+    <div class="col-md-1 text-center height-27">
+      <label class="mt-1">{{i + 1}}</label>
+    </div>
+
+    <div class="col-md-2 border-left-black">
+      <label class="mt-1">{{item.partyName}}</label>
+    </div>
+
+    <div class="col-md-2 border-left-black">
+      <label class="mt-1">{{item.partyCNIC}}</label>
+    </div>
+
+    <div class="col-md-2 border-left-black">
+      <label class="mt-1">{{item.mobile}}</label>
+    </div>
+
+    <div class="col-md-1 border-left-black">
+      <label class="mt-1">{{item.nextToKin}}</label>
+    </div>
+
+    <div class="col-md-4 border-left-black">
+      <label class="mt-1">{{item.partyAddress}}</label>
+    </div>
+
+  </div>
+
+
+  <!------------------------------------- Table END -------------------------------------------------->
+
+
 </div>

@@ -12703,3 +12703,11 @@ label{
 .height-27{
   height: 27px !important;
 }
+
+.ml-1{
+  margin-left: 1px !important;
+}
+
+.clrBlack{
+  color: #000 !important;
+}
