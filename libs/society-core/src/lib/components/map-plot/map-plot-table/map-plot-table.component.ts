@@ -17,15 +17,6 @@ export class MapPlotTableComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
-    this.getMapPlot();
-  }
-
-  getMapPlot(){
-    this.dataService.getHttp('core-api/GetMappedPlot', '').subscribe((response: any) => {
-      this.tableData = response;
-    }, (error: any) => {
-      console.log(error);
-    });
   }
 
 }

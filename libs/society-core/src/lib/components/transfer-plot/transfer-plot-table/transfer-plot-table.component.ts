@@ -21,19 +21,7 @@ export class TransferPlotTableComponent implements OnInit {
     private valid: SharedHelpersFieldValidationsModule
   ) {}
 
-  ngOnInit(): void {
-    this.getTransfer();
-  }
+  ngOnInit(): void {}
 
-  getTransfer() {
-    this.dataService.getHttp('core-api/GetFileTransferDetail', '').subscribe(
-      (response: any) => {
-        this.tableData = response;
-      },
-      (error: any) => {
-        console.log(error);
-      }
-    );
-  }
 
 }

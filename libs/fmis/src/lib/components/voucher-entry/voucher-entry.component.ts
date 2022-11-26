@@ -200,7 +200,7 @@ export class VoucherEntryComponent implements OnInit {
       trnType: 'Payment Adjustment'
     },
     {
-      trnTypeId: 'Rec',
+      trnTypeId: 'RecAdj',
       trnType: 'Receipt Adjustment'
     },
   ];

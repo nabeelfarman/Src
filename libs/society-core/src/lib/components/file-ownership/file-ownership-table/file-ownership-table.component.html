@@ -14,6 +14,7 @@
         <th>Party Name</th>
         <th>Type</th>
         <th>Date</th>
+        <th>Action</th>
       </tr>
     </thead>
     <tbody>
@@ -22,7 +23,71 @@
         <td>{{ item.partyName }}</td>
         <td>{{ item.purchaseType }}</td>
         <td>{{ item.allotmentDate | date:'dd-MM-yyyy' }}</td>
+        <td class="text-center">
+          <mat-icon class="cursorPointer" (click)="getPaymentDetail(item)">list_alt</mat-icon>
+        </td>
       </tr>
     </tbody>
   </table>
+</div>
+
+
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="paymentDetailModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+  data-bs-backdrop="false"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content mat-elevation-z20">
+      <div class="modal-header bg-light">
+        <h4 class="modal-title text-primary" id="exampleModalLabel">
+          Payment Plan Detail
+        </h4>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="d-flex">
+              <h5 class="me-2">File Name:</h5>
+              <h4 class="fw-bold">{{lblFile}}</h4>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="d-flex">
+              <h5 class="me-2">Party Name:</h5>
+              <h4 class="fw-bold">{{lblParty}}</h4>
+            </div>
+          </div>
+        </div>
+        <div class="table-responsive">
+          <table class="table table-striped table-bordered">
+            <thead>
+              <tr>
+                <th>Installment Name</th>
+                <th>Amount</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of paymentPlanDetailList; let i = index">
+                <td>{{ item.installmentTypeName }}</td>
+                <td>{{ item.amount }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        
+      </div>
+    </div>
+  </div>
 </div>

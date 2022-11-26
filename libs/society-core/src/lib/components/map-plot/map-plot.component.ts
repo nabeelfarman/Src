@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { SharedHelpersFieldValidationsModule } from '@society/shared/helpers/field-validations';
 import { MapPlotInterface, MyFormField } from '@society/shared/interface';
 import { SharedServicesDataModule } from '@society/shared/services/data';
 import { SharedServicesGlobalDataModule } from '@society/shared/services/global-data';
+import { MapPlotTableComponent } from './map-plot-table/map-plot-table.component';
 
 @Component({
   selector: 'society-map-plot',
@@ -10,6 +11,8 @@ import { SharedServicesGlobalDataModule } from '@society/shared/services/global-
   styleUrls: ['./map-plot.component.scss']
 })
 export class MapPlotComponent implements OnInit {
+
+  @ViewChild(MapPlotTableComponent) mapPlotTable: any;
 
   pageFields: MapPlotInterface = {
     FileID: '0',
@@ -64,6 +67,15 @@ export class MapPlotComponent implements OnInit {
 
     this.getFile();
     this.getPlot();
+    this.getMapPlot();
+  }
+
+  getMapPlot(){
+    this.dataService.getHttp('core-api/GetMappedPlot', '').subscribe((response: any) => {
+      this.mapPlotTable.tableData = response;
+    }, (error: any) => {
+      console.log(error);
+    });
   }
 
   getFile() {
@@ -101,6 +113,7 @@ export class MapPlotComponent implements OnInit {
           if (response.msg == "Plot Mapped Successfully") {
             this.valid.apiInfoResponse('Record saved successfully');
             this.reset();
+            this.getMapPlot();
           } else {
             this.valid.apiErrorResponse(response.msg);
           }

@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { SharedHelpersFieldValidationsModule } from '@society/shared/helpers/field-validations';
 import { MyFormField, TransferPlotInterface } from '@society/shared/interface';
 import { SharedServicesDataModule } from '@society/shared/services/data';
 import { SharedServicesGlobalDataModule } from '@society/shared/services/global-data';
+import { TransferPlotTableComponent } from './transfer-plot-table/transfer-plot-table.component';
 
 @Component({
   selector: 'society-transfer-plot',
@@ -11,6 +12,7 @@ import { SharedServicesGlobalDataModule } from '@society/shared/services/global-
 })
 export class TransferPlotComponent implements OnInit {
 
+  @ViewChild(TransferPlotTableComponent) transferTable: any;
   pageFields: TransferPlotInterface = {
     FileID: '0',
     spType: '',
@@ -78,6 +80,18 @@ export class TransferPlotComponent implements OnInit {
 
     this.getFile();
     this.getParty();
+    this.getTransfer();
+  }
+
+  getTransfer() {
+    this.dataService.getHttp('core-api/GetFileTransferDetail', '').subscribe(
+      (response: any) => {
+        this.transferTable.tableData = response;
+      },
+      (error: any) => {
+        console.log(error);
+      }
+    );
   }
 
   getParty() {
@@ -115,7 +129,7 @@ export class TransferPlotComponent implements OnInit {
           if (response.msg == "File Transferred Successfully") {
             this.valid.apiInfoResponse('Record saved successfully');
             this.reset();
-            
+            this.getTransfer();
           } else {
             this.valid.apiErrorResponse(response.msg);
           }

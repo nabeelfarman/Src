@@ -11,6 +11,7 @@ import { environment } from 'apps/society/src/environments/environment';
 })
 export class CustomerBalanceSheetComponent implements OnInit {
 
+  lblTotal: any = 0;
   logoImg: any = '';
 
   balanceSheetList: any = [];
@@ -47,6 +48,10 @@ export class CustomerBalanceSheetComponent implements OnInit {
   getBalanceSheet(){
     this.dataService.getHttp('core-api/getcustomerbalancesheet', '').subscribe((response: any) => {
       this.balanceSheetList = response;
+      this.lblTotal = 0;
+      for(var i = 0; i < response.length; i++){
+        this.lblTotal = parseInt(this.lblTotal) + parseInt(response[i].balance);
+      }
     }, (error: any) => {
       console.log(error);
     });

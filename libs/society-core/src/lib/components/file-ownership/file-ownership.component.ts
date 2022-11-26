@@ -273,13 +273,15 @@ export class FileOwnershipComponent implements OnInit {
       }else{
         var found = false;
         for(var i = 0; i < this.paymentDetailList.length; i++){
-          if(this.paymentDetailList[i].installmentTypeID == this.cmbInstallment){
-            found = true;
-            i = this.paymentDetailList.length + 1;
-          }else if(this.paymentDetailList[i].dueDate >= this.datePipe.transform(this.dtpDueDate, 'yyyy-MM-dd')){
+          if(this.datePipe.transform(this.paymentDetailList[i].dueDate, 'yyyy-MM-dd') >= this.datePipe.transform(this.dtpDueDate, 'yyyy-MM-dd')){
             this.valid.apiInfoResponse('date is not correct');
             return;
           }
+          if(this.paymentDetailList[i].installmentTypeID == this.cmbInstallment){
+            found = true;
+            i = this.paymentDetailList.length + 1;
+          }
+          
         }
         if(found == false){
           this.paymentDetailList.push({

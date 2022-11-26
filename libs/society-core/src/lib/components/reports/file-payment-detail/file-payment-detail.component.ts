@@ -16,6 +16,10 @@ export class FilePaymentDetailComponent implements OnInit {
   lblMobile: any = '';
   lblCNIC: any = '';
 
+  lblAmount: any = 0;
+  lblPaid: any = 0;
+  lblBalance: any = 0;
+
   logoImg: any = '';
   cmbFile: any = '';
 
@@ -58,6 +62,16 @@ export class FilePaymentDetailComponent implements OnInit {
       this.lblFileName = response[0].fileName;
       this.lblCNIC = response[0].partyCNIC;
       this.lblMobile = response[0].mobile;
+
+      this.lblAmount = 0;
+      this.lblPaid = 0;
+      this.lblBalance = 0;
+
+      for(var i = 0; i < response.length; i++){
+        this.lblAmount = parseInt(this.lblAmount) + parseInt(response[i].amount);
+        this.lblPaid = parseInt(this.lblPaid) + parseInt(response[i].paid);
+        this.lblBalance = parseInt(this.lblBalance) + (parseInt(response[i].amount) - parseInt(response[i].paid));
+      }
     }, (error: any) => {
       console.log(error);
     });
