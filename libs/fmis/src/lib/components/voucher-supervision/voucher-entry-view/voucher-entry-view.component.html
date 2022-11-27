@@ -9,35 +9,25 @@
       <tr>
         <th scope="col">Account Code</th>
         <th scope="col">Account Title</th>
-        <th scope="col"><div class="pull-right">Debit</div></th>
-        <th scope="col"><div class="pull-right">Credit</div></th>
-        <th scope="col" class="text-center">Actions</th>
+        <th scope="col">
+          <div class="pull-right">Debit</div>
+        </th>
+        <th scope="col">
+          <div class="pull-right">Credit</div>
+        </th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let item of tableData; let i=index">
         <td>{{item.accountCode}}</td>
-        <td>{{item.accountTitle}}</td>
-        <td><div class="pull-right">{{item.debit | number}}</div></td>
-        <td><div class="pull-right">{{item.credit | number}}</div></td>
-        <td class="text-center">
-          <span
-            class="text-primary cursorPointer border-right-dark ps-2 pe-2"
-            data-bs-toggle="modal"
-            data-bs-target="#breakupModal"
-          >
-            <mat-icon matTooltip="entery breakup">scatter_plot</mat-icon>
-            <sup>breakup</sup>
-          </span>
-          <span
-            class="text-primary cursorPointer ps-2"
-            data-bs-toggle="modal"
-            data-bs-target="#taxModal"
-          >
-            <mat-icon matTooltip="tax calculations">functions</mat-icon>
-            <sup>tax</sup>
-          </span>
+        <td>{{item.coaTitle}}</td>
+        <td>
+          <div class="pull-right">{{item.debit | number}}</div>
         </td>
+        <td>
+          <div class="pull-right">{{item.credit | number}}</div>
+        </td>
+
       </tr>
       <tr class="bg-white border">
         <td colspan="2">
@@ -54,7 +44,9 @@
 <!-- Party -->
 <div class="row">
   <div class="col-md-2">
-    <div class="pull-right"><h4>Party Name</h4></div>
+    <div class="pull-right">
+      <h4>Party Name</h4>
+    </div>
   </div>
   <div class="col-md-8 border-bottom border-dark">
     <p>{{partyName}}</p>
@@ -64,7 +56,9 @@
 <!-- Description -->
 <div class="row mt-5">
   <div class="col-md-2">
-    <div class="pull-right"><h4>Description</h4></div>
+    <div class="pull-right">
+      <h4>Description</h4>
+    </div>
   </div>
   <div class="col-md-8 border-bottom border-dark">
     <p>
@@ -74,26 +68,15 @@
 </div>
 
 <!-- breakup Modal -->
-<div
-  class="modal fade"
-  id="breakupModal"
-  tabindex="-1"
-  aria-labelledby="exampleModalLabel"
-  aria-hidden="true"
-  data-bs-backdrop="false"
->
+<div class="modal fade" id="breakupModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+  data-bs-backdrop="false">
   <div class="modal-dialog modal-xl modal-dialog-centered">
     <div class="modal-content mat-elevation-z20">
       <div class="modal-header bg-light">
         <h4 class="modal-title text-primary" id="exampleModalLabel">
           Transaction Breakup - 71.04.00 - Medical Expenses
         </h4>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        ></button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <society-voucher-entry-breakup></society-voucher-entry-breakup>
@@ -103,26 +86,15 @@
 </div>
 
 <!-- tax calculation -->
-<div
-  class="modal fade"
-  id="taxModal"
-  tabindex="-1"
-  aria-labelledby="exampleModalLabel"
-  aria-hidden="true"
-  data-bs-backdrop="false"
->
+<div class="modal fade" id="taxModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+  data-bs-backdrop="false">
   <div class="modal-dialog modal-md modal-dialog-centered">
     <div class="modal-content mat-elevation-z20">
       <div class="modal-header bg-light">
         <h4 class="modal-title text-primary" id="exampleModalLabel">
           Tax Info
         </h4>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        ></button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <society-transaction-tax-info></society-transaction-tax-info>

@@ -15,24 +15,25 @@ export class VoucherSupervisionComponent implements OnInit {
   @ViewChild(VoucherEntryViewComponent) supervisedTable: any;
 
   dtpVoucherDate: any = "";
+  voucherType: any = "";
 
   voucherList: any = [];
   error: any;
 
   pageFields: UnsupervisedInterface = {
-    trnId: '0',
-    userid: '',
+    invoiceNo: '0',
+    userID: '',
   };
 
   formFields: MyFormField[] = [
     {
-      value: this.pageFields.trnId,
+      value: this.pageFields.invoiceNo,
       msg: 'select voucher no',
       type: 'selectBox',
       required: true,
     },
     {
-      value: this.pageFields.userid,
+      value: this.pageFields.userID,
       msg: '',
       type: 'hidden',
       required: false,
@@ -51,40 +52,39 @@ export class VoucherSupervisionComponent implements OnInit {
 
   }
 
-  getUnsupervisedTransaction(item: any){
+  getVoucherNo(){
 
-    var convertDate = this.datepipe.transform(item, 'yyyy-MM-dd');
+    if(this.dtpVoucherDate != '' && this.voucherType != ''){
 
-    this.dataService
-    .getHttp('fmis-api/VoucherSupervision/getUnsupervisedTransaction?voucherDate=' + convertDate, '')
-    .subscribe(
-      (response: any) => {
-        this.voucherList = response;
-      },
-      (error: any) => {
-        console.log(error);
-      }
-    );
+      var convertDate = this.datepipe.transform(this.dtpVoucherDate, 'yyyy-MM-dd');
+
+      this.dataService
+      .getHttp('core-api/getVoucherWithDate?Vtype=' + this.voucherType + '&VDate=' + convertDate, '')
+      .subscribe(
+        (response: any) => {
+          this.voucherList = response;
+        },
+        (error: any) => {
+          console.log(error);
+        }
+      );
+    }
   }
 
   getVoucherDetail(item: any){
-
-    var data = this.voucherList.filter((x: {trnId: any}) => x.trnId == item);
-
-    this.supervisedTable.partyName = data[0].partyName;
-    this.supervisedTable.description = data[0].trnDescription;
-    this.supervisedTable.voucherNo = data[0].voucherNo;
     this.dataService
-    .getHttp('fmis-api/Voucher/getVoucherDetail?trnID=' + item, '')
+    .getHttp('core-api/getSpecificVocherDetail?invoiceno=' + item, '')
     .subscribe(
       (response: any) => {
         this.supervisedTable.tableData = response;
-
+        
         this.supervisedTable.totalDebit = 0;
         this.supervisedTable.totalCredit = 0;
-
+        
+        this.supervisedTable.partyName = response[0].partyName;
+        this.supervisedTable.description = response[0].invoiceDescription;
+        
         for(var i = 0; i < response.length; i++){
-
           this.supervisedTable.totalDebit += response[i].debit;
           this.supervisedTable.totalCredit += response[i].credit;
         }
@@ -97,14 +97,15 @@ export class VoucherSupervisionComponent implements OnInit {
 
   save(){
     this.dataService
-      .receivedtHttp(this.pageFields, this.formFields, 'fmis-api/VoucherSupervision/saveTransaction')
+      .receivedtHttp(this.pageFields, this.formFields, 'core-api/approveVoucher')
       .subscribe(
-        (response: any[]) => {
-          if (response[0].includes('Success') == true) {
-            this.valid.apiInfoResponse('Record saved successfully');
+        (response: any) => {
+          console.log(response.msg);
+          if (response.msg == 'Voucher Supervise Successfully') {
+            this.valid.apiInfoResponse('Voucher Supervise Successfully');
             this.reset();
           } else {
-            this.valid.apiErrorResponse(response[0]);
+            this.valid.apiErrorResponse(response.msg);
           }
         },
         (error: any) => {
@@ -116,14 +117,18 @@ export class VoucherSupervisionComponent implements OnInit {
 
   reset(){
     this.formFields = this.valid.resetFormFields(this.formFields);
+    this.formFields[0].value = '0';
     this.dtpVoucherDate = '';
+    this.voucherType = '';
     this.voucherList = [];
-    this.supervisedTable.partyName = '';
-    this.supervisedTable.description = '';
-    this.supervisedTable.totalDebit = 0;
-    this.supervisedTable.totalCredit = 0;
     this.supervisedTable.voucherNo = '';
     this.supervisedTable.tableData = [];
+
+    this.supervisedTable.totalDebit = 0;
+    this.supervisedTable.totalCredit = 0;
     
+    this.supervisedTable.partyName = '';
+    this.supervisedTable.description = '';
+        
   }
 }

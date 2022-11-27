@@ -1,4 +1,4 @@
 export class UnsupervisedInterface {
-    trnId = '0';
-    userid = '';
+    invoiceNo = '0';
+    userID = '';
 }

@@ -13,17 +13,18 @@
   <div class="offset-md-3 col-md-2">
     <mat-form-field class="w-100">
       <mat-label>Voucher Type</mat-label>
-      <mat-select>
-        <mat-option value="one">Payment Voucher</mat-option>
-        <mat-option value="two">Receipt Voucher</mat-option>
-        <mat-option value="two">Adjustment Voucher</mat-option>
+      <mat-select [(ngModel)]="voucherType" (ngModelChange)="getVoucherNo()">
+        <mat-option value="Pay">Payment Voucher</mat-option>
+        <mat-option value="Rec">Receipt Voucher</mat-option>
+        <mat-option value="PayAdj">Payment Adjustment Voucher</mat-option>
+        <mat-option value="RecAdj">Preceipt Adjustment Voucher</mat-option>
       </mat-select>
     </mat-form-field>
   </div>
   <div class="col-md-2">
     <mat-form-field class="w-100">
       <mat-label>Voucher Date</mat-label>
-      <input matInput [matDatepicker]="picker" [(ngModel)]="dtpVoucherDate" (ngModelChange)="getUnsupervisedTransaction(dtpVoucherDate)" />
+      <input matInput [matDatepicker]="picker" [(ngModel)]="dtpVoucherDate" (ngModelChange)="getVoucherNo()" />
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
@@ -32,11 +33,8 @@
     <mat-form-field class="w-100">
       <mat-label>Voucher No</mat-label>
       <mat-select [(ngModel)]="formFields[0].value" (ngModelChange)="getVoucherDetail(formFields[0].value)">
-        <mat-option
-          *ngFor="let item of voucherList"
-          [value]="item.trnId"
-        >
-        {{ item.voucherNo }}
+        <mat-option *ngFor="let item of voucherList" [value]="item.invoiceNo">
+          {{ item.invoiceNo }}
         </mat-option>
       </mat-select>
     </mat-form-field>

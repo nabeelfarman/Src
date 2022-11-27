@@ -27,7 +27,7 @@ export class ChartOfAccountTableComponent implements OnInit {
   }
 
   getChartOfAccount(){
-    this.dataService.getHttp('fmis-api/ChartOfAccount/getChartOfAccount', '').subscribe((response: any) => {
+    this.dataService.getHttp('core-api/getChartOfAccount', '').subscribe((response: any) => {
       this.tableData = response.reverse();
     }, (error: any) => {
       console.log(error);
@@ -40,14 +40,14 @@ export class ChartOfAccountTableComponent implements OnInit {
 
   delete(item: any){
     var pageFields = {
-      newCoaID: '0',
+      coaID: '0',
       spType: '',
-      userId: '',
+      userID: '',
     };
 
     var formFields: MyFormField[] = [
       {
-        value: pageFields.newCoaID,
+        value: pageFields.coaID,
         msg: '',
         type: 'hidden',
         required: false,
@@ -59,7 +59,7 @@ export class ChartOfAccountTableComponent implements OnInit {
         required: false,
       },
       {
-        value: pageFields.userId,
+        value: pageFields.userID,
         msg: '',
         type: 'hidden',
         required: false,
@@ -73,15 +73,15 @@ export class ChartOfAccountTableComponent implements OnInit {
       .deleteHttp(
         pageFields,
         formFields,
-        'fmis-api/ChartOfAccount/saveChartOfAccount'
+        'core-api/deleteChartOfAccount'
       )
       .subscribe(
-        (response: any[]) => {
-          if(response[0].includes('Success') == true){
+        (response: any) => {
+          if(response.msg == "Data Deleted Successfully"){
             this.valid.apiInfoResponse('Record deleted successfully');
             this.getChartOfAccount();
           }else{
-            this.valid.apiErrorResponse(response[0]);
+            this.valid.apiErrorResponse(response.msg);
           }
           
         },
