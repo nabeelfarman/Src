@@ -4,6 +4,7 @@ import { MyFormField } from '@society/shared/interface';
 import { SharedServicesDataModule } from '@society/shared/services/data';
 import { SharedServicesGlobalDataModule } from '@society/shared/services/global-data';
 import Swal from "sweetalert2/dist/sweetalert2.js";
+declare var $: any;
 
 @Component({
   selector: 'society-src-payment-plan-table',
@@ -14,6 +15,7 @@ export class SrcPaymentPlanTableComponent implements OnInit {
 
   tblSearch: any = '';
   tableData: any = [];
+  paymentPlanDetailList: any = [];
 
   error: any;
 
@@ -31,6 +33,20 @@ export class SrcPaymentPlanTableComponent implements OnInit {
     this.dataService.getHttp('core-api/getpaymentplan', '').subscribe(
       (response: any) => {
         this.tableData = response;
+      },
+      (error: any) => {
+        console.log(error);
+      }
+    );
+  }
+
+  getPaymentDetail(item: any){
+    
+    this.paymentPlanDetailList = [];
+    this.dataService.getHttp('core-api/GetPaymentPlanDetail?PaymentPlanID=' + item.paymentPlanID, '').subscribe(
+      (response: any) => {
+        this.paymentPlanDetailList = response;
+        $('#paymentDetailModal').modal('show');
       },
       (error: any) => {
         console.log(error);
