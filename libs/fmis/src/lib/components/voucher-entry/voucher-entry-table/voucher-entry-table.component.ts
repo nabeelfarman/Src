@@ -15,6 +15,9 @@ export class VoucherEntryTableComponent implements OnInit {
 
   @Output() eventEmitter = new EventEmitter();
 
+  searchHead: any = '';
+  searchParty: any = '';
+
   lblTransaction: string = '';
   lblDebit: any = 0;
   lblCredit: any = 0;

@@ -1,4 +1,5 @@
 <div class="table-responsive">
+
   <table class="table table-striped table-bordered">
     <thead>
       <tr>
@@ -16,9 +17,11 @@
             <mat-form-field class="w-100" floatLabel="never">
               <mat-label>Select</mat-label>
               <mat-select [(ngModel)]="cmbAccHead">
-                <!-- <mat-option value="one">71.01.01 - Pay to Officer</mat-option>
-                <mat-option value="two">71.01.02 - Pay to Staff</mat-option> -->
-                <mat-option *ngFor="let item of coaList" [value]="item.coaID">
+                <mat-option>
+                  <ngx-mat-select-search [(ngModel)]="searchHead" [placeholderLabel]="'Search...'"
+                    [noEntriesFoundLabel]="'Not found'" name="search"></ngx-mat-select-search>
+                </mat-option>
+                <mat-option *ngFor="let item of coaList | filter : searchHead" [value]="item.coaID">
                   {{ item.coaTitle }}
                 </mat-option>
               </mat-select>
@@ -30,7 +33,11 @@
             <mat-form-field class="w-100" floatLabel="never">
               <mat-label>Select</mat-label>
               <mat-select [(ngModel)]="cmbPartyTo">
-                <mat-option *ngFor="let item of partyList" [value]="item.partyID">
+                <mat-option>
+                  <ngx-mat-select-search [(ngModel)]="searchParty" [placeholderLabel]="'Search...'"
+                    [noEntriesFoundLabel]="'Not found'" name="search"></ngx-mat-select-search>
+                </mat-option>
+                <mat-option *ngFor="let item of partyList | filter : searchParty" [value]="item.partyID">
                   {{ item.partyName }}
                 </mat-option>
               </mat-select>

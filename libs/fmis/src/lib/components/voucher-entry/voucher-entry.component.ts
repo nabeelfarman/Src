@@ -21,6 +21,8 @@ export class VoucherEntryComponent implements OnInit {
 
   @ViewChild(InstallmentVoucherPrintComponent) voucherPrint: any;
   
+  searchParty: any = '';
+  
   bankID: string = '';
   lblTax: string = '';
   

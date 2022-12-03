@@ -61,8 +61,9 @@ import { VoucherEntryViewComponent } from './components/voucher-supervision/vouc
 import { FmisDashboardComponent } from './components/fmis-dashboard/fmis-dashboard.component';
 import { ChartModule } from 'angular-highcharts';
 
-import { SearchPipe } from '@society/shared/interface';
-// import { Ng2SearchPipeModule } from 'ng2-search-filter';
+// import { SearchPipe } from '@society/shared/interface';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { SharedInterfaceModule } from '@society/shared/interface';
 
 import { SocietyCoreModule } from '@society/society-core';
 import { CustomerBalanceSheetComponent } from './components/reports/customer-balance-sheet/customer-balance-sheet.component';
@@ -113,8 +114,9 @@ export const fmisRoutes: Route[] = [
     TextMaskModule,
     NgxMatSelectSearchModule,
     ChartModule,
-    SocietyCoreModule
-    // Ng2SearchPipeModule
+    SocietyCoreModule,
+    SharedInterfaceModule,
+    Ng2SearchPipeModule
   ],
   declarations: [
     MainGroupComponent,

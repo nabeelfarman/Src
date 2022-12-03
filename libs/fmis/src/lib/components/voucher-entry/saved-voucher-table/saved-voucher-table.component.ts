@@ -18,6 +18,8 @@ export class SavedVoucherTableComponent implements OnInit {
   @Output() eventEmitterDelete = new EventEmitter();
   @Output() eventEmitterPrint = new EventEmitter();
 
+  tblSearch: any = '';
+
   public config: PerfectScrollbarConfigInterface = {};
 
   tableData: any = [];

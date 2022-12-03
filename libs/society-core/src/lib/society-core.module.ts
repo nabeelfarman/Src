@@ -65,7 +65,9 @@ import { SavedPlotFilePaymentTableComponent } from './components/plot-file-payme
 import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
-import { SearchPipe } from '@society/shared/interface';
+// import { SearchPipe } from '@society/shared/interface';
+import { SharedInterfaceModule } from '@society/shared/interface';
+
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import { PlotAllotmentComponent } from './components/plot-allotment/plot-allotment.component';
 import { PlotAllotmentTableComponent } from './components/plot-allotment/plot-allotment-table/plot-allotment-table.component';
@@ -150,6 +152,7 @@ export const societyCoreRoutes: Route[] = [
     PerfectScrollbarModule,
     NgxMatSelectSearchModule,
     NgxPrintModule,
+    SharedInterfaceModule
   ],
   declarations: [
     PlotCategoryComponent,
@@ -201,7 +204,7 @@ export const societyCoreRoutes: Route[] = [
     TransferLetterComponent,
     MembershipPaymentsReportComponent,
     SavedPlotFilePaymentTableComponent,
-    SearchPipe,
+    // SearchPipe,
     PlotAllotmentComponent,
     PlotAllotmentTableComponent,
     MemberProfilePrintComponent,

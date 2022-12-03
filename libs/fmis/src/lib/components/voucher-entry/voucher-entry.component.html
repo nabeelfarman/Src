@@ -84,7 +84,11 @@
         <mat-form-field class="w-100 pe-3">
           <mat-label>Party</mat-label>
           <mat-select [(ngModel)]="formFields[8].value">
-            <mat-option *ngFor="let item of partyList" [value]="item.partyID">
+            <mat-option>
+              <ngx-mat-select-search [(ngModel)]="searchParty" [placeholderLabel]="'Search...'"
+                [noEntriesFoundLabel]="'Not found'" name="search"></ngx-mat-select-search>
+            </mat-option>
+            <mat-option *ngFor="let item of partyList | filter : searchParty;" [value]="item.partyID">
               {{ item.partyName }}
             </mat-option>
           </mat-select>
