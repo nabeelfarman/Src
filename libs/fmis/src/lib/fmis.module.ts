@@ -71,6 +71,11 @@ import { InstallmentVoucherComponent } from './components/installment-voucher/in
 import { InstallmentVoucherTableComponent } from './components/installment-voucher/installment-voucher-table/installment-voucher-table.component';
 import { InstallmentVoucherReportComponent } from './components/installment-voucher/installment-voucher-report/installment-voucher-report.component';
 import { InstallmentVoucherPrintComponent } from './components/voucher-entry/installment-voucher-print/installment-voucher-print.component';
+import { FixedAssetComponent } from './components/config/fixed-asset/fixed-asset.component';
+import { VendorComponent } from './components/config/vendor/vendor.component';
+import { FixedAssetTableComponent } from './components/config/fixed-asset/fixed-asset-table/fixed-asset-table.component';
+import { VendorTableComponent } from './components/config/vendor/vendor-table/vendor-table.component';
+import { DepreciationTableComponent } from './components/config/fixed-asset/fixed-asset-table/depreciation-table/depreciation-table.component';
 
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -101,6 +106,8 @@ export const fmisRoutes: Route[] = [
   { path: 'sup', component: VoucherSupervisionComponent },
   { path: 'dashboard', component: FmisDashboardComponent },
   { path: 'rptbalancesheet', component: CustomerBalanceSheetComponent },
+  { path: 'fixedasset', component: FixedAssetComponent },
+  { path: 'vendor', component: VendorComponent },
 ];
 
 @NgModule({
@@ -174,6 +181,11 @@ export const fmisRoutes: Route[] = [
     InstallmentVoucherTableComponent,
     InstallmentVoucherReportComponent,
     InstallmentVoucherPrintComponent,
+    FixedAssetComponent,
+    VendorComponent,
+    FixedAssetTableComponent,
+    VendorTableComponent,
+    DepreciationTableComponent,
     // SearchPipe
   ],
   exports: [
@@ -210,6 +222,9 @@ export const fmisRoutes: Route[] = [
     InstallmentVoucherTableComponent,
     InstallmentVoucherReportComponent,
     InstallmentVoucherPrintComponent,
+    FixedAssetTableComponent,
+    VendorTableComponent,
+    DepreciationTableComponent
     // SearchPipe
   ],
   providers: [

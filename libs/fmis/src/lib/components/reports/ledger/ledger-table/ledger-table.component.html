@@ -3,25 +3,23 @@
     <thead>
       <tr>
         <th class="col-1 text-center">Date</th>
-        <th class="col-2 text-center">Voucher No</th>
-        <th class="col-1 text-center">Inst. No</th>
+        <th class="col-2 text-center">Invoice No</th>
         <th class="col-2">Party</th>
         <th class="col-3">Description</th>
-        <th class="col-1 text-right">Opening</th>
         <th class="col-1 text-right">Debit</th>
         <th class="col-1 text-right">Credit</th>
+        <th class="col-1 text-right">Balance</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let item of tableData; let i=index">
-        <td class="col-1 text-center">{{item.TrnDate | date}}</td>
-        <td class="col-1 text-center">-</td>
-        <td class="col-1 text-center">-</td>
-        <td class="col-3">-</td>
-        <td class="col-3">{{item.trnDescription}}</td>
-        <td class="col-1 text-right">{{item.Opening | number}}</td>
-        <td class="col-1 text-right">{{item.Debit | number}}</td>
-        <td class="col-1 text-right">{{item.Credit | number}}</td>
+        <td class="col-1 text-center">{{item.invoiceDate | date}}</td>
+        <td class="col-1 text-center">{{item.invoiceNo}}</td>
+        <td class="col-3">{{item.partyName}}</td>
+        <td class="col-3">{{item.invoiceDescription}}</td>
+        <td class="col-1 text-right">{{item.debit | number}}</td>
+        <td class="col-1 text-right">{{item.credit | number}}</td>
+        <td class="col-1 text-right">{{item.balance | number}}</td>
       </tr>
       <!-- <tr>
         <td class="col-1 text-center">25-Feb-2021</td>

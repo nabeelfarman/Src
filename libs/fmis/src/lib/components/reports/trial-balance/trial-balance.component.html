@@ -1,5 +1,5 @@
 <div class="saveUpdateBar border mat-elevation-z2">
-  <button mat-button class="save cursorPointer">
+  <button mat-button class="save cursorPointer" (click)="showReport()">
     <mat-icon>insert_drive_file</mat-icon>
     <span class="ps-2">Report</span>
   </button>
@@ -15,14 +15,13 @@
     <div class="col-md-6">
       <mat-form-field class="pull-right">
         <mat-label>Year</mat-label>
-        <mat-select>
-          <mat-option value="one">2020</mat-option>
-          <mat-option value="two">2021</mat-option>
+        <mat-select [(ngModel)]="cmbYear">
+          <mat-option *ngFor="let item of yearList" [value]="item.yearID">{{item.yearTitle}}</mat-option>
         </mat-select>
       </mat-form-field>
     </div>
     <div class="col-md-6">
-      <mat-form-field>
+      <!-- <mat-form-field>
         <mat-label>Month</mat-label>
         <mat-select>
           <mat-option value="1">1</mat-option>
@@ -38,7 +37,7 @@
           <mat-option value="11">11</mat-option>
           <mat-option value="12">12</mat-option>
         </mat-select>
-      </mat-form-field>
+      </mat-form-field> -->
     </div>
   </div>
   <!-- end row - 01 -->

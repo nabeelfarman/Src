@@ -1,0 +1,64 @@
+<div class="saveUpdateBar border mat-elevation-z2">
+  <button mat-button class="save cursorPointer" (click)="save()">
+    <mat-icon>save</mat-icon>
+    <span class="ps-2">Save</span>
+  </button>
+  <button mat-button class="save cursorPointer" (click)="reset()">
+    <mat-icon>cached</mat-icon>
+    <span class="ps-2">Reset</span>
+  </button>
+</div>
+
+<div class="row no-scroll h-100 border-top">
+  <div class="col-md-4 bg-white h-100">
+    <h2 class="pt-3 ps-4 pe-3">Add / Modify</h2>
+    <hr />
+    <mat-form-field class="w-100 ps-2">
+      <mat-label>Voucher Date</mat-label>
+      <input matInput [matDatepicker]="picker" [(ngModel)]="formFields[0].value" />
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field class="w-100 ps-2">
+      <mat-label>Project</mat-label>
+      <mat-select [(ngModel)]="formFields[4].value">
+        <mat-option *ngFor="let item of projectList" [value]="item.projectID">
+          {{ item.projectName }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="w-100 ps-2">
+      <mat-label>Party</mat-label>
+      <mat-select [(ngModel)]="formFields[5].value">
+        <mat-option *ngFor="let item of partyList" [value]="item.partyID">
+          {{ item.partyName }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="w-100 ps-2">
+      <mat-label>Bank</mat-label>
+      <mat-select [(ngModel)]="formFields[6].value">
+        <mat-option *ngFor="let item of bankList" [value]="item.bankID">
+          {{ item.bankName }} - {{ item.bankAccountNo }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="w-100 ps-2" floatLabel="never">
+      <mat-label>Bank Receipt No</mat-label>
+      <input matInput [(ngModel)]="formFields[7].value" />
+    </mat-form-field>
+    <mat-form-field class="w-100 ps-2">
+      <mat-label>Invoice Description</mat-label>
+      <textarea matInput [(ngModel)]="formFields[8].value"></textarea>
+    </mat-form-field>
+    <mat-form-field class="w-100 ps-2" floatLabel="never">
+      <mat-label>Amount</mat-label>
+      <input type="number" matInput [(ngModel)]="formFields[9].value" />
+    </mat-form-field>
+  </div>
+  <div class="col-md-8">
+    <h2 class="pt-3 ps-4 pe-3">Saved Record</h2>
+    <hr />
+    <society-fixed-asset-table></society-fixed-asset-table>
+  </div>
+</div>

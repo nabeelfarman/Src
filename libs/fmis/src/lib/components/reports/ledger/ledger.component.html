@@ -1,5 +1,5 @@
 <div class="saveUpdateBar border mat-elevation-z2">
-  <button mat-button class="save cursorPointer" (click)="save()">
+  <button mat-button class="save cursorPointer" (click)="showReport()">
     <mat-icon>insert_drive_file</mat-icon>
     <span class="ps-2">Report</span>
   </button>
@@ -13,20 +13,9 @@
   <div class="col-md-6">
     <mat-form-field class="w-100 ps-3">
       <mat-label>Head of Account</mat-label>
-      <mat-select [(ngModel)]="formFields[0].value">
-        <!-- <mat-option>
-          <ngx-mat-select-search [(ngModel)]="searchHead" [placeholderLabel]="'Search...'"
-            [noEntriesFoundLabel]="'Not found'" name="search"></ngx-mat-select-search>
-        </mat-option>
-        <mat-option
-          *ngFor="let item of coaList | search: 'accountTitle, accountCode': searchHead"
-          [value]="item.coaID"
-        > -->
-        <mat-option
-        *ngFor="let item of coaList"
-        [value]="item.coaID"
-      >
-        {{ item.accountCode }} - {{ item.accountTitle }}
+      <mat-select [(ngModel)]="cmbCOA">
+        <mat-option *ngFor="let item of coaList" [value]="item.coaID">
+          {{ item.coaTitle }}
         </mat-option>
       </mat-select>
     </mat-form-field>
@@ -34,7 +23,7 @@
   <div class="col-md-2">
     <mat-form-field>
       <mat-label>From Date</mat-label>
-      <input matInput [matDatepicker]="fromDate" [(ngModel)]="formFields[2].value" />
+      <input matInput [matDatepicker]="fromDate" [(ngModel)]="dtpFromDate" />
       <mat-datepicker-toggle matSuffix [for]="fromDate"></mat-datepicker-toggle>
       <mat-datepicker #fromDate></mat-datepicker>
     </mat-form-field>
@@ -42,7 +31,7 @@
   <div class="col-md-2">
     <mat-form-field>
       <mat-label>To Date</mat-label>
-      <input matInput [matDatepicker]="toDate" [(ngModel)]="formFields[3].value" />
+      <input matInput [matDatepicker]="toDate" [(ngModel)]="dtpToDate" />
       <mat-datepicker-toggle matSuffix [for]="toDate"></mat-datepicker-toggle>
       <mat-datepicker #toDate></mat-datepicker>
     </mat-form-field>
@@ -70,21 +59,21 @@
         <tbody>
           <tr>
             <td class="col-6">
-              <strong class="pull-right">Opening Balance</strong>
+              <strong class="pull-right">Total Debit</strong>
             </td>
-            <td class="col-6"><strong class="pull-right">{{lblOpening | number}}</strong></td>
+            <td class="col-6"><strong class="pull-right">{{lblDebit | number}}</strong></td>
           </tr>
           <tr>
             <td class="col-6">
-              <strong class="pull-right">Periodic Balance</strong>
+              <strong class="pull-right">Total Credit</strong>
             </td>
-            <td class="col-6"><strong class="pull-right">{{lblPerodic | number}}</strong></td>
+            <td class="col-6"><strong class="pull-right">{{lblCredit | number}}</strong></td>
           </tr>
           <tr>
             <td class="col-6">
-              <strong class="pull-right">Closing Balance</strong>
+              <strong class="pull-right">Total Balance</strong>
             </td>
-            <td class="col-6"><strong class="pull-right">{{lblClosing | number}}</strong></td>
+            <td class="col-6"><strong class="pull-right">{{lblBalance | number}}</strong></td>
           </tr>
         </tbody>
       </table>

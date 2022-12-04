@@ -29,6 +29,9 @@ export * from './lib/fmis/voucher-modal-interface';
 export * from './lib/fmis/voucher-table-interface';
 
 export * from './lib/fmis/installment-voucher-interface';
+export * from './lib/fmis/fixed-asset-interface';
+export * from './lib/fmis/vender-interface';
+export * from './lib/fmis/depreciation-interface';
 
 //export society core classes
 export * from './lib/society-core/plot-type-interface';

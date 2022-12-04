@@ -184,7 +184,7 @@ export class SharedServicesDataModule {
     });
     // console.log(headers);
     for (let i = 0; i < headers.length; i++) {
-      if (formFields[i].type == 'datePicker') {
+      if (formFields[i].type == 'date') {
         formFields[i].value = this.valid.dateFormat(formFields[i].value);
       }
       pageInterface[headers[i]['header']] = formFields[i].value;
