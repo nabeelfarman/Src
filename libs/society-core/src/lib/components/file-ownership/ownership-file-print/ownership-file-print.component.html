@@ -1,0 +1,84 @@
+<div class="container bg-white" id="print-summary">
+
+  <div class="row mb-2">
+    <div class="col-md-6 text-left">
+      <img class="mt-1" src="assets/ui/company/shama.png" width="125px" />
+    </div>
+
+
+    <div class="col-md-6 text-right">
+
+      <div class="d-flex flex-column align-items-center">
+        <div class="h2Report"><b>SHAMA ROYAL CITY</b></div>
+        <div class="h4Report">A Project of: SARDAR ASSOCIATES</div>
+        <h2 class="h3Report txtDarkGrey mt-1">Ownership File Report</h2>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <hr />
+
+
+
+
+  <!---------------------------- table start --------------------------->
+
+
+  <!--header -->
+  <div class="row border-1-black mt-4">
+    <div class="col-md-1 text-center height-27">
+      <label class="mt-1"><b>Sr. #</b></label>
+    </div>
+
+    <div class="col-md-2 border-left-black text-center">
+      <label class="mt-1"><b>Date</b></label>
+    </div>
+
+    <div class="col-md-2 border-left-black text-center">
+      <label class="mt-1"><b>File Name</b></label>
+    </div>
+
+    <div class="col-md-3 border-left-black text-center">
+      <label class="mt-1"><b>Party</b></label>
+    </div>
+
+    <div class="col-md-2 border-left-black text-center">
+      <label class="mt-1"><b>Plot Size</b></label>
+    </div>
+
+    <div class="col-md-2 border-left-black text-center">
+      <label class="mt-1"><b>Plot Type</b></label>
+    </div>
+
+  </div>
+
+  <!--detail -->
+  <div class="row border-1-black" *ngFor="let item of tableData; let i = index;" style="margin-top: -1;">
+    <div class="col-md-1 text-center height-27">
+      <label class="mt-1">{{i + 1}}</label>
+    </div>
+
+    <div class="col-md-2 border-left-black">
+      <label class="mt-1">{{item.allotmentDate | date: 'yyy-MM-dd'}}</label>
+    </div>
+
+    <div class="col-md-2 border-left-black">
+      <label class="mt-1">{{item.fileName}}</label>
+    </div>
+
+    <div class="col-md-3 border-left-black">
+      <label class="mt-1">{{item.partyName}}</label>
+    </div>
+
+    <div class="col-md-2 border-left-black text-right">
+      <label class="mt-1">{{item.plotSize}}</label>
+    </div>
+
+    <div class="col-md-2 border-left-black text-right">
+      <label class="mt-1">{{item.plotTypeTitle}}</label>
+    </div>
+
+  </div>

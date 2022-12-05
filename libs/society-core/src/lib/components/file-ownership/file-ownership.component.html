@@ -126,7 +126,10 @@
   <div class="col-md-4">
     <h2 class="pt-2 pb-2 ps-2 border-bottom">Saved Files</h2>
     <div class="d-flex flex-column">
-      <society-file-ownership-table></society-file-ownership-table>
+      <society-file-ownership-table (eventEmitterPrint)="printData($event)"></society-file-ownership-table>
     </div>
   </div>
 </div>
+
+
+<society-ownership-file-print class="d-none" id="print-summary"></society-ownership-file-print>

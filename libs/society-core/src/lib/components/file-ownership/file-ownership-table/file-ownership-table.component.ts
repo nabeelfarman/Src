@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { SharedHelpersFieldValidationsModule } from '@society/shared/helpers/field-validations';
 import { MyFormField } from '@society/shared/interface';
 import { SharedServicesDataModule } from '@society/shared/services/data';
@@ -11,6 +11,8 @@ declare var $: any;
   styleUrls: ['./file-ownership-table.component.scss']
 })
 export class FileOwnershipTableComponent implements OnInit {
+
+  @Output() eventEmitterPrint = new EventEmitter();
 
   tblSearch: any = '';
 
@@ -59,4 +61,14 @@ export class FileOwnershipTableComponent implements OnInit {
       }
     );
   }
+  
+  printData(item: any){
+    // console.log(item);return;
+    this.dataService.getHttp('core-api/GetSpecificFileDetail?FileOwnerID=' + item.fileOwnerShipID, '').subscribe((response: any) => {
+      this.eventEmitterPrint.emit({item, response});
+    }, (error: any) => {
+      console.log(error);
+    });
+  }
+
 }

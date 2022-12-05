@@ -91,6 +91,7 @@ import { AdvertisementCompanyReportComponent } from './components/reports/advert
 import { TransferPlotTableComponent } from './components/transfer-plot/transfer-plot-table/transfer-plot-table.component';
 import { MapPlotTableComponent } from './components/map-plot/map-plot-table/map-plot-table.component';
 import { FilePaymentDetailComponent } from './components/reports/file-payment-detail/file-payment-detail.component';
+import { OwnershipFilePrintComponent } from './components/file-ownership/ownership-file-print/ownership-file-print.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -227,6 +228,7 @@ export const societyCoreRoutes: Route[] = [
     TransferPlotTableComponent,
     MapPlotTableComponent,
     FilePaymentDetailComponent,
+    OwnershipFilePrintComponent,
   ],
   exports: [
     PlotCategoryTableComponent,
@@ -267,6 +269,7 @@ export const societyCoreRoutes: Route[] = [
     FileOwnershipTableComponent,
     TransferPlotTableComponent,
     MapPlotTableComponent,
+    OwnershipFilePrintComponent
     // SearchPipe
   ],
   providers: [

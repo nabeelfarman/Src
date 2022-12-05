@@ -5,6 +5,7 @@ import { MyFormField, OwnershipFileInterface } from '@society/shared/interface';
 import { SharedServicesDataModule } from '@society/shared/services/data';
 import { SharedServicesGlobalDataModule } from '@society/shared/services/global-data';
 import { FileOwnershipTableComponent } from './file-ownership-table/file-ownership-table.component';
+import { OwnershipFilePrintComponent } from './ownership-file-print/ownership-file-print.component';
 
 @Component({
   selector: 'society-file-ownership',
@@ -14,6 +15,7 @@ import { FileOwnershipTableComponent } from './file-ownership-table/file-ownersh
 export class FileOwnershipComponent implements OnInit {
 
   @ViewChild(FileOwnershipTableComponent) ownerTable: any;
+  @ViewChild(OwnershipFilePrintComponent) ownerPrint: any;
 
   dtpAllotmentDate: any = '';
   cmbInstallment: any = '';
@@ -300,4 +302,13 @@ export class FileOwnershipComponent implements OnInit {
   remove(index: any){
     this.paymentDetailList.splice(index, 1);
   }
+
+  printData(item: any) {
+    
+    // console.log(item);return;
+    this.ownerPrint.tableData = item.response;
+    setTimeout(() => this.globalService.printData('#print-summary'), 200);
+    
+  }
+
 }
