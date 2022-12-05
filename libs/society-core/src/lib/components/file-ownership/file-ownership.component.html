@@ -64,15 +64,19 @@
         <thead>
           <tr>
             <th class="text-center">Sr#</th>
-            <th>Installment Type</th>
-            <th class="text-right">Amount</th>
-            <th class="text-right">Due Date</th>
+            <th class="text-center">Inst. Type</th>
+            <th class="text-center">Amount</th>
+            <th class="text-center">Due Date</th>
             <th class="text-center">Actions</th>
           </tr>
         </thead>
         <tbody>
+
+
           <tr *ngIf="formFields[7].value == 0">
+
             <td class="text-center">0</td>
+
             <td>
               <select class="form-control" [(ngModel)]="cmbInstallment">
                 <option *ngFor="let inst of installmentList" [value]="inst.installmentTypeID">
@@ -80,43 +84,59 @@
                 </option>
               </select>
             </td>
+
             <td>
               <input type="number" class="form-control" [(ngModel)]="txtAmount" />
             </td>
+
             <td>
-              <mat-form-field class="w-75">
+              <mat-form-field class="text-center">
                 <input matInput [matDatepicker]="picker" [(ngModel)]="dtpDueDate" />
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
               </mat-form-field>
             </td>
+
             <td class="text-center">
               <span class="text-primary cursorPointer" (click)="addPaymentPlan()">
                 <mat-icon>save</mat-icon>
               </span>
             </td>
+
           </tr>
+
+
+
           <tr *ngFor="let item of paymentDetailList; let i = index">
+
             <td class="text-center">{{ i + 1 }}</td>
+
             <td>
               {{item.installmentTypeName}}
             </td>
-            <td>
+
+            <td class="text-right">
               {{item.amount | number}}
             </td>
-            <td *ngIf="formFields[7].value > 0">
-              <mat-form-field class="w-75">
+
+            <td class="text-center" *ngIf="formFields[7].value > 0">
+              <mat-form-field class="text-center">
                 <input matInput [matDatepicker]="picker" [(ngModel)]="item.dueDate" />
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
               </mat-form-field>
             </td>
-            <td *ngIf="formFields[7].value == 0">{{item.dueDate | date: 'dd-MM-yyyy'}}</td>
+
+            <td class="text-center" *ngIf="formFields[7].value == 0">
+              {{item.dueDate | date: 'dd-MM-yyyy'}}
+            </td>
+
             <td class="text-center">
               <span class="text-danger cursorPointer" *ngIf="formFields[7].value == 0" (click)="remove(i)">
                 <mat-icon>delete</mat-icon>
               </span>
             </td>
+
           </tr>
         </tbody>
       </table>

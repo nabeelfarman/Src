@@ -1,84 +1,129 @@
 <div class="container bg-white" id="print-summary">
+  
+  
 
-  <div class="row mb-2">
-    <div class="col-md-6 text-left">
-      <img class="mt-1" src="assets/ui/company/shama.png" width="125px" />
-    </div>
+  <!-- Date and Purchase Type -->
+  <div class="row" *ngFor="let item of tableData; let i = index;" style="margin-top: 350px;">
 
-
-    <div class="col-md-6 text-right">
-
-      <div class="d-flex flex-column align-items-center">
-        <div class="h2Report"><b>SHAMA ROYAL CITY</b></div>
-        <div class="h4Report">A Project of: SARDAR ASSOCIATES</div>
-        <h2 class="h3Report txtDarkGrey mt-1">Ownership File Report</h2>
+    
+      <div class="col-md-2 ">
+        <label>Booking Date:</label>
       </div>
+      <div class="col-md-3">
+        <label class="borderBottomB1 width-100">{{item.allotmentDate | date}}</label>
+      </div>
+  
+      <div class="col-md-2 "></div>
+  
+      <div class="col-md-2 ">
+        <label>Purchase Type:</label>
+      </div>
+      <div class="col-md-3">
+        <label class="borderBottomB1 width-100">{{item.purchaseType}}</label>
+      </div>
+  
 
+  </div>
+
+
+  <!-- Owner and CNIC  -->
+  <div class="row mt-4" *ngFor="let item of tableData; let i = index;">
+
+    
+      <div class="col-md-2 ">
+        <label>Buyer Name:</label>
+      </div>
+      <div class="col-md-3">
+        <label class="borderBottomB1 width-100">{{item.partyName}}</label>
+      </div>
+  
+      <div class="col-md-2 "></div>
+  
+      <div class="col-md-2 ">
+        <label>CNIC :</label>
+      </div>
+      <div class="col-md-3">
+        <label class="borderBottomB1 width-100">{{item.partyCNIC}}</label>
+      </div>
+  
+
+  </div>
+  
+
+  <!-- File Name and Nature  -->
+  <div class="row mt-4" *ngFor="let item of tableData; let i = index;">
+
+    
+    <div class="col-md-2 ">
+      <label>File/Plot:</label>
+    </div>
+    <div class="col-md-3">
+      <label class="borderBottomB1 width-100">{{item.fileName}}</label>
+    </div>
+
+    <div class="col-md-2 "></div>
+
+    <div class="col-md-2 ">
+      <label>Plot Nature:</label>
+    </div>
+    <div class="col-md-3">
+      <label class="borderBottomB1 width-100">{{item.plotNatureTitle}}</label>
+    </div>
+
+
+  </div>
+
+
+  <!-- Size And Marlas  -->
+  <div class="row mt-4" *ngFor="let item of tableData; let i = index;">
+
+    
+    <div class="col-md-2 ">
+      <label>Plot Size:</label>
+    </div>
+    <div class="col-md-3">
+      <label class="borderBottomB1 width-100">{{item.plotUnit}}</label>
+    </div>
+
+    <div class="col-md-2 "></div>
+
+    <div class="col-md-2 ">
+      <label>Marlas:</label>
+    </div>
+    <div class="col-md-3">
+      <label class="borderBottomB1 width-100">{{item.plotSize | number}}</label>
+    </div>
+
+
+  </div>
+
+
+  <!--  Address  -->
+  <div class="row mt-4" *ngFor="let item of tableData; let i = index;">
+
+    
+    <div class="col-md-2 ">
+      <label>Address:</label>
+    </div>
+    <div class="col-md-10">
+      <label class="borderBottomB1 width-100">{{item.partyAddress}}</label>
     </div>
 
   </div>
 
 
-  <hr />
+  <!--  Description  -->
+  <!-- <div class="row mt-4 hidden" *ngFor="let item of tableData; let i = index;">
 
-
-
-
-  <!---------------------------- table start --------------------------->
-
-
-  <!--header -->
-  <div class="row border-1-black mt-4">
-    <div class="col-md-1 text-center height-27">
-      <label class="mt-1"><b>Sr. #</b></label>
+    
+    <div class="col-md-2 ">
+      <label>Description:</label>
+    </div>
+    <div class="col-md-10">
+      <label class="borderBottomB1 width-100">{{item.fosDescription}}</label>
     </div>
 
-    <div class="col-md-2 border-left-black text-center">
-      <label class="mt-1"><b>Date</b></label>
-    </div>
+  </div> -->
 
-    <div class="col-md-2 border-left-black text-center">
-      <label class="mt-1"><b>File Name</b></label>
-    </div>
+</div>
 
-    <div class="col-md-3 border-left-black text-center">
-      <label class="mt-1"><b>Party</b></label>
-    </div>
-
-    <div class="col-md-2 border-left-black text-center">
-      <label class="mt-1"><b>Plot Size</b></label>
-    </div>
-
-    <div class="col-md-2 border-left-black text-center">
-      <label class="mt-1"><b>Plot Type</b></label>
-    </div>
-
-  </div>
-
-  <!--detail -->
-  <div class="row border-1-black" *ngFor="let item of tableData; let i = index;" style="margin-top: -1;">
-    <div class="col-md-1 text-center height-27">
-      <label class="mt-1">{{i + 1}}</label>
-    </div>
-
-    <div class="col-md-2 border-left-black">
-      <label class="mt-1">{{item.allotmentDate | date: 'yyy-MM-dd'}}</label>
-    </div>
-
-    <div class="col-md-2 border-left-black">
-      <label class="mt-1">{{item.fileName}}</label>
-    </div>
-
-    <div class="col-md-3 border-left-black">
-      <label class="mt-1">{{item.partyName}}</label>
-    </div>
-
-    <div class="col-md-2 border-left-black text-right">
-      <label class="mt-1">{{item.plotSize}}</label>
-    </div>
-
-    <div class="col-md-2 border-left-black text-right">
-      <label class="mt-1">{{item.plotTypeTitle}}</label>
-    </div>
-
-  </div>

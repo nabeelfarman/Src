@@ -51,7 +51,7 @@ export class FileOwnershipTableComponent implements OnInit {
     this.lblParty = item.partyName;
     
     this.paymentPlanDetailList = [];
-    this.dataService.getHttp('core-api/GetPaymentPlanDetail?PaymentPlanID=' + item.paymentPlanID, '').subscribe(
+    this.dataService.getHttp('core-api/GetFilePaymentPlan?FileID=' + item.fileID, '').subscribe(
       (response: any) => {
         this.paymentPlanDetailList = response;
         $('#paymentDetailModal').modal('show');

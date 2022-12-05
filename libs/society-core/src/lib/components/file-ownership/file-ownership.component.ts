@@ -221,14 +221,7 @@ export class FileOwnershipComponent implements OnInit {
       this.formFields[8].value = JSON.stringify(this.paymentDetailList);
     }
 
-    this.dataService
-      .savetHttp(
-        this.pageFields,
-        this.formFields,
-        'core-api/InsertOwnerShip'
-      )
-      .subscribe(
-        (response: any) => {
+    this.dataService.savetHttp(this.pageFields, this.formFields, 'core-api/InsertOwnerShip').subscribe((response: any) => {
           if (response.msg == "Data Saved Successfully") {
             this.valid.apiInfoResponse('Record saved successfully');
             this.getFile();

@@ -68,14 +68,14 @@
           <table class="table table-striped table-bordered">
             <thead>
               <tr>
-                <th>Installment Name</th>
-                <th>Amount</th>
+                <th class="text-center">Installment Name</th>
+                <th class="text-center">Amount</th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let item of paymentPlanDetailList; let i = index">
                 <td>{{ item.installmentTypeName }}</td>
-                <td>{{ item.amount }}</td>
+                <td class="text-right">{{ item.amount | number}}</td>
               </tr>
             </tbody>
           </table>
