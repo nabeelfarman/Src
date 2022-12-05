@@ -3,7 +3,7 @@
     <mat-icon>insert_drive_file</mat-icon>
     <span class="ps-2">Report</span>
   </button>
-  <button mat-button class="save cursorPointer" (click)="reset()">
+  <button mat-button class="save cursorPointer" (click)="printData()">
     <mat-icon>print</mat-icon>
     <span class="ps-2">Print</span>
   </button>
@@ -37,46 +37,58 @@
     </mat-form-field>
   </div>
 </div>
-<!-- <div class="row light-blue-bg border">
-  <div class="col-md-6">
+
+<div id="print-summary">
+
+  <div class="row mb-2 d-none">
+    <div class="col-md-6 text-left">
+      <img class="mt-1" src="assets/ui/company/shama.png" width="125px" />
+    </div>
+
+
+    <div class="col-md-6 text-right">
+
+      <div class="d-flex flex-column align-items-center">
+        <div class="h2Report"><b>SHAMA ROYAL CITY</b></div>
+        <div class="h4Report">A Project of: SARDAR ASSOCIATES</div>
+        <h2 class="h3Report txtDarkGrey mt-1">Ledger Report</h2>
+      </div>
+
+    </div>
+
   </div>
-  <div class="col-md-6">
-    <mat-form-field class="w-100 pe-3">
-      <mat-label>Payer / Payee</mat-label>
-      <mat-select>
-        <mat-option value="one">UBL RDF</mat-option>
-        <mat-option value="two">M/s Shifa International</mat-option>
-      </mat-select>
-    </mat-form-field>
-  </div>
-</div> -->
-<society-ledger-table></society-ledger-table>
-<!-- ledger summary footer -->
-<div class="row bg-white border pt-3 pe-3">
-  <div class="offset-md-8 col-md-4">
-    <div class="table-responsive">
-      <table class="table table-bordered">
-        <tbody>
-          <tr>
-            <td class="col-6">
-              <strong class="pull-right">Total Debit</strong>
-            </td>
-            <td class="col-6"><strong class="pull-right">{{lblDebit | number}}</strong></td>
-          </tr>
-          <tr>
-            <td class="col-6">
-              <strong class="pull-right">Total Credit</strong>
-            </td>
-            <td class="col-6"><strong class="pull-right">{{lblCredit | number}}</strong></td>
-          </tr>
-          <tr>
-            <td class="col-6">
-              <strong class="pull-right">Total Balance</strong>
-            </td>
-            <td class="col-6"><strong class="pull-right">{{lblBalance | number}}</strong></td>
-          </tr>
-        </tbody>
-      </table>
+
+  <hr />
+
+  <society-ledger-table></society-ledger-table>
+  <!-- ledger summary footer -->
+  <div class="row bg-white pt-3 pe-3">
+    <div class="offset-md-8 col-md-4">
+      <div class="table-responsive">
+        <table class="table table-bordered">
+          <tbody>
+            <tr>
+              <td class="col-6">
+                <strong class="pull-right">Total Debit</strong>
+              </td>
+              <td class="col-6"><strong class="pull-right">{{lblDebit | number}}</strong></td>
+            </tr>
+            <tr>
+              <td class="col-6">
+                <strong class="pull-right">Total Credit</strong>
+              </td>
+              <td class="col-6"><strong class="pull-right">{{lblCredit | number}}</strong></td>
+            </tr>
+            <tr>
+              <td class="col-6">
+                <strong class="pull-right">Total Balance</strong>
+              </td>
+              <td class="col-6"><strong class="pull-right">{{lblBalance | number}}</strong></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
+
 </div>

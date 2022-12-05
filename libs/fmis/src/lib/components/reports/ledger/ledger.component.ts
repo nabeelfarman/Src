@@ -150,4 +150,17 @@ export class LedgerComponent implements OnInit {
     this.lblCredit = 0;
     this.lblBalance = 0;
   }
+
+  
+  printData() {
+    
+    // console.log(item);return;
+    if(this.ledgerTable.tableData.length == 0){
+      this.valid.apiInfoResponse("no data found");return;
+    }else{
+      setTimeout(() => this.globalService.printData('#print-summary'), 200);
+    }
+    
+  }
+
 }

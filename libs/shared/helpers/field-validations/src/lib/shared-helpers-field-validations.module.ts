@@ -130,7 +130,7 @@ export class SharedHelpersFieldValidationsModule {
   // // changeDateFormat
   // fields value validations and formatting
   dateFormat(date?: Date): string {
-    return this.datePipe.transform(date, 'MM/dd/yyyy').toString();
+    return this.datePipe.transform(date, 'yyyy-MM-dd').toString();
   }
 
   validateName(nameStr: string, msg: string): boolean {

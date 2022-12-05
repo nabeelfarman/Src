@@ -1,9 +1,9 @@
 <div class="saveUpdateBar border mat-elevation-z2">
-  <button mat-button class="save cursorPointer">
+  <button mat-button class="save cursorPointer" (click)="showReport()">
     <mat-icon>insert_drive_file</mat-icon>
     <span class="ps-2">Report</span>
   </button>
-  <button mat-button class="save cursorPointer">
+  <button mat-button class="save cursorPointer" (click)="printData()">
     <mat-icon>print</mat-icon>
     <span class="ps-2">Print</span>
   </button>
@@ -14,18 +14,15 @@
     <div class="col-md-6">
       <mat-form-field class="pull-right">
         <mat-label>From Date</mat-label>
-        <input matInput [matDatepicker]="fromDate" />
-        <mat-datepicker-toggle
-          matSuffix
-          [for]="fromDate"
-        ></mat-datepicker-toggle>
+        <input matInput [(ngModel)]="dtpFromDate" [matDatepicker]="fromDate" />
+        <mat-datepicker-toggle matSuffix [for]="fromDate"></mat-datepicker-toggle>
         <mat-datepicker #fromDate></mat-datepicker>
       </mat-form-field>
     </div>
     <div class="col-md-6">
       <mat-form-field>
         <mat-label>To Date</mat-label>
-        <input matInput [matDatepicker]="toDate" />
+        <input matInput [(ngModel)]="dtpToDate" [matDatepicker]="toDate" />
         <mat-datepicker-toggle matSuffix [for]="toDate"></mat-datepicker-toggle>
         <mat-datepicker #toDate></mat-datepicker>
       </mat-form-field>
@@ -33,44 +30,83 @@
   </div>
 
   <!-- bank balances summary -->
-  <society-bank-balance-summary></society-bank-balance-summary>
+  <div id="print-summary" class="d-none">
+
+    <div class="row mb-2">
+      <div class="col-md-6 text-left">
+        <img class="mt-1" src="assets/ui/company/shama.png" width="125px" />
+      </div>
+
+
+      <div class="col-md-6 text-right">
+
+        <div class="d-flex flex-column align-items-center">
+          <div class="h2Report"><b>SHAMA ROYAL CITY</b></div>
+          <div class="h4Report">A Project of: SARDAR ASSOCIATES</div>
+          <h2 class="h3Report txtDarkGrey mt-1">Cash Book Summary Report</h2>
+        </div>
+
+      </div>
+      <hr />
+
+    </div>
+
+    <society-cash-book-summary-print></society-cash-book-summary-print>
+
+  </div>
+  <society-bank-balance-summary (eventEmitter)="showDetail($event)"></society-bank-balance-summary>
+
 </div>
 <!-- end main-content -->
 
 <!-- cash book report Modal -->
-<div
-  class="modal fade"
-  id="cashBookModal"
-  tabindex="-1"
-  aria-labelledby="exampleModalLabel"
-  aria-hidden="true"
-  data-bs-backdrop="false"
->
+<div class="modal fade" id="cashBookModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+  data-bs-backdrop="false">
   <div class="modal-dialog modal-xl modal-dialog-centered">
     <div class="modal-content mat-elevation-z20">
       <div class="modal-header bg-light">
         <h4 class="modal-title text-primary" id="exampleModalLabel">
-          Cash Book Report - Allied Bank Account No. 2343-1
+          {{lblCashBook}}
         </h4>
-        <button mat-icon-button color="warn">
+        <button mat-icon-button color="warn" (click)="printDetailData()">
           <mat-icon>print</mat-icon>
         </button>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        ></button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <society-cash-bbok-rpt></society-cash-bbok-rpt>
-      </div>
-      <!-- <div class="modal-footer dark-light-bg">
-        <div class="d-flex flex-row w-100 justify-content-around">
-          <button mat-raised-button class="savebtn">Save</button>
-          <button mat-raised-button class="resetbtn">Reset</button>
+
+        <div id="print-detail-summary">
+
+          <div class="row mb-2 d-none">
+            <div class="col-md-6 text-left">
+              <img class="mt-1" src="assets/ui/company/shama.png" width="125px" />
+            </div>
+
+
+            <div class="col-md-6 text-right">
+
+              <div class="d-flex flex-column align-items-center">
+                <div class="h2Report"><b>SHAMA ROYAL CITY</b></div>
+                <div class="h4Report">A Project of: SARDAR ASSOCIATES</div>
+                <h2 class="h3Report txtDarkGrey mt-1">Cash Book Summary Detail Report</h2>
+              </div>
+
+            </div>
+            <hr />
+
+          </div>
+
+          <div class="d-flex d-none align-items-center">
+            <h6 class="me-3">Bank Name: </h6>
+            <h4>
+              {{lblCashBook}}
+            </h4>
+          </div>
+
+
+          <society-cash-bbok-rpt></society-cash-bbok-rpt>
         </div>
-      </div> -->
+      </div>
     </div>
   </div>
 </div>

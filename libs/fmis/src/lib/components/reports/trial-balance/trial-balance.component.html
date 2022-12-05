@@ -3,7 +3,7 @@
     <mat-icon>insert_drive_file</mat-icon>
     <span class="ps-2">Report</span>
   </button>
-  <button mat-button class="save cursorPointer">
+  <button mat-button class="save cursorPointer" (click)="printData()">
     <mat-icon>print</mat-icon>
     <span class="ps-2">Print</span>
   </button>
@@ -43,6 +43,6 @@
   <!-- end row - 01 -->
 
   <!-- report -->
-  <society-trial-balance-table></society-trial-balance-table>
+  <society-trial-balance-table id="print-summary"></society-trial-balance-table>
 </div>
 <!-- end of main-content -->

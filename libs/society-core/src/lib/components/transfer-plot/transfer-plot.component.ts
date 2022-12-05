@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { SharedHelpersFieldValidationsModule } from '@society/shared/helpers/field-validations';
 import { MyFormField, TransferPlotInterface } from '@society/shared/interface';
@@ -13,6 +14,8 @@ import { TransferPlotTableComponent } from './transfer-plot-table/transfer-plot-
 export class TransferPlotComponent implements OnInit {
 
   @ViewChild(TransferPlotTableComponent) transferTable: any;
+  dtpAllotmentDate: any = '';
+
   pageFields: TransferPlotInterface = {
     FileID: '0',
     spType: '',
@@ -70,7 +73,8 @@ export class TransferPlotComponent implements OnInit {
   constructor(
     private dataService: SharedServicesDataModule,
     private globalService: SharedServicesGlobalDataModule,
-    private valid: SharedHelpersFieldValidationsModule
+    private valid: SharedHelpersFieldValidationsModule,
+    private datePipe: DatePipe
   ) {}
 
   ngOnInit(): void {
@@ -118,6 +122,7 @@ export class TransferPlotComponent implements OnInit {
 
   save(){
     
+    // this.formFields[4].value = this.datePipe.transform(this.dtpAllotmentDate, 'yyyy-MM-dd');
     this.dataService
       .savetHttp(
         this.pageFields,
@@ -144,5 +149,6 @@ export class TransferPlotComponent implements OnInit {
   reset(){
     this.formFields = this.valid.resetFormFields(this.formFields);
     this.formFields[0].value = '0';
+    this.formFields[5].value = '';
   }
 }

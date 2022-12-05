@@ -69,4 +69,14 @@ export class TrialBalanceComponent implements OnInit {
       });
     }
   }
+
+  printData(){
+    
+    if(this.trialTable.tableData.length == 0){
+      this.valid.apiInfoResponse("no data found");return;
+    }else{
+      setTimeout(() => this.globalService.printData('#print-summary'), 200);
+    }
+    
+  }
 }

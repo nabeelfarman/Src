@@ -7,6 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CashBbokRptComponent implements OnInit {
 
+  lblDebit: any = 0;
+  lblCredit: any = 0;
+
+  tableData: any = [];
+  
   constructor() { }
 
   ngOnInit(): void {

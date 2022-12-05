@@ -76,6 +76,7 @@ import { VendorComponent } from './components/config/vendor/vendor.component';
 import { FixedAssetTableComponent } from './components/config/fixed-asset/fixed-asset-table/fixed-asset-table.component';
 import { VendorTableComponent } from './components/config/vendor/vendor-table/vendor-table.component';
 import { DepreciationTableComponent } from './components/config/fixed-asset/fixed-asset-table/depreciation-table/depreciation-table.component';
+import { CashBookSummaryPrintComponent } from './components/reports/cash-book/cash-book-summary-print/cash-book-summary-print.component';
 
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -186,6 +187,7 @@ export const fmisRoutes: Route[] = [
     FixedAssetTableComponent,
     VendorTableComponent,
     DepreciationTableComponent,
+    CashBookSummaryPrintComponent,
     // SearchPipe
   ],
   exports: [
@@ -224,7 +226,8 @@ export const fmisRoutes: Route[] = [
     InstallmentVoucherPrintComponent,
     FixedAssetTableComponent,
     VendorTableComponent,
-    DepreciationTableComponent
+    DepreciationTableComponent,
+    CashBookSummaryPrintComponent
     // SearchPipe
   ],
   providers: [
