@@ -9,7 +9,7 @@
     <div class="d-flex flex-column align-items-center">
       <div class="h2Report"><b>SHAMA ROYAL CITY</b></div>
       <div class="h4Report">A Project of: SARDAR ASSOCIATES</div>
-      <h2 class="h3Report txtDarkGrey mt-1">Trial Balance Report</h2>
+      <h2 class="h3Report txtDarkGrey mt-1">Trail Balance</h2>
     </div>
 
   </div>
@@ -19,63 +19,51 @@
 <hr />
 
 <div class="table-responsive">
-  <table class="table table-striped table-bordered">
+  <table class="table table-logix">
     <thead>
       <tr>
         <th rowspan="2" class="col-2">Account Code</th>
         <th rowspan="2" class="col-4">Account Title</th>
-        <th colspan="2" class="col-2 text-center">Opening Balance</th>
-        <th colspan="2" class="col-2 text-center">Yearly Balance</th>
-        <th colspan="2" class="col-2 text-center">Closing Balance</th>
+        <th colspan="2" class="col-2">Opening Balance</th>
+        <th colspan="2" class="col-2">Yearly Balance</th>
+        <th colspan="2" class="col-2">Closing Balance</th>
       </tr>
       <tr>
-        <th class="col-1"><span class="pull-right">Debit</span></th>
-        <th class="col-1"><span class="pull-right">Credit</span></th>
-        <th class="col-1"><span class="pull-right">Debit</span></th>
-        <th class="col-1"><span class="pull-right">Credit</span></th>
-        <th class="col-1"><span class="pull-right">Debit</span></th>
-        <th class="col-1"><span class="pull-right">Credit</span></th>
+        <th class="col-1"><span>Debit</span></th>
+        <th class="col-1"><span >Credit</span></th>
+        <th class="col-1"><span >Debit</span></th>
+        <th class="col-1"><span >Credit</span></th>
+        <th class="col-1"><span >Debit</span></th>
+        <th class="col-1"><span >Credit</span></th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let item of tableData">
         <td class="col-2">{{item.accountCode}}</td>
         <td class="col-4">{{item.coaTitle}}</td>
-        <td class="col-1"><span class="pull-right">{{item.oDebit | number}}</span></td>
-        <td class="col-1"><span class="pull-right">{{item.oCredit | number}}</span></td>
-        <td class="col-1"><span class="pull-right">{{item.debit}}</span></td>
-        <td class="col-1"><span class="pull-right">{{item.credit}}</span></td>
-        <td class="col-1"><span class="pull-right">{{item.cDebit | number}}</span></td>
-        <td class="col-1"><span class="pull-right">{{item.cCredit | number}}</span></td>
+        <td class="col-1 text-right">{{item.oDebit | number}}</td>
+        <td class="col-1 text-right">{{item.oCredit | number}}</td>
+        <td class="col-1 text-right">{{item.debit | number}}</td>
+        <td class="col-1 text-right">{{item.credit | number}}</td>
+        <td class="col-1 text-right">{{item.cDebit | number}}</td>
+        <td class="col-1 text-right">{{item.cCredit | number}}</td>
       </tr>
     </tbody>
   </table>
 </div>
+
+
 <div class="table-responsive">
-  <table class="table table-striped table-bordered">
+  <table class="table table-logix">
     <tbody>
-      <tr class="light-blue-bg">
-        <td class="col-6">
-          <span class="pull-right"><strong>Total</strong></span>
-        </td>
-        <td class="col-1">
-          <span class="pull-right"><strong>{{lblODebit | number}}</strong></span>
-        </td>
-        <td class="col-1">
-          <span class="pull-right"><strong>{{lblOCredit | number}}</strong></span>
-        </td>
-        <td class="col-1">
-          <span class="pull-right"><strong>{{lblDebit}}</strong></span>
-        </td>
-        <td class="col-1">
-          <span class="pull-right"><strong>{{lblCredit}}</strong></span>
-        </td>
-        <td class="col-1">
-          <span class="pull-right"><strong>{{lblCDebit | number}}</strong></span>
-        </td>
-        <td class="col-1">
-          <span class="pull-right"><strong>{{lblCCredit | number}}</strong></span>
-        </td>
+      <tr>
+        <td class="col-6 text-right"> <strong>Total</strong></td>
+        <td class="col-1 text-right"><strong>{{lblODebit | number}}</strong></td>
+        <td class="col-1 text-right"><strong>{{lblOCredit | number}}</strong></td>
+        <td class="col-1 text-right"><strong>{{lblDebit | number}}</strong></td>
+        <td class="col-1 text-right"><strong>{{lblCredit | number}}</strong></td>
+        <td class="col-1 text-right"><strong>{{lblCDebit | number}}</strong></td>
+        <td class="col-1 text-right"><strong>{{lblCCredit | number}}</strong></td>
       </tr>
     </tbody>
   </table>

@@ -266,7 +266,8 @@ export class VoucherEntryComponent implements OnInit {
   getChartOfAccount(){
     this.dataService.getHttp('core-api/GetVouchercoa?VoucherType=' + this.formFields[0].value + '&AmountType=' + this.rdbType, '').subscribe((response: any) => {
       this.voucherMainTbl.coaList = response.reverse();
-
+      this.formFields[6].value = '';
+      this.formFields[7].value = '';
     }, (error: any) => {
       console.log(error);
     });
@@ -428,7 +429,8 @@ export class VoucherEntryComponent implements OnInit {
     this.tranTax.lblNature = '';
 
     this.formFields[6].value = '';
-
+    this.formFields[7].value = '';
+    
     this.voucherMainTbl.bankID = '';
     this.voucherMainTbl.lblTax = '';
     this.voucherMainTbl.lblTransaction = '';
