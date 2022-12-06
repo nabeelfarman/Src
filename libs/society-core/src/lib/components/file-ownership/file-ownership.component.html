@@ -14,7 +14,10 @@
     <mat-form-field class="w-100">
       <mat-label>File</mat-label>
       <mat-select [(ngModel)]="formFields[0].value">
-        <mat-option *ngFor="let item of fileList" [value]="item.fileID">
+        <mat-option>
+          <ngx-mat-select-search [(ngModel)]="searchFileName" [noEntriesFoundLabel]="'Not found'" placeholderLabel="Search..." name="search"></ngx-mat-select-search>
+        </mat-option>
+        <mat-option *ngFor="let item of fileList | search: 'fileName': searchFileName" [value]="item.fileID">
           {{item.fileName}}
         </mat-option>
       </mat-select>
@@ -22,7 +25,10 @@
     <mat-form-field class="w-100">
       <mat-label>Party</mat-label>
       <mat-select [(ngModel)]="formFields[3].value">
-        <mat-option *ngFor="let item of partyList" [value]="item.partyID">
+        <mat-option>
+          <ngx-mat-select-search [(ngModel)]="searchPartyName" [noEntriesFoundLabel]="'Not found'" placeholderLabel="Search..." name="search"></ngx-mat-select-search>
+        </mat-option>
+        <mat-option *ngFor="let item of partyList | search: 'partyName': searchPartyName" [value]="item.partyID">
           {{item.partyName}}
         </mat-option>
       </mat-select>
@@ -48,10 +54,13 @@
     <mat-form-field class="w-100">
       <mat-label>Payment Plan</mat-label>
       <mat-select [(ngModel)]="formFields[7].value" (ngModelChange)="getPaymentDetail(formFields[7].value)">
+          <mat-option>
+            <ngx-mat-select-search [(ngModel)]="searchPaymentPlanName" [noEntriesFoundLabel]="'Not found'" placeholderLabel="Search..." name="search"></ngx-mat-select-search>
+          </mat-option>
         <mat-option value="0">
           Custom
         </mat-option>
-        <mat-option *ngFor="let item of paymentList" [value]="item.paymentPlanID">
+        <mat-option *ngFor="let item of paymentList | search: 'paymentPlanName': searchPaymentPlanName" [value]="item.paymentPlanID">
           {{item.paymentPlanName}}
         </mat-option>
       </mat-select>

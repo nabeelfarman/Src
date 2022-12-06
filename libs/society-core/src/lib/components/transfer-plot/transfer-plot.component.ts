@@ -15,6 +15,8 @@ export class TransferPlotComponent implements OnInit {
 
   @ViewChild(TransferPlotTableComponent) transferTable: any;
   dtpAllotmentDate: any = '';
+  searchFileName: string = '';
+  searchPartyName: string = '';
 
   pageFields: TransferPlotInterface = {
     FileID: '0',

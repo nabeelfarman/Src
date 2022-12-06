@@ -11,7 +11,10 @@
   <mat-form-field class="w-25">
     <mat-label>File</mat-label>
     <mat-select [(ngModel)]="cmbFile" (ngModelChange)="getFilePayment()">
-      <mat-option *ngFor="let item of fileList" [value]="item.fileID">
+      <mat-option>
+        <ngx-mat-select-search [(ngModel)]="searchFileName" [noEntriesFoundLabel]="'Not found'" placeholderLabel="Search..." name="search"></ngx-mat-select-search>
+      </mat-option>
+      <mat-option *ngFor="let item of fileList | search: 'fileName': searchFileName" [value]="item.fileID">
         {{item.fileName}}
       </mat-option>
     </mat-select>
@@ -163,15 +166,15 @@
   </div>
   
   <div class="col-md-2 border-left-black text-right">
-    <label class="mt-1">{{lblAmount}}</label>
+    <label class="mt-1">{{lblAmount | number}}</label>
   </div>
 
   <div class="col-md-2 border-left-black text-right">
-    <label class="mt-1">{{lblPaid}}</label>
+    <label class="mt-1">{{lblPaid | number}}</label>
   </div>
 
   <div class="col-md-2 border-left-black text-right">
-    <label class="mt-1">{{lblBalance}}</label>
+    <label class="mt-1">{{lblBalance | number}}</label>
   </div>
 
 </div>

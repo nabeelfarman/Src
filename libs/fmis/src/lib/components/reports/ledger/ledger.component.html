@@ -41,20 +41,21 @@
 <div id="print-summary">
 
   <div class="row mb-2 d-none">
-    <div class="col-md-6 text-left">
-      <img class="mt-1" src="assets/ui/company/shama.png" width="125px" />
-    </div>
 
-
-    <div class="col-md-6 text-right">
-
-      <div class="d-flex flex-column align-items-center">
-        <div class="h2Report"><b>SHAMA ROYAL CITY</b></div>
-        <div class="h4Report">A Project of: SARDAR ASSOCIATES</div>
-        <h2 class="h3Report txtDarkGrey mt-1">Ledger Report</h2>
+      <div class="col-md-6 text-left">
+        <img class="mt-1" src="assets/ui/company/shama.png" width="125px" />
       </div>
-
-    </div>
+  
+  
+      <div class="col-md-6 text-right">
+  
+        <div class="d-flex flex-column align-items-center">
+          <div class="h2Report"><b>SHAMA ROYAL CITY</b></div>
+          <div class="h4Report">A Project of: SARDAR ASSOCIATES</div>
+          <h2 class="h3Report txtDarkGrey mt-1">Ledger Report</h2>
+        </div>
+  
+      </div>
 
   </div>
 
@@ -62,33 +63,25 @@
 
   <society-ledger-table></society-ledger-table>
   <!-- ledger summary footer -->
-  <div class="row bg-white pt-3 pe-3">
-    <div class="offset-md-8 col-md-4">
-      <div class="table-responsive">
-        <table class="table table-bordered">
-          <tbody>
-            <tr>
-              <td class="col-6">
-                <strong class="pull-right">Total Debit</strong>
-              </td>
-              <td class="col-6"><strong class="pull-right">{{lblDebit | number}}</strong></td>
-            </tr>
-            <tr>
-              <td class="col-6">
-                <strong class="pull-right">Total Credit</strong>
-              </td>
-              <td class="col-6"><strong class="pull-right">{{lblCredit | number}}</strong></td>
-            </tr>
-            <tr>
-              <td class="col-6">
-                <strong class="pull-right">Total Balance</strong>
-              </td>
-              <td class="col-6"><strong class="pull-right">{{lblBalance | number}}</strong></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
 
+  <div class="row bg-white border-1-black mt-2 ml-1 me-1">
+
+
+    <div class="col-md-6 text-left height-27">
+      <label class="mt-1">TOTAL</label>
+    </div>
+    
+    <div class="col-md-2 border-left-black text-right">
+      <label class="mt-1">{{lblDebit | number}}</label>
+    </div>
+  
+    <div class="col-md-2 border-left-black text-right">
+      <label class="mt-1">{{lblCredit | number}}</label>
+    </div>
+  
+    <div class="col-md-2 border-left-black text-right">
+      <label class="mt-1">{{lblDebit - lblCredit | number}}</label>
+    </div>
+  
+  </div>  
 </div>

@@ -16,7 +16,10 @@
         <mat-form-field class="w-100">
           <mat-label>File Name</mat-label>
           <mat-select [(ngModel)]="formFields[0].value">
-            <mat-option *ngFor="let item of fileList;" [value]="item.fileID">
+            <mat-option>
+              <ngx-mat-select-search [(ngModel)]="searchFileName" [noEntriesFoundLabel]="'Not found'" placeholderLabel="Search..." name="search"></ngx-mat-select-search>
+            </mat-option>
+            <mat-option *ngFor="let item of fileList | search: 'fileName': searchFileName" [value]="item.fileID">
               {{ item.fileName }}
             </mat-option>
           </mat-select>
@@ -24,7 +27,10 @@
         <mat-form-field class="w-100">
           <mat-label>Party Name</mat-label>
           <mat-select [(ngModel)]="formFields[3].value">
-            <mat-option *ngFor="let item of partyList;" [value]="item.partyID">
+            <mat-option>
+              <ngx-mat-select-search [(ngModel)]="searchPartyName" [noEntriesFoundLabel]="'Not found'" placeholderLabel="Search..." name="search"></ngx-mat-select-search>
+            </mat-option>
+            <mat-option *ngFor="let item of partyList | search: 'partyName': searchPartyName" [value]="item.partyID">
               {{ item.partyName }}
             </mat-option>
           </mat-select>

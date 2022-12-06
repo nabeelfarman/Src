@@ -1,35 +1,74 @@
-<div class="table-responsive">
-  <table class="table table-striped table-bordered">
-    <thead>
-      <tr>
-        <th class="col-1">Sr#</th>
-        <th class="col-5">Bank Name</th>
-        <th class="col-2"><span class="pull-right">Debit</span></th>
-        <th class="col-2"><span class="pull-right">Opening Debit</span></th>
-        <th class="col-2"><span class="pull-right">Closing Debit</span></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let item of tableData let i = index;">
-        <td class="col-1">{{i+1}}</td>
-        <td class="col-5">{{item.bankName}}</td>
-        <td class="col-2"><span class="pull-right">{{item.debit | number}}</span></td>
-        <td class="col-2"><span class="pull-right">{{item.oDebit | number}}</span></td>
-        <td class="col-2"><span class="pull-right">{{item.cDebit | number}}</span></td>
-      </tr>
-    </tbody>
-  </table>
+<!--Header -->
+<div class="row border-1-black mt-4 ml-1 me-1">
+  <div class="col-md-1 text-center height-27">
+    <label class="mt-1"><b>Sr. #</b></label>
+  </div>
+
+  <div class="col-md-5 border-left-black text-center">
+    <label class="mt-1"><b>Bank Title</b></label>
+  </div>
+
+  <div class="col-md-2 border-left-black text-center">
+    <label class="mt-1"><b>Opening</b></label>
+  </div>
+
+  <div class="col-md-2 border-left-black text-center">
+    <label class="mt-1"><b>Periodic</b></label>
+  </div>
+
+  <div class="col-md-2 border-left-black text-center">
+    <label class="mt-1"><b>Closing</b></label>
+  </div>
+
 </div>
 
-<div class="table-responsive" *ngIf="tableData.length > 0">
-  <table class="table table-bordered light-blue-bg">
-    <tbody>
-      <tr>
-        <td class="col-6"><strong class="pull-right">Total</strong></td>
-        <td class="col-2"><strong class="pull-right">{{lblDebit | number}}</strong></td>
-        <td class="col-2"><strong class="pull-right">{{lblODebit | number}}</strong></td>
-        <td class="col-2"><strong class="pull-right">{{lblCDebit | number}}</strong></td>
-      </tr>
-    </tbody>
-  </table>
+
+
+
+<!--Detail -->
+<div class="row border-1-black ml-1 me-1" *ngFor="let item of tableData; let i = index;" style="margin-top: -1;">
+  <div class="col-md-1 height-27">
+    <label class="mt-1">{{i + 1}}</label>
+  </div>
+
+  <div class="col-md-5 border-left-black">
+    <label class="mt-1">{{item.bankName}}</label>
+  </div>
+
+  <div class="col-md-2 border-left-black text-right">
+    <label class="mt-1">{{item.oDebit | number}}</label>
+  </div>
+
+  <div class="col-md-2 border-left-black text-right">
+    <label class="mt-1">{{item.debit | number}}</label>
+  </div>
+
+  <div class="col-md-2 border-left-black text-right">
+    <label class="mt-1">{{item.cDebit | number}}</label>
+  </div>
+
 </div>
+
+
+
+<!-- Footer -->
+<div class="row border-1-black mt-2 ml-1 me-1">
+
+
+  <div class="col-md-6 text-left height-27">
+    <label class="mt-1">TOTAL</label>
+  </div>
+  
+  <div class="col-md-2 border-left-black text-right">
+    <label class="mt-1">{{lblODebit | number}}</label>
+  </div>
+
+  <div class="col-md-2 border-left-black text-right">
+    <label class="mt-1">{{lblDebit | number}}</label>
+  </div>
+
+  <div class="col-md-2 border-left-black text-right">
+    <label class="mt-1">{{lblCDebit | number}}</label>
+  </div>
+
+</div>  

@@ -15,7 +15,8 @@ export class ChartOfAccountTableComponent implements OnInit {
 
   tableData: any = [];
   error: any;
-
+  tblSearch: any = '';
+  
   constructor(
     private dataService: SharedServicesDataModule,
     private globalService: SharedServicesGlobalDataModule,

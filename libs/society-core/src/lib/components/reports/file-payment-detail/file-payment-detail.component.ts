@@ -16,6 +16,8 @@ export class FilePaymentDetailComponent implements OnInit {
   lblMobile: any = '';
   lblCNIC: any = '';
 
+  searchFileName: any = '';
+
   lblAmount: any = 0;
   lblPaid: any = 0;
   lblBalance: any = 0;

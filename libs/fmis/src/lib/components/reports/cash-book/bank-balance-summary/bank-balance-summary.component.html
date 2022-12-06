@@ -3,10 +3,10 @@
     <thead>
       <tr>
         <th class="col-1">Sr#</th>
-        <th class="col-4">Bank Name</th>
-        <th class="col-2"><span class="pull-right">Debit</span></th>
-        <th class="col-2"><span class="pull-right">Opening Debit</span></th>
-        <th class="col-2"><span class="pull-right">Closing Debit</span></th>
+        <th class="col-4">Bank Title</th>
+        <th class="col-2"><span class="pull-right">Opening</span></th>
+        <th class="col-2"><span class="pull-right">Periodic</span></th>
+        <th class="col-2"><span class="pull-right">Closing</span></th>
         <th class="col-1 text-center">Action</th>
       </tr>
     </thead>
@@ -14,11 +14,11 @@
       <tr *ngFor="let item of tableData let i = index;">
         <td class="col-1">{{i+1}}</td>
         <td class="col-4">{{item.bankName}}</td>
-        <td class="col-2"><span class="pull-right">{{item.debit | number}}</span></td>
         <td class="col-2"><span class="pull-right">{{item.oDebit | number}}</span></td>
+        <td class="col-2"><span class="pull-right">{{item.debit | number}}</span></td>
         <td class="col-2"><span class="pull-right">{{item.cDebit | number}}</span></td>
         <td class="col-1 text-center">
-          <span class="text-primary pe-2 cursorPointer" *ngIf="item.bankID > 0" (click)="showDetail(item)">
+          <span class="text-primary pe-2 cursorPointer" (click)="showDetail(item)">
             <mat-icon>insert_drive_file</mat-icon>
           </span>
         </td>

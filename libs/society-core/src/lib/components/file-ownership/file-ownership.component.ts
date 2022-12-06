@@ -21,6 +21,9 @@ export class FileOwnershipComponent implements OnInit {
   cmbInstallment: any = '';
   txtAmount: any = 0;
   dtpDueDate: any = '';
+  searchFileName: string = '';
+  searchPartyName: string = '';
+  searchPaymentPlanName: string = '';
 
   pageFields: OwnershipFileInterface = {
     FileID: '0',
@@ -210,7 +213,7 @@ export class FileOwnershipComponent implements OnInit {
     }
   }
 
-  save(){
+  save(){ 
     this.formFields[4].value = this.datePipe.transform(this.dtpAllotmentDate, 'yyyy-MM-dd');
     if(this.paymentDetailList.length > 0){
       for(var i = 0; i < this.paymentDetailList.length;i++){
