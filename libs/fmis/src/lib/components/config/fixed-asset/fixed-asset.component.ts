@@ -14,6 +14,8 @@ export class FixedAssetComponent implements OnInit {
 
   @ViewChild(FixedAssetTableComponent) assetTable: any;
 
+  rdbType: any = '1';
+
   pageFields: FixedAssetInterface = {
     InvoiceDate: '0', //0
     spType: '', //1
@@ -68,13 +70,13 @@ export class FixedAssetComponent implements OnInit {
       value: this.pageFields.BankID,
       msg: 'select bank',
       type: 'selectbox',
-      required: true,
+      required: false,
     },
     {
       value: this.pageFields.BankReceiptNo,
       msg: 'enter bank receipt no',
       type: 'textbox',
-      required: true,
+      required: false,
     },
     {
       value: this.pageFields.InvoiceDescription,
@@ -107,6 +109,7 @@ export class FixedAssetComponent implements OnInit {
     this.globalService.setHeaderTitle('Fixed Asset');
     this.formFields[2].value = this.globalService.getUserId().toString();
     
+    this.rdbType = '1';
     this.getBankAccount();
     this.getProject();
     this.getParty();
@@ -148,6 +151,18 @@ export class FixedAssetComponent implements OnInit {
   save() {
 
     this.formFields[3].value = '1';
+
+    if(this.rdbType == '2'){
+      if(this.formFields[6].value == ''){
+        this.valid.apiInfoResponse('select bank');return;
+      }
+      if(this.formFields[7].value == ''){
+        this.valid.apiInfoResponse('enter bank receipt no');return;
+      }
+    }else{
+      this.formFields[6].value = '0';
+      this.formFields[7].value = '';
+    }
 
     this.dataService
     .savetHttp(
