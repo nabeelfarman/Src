@@ -36,16 +36,17 @@
       </mat-select>
     </mat-form-field>
 
-    <mat-radio-group aria-label="Select an option" class="ps-2" [(ngModel)]="rdbType" style="padding: 15px;">
+    <mat-radio-group aria-label="Select an option" class="ps-2" [(ngModel)]="rdbType" (change)="onRdbChange(rdbType)"
+      style="padding: 15px;">
       <mat-radio-button value="1">Cash</mat-radio-button>&nbsp;&nbsp;&nbsp;
       <mat-radio-button value="2">Bank</mat-radio-button>
     </mat-radio-group>
 
-    <div class="row" *ngIf="rdbType == 2" style="margin-top: 15px;">
+    <div class="row" style="margin-top: 15px;">
       <div class="col-md-6">
         <mat-form-field class="w-100 ps-2">
           <mat-label>Bank</mat-label>
-          <mat-select [(ngModel)]="formFields[6].value">
+          <mat-select [(ngModel)]="formFields[6].value" [disabled]="rdbType == 1">
             <mat-option *ngFor="let item of bankList" [value]="item.bankID">
               {{ item.bankName }} - {{ item.bankAccountNo }}
             </mat-option>
@@ -55,7 +56,7 @@
       <div class="col-md-6">
         <mat-form-field class="w-100 ps-2" floatLabel="never">
           <mat-label>Bank Receipt No</mat-label>
-          <input matInput [(ngModel)]="formFields[7].value" />
+          <input matInput [(ngModel)]="formFields[7].value" [disabled]="rdbType == 1" />
         </mat-form-field>
       </div>
     </div>

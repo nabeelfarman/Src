@@ -147,7 +147,12 @@ export class FixedAssetComponent implements OnInit {
       console.log(error);
     });
   }
-  
+  onRdbChange(value: any){
+    if(value == 1){
+      this.formFields[6].value = '0';
+      this.formFields[7].value = '';
+    }
+  }
   save() {
 
     this.formFields[3].value = '1';
