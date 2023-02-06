@@ -1,5 +1,9 @@
 <div class="saveUpdateBar border mat-elevation-z2">
-  <button mat-button class="save cursorPointer" (click)="save('#print-summary')">
+  <button
+    mat-button
+    class="save cursorPointer"
+    (click)="save('#print-summary')"
+  >
     <mat-icon>save</mat-icon>
     <span class="ps-2">Save</span>
   </button>
@@ -15,9 +19,19 @@
         <div class="d-flex flex-row justify-content-end">
           <mat-form-field class="w-50">
             <mat-label>Voucher Type</mat-label>
-            <mat-select [(ngModel)]="formFields[0].value" (ngModelChange)="getChartOfAccount(); getExternalParties();"
-              [disabled]="lblTableLength > 0">
-              <mat-option *ngFor="let item of voucherTypeList" [value]="item.trnTypeId">
+            <mat-select
+              [(ngModel)]="formFields[0].value"
+              (ngModelChange)="
+                getChartOfAccount();
+                getExternalParties();
+                onTypeChange(formFields[0].value)
+              "
+              [disabled]="lblTableLength > 0"
+            >
+              <mat-option
+                *ngFor="let item of voucherTypeList"
+                [value]="item.trnTypeId"
+              >
                 {{ item.trnType }}
               </mat-option>
             </mat-select>
@@ -26,9 +40,16 @@
       </div>
       <div class="col-md-2">
         <div class="d-flex flex-row justify-content-center">
-          <mat-radio-group aria-label="Select an option" [(ngModel)]="rdbType" class="ps-2" style="padding: 15px;"
-            [disabled]="lblTableLength > 0" (change)="getChartOfAccount()">
-            <mat-radio-button value="Cash">Cash</mat-radio-button>&nbsp;&nbsp;&nbsp;
+          <mat-radio-group
+            aria-label="Select an option"
+            [(ngModel)]="rdbType"
+            class="ps-2"
+            style="padding: 15px"
+            [disabled]="lblTableLength > 0"
+            (change)="getChartOfAccount()"
+          >
+            <mat-radio-button value="Cash">Cash</mat-radio-button
+            >&nbsp;&nbsp;&nbsp;
             <mat-radio-button value="Bank">Bank</mat-radio-button>
           </mat-radio-group>
         </div>
@@ -36,8 +57,15 @@
       <div class="col-md-5">
         <mat-form-field class="w-50">
           <mat-label>Voucher Date</mat-label>
-          <input matInput [matDatepicker]="picker" [(ngModel)]="formFields[4].value" />
-          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <input
+            matInput
+            [matDatepicker]="picker"
+            [(ngModel)]="formFields[4].value"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
       </div>
@@ -48,7 +76,10 @@
           <mat-form-field class="w-50">
             <mat-label>Project</mat-label>
             <mat-select [(ngModel)]="formFields[5].value">
-              <mat-option *ngFor="let item of projectList" [value]="item.projectID">
+              <mat-option
+                *ngFor="let item of projectList"
+                [value]="item.projectID"
+              >
                 {{ item.projectName }}
               </mat-option>
             </mat-select>
@@ -60,8 +91,11 @@
       <div class="col-md-4">
         <mat-form-field class="w-100 ps-3">
           <mat-label>Bank Account</mat-label>
-          <mat-select [(ngModel)]="formFields[6].value" (ngModelChange)="bankChange(cmbBank)"
-            [disabled]="rdbType == 'Cash'">
+          <mat-select
+            [(ngModel)]="formFields[6].value"
+            (ngModelChange)="bankChange(cmbBank)"
+            [disabled]="rdbType == 'Cash'"
+          >
             <mat-option *ngFor="let item of bankList" [value]="item.bankID">
               {{ item.bankName }} - {{ item.bankAccountNo }}
             </mat-option>
@@ -71,7 +105,12 @@
       <div class="col-md-4">
         <mat-form-field class="w-100" floatLabel="never">
           <mat-label>Bank Receipt No</mat-label>
-          <input class="text-right" matInput [(ngModel)]="formFields[7].value" [disabled]="rdbType == 'Cash'" />
+          <input
+            class="text-right"
+            matInput
+            [(ngModel)]="formFields[7].value"
+            [disabled]="rdbType == 'Cash'"
+          />
         </mat-form-field>
         <!-- <div class="d-flex flex-row h-100 justify-content-center">
           <p class="pt-1">
@@ -85,17 +124,26 @@
           <mat-label>Party</mat-label>
           <mat-select [(ngModel)]="formFields[8].value">
             <mat-option>
-              <ngx-mat-select-search [(ngModel)]="searchParty" [placeholderLabel]="'Search...'"
-                [noEntriesFoundLabel]="'Not found'" name="search"></ngx-mat-select-search>
+              <ngx-mat-select-search
+                [(ngModel)]="searchParty"
+                [placeholderLabel]="'Search...'"
+                [noEntriesFoundLabel]="'Not found'"
+                name="search"
+              ></ngx-mat-select-search>
             </mat-option>
-            <mat-option *ngFor="let item of partyList | filter : searchParty;" [value]="item.partyID">
+            <mat-option
+              *ngFor="let item of partyList | filter: searchParty"
+              [value]="item.partyID"
+            >
               {{ item.partyName }}
             </mat-option>
           </mat-select>
         </mat-form-field>
       </div>
     </div>
-    <society-voucher-entry-table (eventEmitter)="checkTableLength($event)"></society-voucher-entry-table>
+    <society-voucher-entry-table
+      (eventEmitter)="checkTableLength($event)"
+    ></society-voucher-entry-table>
 
     <div class="row bg-white border pt-2">
       <div class="col-md-12 ps-3 pe-3">
@@ -107,23 +155,40 @@
     </div>
   </mat-tab>
   <mat-tab label="Saved" class="h-100">
-    <society-saved-voucher-table (eventEmitterDelete)="delete($event)" (eventEmitterPrint)="printData($event)">
+    <society-saved-voucher-table
+      (eventEmitterDelete)="delete($event)"
+      (eventEmitterPrint)="printData($event)"
+    >
     </society-saved-voucher-table>
   </mat-tab>
 </mat-tab-group>
 
-<society-installment-voucher-print class="d-none" id="print-summary"></society-installment-voucher-print>
+<society-installment-voucher-print
+  class="d-none"
+  id="print-summary"
+></society-installment-voucher-print>
 
 <!-- breakup Modal -->
-<div class="modal fade" id="breakupModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
-  data-bs-backdrop="false">
+<div
+  class="modal fade"
+  id="breakupModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+  data-bs-backdrop="false"
+>
   <div class="modal-dialog modal-xl modal-dialog-centered">
     <div class="modal-content mat-elevation-z20">
       <div class="modal-header bg-light">
         <h4 class="modal-title text-primary" id="exampleModalLabel">
           Transaction Breakup - 71.01.01 - Pay to Officers
         </h4>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
       </div>
       <div class="modal-body">
         <society-voucher-entry-breakup></society-voucher-entry-breakup>
@@ -139,22 +204,35 @@
 </div>
 
 <!-- tax calculation -->
-<div class="modal fade" id="taxModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
-  data-bs-backdrop="false">
+<div
+  class="modal fade"
+  id="taxModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+  data-bs-backdrop="false"
+>
   <div class="modal-dialog modal-md modal-dialog-centered">
     <div class="modal-content mat-elevation-z20">
       <div class="modal-header bg-light">
         <h4 class="modal-title text-primary" id="exampleModalLabel">
           Tax Info
         </h4>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
       </div>
       <div class="modal-body">
         <society-transaction-tax-info></society-transaction-tax-info>
       </div>
       <div class="modal-footer dark-light-bg">
         <div class="d-flex flex-row w-100 justify-content-around">
-          <button mat-raised-button class="savebtn" (click)="saveTax()">Save</button>
+          <button mat-raised-button class="savebtn" (click)="saveTax()">
+            Save
+          </button>
           <button mat-raised-button class="resetbtn">Reset</button>
         </div>
       </div>

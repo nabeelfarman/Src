@@ -1,5 +1,4 @@
 <div class="table-responsive">
-
   <table class="table table-striped table-bordered">
     <thead>
       <tr>
@@ -18,10 +17,17 @@
               <mat-label>Select</mat-label>
               <mat-select [(ngModel)]="cmbAccHead">
                 <mat-option>
-                  <ngx-mat-select-search [(ngModel)]="searchHead" [placeholderLabel]="'Search...'"
-                    [noEntriesFoundLabel]="'Not found'" name="search"></ngx-mat-select-search>
+                  <ngx-mat-select-search
+                    [(ngModel)]="searchHead"
+                    [placeholderLabel]="'Search...'"
+                    [noEntriesFoundLabel]="'Not found'"
+                    name="search"
+                  ></ngx-mat-select-search>
                 </mat-option>
-                <mat-option *ngFor="let item of coaList | filter : searchHead" [value]="item.coaID">
+                <mat-option
+                  *ngFor="let item of coaList | filter: searchHead"
+                  [value]="item.coaID"
+                >
                   {{ item.coaTitle }}
                 </mat-option>
               </mat-select>
@@ -34,10 +40,17 @@
               <mat-label>Select</mat-label>
               <mat-select [(ngModel)]="cmbPartyTo">
                 <mat-option>
-                  <ngx-mat-select-search [(ngModel)]="searchParty" [placeholderLabel]="'Search...'"
-                    [noEntriesFoundLabel]="'Not found'" name="search"></ngx-mat-select-search>
+                  <ngx-mat-select-search
+                    [(ngModel)]="searchParty"
+                    [placeholderLabel]="'Search...'"
+                    [noEntriesFoundLabel]="'Not found'"
+                    name="search"
+                  ></ngx-mat-select-search>
                 </mat-option>
-                <mat-option *ngFor="let item of partyList | filter : searchParty" [value]="item.partyID">
+                <mat-option
+                  *ngFor="let item of partyList | filter: searchParty"
+                  [value]="item.partyID"
+                >
                   {{ item.partyName }}
                 </mat-option>
               </mat-select>
@@ -48,7 +61,13 @@
           <div class="my-form-field">
             <mat-form-field class="w-100" floatLabel="never">
               <mat-label class="pull-right">Debit</mat-label>
-              <input class="text-right" type="number" matInput [(ngModel)]="txtDebit" />
+              <input
+                class="text-right"
+                type="number"
+                matInput
+                [(ngModel)]="txtDebit"
+                [disabled]="disableDebit"
+              />
             </mat-form-field>
           </div>
         </td>
@@ -56,7 +75,13 @@
           <div class="my-form-field">
             <mat-form-field class="w-100" floatLabel="never">
               <mat-label class="pull-right">Credit</mat-label>
-              <input matInput class="text-right" type="number" [(ngModel)]="txtCredit" />
+              <input
+                matInput
+                class="text-right"
+                type="number"
+                [(ngModel)]="txtCredit"
+                [disabled]="disableCredit"
+              />
             </mat-form-field>
           </div>
         </td>
@@ -73,11 +98,11 @@
           </span> -->
         </td>
       </tr>
-      <tr *ngFor="let item of tableData; let i = index;">
-        <td>{{item.accHead}}</td>
-        <td>{{item.partyName}}</td>
-        <td class="text-end">{{item.Debit}}</td>
-        <td class="text-end">{{item.Credit}}</td>
+      <tr *ngFor="let item of tableData; let i = index">
+        <td>{{ item.accHead }}</td>
+        <td>{{ item.partyName }}</td>
+        <td class="text-end">{{ item.Debit }}</td>
+        <td class="text-end">{{ item.Credit }}</td>
         <td class="text-center">
           <span class="text-danger cursorPointer ps-2 pe-2" (click)="remove(i)">
             <mat-icon>delete</mat-icon>
@@ -88,8 +113,12 @@
         <td colspan="2">
           <strong class="pull-right pe-3">Total Voucher Amount</strong>
         </td>
-        <td><strong class="pull-right">{{lblDebit}}</strong></td>
-        <td><strong class="pull-right">{{lblCredit}}</strong></td>
+        <td>
+          <strong class="pull-right">{{ lblDebit }}</strong>
+        </td>
+        <td>
+          <strong class="pull-right">{{ lblCredit }}</strong>
+        </td>
         <td></td>
       </tr>
     </tbody>

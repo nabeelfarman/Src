@@ -9,11 +9,13 @@ declare var $: any;
 @Component({
   selector: 'society-voucher-entry-table',
   templateUrl: './voucher-entry-table.component.html',
-  styleUrls: ['./voucher-entry-table.component.scss']
+  styleUrls: ['./voucher-entry-table.component.scss'],
 })
 export class VoucherEntryTableComponent implements OnInit {
-
   @Output() eventEmitter = new EventEmitter();
+
+  disableDebit: boolean = false;
+  disableCredit: boolean = false;
 
   searchHead: any = '';
   searchParty: any = '';
@@ -79,7 +81,7 @@ export class VoucherEntryTableComponent implements OnInit {
       msg: 'enter credit',
       type: 'textBox',
       required: false,
-    }
+    },
   ];
 
   coaList: any = [];
@@ -99,23 +101,32 @@ export class VoucherEntryTableComponent implements OnInit {
     this.formFields[2].value = this.globalService.getUserId().toString();
   }
 
-  save(){
+  save() {
     // alert(this.txtCredit)
-    if(this.cmbAccHead == ''){
-      this.valid.apiErrorResponse("select account head");return;
-    }else if(this.cmbPartyTo == ''){
-      this.valid.apiErrorResponse("select party to");return;
-    }else if(this.txtDebit == 0 && this.txtCredit == 0){
-      this.valid.apiErrorResponse("enter debit or credit amount");return;
-    }else if(this.txtDebit != 0 && this.txtCredit != 0){
-      this.valid.apiErrorResponse("one amount must be zero");return;
-    }else{
-      var partyData = this.partyList.filter((x: { partyID: any }) => x.partyID == this.cmbPartyTo);
-      var coaData = this.coaList.filter((x: { coaID: any }) => x.coaID == this.cmbAccHead)
-      
-      for(var i = 0; i < this.tableData.length; i++){
-        if(this.tableData[i].COAID == this.cmbAccHead){
-          this.valid.apiInfoResponse('accound head already exist.');return;
+    if (this.cmbAccHead == '') {
+      this.valid.apiErrorResponse('select account head');
+      return;
+    } else if (this.cmbPartyTo == '') {
+      this.valid.apiErrorResponse('select party to');
+      return;
+    } else if (this.txtDebit == 0 && this.txtCredit == 0) {
+      this.valid.apiErrorResponse('enter debit or credit amount');
+      return;
+    } else if (this.txtDebit != 0 && this.txtCredit != 0) {
+      this.valid.apiErrorResponse('one amount must be zero');
+      return;
+    } else {
+      var partyData = this.partyList.filter(
+        (x: { partyID: any }) => x.partyID == this.cmbPartyTo
+      );
+      var coaData = this.coaList.filter(
+        (x: { coaID: any }) => x.coaID == this.cmbAccHead
+      );
+
+      for (var i = 0; i < this.tableData.length; i++) {
+        if (this.tableData[i].COAID == this.cmbAccHead) {
+          this.valid.apiInfoResponse('accound head already exist.');
+          return;
         }
       }
       this.tableData.push({
@@ -139,31 +150,30 @@ export class VoucherEntryTableComponent implements OnInit {
     }
   }
 
-  remove(index: any){
-    
+  remove(index: any) {
     this.lblDebit -= this.tableData[index].Debit;
     this.lblCredit -= this.tableData[index].Credit;
-    
+
     this.tableData.splice(index, 1);
 
     this.eventEmitter.emit(this.tableData.length);
   }
 
-  openModal(){
-
-    if(
+  openModal() {
+    if (
       this.formFields[3].value == '' ||
       this.formFields[4].value == '' ||
-      (this.formFields[5].value == '' &&
-      this.formFields[6].value == '')){
-        this.valid.apiErrorResponse("enter row data");return;
-      }else{
-        $("#taxModal").modal("show");
-      }
+      (this.formFields[5].value == '' && this.formFields[6].value == '')
+    ) {
+      this.valid.apiErrorResponse('enter row data');
+      return;
+    } else {
+      $('#taxModal').modal('show');
+    }
     // data-bs-toggle="modal"
     // data-bs-target="#taxModal"
   }
-  reset(){
+  reset() {
     // this.formFields = this.valid.resetFormFields(this.formFields);
   }
 }

@@ -1,6 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { SharedHelpersFieldValidationsModule } from '@society/shared/helpers/field-validations';
-import { MyFormField, VoucherInterface, VoucherModalInterface } from '@society/shared/interface';
+import {
+  MyFormField,
+  VoucherInterface,
+  VoucherModalInterface,
+} from '@society/shared/interface';
 import { SharedServicesDataModule } from '@society/shared/services/data';
 import { SharedServicesGlobalDataModule } from '@society/shared/services/global-data';
 import { InstallmentVoucherPrintComponent } from './installment-voucher-print/installment-voucher-print.component';
@@ -14,18 +18,17 @@ import { VoucherEntryTableComponent } from './voucher-entry-table/voucher-entry-
   styleUrls: ['./voucher-entry.component.scss'],
 })
 export class VoucherEntryComponent implements OnInit {
-
   @ViewChild(SavedVoucherTableComponent) voucherTbl: any;
   @ViewChild(VoucherEntryTableComponent) voucherMainTbl: any;
   @ViewChild(TransactionTaxInfoComponent) tranTax: any;
 
   @ViewChild(InstallmentVoucherPrintComponent) voucherPrint: any;
-  
+
   searchParty: any = '';
-  
+
   bankID: string = '';
   lblTax: string = '';
-  
+
   lblTableLength: any = 0;
 
   rdbType: any = '';
@@ -42,7 +45,6 @@ export class VoucherEntryComponent implements OnInit {
     taxId: '',
   };
 
-  
   pageFields: VoucherInterface = {
     InvType: '',
     spType: '',
@@ -57,7 +59,7 @@ export class VoucherEntryComponent implements OnInit {
     InvoiceDescription: '',
     Amount: '',
   };
-  
+
   formFields: MyFormField[] = [
     {
       value: this.pageFields.InvType,
@@ -175,7 +177,7 @@ export class VoucherEntryComponent implements OnInit {
       msg: 'select tax section',
       type: 'selectBox',
       required: true,
-    }
+    },
   ];
 
   // pageFields: VoucherInterface = {
@@ -191,19 +193,15 @@ export class VoucherEntryComponent implements OnInit {
   voucherTypeList: any = [
     {
       trnTypeId: 'Pay',
-      trnType: 'Payment'
+      trnType: 'Payment',
     },
     {
       trnTypeId: 'Rec',
-      trnType: 'Receipt'
+      trnType: 'Receipt',
     },
     {
-      trnTypeId: 'PayAdj',
-      trnType: 'Payment Adjustment'
-    },
-    {
-      trnTypeId: 'RecAdj',
-      trnType: 'Receipt Adjustment'
+      trnTypeId: 'Adj',
+      trnType: 'Adjustment',
     },
   ];
 
@@ -230,56 +228,96 @@ export class VoucherEntryComponent implements OnInit {
     this.getSavedVoucher();
   }
 
-  getBankAccount(){
-  this.dataService.getHttp('core-api/getBank', '').subscribe((response: any) => {
-    this.bankList = response;
-    }, (error: any) => {
-      console.log(error);
-    });
-  }
-  
-  getSavedVoucher(){
-    this.dataService.getHttp('core-api/GetSavedVoucherDetail', '').subscribe((response: any) => {
-      this.voucherTbl.tableData = response;
-    }, (error: any) => {
-      console.log(error);
-    });
-  }
-  
-  getProject(){
-    this.dataService.getHttp('core-api/getProject', '').subscribe((response: any) => {
-      this.projectList = response;
-      }, (error: any) => {
+  getBankAccount() {
+    this.dataService.getHttp('core-api/getBank', '').subscribe(
+      (response: any) => {
+        this.bankList = response;
+      },
+      (error: any) => {
         console.log(error);
-      });
+      }
+    );
+  }
+
+  getSavedVoucher() {
+    this.dataService.getHttp('core-api/GetSavedVoucherDetail', '').subscribe(
+      (response: any) => {
+        this.voucherTbl.tableData = response;
+      },
+      (error: any) => {
+        console.log(error);
+      }
+    );
+  }
+
+  getProject() {
+    this.dataService.getHttp('core-api/getProject', '').subscribe(
+      (response: any) => {
+        this.projectList = response;
+      },
+      (error: any) => {
+        console.log(error);
+      }
+    );
+  }
+
+  getExternalParties() {
+    this.dataService
+      .getHttp(
+        'core-api/GetVoucherParty?VoucherType=' + this.formFields[0].value,
+        ''
+      )
+      .subscribe(
+        (response: any) => {
+          this.voucherMainTbl.partyList = response.reverse();
+          this.partyList = response.reverse();
+        },
+        (error: any) => {
+          console.log(error);
+        }
+      );
+  }
+
+  getChartOfAccount() {
+    this.dataService
+      .getHttp(
+        'core-api/GetVouchercoa?VoucherType=' +
+          this.formFields[0].value +
+          '&AmountType=' +
+          this.rdbType,
+        ''
+      )
+      .subscribe(
+        (response: any) => {
+          this.voucherMainTbl.coaList = response.reverse();
+          this.formFields[6].value = '';
+          this.formFields[7].value = '';
+        },
+        (error: any) => {
+          console.log(error);
+        }
+      );
+  }
+
+  onTypeChange(item: any) {
+    this.voucherMainTbl.lblDebit = '0';
+    this.voucherMainTbl.lblCredit = '0';
+    if (item == 'Pay') {
+      this.voucherMainTbl.disableCredit = true;
+      this.voucherMainTbl.disableDebit = false;
+    } else if (item == 'Rec') {
+      this.voucherMainTbl.disableCredit = false;
+      this.voucherMainTbl.disableDebit = true;
+    } else if (item == 'Adj') {
+      this.voucherMainTbl.disableCredit = false;
+      this.voucherMainTbl.disableDebit = false;
     }
-
-  getExternalParties(){
-    this.dataService.getHttp('core-api/GetVoucherParty?VoucherType=' + this.formFields[0].value, '').subscribe((response: any) => {
-      this.voucherMainTbl.partyList = response.reverse();
-      this.partyList = response.reverse();
-    }, (error: any) => {
-      console.log(error);
-    });
   }
-  
-  getChartOfAccount(){
-    this.dataService.getHttp('core-api/GetVouchercoa?VoucherType=' + this.formFields[0].value + '&AmountType=' + this.rdbType, '').subscribe((response: any) => {
-      this.voucherMainTbl.coaList = response.reverse();
-      this.formFields[6].value = '';
-      this.formFields[7].value = '';
-    }, (error: any) => {
-      console.log(error);
-    });
-  }
-
-  bankChange(item: any){
+  bankChange(item: any) {
     this.bankID = item;
-
   }
 
-
-  checkTableLength(item: any){
+  checkTableLength(item: any) {
     this.lblTableLength = item;
   }
 
@@ -290,87 +328,100 @@ export class VoucherEntryComponent implements OnInit {
     this.formFields[3].value = '1';
     this.formFields[11].value = '0';
 
-    if(this.rdbType == 'Cash'){
+    if (this.rdbType == 'Cash') {
       this.formFields[6].value = '0';
-    }else if(this.rdbType == 'Bank'){
-      if(this.formFields[6].value == ''){
-        this.valid.apiInfoResponse('select bank');return;
-      }else if(this.formFields[7].value == ''){
-        this.valid.apiInfoResponse('enter  bank receipt no');return;
+    } else if (this.rdbType == 'Bank') {
+      if (this.formFields[6].value == '') {
+        this.valid.apiInfoResponse('select bank');
+        return;
+      } else if (this.formFields[7].value == '') {
+        this.valid.apiInfoResponse('enter  bank receipt no');
+        return;
       }
     }
 
-    if(this.voucherMainTbl.tableData.length > 0){
-      var found = false;
-      // var foundBank = false;
+    if (this.voucherMainTbl.tableData.length > 0) {
+      // var found = false;
+      // // var foundBank = false;
 
-      for(var i = 0; i < this.voucherMainTbl.tableData.length; i++){
-        if(this.voucherMainTbl.tableData[i].COAID == '2' && this.rdbType == 'Cash'){
-          found = true;
-          i = this.voucherMainTbl.tableData.length + 1;
-        }else if(this.voucherMainTbl.tableData[i].COAID != '3' && this.rdbType == 'Bank'){
-          found = true;
-          i = this.voucherMainTbl.tableData.length + 1;
-        }
-      }
+      // for (var i = 0; i < this.voucherMainTbl.tableData.length; i++) {
+      //   if (
+      //     this.voucherMainTbl.tableData[i].COAID == '2' &&
+      //     this.rdbType == 'Cash'
+      //   ) {
+      //     found = true;
+      //     i = this.voucherMainTbl.tableData.length + 1;
+      //   } else if (
+      //     this.voucherMainTbl.tableData[i].COAID != '3' &&
+      //     this.rdbType == 'Bank'
+      //   ) {
+      //     found = true;
+      //     i = this.voucherMainTbl.tableData.length + 1;
+      //   }
+      // }
 
-      if(found == false){
-        this.valid.apiInfoResponse('enter cash or bank in voucher detail');return;
-      }
+      // if (found == false) {
+      //   this.valid.apiInfoResponse('enter cash or bank in voucher detail');
+      //   return;
+      // }
 
       this.formFields[9].value = JSON.stringify(this.voucherMainTbl.tableData);
     }
 
-    if(this.voucherMainTbl.lblDebit != this.voucherMainTbl.lblCredit){
-      this.valid.apiInfoResponse('debit and credit amount not matched');return;
+    if (this.formFields[0].value == 'Adj') {
+      if (this.voucherMainTbl.lblDebit != this.voucherMainTbl.lblCredit) {
+        this.valid.apiInfoResponse('debit and credit amount not matched');
+        return;
+      }
     }
 
     this.dataService
-    .savetHttp(
-      this.pageFields,
-      this.formFields,
-      'core-api/InsertVoucher'
-    )
-    .subscribe(
-      (response: any) => {
-        if(response.msg == 'Data Saved Successfully'){
-          this.valid.apiInfoResponse('record added successfully');
+      .savetHttp(this.pageFields, this.formFields, 'core-api/InsertVoucher')
+      .subscribe(
+        (response: any) => {
+          if (response.msg == 'Data Saved Successfully') {
+            this.valid.apiInfoResponse('record added successfully');
 
-          var partyData = this.partyList.filter((n: {partyID: any}) => n.partyID == this.formFields[8].value);
-          var projectData = this.projectList.filter((m: {projectID: any}) => m.projectID == this.formFields[5].value);
+            var partyData = this.partyList.filter(
+              (n: { partyID: any }) => n.partyID == this.formFields[8].value
+            );
+            var projectData = this.projectList.filter(
+              (m: { projectID: any }) => m.projectID == this.formFields[5].value
+            );
 
-          if(this.rdbType == 'Bank'){
-            var bankData = this.bankList.filter((x:{bankID: any}) => x.bankID == this.formFields[6].value);
+            if (this.rdbType == 'Bank') {
+              var bankData = this.bankList.filter(
+                (x: { bankID: any }) => x.bankID == this.formFields[6].value
+              );
 
-            this.voucherPrint.lblBank = bankData[0].bankName + ' - ' + bankData[0].bankAccountNo;
-            this.voucherPrint.lblBankReceipt = this.formFields[7].value;
-  
+              this.voucherPrint.lblBank =
+                bankData[0].bankName + ' - ' + bankData[0].bankAccountNo;
+              this.voucherPrint.lblBankReceipt = this.formFields[7].value;
+            }
+
+            this.voucherPrint.lblVoucherType = this.formFields[0].value;
+            this.voucherPrint.lblVoucherDate = this.formFields[4].value;
+            this.voucherPrint.lblAccountType = this.rdbType;
+            this.voucherPrint.lblProject = projectData[0].projectName;
+            this.voucherPrint.lblParty = partyData[0].partyName;
+            this.voucherPrint.tableData = this.voucherMainTbl.tableData;
+
+            this.voucherPrint.lblDebit = this.voucherMainTbl.lblDebit;
+            this.voucherPrint.lblCredit = this.voucherMainTbl.lblCredit;
+
+            setTimeout(() => this.globalService.printData(printSection), 200);
+
+            this.reset();
+            this.getSavedVoucher();
+          } else {
+            this.valid.apiErrorResponse(response.toString());
           }
-          
-          this.voucherPrint.lblVoucherType = this.formFields[0].value;
-          this.voucherPrint.lblVoucherDate = this.formFields[4].value; 
-          this.voucherPrint.lblAccountType = this.rdbType;
-          this.voucherPrint.lblProject = projectData[0].projectName;
-          this.voucherPrint.lblParty = partyData[0].partyName;
-          this.voucherPrint.tableData = this.voucherMainTbl.tableData;
-          
-          this.voucherPrint.lblDebit = this.voucherMainTbl.lblDebit;
-          this.voucherPrint.lblCredit = this.voucherMainTbl.lblCredit;
-
-          setTimeout(() => this.globalService.printData(printSection), 200);
-          
-          this.reset();
-          this.getSavedVoucher();
-        }else{
-          this.valid.apiErrorResponse(response.toString());
+        },
+        (error: any) => {
+          this.error = error;
+          this.valid.apiErrorResponse(this.error);
         }
-      },
-      (error: any) => {
-        this.error = error;
-        this.valid.apiErrorResponse(this.error);
-      }
-    );
-
+      );
   }
 
   saveTax() {
@@ -383,54 +434,65 @@ export class VoucherEntryComponent implements OnInit {
     this.formFieldsModal[5].value = this.voucherMainTbl.formFields[6].value;
     this.formFieldsModal[6].value = this.tranTax.cmbTax;
 
-    if(this.formFieldsModal[4].value == "" && this.formFieldsModal[5].value == ""){
-      this.valid.apiErrorResponse('enter debit'); return;
-    }else if(this.formFieldsModal[4].value == "" && this.formFieldsModal[5].value != ""){
+    if (
+      this.formFieldsModal[4].value == '' &&
+      this.formFieldsModal[5].value == ''
+    ) {
+      this.valid.apiErrorResponse('enter debit');
+      return;
+    } else if (
+      this.formFieldsModal[4].value == '' &&
+      this.formFieldsModal[5].value != ''
+    ) {
       this.formFieldsModal[4].value = '0';
-    }else if(this.formFieldsModal[4].value != "" && this.formFieldsModal[5].value == ""){
+    } else if (
+      this.formFieldsModal[4].value != '' &&
+      this.formFieldsModal[5].value == ''
+    ) {
       this.formFieldsModal[5].value = '0';
     }
 
     this.dataService
-    .savetHttp(
-      this.pageFieldsModal,
-      this.formFieldsModal,
-      'fmis-api/Voucher/saveVoucher'
-    )
-    .subscribe(
-      (response: any[]) => {
-        if(response[0].includes('Success') == true){
-          this.valid.apiInfoResponse('record added successfully');
-          // this.plotsTable.getPlots();
-          this.lblTax = "Success";
-          this.resetTrans();
-        }else{
-          this.valid.apiErrorResponse(response.toString());
+      .savetHttp(
+        this.pageFieldsModal,
+        this.formFieldsModal,
+        'fmis-api/Voucher/saveVoucher'
+      )
+      .subscribe(
+        (response: any[]) => {
+          if (response[0].includes('Success') == true) {
+            this.valid.apiInfoResponse('record added successfully');
+            // this.plotsTable.getPlots();
+            this.lblTax = 'Success';
+            this.resetTrans();
+          } else {
+            this.valid.apiErrorResponse(response.toString());
+          }
+        },
+        (error: any) => {
+          this.error = error;
+          this.valid.apiErrorResponse(this.error);
         }
-      },
-      (error: any) => {
-        this.error = error;
-        this.valid.apiErrorResponse(this.error);
-      }
-    );
-
+      );
   }
 
   reset() {
-    this.voucherMainTbl.formFields = this.valid.resetFormFields(this.voucherMainTbl.formFields);
+    this.voucherMainTbl.formFields = this.valid.resetFormFields(
+      this.voucherMainTbl.formFields
+    );
     this.formFields = this.valid.resetFormFields(this.formFields);
     this.formFieldsModal = this.valid.resetFormFields(this.formFieldsModal);
 
-    this.voucherMainTbl.formFields[5].value = "";
-    this.voucherMainTbl.formFields[6].value = "";
-    
+    this.voucherMainTbl.formFields[5].value = '';
+    this.voucherMainTbl.formFields[6].value = '';
+
     this.tranTax.cmbTax = '';
     this.tranTax.cmbSTax = '';
     this.tranTax.lblNature = '';
 
     this.formFields[6].value = '';
     this.formFields[7].value = '';
-    
+
     this.voucherMainTbl.bankID = '';
     this.voucherMainTbl.lblTax = '';
     this.voucherMainTbl.lblTransaction = '';
@@ -440,78 +502,84 @@ export class VoucherEntryComponent implements OnInit {
     this.voucherMainTbl.coaList = [];
     this.voucherMainTbl.partyList = [];
     this.partyList = [];
-    
+
+    this.voucherMainTbl.disableCredit = false;
+    this.voucherMainTbl.disableDebit = false;
+
     this.lblTableLength = 0;
-  
   }
-  
-  resetTrans(){}
+
+  resetTrans() {}
 
   printData(item: any) {
-    
     // var partyData = this.partyList.filter((n: {partyID: any}) => n.partyID == this.formFields[8].value);
-    var projectData = this.projectList.filter((m: {projectID: any}) => m.projectID == item.item.projectID);
+    var projectData = this.projectList.filter(
+      (m: { projectID: any }) => m.projectID == item.item.projectID
+    );
 
-    if(item.item.bankID > 0){
-      var bankData = this.bankList.filter((x:{bankID: any}) => x.bankID == item.item.bankID);
+    if (item.item.bankID > 0) {
+      var bankData = this.bankList.filter(
+        (x: { bankID: any }) => x.bankID == item.item.bankID
+      );
 
       this.voucherPrint.lblBank = bankData[0].bankName; // + ' (' + bankData[0].bankAccountNo + ')';
 
-      if(item.item.bankReceiptNo == '' || item.item.bankReceiptNo == null){
+      if (item.item.bankReceiptNo == '' || item.item.bankReceiptNo == null) {
         this.voucherPrint.lblBankReceipt = '-';
-      }
-      else {
+      } else {
         this.voucherPrint.lblBankReceipt = item.item.bankReceiptNo;
       }
-      
 
       this.voucherPrint.lblAccountType = 'Bank';
-
-    }else{
+    } else {
       this.voucherPrint.lblAccountType = 'Cash';
     }
 
     this.voucherPrint.lblVoucherType = item.item.invType;
-    this.voucherPrint.lblVoucherDate = item.item.invoiceDate; 
+    this.voucherPrint.lblVoucherDate = item.item.invoiceDate;
     this.voucherPrint.lblParty = item.item.partyName;
-    
-    if(item.item.invoiceDescription == '' || item.item.invoiceDescription == null){
+
+    if (
+      item.item.invoiceDescription == '' ||
+      item.item.invoiceDescription == null
+    ) {
       this.voucherPrint.lblDescription = '-';
-    }
-    else {
+    } else {
       this.voucherPrint.lblDescription = item.item.invoiceDescription;
     }
 
-    if(projectData.length > 0){
+    if (projectData.length > 0) {
       this.voucherPrint.lblProject = projectData[0].projectName;
-    }else{
+    } else {
       this.voucherPrint.lblProject = '-';
     }
 
-    
     this.voucherPrint.lblDebit = 0;
     this.voucherPrint.lblCredit = 0;
     this.voucherPrint.tableData = [];
-    for(var i = 0; i < item.response.length; i++){
+    for (var i = 0; i < item.response.length; i++) {
       this.voucherPrint.tableData.push({
         accHead: item.response[i].coaTitle,
         partyName: item.response[i].partyName,
         Debit: item.response[i].debit,
         Credit: item.response[i].credit,
-      })
-      if(item.response[i].debit > 0){
-        this.voucherPrint.lblDebit = parseInt(this.voucherPrint.lblDebit) + parseInt(item.response[i].debit);
+      });
+      if (item.response[i].debit > 0) {
+        this.voucherPrint.lblDebit =
+          parseInt(this.voucherPrint.lblDebit) +
+          parseInt(item.response[i].debit);
       }
-      if(item.response[i].credit > 0){
-        this.voucherPrint.lblCredit = parseInt(this.voucherPrint.lblCredit) + parseInt(item.response[i].credit);
+      if (item.response[i].credit > 0) {
+        this.voucherPrint.lblCredit =
+          parseInt(this.voucherPrint.lblCredit) +
+          parseInt(item.response[i].credit);
       }
     }
 
     setTimeout(() => this.globalService.printData('#print-summary'), 200);
-    
   }
 
-  delete(item: any){
+  delete(item: any) {
     this.getSavedVoucher();
   }
 }
