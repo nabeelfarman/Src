@@ -96,7 +96,7 @@ export class ChartOfAccountComponent implements OnInit {
       value: this.pageFields.transactionAllowed,
       msg: '',
       type: 'radioButton',
-      required: true,
+      required: false,
     },
     {
       value: this.pageFields.memberReceiptHead,
@@ -329,6 +329,7 @@ export class ChartOfAccountComponent implements OnInit {
     this.formFields[7].value = '';
     this.formFields[10].value = '';
     this.lblAccountCode = '';
+    this.cmbLevelNo = '';
 
     this.coaLevel1List = [];
     this.coaLevel2List = [];
