@@ -1,4 +1,4 @@
-:root{
+:root {
   // --dark : #484e4a;
   --dark: #2a2829;
   --dark-light: #c5c1bb;
@@ -10,64 +10,79 @@
   --white: #ffffff;
   --nha-blue: #3c1874;
   // --nha-blue: #0041C2;
-  --royal-blue: #0041C2;
+  --royal-blue: #0041c2;
   --nha-light-blue: #dff2fa;
   // --nha-light-blue: green;
 }
-body,html{
+body,
+html {
   width: 100%;
   height: 100%;
   // background-color: var(--light);
-  background-image: linear-gradient(to right top, #f8f9fa, #f4f6f9, #f1f2f8, #f0eef6, #f1e9f3, #f0e9f3, #f0e8f3, #efe8f3, #edebf6, #ebeff7, #ebf1f8, #edf4f8);
+  background-image: linear-gradient(
+    to right top,
+    #f8f9fa,
+    #f4f6f9,
+    #f1f2f8,
+    #f0eef6,
+    #f1e9f3,
+    #f0e9f3,
+    #f0e8f3,
+    #efe8f3,
+    #edebf6,
+    #ebeff7,
+    #ebf1f8,
+    #edf4f8
+  );
   overflow: hidden;
 }
 
-h2{
+h2 {
   font-family: 'Oswald';
   font-size: 1.8em !important;
   // color: var(--nha-blue);
   letter-spacing: 0.05em !important;
 }
 
-h3{
+h3 {
   font-family: 'Lato';
   font-size: 1.5em !important;
   // color: var(--nha-blue);
 }
 
-h4{
+h4 {
   font-family: 'Lato';
   font-size: 1.2em !important;
-  letter-spacing: 0.10em !important;
+  letter-spacing: 0.1em !important;
   // font-weight: 600 !important;
 }
 
-h5{
+h5 {
   font-family: 'Raleway';
-  font-size: 0.50em;
+  font-size: 0.5em;
   color: var(--sun-red);
 }
 
-.h3-panel{
+.h3-panel {
   font-family: 'Lato' !important;
   font-size: 1.1em !important;
   letter-spacing: 0.1em !important;
   // font-weight: 600;
 }
 
-.fullWidth{
+.fullWidth {
   width: 100% !important;
 }
 button {
   outline: none !important;
 }
 
-.noneOutline{
+.noneOutline {
   outline: none !important;
 }
 
 /********************** headings ************************/
-.h1-page-header{
+.h1-page-header {
   padding-left: 0.5em;
   color: var(--dark);
   font-family: 'Raleway';
@@ -75,50 +90,50 @@ button {
 }
 
 /****************** Home Page *************************/
-.homePage img{
+.homePage img {
   // content: url(../assets/images/ssechs.png);
 }
-.homePageHeading{
+.homePageHeading {
   font-family: 'Lato';
   font-size: 1.5em;
   color: var(--nha-orange);
 }
-.erpImg{
+.erpImg {
   background-image: url(../assets/images/erp.png);
   width: 100%;
   height: 20%;
   background-position: center;
   background-repeat: no-repeat;
 }
-.erpHeading{
+.erpHeading {
   font-family: Raleway;
-  font-size: 2.0em;
+  font-size: 2em;
   color: var(--sun-red);
 }
 /**************** background colors *******************/
-.bg-dark-light{
+.bg-dark-light {
   background-color: var(--dark-light);
 }
 
-.bg-light{
+.bg-light {
   background-color: var(--light);
 }
 
 /******************** borders ************************/
-.border-bottom-page-header{
+.border-bottom-page-header {
   border-bottom: 2px solid var(--white);
 }
-.border-right-dark{
+.border-right-dark {
   border-right: 1px solid var(--dark-light);
 }
-.border-top-light{
+.border-top-light {
   border-top: var(--dark-light) !important;
 }
-.border-bottom-light{
+.border-bottom-light {
   border-bottom: var(--dark-light) !important;
 }
 /****************** buttons ***********************/
-.cursorPointer{
+.cursorPointer {
   cursor: pointer !important;
 }
 // .cursorPointer:hover{
@@ -127,7 +142,7 @@ button {
 // }
 .button-page-header {
   position: relative;
-  padding: 0.25em 1.0em;
+  padding: 0.25em 1em;
   border: none;
   background-color: transparent;
   cursor: pointer;
@@ -139,8 +154,9 @@ button {
 .button-page-header.type2 {
   color: var(--dark);
 }
-.button-page-header.type2.type2:after, .button-page-header.type2.type2:before {
-  content: "";
+.button-page-header.type2.type2:after,
+.button-page-header.type2.type2:before {
+  content: '';
   display: block;
   position: absolute;
   top: 100%;
@@ -223,7 +239,7 @@ button {
   display: block;
   height: 2px;
   width: 100%;
-  content: "";
+  content: '';
   background-color: var(--sun-red);
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
@@ -239,22 +255,22 @@ button {
 /********************************************************/
 /************** Scroll bar *************/
 /********************************************************/
-.simplebar-scrollbar{
+.simplebar-scrollbar {
   background-color: var(--sun-red);
   width: 0.2em;
   padding: 0;
   margin: 0;
 }
-.scroll-verticle{
+.scroll-verticle {
   overflow-x: hidden !important;
-  overflow-y: scroll ;
+  overflow-y: scroll;
 }
 
-.scroll-horizontal{
-  overflow-x: auto ;
+.scroll-horizontal {
+  overflow-x: auto;
   overflow-y: hidden !important;
 }
-.no-scroll{
+.no-scroll {
   width: 100% !important;
   height: 100% !important;
   overflow: hidden !important;
@@ -294,7 +310,7 @@ button {
 /*************** end Scroll bar ****************/
 
 /*************** Angular Material ***************/
-.mat-tab-group{
+.mat-tab-group {
   height: calc(100%-0px);
   min-height: calc(100%-0px);
   max-height: calc(100%-0px);
@@ -302,73 +318,72 @@ button {
   min-width: 100%;
 }
 
-.my-form-field .mat-form-field-wrapper{
+.my-form-field .mat-form-field-wrapper {
   margin-bottom: -1.25em;
   margin-top: -0.75em;
 }
 
-.mat-card-title{
+.mat-card-title {
   // font-family: 'Raleway';
   font-size: 1.2em;
   color: var(--sun-red);
 }
 
 .mat-tab-body-content {
-  overflow-x: hidden!important;
+  overflow-x: hidden !important;
   overflow-y: auto !important;
 }
-.mat-tab-body{
+.mat-tab-body {
   flex-grow: 1 !important;
 }
-.mat-panel-title{
+.mat-panel-title {
   letter-spacing: 0.1em !important;
   font-weight: 800 !important;
 }
 
-button.mat-raised-button.savebtn{
+button.mat-raised-button.savebtn {
   background-color: var(--nha-orange) !important;
   color: #fff !important;
-  padding-left: 3.0em !important;
-  padding-right: 3.0em !important;
+  padding-left: 3em !important;
+  padding-right: 3em !important;
 }
 
-button.mat-raised-button.resetbtn{
+button.mat-raised-button.resetbtn {
   background-color: var(--nha-blue) !important;
   color: #fff !important;
-  padding-left: 3.0em !important;
-  padding-right: 3.0em !important;
+  padding-left: 3em !important;
+  padding-right: 3em !important;
 }
 
-button.mat-raised-button.uploadbtn{
+button.mat-raised-button.uploadbtn {
   background-color: var(--dark) !important;
-  padding-left: 3.0em !important;
-  padding-right: 3.0em !important;
+  padding-left: 3em !important;
+  padding-right: 3em !important;
   color: white !important;
 }
 
 /*************** end Angular Material ************/
 
 /************* Image Avatars ***************/
-.avatar-border{
+.avatar-border {
   border: 3px solid var(--white);
 }
-.picFrame{
+.picFrame {
   border: 10px solid white;
   width: 300px;
   height: auto;
 }
 /*********** end Image Avatars *************/
 
-
 /***************** bootstrap classes ***************/
 .row [class*='col-'] {
-  transition: flex 0.5s ease-in-out, max-width .5s ease-in-out;
+  transition: flex 0.5s ease-in-out, max-width 0.5s ease-in-out;
 }
 
 /************** end bootstrap classes **************/
 
 /*************** div images *****************/
-.img-mts{
+.img-mts {
   height: 3em;
   background-image: url(../assets/images/payroll/mts.png);
   background-position: center;
@@ -377,53 +392,52 @@ button.mat-raised-button.uploadbtn{
 }
 /************* end div images ***************/
 
-
 /************* text & background colors ****************/
-.sunred-text{
+.sunred-text {
   color: var(--sun-red) !important;
 }
 
-.blue-text{
+.blue-text {
   color: var(--nha-blue) !important;
 }
-.royal-blue-text{
+.royal-blue-text {
   color: var(--royal-blue) !important;
 }
-.sunred-bg{
+.sunred-bg {
   background-color: var(--sun-red) !important;
 }
 
-.dark-bg{
+.dark-bg {
   background-color: var(--dark) !important;
 }
 
-.light-blue-bg{
+.light-blue-bg {
   background-color: var(--nha-light-blue) !important;
 }
 
-.sun-red-bg{
+.sun-red-bg {
   background-color: var(--sun-red) !important;
 }
-.nha-orange-bg{
+.nha-orange-bg {
   background-color: var(--nha-orange) !important;
 }
 
-.nha-orange-text{
+.nha-orange-text {
   color: var(--nha-orange) !important;
 }
 
-.orange-bg{
+.orange-bg {
   background-color: var(--orange) !important;
 }
 
-.yellow-text{
-  color:yellow !important;
+.yellow-text {
+  color: yellow !important;
 }
-.dark-light-bg{
+.dark-light-bg {
   background-color: var(--dark-light) !important;
 }
 
-.darktone1-bg{
+.darktone1-bg {
   background-color: var(--darktone1) !important;
 }
 /****************** side Nav css ********************/
@@ -465,7 +479,7 @@ button.mat-raised-button.uploadbtn{
   cursor: pointer;
 }
 .side-nav-link:after {
-  content: "";
+  content: '';
   position: absolute;
   width: 80%;
   // border-bottom: 1px solid rgba(255, 255, 255, 0.5);
@@ -494,15 +508,14 @@ button.mat-raised-button.uploadbtn{
 }
 /*************** End side Nav css *******************/
 
-
 /************** Module Box Div *********************/
-.cardTxtYellow{
+.cardTxtYellow {
   background-color: var(--nha-light-blue);
   border-radius: 30px;
   color: var(--dark);
-  font-size: 1.0em;
+  font-size: 1em;
 }
-.cardTxtGreen{
+.cardTxtGreen {
   background-color: green;
   border-radius: 30px;
   color: white;
@@ -511,23 +524,19 @@ button.mat-raised-button.uploadbtn{
 /************** Panel Height *****************/
 
 /***************** Margins and Paddings ****************/
-.zeroMargin{
-  margin-top : -10.25em !important
+.zeroMargin {
+  margin-top: -10.25em !important;
 }
 
-.pay-register-item-width{
+.pay-register-item-width {
   width: 120px;
   // background-color: yellow;
   // border: 1px solid red;
 }
 
-
-
-
-.txtDarkGrey{
+.txtDarkGrey {
   color: #32332e !important;
 }
-
 
 .h1Report {
   font-size: 1.5em !important;
@@ -575,33 +584,32 @@ hr {
 
 /*****************************Adnan css ****************************/
 
-
-.rptcontainer{
+.rptcontainer {
   border: 1px solid black !important;
 }
 
-.border-1-black{
-  border: 1px solid black !important
+.border-1-black {
+  border: 1px solid black !important;
 }
 
-.border-left-black{
-  border-left: 1px solid black !important
+.border-left-black {
+  border-left: 1px solid black !important;
 }
 
-label{
+label {
   color: #000 !important;
   font-size: 12px;
 }
 
-.height-27{
+.height-27 {
   height: 27px !important;
 }
 
-.ml-1{
+.ml-1 {
   margin-left: 1px !important;
 }
 
-.clrBlack{
+.clrBlack {
   color: #000 !important;
 }
 
@@ -609,33 +617,29 @@ label{
   border-bottom: 1px solid black !important;
 }
 
-.width-100{
+.width-100 {
   width: 100% !important;
 }
 
-
-
-
-
-.table-logix{
-  background-color: #fff; 
+.table-logix {
+  background-color: #fff;
   border: 1px solid black;
 }
 
 .table-logix > thead {
-  border:1px solid black;
+  border: 1px solid black;
 }
 
 /*********** Table Stripped *******/
-.table-logix > thead > tr{
-  border: 1px solid black;    
+.table-logix > thead > tr {
+  border: 1px solid black;
 }
 .table-logix > thead > tr > th {
   /*background-color:#D2101B;*/
-  /*color:#fff;*/  
-  font-weight: bold;  
+  /*color:#fff;*/
+  font-weight: bold;
   text-align: center;
-  border:1px solid black;
+  border: 1px solid black;
 }
 
 .table-logix > tbody > tr {
@@ -644,4 +648,7 @@ label{
 
 .table-logix > tbody > tr > td {
   border: 1px solid black;
+}
+#newCOA .modal-content {
+  min-height: 600px;
 }

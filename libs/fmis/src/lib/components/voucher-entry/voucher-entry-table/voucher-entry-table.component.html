@@ -3,7 +3,6 @@
     <thead>
       <tr>
         <th scope="col">Account Head</th>
-        <th scope="col">Party To</th>
         <th scope="col" class="text-end">Debit</th>
         <th scope="col" class="text-end">Credit</th>
         <th scope="col" class="text-center">Actions</th>
@@ -29,29 +28,6 @@
                   [value]="item.coaID"
                 >
                   {{ item.coaTitle }}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
-          </div>
-        </td>
-        <td>
-          <div class="my-form-field">
-            <mat-form-field class="w-100" floatLabel="never">
-              <mat-label>Select</mat-label>
-              <mat-select [(ngModel)]="cmbPartyTo">
-                <mat-option>
-                  <ngx-mat-select-search
-                    [(ngModel)]="searchParty"
-                    [placeholderLabel]="'Search...'"
-                    [noEntriesFoundLabel]="'Not found'"
-                    name="search"
-                  ></ngx-mat-select-search>
-                </mat-option>
-                <mat-option
-                  *ngFor="let item of partyList | filter: searchParty"
-                  [value]="item.partyID"
-                >
-                  {{ item.partyName }}
                 </mat-option>
               </mat-select>
             </mat-form-field>
@@ -100,7 +76,6 @@
       </tr>
       <tr *ngFor="let item of tableData; let i = index">
         <td>{{ item.accHead }}</td>
-        <td>{{ item.partyName }}</td>
         <td class="text-end">{{ item.Debit }}</td>
         <td class="text-end">{{ item.Credit }}</td>
         <td class="text-center">
