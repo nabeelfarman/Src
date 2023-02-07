@@ -63,7 +63,7 @@ export class VoucherEntryComponent implements OnInit {
   formFields: MyFormField[] = [
     {
       value: this.pageFields.InvType,
-      msg: 'select voucher type',
+      msg: 'Please select voucher type',
       type: 'selectbox',
       required: true,
     },
@@ -81,55 +81,55 @@ export class VoucherEntryComponent implements OnInit {
     },
     {
       value: this.pageFields.BranchID,
-      msg: 'select branch',
+      msg: 'Select branch',
       type: 'selectbox',
       required: true,
     },
     {
       value: this.pageFields.InvoiceDate,
-      msg: 'select voucher date',
+      msg: 'Please select voucher date',
       type: 'date',
       required: true,
     },
     {
       value: this.pageFields.ProjectID,
-      msg: 'select project',
+      msg: 'Select project',
       type: 'selectbox',
       required: true,
     },
     {
       value: this.pageFields.BankID,
-      msg: 'select bank',
+      msg: 'Select bank',
       type: 'selectbox',
       required: false,
     },
     {
       value: this.pageFields.BankReceiptNo,
-      msg: 'enter bank receipt no',
+      msg: 'Enter bank receipt no',
       type: 'textbox',
       required: false,
     },
     {
       value: this.pageFields.PartyID,
-      msg: 'select party',
+      msg: 'Select party',
       type: 'selectbox',
       required: true,
     },
     {
       value: this.pageFields.InvoiceDetail,
-      msg: 'enter debit or credit amount data',
+      msg: 'Enter debit or credit amount data',
       type: 'textbox',
       required: true,
     },
     {
       value: this.pageFields.InvoiceDescription,
-      msg: 'enter description',
+      msg: 'Enter Narration',
       type: 'textbox',
       required: true,
     },
     {
       value: this.pageFields.Amount,
-      msg: 'enter amount',
+      msg: 'Please enter amount',
       type: 'textbox',
       required: false,
     },
@@ -223,10 +223,17 @@ export class VoucherEntryComponent implements OnInit {
     this.formFields[2].value = this.globalService.getUserId().toString();
 
     this.rdbType = 'Cash';
+
+    this.formFields[4].value = new Date();
+
     this.getBankAccount();
     this.getProject();
     this.getSavedVoucher();
   }
+
+
+
+
 
   getBankAccount() {
     this.dataService.getHttp('core-api/getBank', '').subscribe(
@@ -239,6 +246,10 @@ export class VoucherEntryComponent implements OnInit {
     );
   }
 
+
+
+
+
   getSavedVoucher() {
     this.dataService.getHttp('core-api/GetSavedVoucherDetail', '').subscribe(
       (response: any) => {
@@ -250,6 +261,11 @@ export class VoucherEntryComponent implements OnInit {
     );
   }
 
+
+
+
+
+
   getProject() {
     this.dataService.getHttp('core-api/getProject', '').subscribe(
       (response: any) => {
@@ -260,6 +276,11 @@ export class VoucherEntryComponent implements OnInit {
       }
     );
   }
+
+
+
+
+
 
   getExternalParties() {
     this.dataService
@@ -278,15 +299,13 @@ export class VoucherEntryComponent implements OnInit {
       );
   }
 
+
+
+
+
   getChartOfAccount() {
     this.dataService
-      .getHttp(
-        'core-api/GetVouchercoa?VoucherType=' +
-          this.formFields[0].value +
-          '&AmountType=' +
-          this.rdbType,
-        ''
-      )
+      .getHttp('core-api/GetVouchercoa?VoucherType=' + this.formFields[0].value + '&AmountType=' + this.rdbType,'' )
       .subscribe(
         (response: any) => {
           this.voucherMainTbl.coaList = response.reverse();
@@ -298,6 +317,10 @@ export class VoucherEntryComponent implements OnInit {
         }
       );
   }
+
+
+
+
 
   onTypeChange(item: any) {
     this.voucherMainTbl.lblDebit = '0';
@@ -313,13 +336,26 @@ export class VoucherEntryComponent implements OnInit {
       this.voucherMainTbl.disableDebit = false;
     }
   }
+
+
+
+
+
   bankChange(item: any) {
     this.bankID = item;
   }
 
+
+
+
+
   checkTableLength(item: any) {
     this.lblTableLength = item;
   }
+
+
+
+
 
   save(printSection: any) {
     this.voucherPrint.tableData = [];
@@ -329,48 +365,34 @@ export class VoucherEntryComponent implements OnInit {
     this.formFields[11].value = '0';
 
     if (this.rdbType == 'Cash') {
+
       this.formFields[6].value = '0';
+
     } else if (this.rdbType == 'Bank') {
+
       if (this.formFields[6].value == '') {
-        this.valid.apiInfoResponse('select bank');
+
+        this.valid.apiInfoResponse('Plese select bank');
         return;
+
       } else if (this.formFields[7].value == '') {
-        this.valid.apiInfoResponse('enter  bank receipt no');
+
+        this.valid.apiInfoResponse('Please enter bank receipt no');
         return;
+
       }
+
     }
 
     if (this.voucherMainTbl.tableData.length > 0) {
-      // var found = false;
-      // // var foundBank = false;
-
-      // for (var i = 0; i < this.voucherMainTbl.tableData.length; i++) {
-      //   if (
-      //     this.voucherMainTbl.tableData[i].COAID == '2' &&
-      //     this.rdbType == 'Cash'
-      //   ) {
-      //     found = true;
-      //     i = this.voucherMainTbl.tableData.length + 1;
-      //   } else if (
-      //     this.voucherMainTbl.tableData[i].COAID != '3' &&
-      //     this.rdbType == 'Bank'
-      //   ) {
-      //     found = true;
-      //     i = this.voucherMainTbl.tableData.length + 1;
-      //   }
-      // }
-
-      // if (found == false) {
-      //   this.valid.apiInfoResponse('enter cash or bank in voucher detail');
-      //   return;
-      // }
+      
 
       this.formFields[9].value = JSON.stringify(this.voucherMainTbl.tableData);
     }
 
     if (this.formFields[0].value == 'Adj') {
       if (this.voucherMainTbl.lblDebit != this.voucherMainTbl.lblCredit) {
-        this.valid.apiInfoResponse('debit and credit amount not matched');
+        this.valid.apiInfoResponse('Debit and credit amount not matched');
         return;
       }
     }
@@ -382,21 +404,17 @@ export class VoucherEntryComponent implements OnInit {
           if (response.msg == 'Data Saved Successfully') {
             this.valid.apiInfoResponse('record added successfully');
 
-            var partyData = this.partyList.filter(
-              (n: { partyID: any }) => n.partyID == this.formFields[8].value
-            );
-            var projectData = this.projectList.filter(
-              (m: { projectID: any }) => m.projectID == this.formFields[5].value
-            );
+            var partyData = this.partyList.filter((n: { partyID: any }) => n.partyID == this.formFields[8].value);
+
+            var projectData = this.projectList.filter((m: { projectID: any }) => m.projectID == this.formFields[5].value);
 
             if (this.rdbType == 'Bank') {
-              var bankData = this.bankList.filter(
-                (x: { bankID: any }) => x.bankID == this.formFields[6].value
-              );
 
-              this.voucherPrint.lblBank =
-                bankData[0].bankName + ' - ' + bankData[0].bankAccountNo;
+              var bankData = this.bankList.filter((x: { bankID: any }) => x.bankID == this.formFields[6].value);
+
+              this.voucherPrint.lblBank = bankData[0].bankName + ' - ' + bankData[0].bankAccountNo;
               this.voucherPrint.lblBankReceipt = this.formFields[7].value;
+
             }
 
             this.voucherPrint.lblVoucherType = this.formFields[0].value;
@@ -423,6 +441,10 @@ export class VoucherEntryComponent implements OnInit {
         }
       );
   }
+
+
+
+
 
   saveTax() {
     // this.lblTax = 'ok';
@@ -476,6 +498,10 @@ export class VoucherEntryComponent implements OnInit {
       );
   }
 
+
+
+
+
   reset() {
     this.voucherMainTbl.formFields = this.valid.resetFormFields(
       this.voucherMainTbl.formFields
@@ -483,7 +509,7 @@ export class VoucherEntryComponent implements OnInit {
     this.formFields = this.valid.resetFormFields(this.formFields);
     this.formFieldsModal = this.valid.resetFormFields(this.formFieldsModal);
 
-    this.voucherMainTbl.formFields[5].value = '';
+    this.voucherMainTbl.formFields[5].value = new Date();
     this.voucherMainTbl.formFields[6].value = '';
 
     this.tranTax.cmbTax = '';
@@ -509,7 +535,15 @@ export class VoucherEntryComponent implements OnInit {
     this.lblTableLength = 0;
   }
 
+
+
+
+
   resetTrans() {}
+
+
+
+
 
   printData(item: any) {
     // var partyData = this.partyList.filter((n: {partyID: any}) => n.partyID == this.formFields[8].value);
@@ -578,6 +612,9 @@ export class VoucherEntryComponent implements OnInit {
 
     setTimeout(() => this.globalService.printData('#print-summary'), 200);
   }
+
+
+
 
   delete(item: any) {
     this.getSavedVoucher();
