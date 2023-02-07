@@ -1,28 +1,29 @@
 <div class="container bg-white" id="print-summary">
-
   <div class="row mb-2">
     <div class="col-md-6 text-left">
       <img class="mt-1" src="assets/ui/company/shama.png" width="125px" />
     </div>
 
-
     <div class="col-md-6 text-right">
-
       <div class="d-flex flex-column align-items-center">
         <div class="h2Report"><b>SHAMA ROYAL CITY</b></div>
         <div class="h4Report">A Project of: SARDAR ASSOCIATES</div>
         <h2 class="h3Report txtDarkGrey mt-1">Payment/Receipt Voucher</h2>
       </div>
-
     </div>
-
   </div>
-
 
   <hr />
 
-
-
+  <!-- invoice No-->
+  <div class="row">
+    <div class="col-md-3">
+      <label>Invoice No:</label>
+    </div>
+    <div class="col-md-3 text-center borderBottomB1">
+      <label>{{ lblInvoiceNo }}</label>
+    </div>
+  </div>
 
   <!--Voucher Date Row -->
   <div class="row">
@@ -30,21 +31,16 @@
       <label>Voucher Date:</label>
     </div>
     <div class="col-md-3 text-center borderBottomB1">
-      <label>{{lblVoucherDate | date}}</label>
+      <label>{{ lblVoucherDate | date }}</label>
     </div>
 
-
-    <div class="col-md-3 ">
+    <div class="col-md-3">
       <label>Voucher Type:</label>
     </div>
     <div class="col-md-3 text-center">
-      <label class="borderBottomB1 width-100">{{lblVoucherType}}</label>
+      <label class="borderBottomB1 width-100">{{ lblVoucherType }}</label>
     </div>
-
   </div>
-
-
-
 
   <!--Payment Nature Row -->
   <div class="row">
@@ -52,20 +48,16 @@
       <label>Payment Nature:</label>
     </div>
     <div class="col-md-3 text-center borderBottomB1">
-      <label>{{lblAccountType}}</label>
+      <label>{{ lblAccountType }}</label>
     </div>
-
 
     <div class="col-md-3">
       <label>Project:</label>
     </div>
     <div class="col-md-3 text-center">
-      <label class="borderBottomB1 width-100">{{lblProject}}</label>
+      <label class="borderBottomB1 width-100">{{ lblProject }}</label>
     </div>
-
   </div>
-
-
 
   <!--Bank Detail Row -->
   <div class="row" *ngIf="lblAccountType == 'Bank'">
@@ -73,20 +65,16 @@
       <label>Bank:</label>
     </div>
     <div class="col-md-3 text-center borderBottomB1">
-      <label>{{lblBank}}</label>
+      <label>{{ lblBank }}</label>
     </div>
-
 
     <div class="col-md-3">
       <label>Ref/Cheque:</label>
     </div>
     <div class="col-md-3 text-center">
-      <label class="borderBottomB1 width-100">{{lblBankReceipt}}</label>
+      <label class="borderBottomB1 width-100">{{ lblBankReceipt }}</label>
     </div>
-
   </div>
-
-
 
   <!--Party Name Row-->
   <div class="row mt-2">
@@ -94,12 +82,11 @@
       <label>Party:</label>
     </div>
     <div class="col-md-9">
-      <label class="borderBottomB1 width-100" ><b>{{lblParty}}</b></label>
+      <label class="borderBottomB1 width-100"
+        ><b>{{ lblParty }}</b></label
+      >
     </div>
   </div>
-
-
-
 
   <!--Description Row-->
   <div class="row mt-2">
@@ -107,90 +94,84 @@
       <label>Narration:</label>
     </div>
     <div class="col-md-9">
-      <label class="borderBottomB1 width-100" >{{lblDescription}}</label>
+      <label class="borderBottomB1 width-100">{{ lblDescription }}</label>
     </div>
   </div>
 
+  <!---------------------------- table start --------------------------->
 
+  <!--header -->
+  <div class="row border-1-black mt-4">
+    <div class="col-md-1 text-center height-27">
+      <label class="mt-1"><b>Sr. #</b></label>
+    </div>
 
+    <div class="col-md-3 border-left-black">
+      <label class="mt-1"><b>Account Head</b></label>
+    </div>
 
-<!---------------------------- table start --------------------------->
+    <div class="col-md-4 border-left-black">
+      <label class="mt-1"><b>Account Code</b></label>
+    </div>
 
+    <div class="col-md-2 border-left-black text-right">
+      <label class="mt-1"><b>Debit</b></label>
+    </div>
 
-<!--header -->
-<div class="row border-1-black mt-4">
-  <div class="col-md-1 text-center height-27">
-    <label class="mt-1"><b>Sr. #</b></label>
+    <div class="col-md-2 border-left-black text-right">
+      <label class="mt-1"><b>Credit</b></label>
+    </div>
   </div>
 
-  <div class="col-md-3 border-left-black text-center">
-    <label class="mt-1"><b>Account Head</b></label>
+  <!--detail -->
+  <div
+    class="row border-1-black"
+    *ngFor="let item of tableData; let i = index"
+    style="margin-top: -1"
+  >
+    <div class="col-md-1 text-center height-27">
+      <label class="mt-1">{{ i + 1 }}</label>
+    </div>
+
+    <div class="col-md-3 border-left-black">
+      <label class="mt-1">{{ item.accHead }}</label>
+    </div>
+
+    <div class="col-md-4 border-left-black">
+      <label class="mt-1">{{ item.accountCode }}</label>
+    </div>
+
+    <div class="col-md-2 border-left-black text-right">
+      <label class="mt-1">{{ item.Debit }}</label>
+    </div>
+
+    <div class="col-md-2 border-left-black text-right">
+      <label class="mt-1">{{ item.Credit }}</label>
+    </div>
   </div>
 
-  <div class="col-md-4 border-left-black text-center">
-    <label class="mt-1"><b>Account Code</b></label>
-  </div>
-  
-  <div class="col-md-2 border-left-black text-center">
-    <label class="mt-1"><b>Debit</b></label>
-  </div>
+  <!--footer -->
+  <div class="row border-1-black mt-2">
+    <div class="col-md-1 text-center height-27">
+      <label class="mt-1"></label>
+    </div>
 
-  <div class="col-md-2 border-left-black text-center">
-    <label class="mt-1"><b>Credit</b></label>
-  </div>
+    <div class="col-md-7 text-left">
+      <label class="mt-1">VOUCHER TOTAL</label>
+    </div>
 
-</div>
+    <div class="col-md-2 border-left-black text-right">
+      <label class="mt-1">{{ lblDebit }}</label>
+    </div>
 
-<!--detail -->
-<div class="row border-1-black" *ngFor="let item of tableData; let i = index;" style="margin-top: -1;">
-  <div class="col-md-1 text-center height-27">
-    <label class="mt-1">{{i + 1}}</label>
-  </div>
-
-  <div class="col-md-3 border-left-black">
-    <label class="mt-1">{{item.accHead}}</label>
+    <div class="col-md-2 border-left-black text-right">
+      <label class="mt-1">{{ lblCredit }}</label>
+    </div>
   </div>
 
-  <div class="col-md-4 border-left-black">
-    <label class="mt-1">{{item.accountCode}}</label>
-  </div>
-  
-  <div class="col-md-2 border-left-black text-right">
-    <label class="mt-1">{{item.Debit}}</label>
-  </div>
+  <!------------------------------------- Table END -------------------------------------------------->
 
-  <div class="col-md-2 border-left-black text-right">
-    <label class="mt-1">{{item.Credit}}</label>
-  </div>
-
-</div>
-
-
-<!--footer -->
-<div class="row border-1-black mt-2">
-  <div class="col-md-1 text-center height-27">
-    <label class="mt-1"></label>
-  </div>
-
-
-  <div class="col-md-7 text-left">
-    <label class="mt-1">VOUCHER TOTAL</label>
-  </div>
-  
-  <div class="col-md-2 border-left-black text-right">
-    <label class="mt-1">{{lblDebit}}</label>
-  </div>
-
-  <div class="col-md-2 border-left-black text-right">
-    <label class="mt-1">{{lblCredit}}</label>
-  </div>
-
-</div>
-
-<!------------------------------------- Table END -------------------------------------------------->
-
-
-  <br/>
+  <br />
 
   <!--Approved By Row -->
   <div class="row mt-4">
@@ -201,15 +182,13 @@
       <label class="borderBottomB1 width-100">.</label>
     </div>
 
-    <div class="col-md-2 "></div>
+    <div class="col-md-2"></div>
 
-    <div class="col-md-2 ">
+    <div class="col-md-2">
       <label>Approved By:</label>
     </div>
     <div class="col-md-3 text-right">
       <label class="borderBottomB1 width-100">.</label>
     </div>
-
   </div>
-
 </div>

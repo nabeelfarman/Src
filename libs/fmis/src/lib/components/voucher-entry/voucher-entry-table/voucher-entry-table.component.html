@@ -27,7 +27,7 @@
                   *ngFor="let item of coaList | filter: searchHead"
                   [value]="item.coaID"
                 >
-                  {{ item.coaTitle }}
+                  {{ item.coaTitle }} ({{ item.accountCode }})
                 </mat-option>
               </mat-select>
             </mat-form-field>
@@ -85,7 +85,7 @@
         </td>
       </tr>
       <tr class="light-blue-bg border">
-        <td colspan="2">
+        <td>
           <strong class="pull-right pe-3">Total Voucher Amount</strong>
         </td>
         <td>

@@ -88,6 +88,7 @@ export class VoucherEntryTableComponent implements OnInit {
   partyList: any = [];
 
   tableData: any = [];
+  tempTableData: any = [];
 
   error: any;
 
@@ -113,6 +114,9 @@ export class VoucherEntryTableComponent implements OnInit {
       this.valid.apiErrorResponse('one amount must be zero');
       return;
     } else {
+      // var partyData = this.partyList.filter(
+      //   (x: { partyID: any }) => x.partyID == this.cmbPartyTo
+      // );
       var coaData = this.coaList.filter(
         (x: { coaID: any }) => x.coaID == this.cmbAccHead
       );
@@ -126,11 +130,19 @@ export class VoucherEntryTableComponent implements OnInit {
       this.tableData.push({
         COAID: this.cmbAccHead,
         accHead: coaData[0].coaTitle,
-        PartyID: this.cmbPartyTo,
+        PartyID: '0',
         Debit: this.txtDebit,
         Credit: this.txtCredit,
       });
 
+      this.tempTableData.push({
+        COAID: this.cmbAccHead,
+        accHead: coaData[0].coaTitle,
+        accountCode: coaData[0].accountCode,
+        PartyID: '0',
+        Debit: this.txtDebit,
+        Credit: this.txtCredit,
+      });
       this.eventEmitter.emit(this.tableData.length);
 
       this.lblDebit = parseInt(this.lblDebit) + parseInt(this.txtDebit);
@@ -148,6 +160,7 @@ export class VoucherEntryTableComponent implements OnInit {
     this.lblCredit -= this.tableData[index].Credit;
 
     this.tableData.splice(index, 1);
+    this.tempTableData.splice(index, 1);
 
     this.eventEmitter.emit(this.tableData.length);
   }

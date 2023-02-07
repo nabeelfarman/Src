@@ -3,10 +3,10 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'society-installment-voucher-print',
   templateUrl: './installment-voucher-print.component.html',
-  styleUrls: ['./installment-voucher-print.component.scss']
+  styleUrls: ['./installment-voucher-print.component.scss'],
 })
 export class InstallmentVoucherPrintComponent implements OnInit {
-
+  lblInvoiceNo: any = '';
   lblVoucherType: any = '';
   lblVoucherDate: any = '';
   lblAccountType: any = '';
@@ -14,7 +14,7 @@ export class InstallmentVoucherPrintComponent implements OnInit {
   lblBank: any = '';
   lblBankReceipt: any = '';
   lblParty: any = '';
-  
+
   lblDebit: any = 0;
   lblCredit: any = 0;
 
@@ -22,9 +22,7 @@ export class InstallmentVoucherPrintComponent implements OnInit {
 
   lblDescription: any = '';
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }
