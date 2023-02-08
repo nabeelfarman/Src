@@ -38,6 +38,7 @@ export class SavedVoucherTableComponent implements OnInit {
   }
 
   getVoucherDetail(item: any){
+    
     this.dataService.getHttp('core-api/GetSpecificVocherDetail?InvoiceNo=' + item, '').subscribe((response: any) => {
       this.tableDetailData = response;
       $('#voucherModal').modal('show');

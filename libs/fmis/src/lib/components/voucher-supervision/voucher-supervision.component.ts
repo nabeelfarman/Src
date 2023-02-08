@@ -103,7 +103,9 @@ export class VoucherSupervisionComponent implements OnInit {
           console.log(response.msg);
           if (response.msg == 'Voucher Supervise Successfully') {
             this.valid.apiInfoResponse('Voucher Supervise Successfully');
-            this.reset();
+            //this.reset();
+            this.formFields[0].value = "";
+            this.getVoucherNo();
           } else {
             this.valid.apiErrorResponse(response.msg);
           }
