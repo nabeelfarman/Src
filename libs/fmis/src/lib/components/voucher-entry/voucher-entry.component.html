@@ -98,7 +98,10 @@
       <div class="col-md-6">
         <mat-form-field class="w-100 ps-3">
           <mat-label>Reference Chart of Account</mat-label>
-          <mat-select [(ngModel)]="formFields[6].value">
+          <mat-select
+            [(ngModel)]="formFields[6].value"
+            [disabled]="formFields[0].value == 'Adj'"
+          >
             <mat-option *ngFor="let item of refCoaList" [value]="item.coaID">
               {{ item.coaTitle }}
             </mat-option>
@@ -108,7 +111,10 @@
       <div class="col-md-6">
         <mat-form-field class="w-100 pe-3">
           <mat-label>Party</mat-label>
-          <mat-select [(ngModel)]="formFields[7].value">
+          <mat-select
+            [(ngModel)]="formFields[7].value"
+            [disabled]="formFields[0].value == 'Adj'"
+          >
             <mat-option>
               <ngx-mat-select-search
                 [(ngModel)]="searchParty"

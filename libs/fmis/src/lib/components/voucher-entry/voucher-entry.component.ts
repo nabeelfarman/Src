@@ -100,13 +100,13 @@ export class VoucherEntryComponent implements OnInit {
       value: this.pageFields.RefCOAID,
       msg: 'Select reference chart of account',
       type: 'selectbox',
-      required: true,
+      required: false,
     },
     {
       value: this.pageFields.PartyID,
       msg: 'Select party',
       type: 'selectbox',
-      required: true,
+      required: false,
     },
     {
       value: this.pageFields.InvoiceDetail,
@@ -368,6 +368,19 @@ export class VoucherEntryComponent implements OnInit {
       }
     }
 
+    if (this.formFields[0].value != 'Adj') {
+      if (this.formFields[6].value == '') {
+        this.valid.apiInfoResponse('please select reference chart of account');
+        return;
+      } else if (this.formFields[7].value == '') {
+        this.valid.apiInfoResponse('please select party');
+        return;
+      }
+    } else {
+      this.formFields[6].value = '0';
+      this.formFields[7].value = '0';
+    }
+
     this.dataService
       .savetHttp(this.pageFields, this.formFields, 'core-api/InsertVoucher')
       .subscribe(
@@ -585,6 +598,10 @@ export class VoucherEntryComponent implements OnInit {
     var data = this.voucherTbl.tableData.filter(
       (x: { invoiceNo: any }) => x.invoiceNo == item
     );
+    // alert(item);
+    // alert(data.length);
+    // console.log(data);
+    // console.log(this.voucherTbl.tableData);
 
     var projectData = this.projectList.filter(
       (m: { projectID: any }) => m.projectID == data[0].projectID
