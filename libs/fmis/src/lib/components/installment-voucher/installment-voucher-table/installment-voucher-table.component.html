@@ -12,14 +12,12 @@
       <tr>
         <th>Invoice No</th>
         <th>Invoice Date</th>
-        <th>Receipt No</th>
         <th>Party Name</th>
         <th>File Name</th>
         <th>installment Type</th>
-        <th>Payment Nature</th>
-        <th>Bank Name</th>
+        <th>Coa Title</th>
         <th>Amount</th>
-        <th>Action</th>
+        <th class="text-center">Action</th>
       </tr>
     </thead>
     <tbody>
@@ -27,14 +25,12 @@
       <tr *ngFor="let item of tableData; let i = index">
         <td>{{ item.invoiceNo }}</td>
         <td>{{ item.invoiceDate | date: 'yyyy-MM-dd' }}</td>
-        <td>{{ item.bankReceiptNo }}</td>
         <td>{{ item.partyName }}</td>
         <td>{{ item.fileName }}</td>
         <td>{{ item.installmentTypeName }}</td>
-        <td>{{ item.paymentNature }}</td>
-        <td>{{ item.bankName }}</td>
+        <td>{{ item.coaTitle }}</td>
         <td>{{ item.amount }}</td>
-        <td class="cursorPointer">
+        <td class="cursorPointer text-center">
           <mat-icon (click)="printData('#print-summary', item)">print</mat-icon>
         </td>
       </tr>
@@ -42,4 +38,7 @@
   </table>
 </div>
 
-<society-installment-voucher-report class="d-none" id="print-summary"></society-installment-voucher-report>
+<society-installment-voucher-report
+  class="d-none"
+  id="print-summary"
+></society-installment-voucher-report>

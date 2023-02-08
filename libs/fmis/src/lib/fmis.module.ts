@@ -78,7 +78,6 @@ import { VendorTableComponent } from './components/config/vendor/vendor-table/ve
 import { DepreciationTableComponent } from './components/config/fixed-asset/fixed-asset-table/depreciation-table/depreciation-table.component';
 import { CashBookSummaryPrintComponent } from './components/reports/cash-book/cash-book-summary-print/cash-book-summary-print.component';
 
-
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
 };
@@ -86,27 +85,27 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 export const fmisRoutes: Route[] = [
   { path: 'mainGroup', component: MainGroupComponent },
   { path: 'subGroup', component: SubGroupComponent },
-  { path: 'budgetHead', component: BugetHeadComponent },
+  // { path: 'budgetHead', component: BugetHeadComponent },
   { path: 'coa', component: ChartOfAccountComponent },
-  { path: 'taxSec', component: TaxSectionComponent },
-  { path: 'budgetEst', component: BudgetEstimateComponent },
+  // { path: 'taxSec', component: TaxSectionComponent },
+  // { path: 'budgetEst', component: BudgetEstimateComponent },
   { path: 'voucher', component: VoucherEntryComponent },
   { path: 'ledgerRpt', component: LedgerComponent },
   { path: 'trialRpt', component: TrialBalanceComponent },
   { path: 'cashBookRpt', component: CashBookComponent },
-  { path: 'paySup', component: VoucherPaymentSupervisionComponent },
+  // { path: 'paySup', component: VoucherPaymentSupervisionComponent },
   // { path: 'sch', component: FmisSchedulesComponent },
   { path: 'instvouch', component: InstallmentVoucherComponent },
   { path: 'incStat', component: IncomeStatementComponent },
-  { path: 'balSheet', component: BalanceSheetComponent },
+  // { path: 'balSheet', component: BalanceSheetComponent },
   { path: 'cashFlow', component: CashFlowComponent },
   { path: 'bankRecon', component: BankReconciliationComponent },
-  { path: 'taxYearRate', component: TaxYearRatesComponent },
+  // { path: 'taxYearRate', component: TaxYearRatesComponent },
   { path: 'bankInfo', component: BankInfoComponent },
-  { path: 'parties', component: ExternalPartiesComponent },
+  // { path: 'parties', component: ExternalPartiesComponent },
   { path: 'sup', component: VoucherSupervisionComponent },
   { path: 'dashboard', component: FmisDashboardComponent },
-  { path: 'rptbalancesheet', component: CustomerBalanceSheetComponent },
+  { path: 'balSheet', component: CustomerBalanceSheetComponent },
   { path: 'fixedasset', component: FixedAssetComponent },
   { path: 'vendor', component: VendorComponent },
 ];
@@ -124,7 +123,7 @@ export const fmisRoutes: Route[] = [
     ChartModule,
     SocietyCoreModule,
     SharedInterfaceModule,
-    Ng2SearchPipeModule
+    Ng2SearchPipeModule,
   ],
   declarations: [
     MainGroupComponent,
@@ -227,7 +226,7 @@ export const fmisRoutes: Route[] = [
     FixedAssetTableComponent,
     VendorTableComponent,
     DepreciationTableComponent,
-    CashBookSummaryPrintComponent
+    CashBookSummaryPrintComponent,
     // SearchPipe
   ],
   providers: [

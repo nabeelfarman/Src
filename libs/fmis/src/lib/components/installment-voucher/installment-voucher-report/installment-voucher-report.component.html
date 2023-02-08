@@ -1,326 +1,260 @@
-<div class="container bg-white rptcontainer" id="print-summary">
+<div id="print-summary">
+  <div class="container bg-white rptcontainer" id="print-summary">
+    <div class="row mb-2">
+      <div class="col-md-6 text-left">
+        <img class="mt-1" src="assets/ui/company/shama.png" width="125px" />
+        <!-- <div class="h4Report"><b>{{dtpFromDate | date:'dd-MM-yyyy'}} to {{dtpToDate | date:'dd-MM-yyyy'}}</b></div> -->
+      </div>
 
-
-  <div class="row mb-2">
-
-    <div class="col-md-6 text-left">
-      <img class="mt-1" src="assets/ui/company/shama.png" width="125px" />
-      <!-- <div class="h4Report"><b>{{dtpFromDate | date:'dd-MM-yyyy'}} to {{dtpToDate | date:'dd-MM-yyyy'}}</b></div> -->
-    </div>
-
-
-
-    <div class="col-md-6 text-right">
-      <div class="d-flex flex-column align-items-center">
-        <div class="h2Report"><b>SHAMA ROYAL CITY</b></div>
-        <div class="h4Report">A Project of: SARDAR ASSOCIATES</div>
-        <h2 class="h3Report txtDarkGrey mt-1">Payment Voucher</h2>
-        
+      <div class="col-md-6 text-right">
+        <div class="d-flex flex-column align-items-center">
+          <div class="h2Report"><b>SHAMA ROYAL CITY</b></div>
+          <div class="h4Report">A Project of: SARDAR ASSOCIATES</div>
+          <h2 class="h3Report txtDarkGrey mt-1">Payment Voucher</h2>
+        </div>
       </div>
     </div>
-  </div>
 
+    <hr />
 
-  <hr />
+    <!--Voucher Date Row -->
+    <div class="row">
+      <div class="col-md-2">
+        <label>Voucher Date:</label>
+      </div>
+      <div class="col-md-3 text-center borderBottomB1">
+        <label>{{ lblInvoiceDate | date }}</label>
+      </div>
 
-  <!--Voucher Date Row -->
-  <div class="row">
-    <div class="col-md-2">
-      <label>Voucher Date:</label>
-    </div>
-    <div class="col-md-3 text-center borderBottomB1">
-      <label>{{lblInvoiceDate | date}}</label>
-    </div>
+      <div class="col-md-2"></div>
 
-    <div class="col-md-2"></div>
-
-    <div class="col-md-2 ">
-      <label>Voucher No:</label>
-    </div>
-    <div class="col-md-3 text-center">
-      <label class="borderBottomB1 width-100">{{lblInvoiceNo}}</label>
-    </div>
-
-  </div>
-
-
-
-  <!--Party Name Row-->
-  <div class="row mt-3">
-    <div class="col-md-3">
-      <label>Thanks To Mr./Mrs/MS:</label>
-    </div>
-    <div class="col-md-9 text-center">
-      <label class="borderBottomB1 width-100" >{{lblOwnerName}}</label>
-    </div>
-  </div>
-
-
-
-
-  <!--Amount Row-->
-  <div class="row mt-3">
-    <div class="col-md-3">
-      <label>Amount:</label>
-    </div>
-    <div class="col-md-9 text-center">
-      <label class="borderBottomB1 width-100" >Rs. {{lblAmount | number}}/-</label>
-    </div>
-  </div>
-
-
-
-  <!--Installment Type Row-->
-  <div class="row mt-3">
-    <div class="col-md-3">
-      <label>Installment Type:</label>
-    </div>
-    <div class="col-md-9 text-center">
-      <label class="borderBottomB1 width-100" >{{lblInstallmentType}}</label>
-    </div>
-  </div>
-
-
-
-  <!--Payment Nature Row-->
-  <div class="row mt-3">
-    <div class="col-md-3">
-      <label>File / Plot:</label>
-    </div>
-    <div class="col-md-3 text-center">
-      <label class="borderBottomB1 width-100">{{lblFileName}}</label>
+      <div class="col-md-2">
+        <label>Voucher No:</label>
+      </div>
+      <div class="col-md-3 text-center">
+        <label class="borderBottomB1 width-100">{{ lblInvoiceNo }}</label>
+      </div>
     </div>
 
-    <div class="col-md-3">
-      <label>Payment Nature:</label>
-    </div>
-    <div class="col-md-3 text-center">
-      <label class="borderBottomB1 width-100">{{lblPaymentNature}}</label>
-    </div>
-
-  </div>
-
-
- 
-  <!--Bank and Reference Row-->
-  <div class="row mt-3" *ngIf="lblPaymentNature == 'Bank'">
-    <div class="col-md-3">
-      <label>Bank:</label>
-    </div>
-    <div class="col-md-3 text-center">
-      <label class="borderBottomB1 width-100">{{lblBankName}}</label>
+    <!--Party Name Row-->
+    <div class="row mt-3">
+      <div class="col-md-3">
+        <label>Thanks To Mr./Mrs/MS:</label>
+      </div>
+      <div class="col-md-9 text-center">
+        <label class="borderBottomB1 width-100">{{ lblOwnerName }}</label>
+      </div>
     </div>
 
-    <div class="col-md-3">
-      <label>Bank Reference:</label>
+    <!--Amount Row-->
+    <div class="row mt-3">
+      <div class="col-md-3">
+        <label>Amount:</label>
+      </div>
+      <div class="col-md-9 text-center">
+        <label class="borderBottomB1 width-100"
+          >Rs. {{ lblAmount | number }}/-</label
+        >
+      </div>
     </div>
-    <div class="col-md-3 text-center">
-      <label class="borderBottomB1 width-100">{{lblBankReceipt}}</label>
+
+    <!--Installment Type Row-->
+    <div class="row mt-3">
+      <div class="col-md-3">
+        <label>Installment Type:</label>
+      </div>
+      <div class="col-md-9 text-center">
+        <label class="borderBottomB1 width-100">{{ lblInstallmentType }}</label>
+      </div>
     </div>
 
-  </div>
+    <!--Payment Nature Row-->
+    <div class="row mt-3">
+      <div class="col-md-3">
+        <label>File / Plot:</label>
+      </div>
+      <div class="col-md-3 text-center">
+        <label class="borderBottomB1 width-100">{{ lblFileName }}</label>
+      </div>
 
-
-
-
-
-  <!--Description Row-->
-  <div class="row mt-3">
-    <div class="col-md-3">
-      <label>Description:</label>
+      <div class="col-md-3">
+        <label>Payment Nature:</label>
+      </div>
+      <div class="col-md-3 text-center">
+        <label class="borderBottomB1 width-100">{{ lblPaymentNature }}</label>
+      </div>
     </div>
-    <div class="col-md-9 text-center">
-      <label class="borderBottomB1 width-100" >{{lblDescription}}</label>
+
+    <!--Bank and Reference Row-->
+    <div class="row mt-3" *ngIf="lblPaymentNature == 'Bank'">
+      <div class="col-md-3">
+        <label>Bank:</label>
+      </div>
+      <div class="col-md-3 text-center">
+        <label class="borderBottomB1 width-100">{{ lblBankName }}</label>
+      </div>
+
+      <div class="col-md-3">
+        <label>Bank Reference:</label>
+      </div>
+      <div class="col-md-3 text-center">
+        <label class="borderBottomB1 width-100">{{ lblBankReceipt }}</label>
+      </div>
     </div>
-  </div>
 
-
+    <!--Description Row-->
+    <div class="row mt-3">
+      <div class="col-md-3">
+        <label>Description:</label>
+      </div>
+      <div class="col-md-9 text-center">
+        <label class="borderBottomB1 width-100">{{ lblDescription }}</label>
+      </div>
+    </div>
 
     <!--Stamp Row-->
     <div class="row mt-3 mb-4">
       <div class="col-md-3">
         <label>Received By:</label>
       </div>
-      <div class="col-md-3 borderBottomB1">
-      </div>
-  
+      <div class="col-md-3 borderBottomB1"></div>
+
       <div class="col-md-3">
         <label>Office Stamp:</label>
       </div>
+      <div class="col-md-3"></div>
+    </div>
+  </div>
+  <div class="text-right me-2 mt-1" style="font-size: 8px">Office Copy</div>
+
+  <div class="mt-4" style="border: 1px dashed black"></div>
+  <br />
+
+  <div class="container mt-3 bg-white rptcontainer" id="print-summary">
+    <div class="row mb-2">
+      <div class="col-md-6 text-left">
+        <img class="mt-1" src="assets/ui/company/shama.png" width="125px" />
+        <!-- <div class="h4Report"><b>{{dtpFromDate | date:'dd-MM-yyyy'}} to {{dtpToDate | date:'dd-MM-yyyy'}}</b></div> -->
+      </div>
+
+      <div class="col-md-6 text-right">
+        <div class="d-flex flex-column align-items-center">
+          <div class="h2Report"><b>SHAMA ROYAL CITY</b></div>
+          <div class="h4Report">A Project of: SARDAR ASSOCIATES</div>
+          <h2 class="h3Report txtDarkGrey mt-1">Payment Voucher</h2>
+        </div>
+      </div>
+    </div>
+
+    <hr />
+
+    <!--Voucher Date Row -->
+    <div class="row">
+      <div class="col-md-2">
+        <label>Voucher Date:</label>
+      </div>
+      <div class="col-md-3 text-center borderBottomB1">
+        <label>{{ lblInvoiceDate | date }}</label>
+      </div>
+
+      <div class="col-md-2"></div>
+
+      <div class="col-md-2">
+        <label>Voucher No:</label>
+      </div>
+      <div class="col-md-3 text-center">
+        <label class="borderBottomB1 width-100">{{ lblInvoiceNo }}</label>
+      </div>
+    </div>
+
+    <!--Party Name Row-->
+    <div class="row mt-3">
       <div class="col-md-3">
+        <label>Thanks To Mr./Mrs/MS:</label>
       </div>
-  
-    </div>
-
-
-
-</div>
-<div class="text-right me-2 mt-1" style="font-size: 8px;">Office Copy</div>
-
-
-
-
-<div class="mt-4" style="border: 1px dashed black;"></div><br/>
-
-
-
-
-
-<div class="container mt-3 bg-white rptcontainer" id="print-summary">
-
-
-  <div class="row mb-2">
-
-    <div class="col-md-6 text-left">
-      <img class="mt-1" src="assets/ui/company/shama.png" width="125px" />
-      <!-- <div class="h4Report"><b>{{dtpFromDate | date:'dd-MM-yyyy'}} to {{dtpToDate | date:'dd-MM-yyyy'}}</b></div> -->
-    </div>
-
-
-
-    <div class="col-md-6 text-right">
-      <div class="d-flex flex-column align-items-center">
-        <div class="h2Report"><b>SHAMA ROYAL CITY</b></div>
-        <div class="h4Report">A Project of: SARDAR ASSOCIATES</div>
-        <h2 class="h3Report txtDarkGrey mt-1">Payment Voucher</h2>
-        
+      <div class="col-md-9 text-center">
+        <label class="borderBottomB1 width-100">{{ lblOwnerName }}</label>
       </div>
     </div>
-  </div>
 
-
-  <hr />
-
-  <!--Voucher Date Row -->
-  <div class="row">
-    <div class="col-md-2">
-      <label>Voucher Date:</label>
-    </div>
-    <div class="col-md-3 text-center borderBottomB1">
-      <label>{{lblInvoiceDate | date}}</label>
-    </div>
-
-    <div class="col-md-2"></div>
-
-    <div class="col-md-2 ">
-      <label>Voucher No:</label>
-    </div>
-    <div class="col-md-3 text-center">
-      <label class="borderBottomB1 width-100">{{lblInvoiceNo}}</label>
+    <!--Amount Row-->
+    <div class="row mt-3">
+      <div class="col-md-3">
+        <label>Amount:</label>
+      </div>
+      <div class="col-md-9 text-center">
+        <label class="borderBottomB1 width-100"
+          >Rs. {{ lblAmount | number }}/-</label
+        >
+      </div>
     </div>
 
-  </div>
-
-
-
-  <!--Party Name Row-->
-  <div class="row mt-3">
-    <div class="col-md-3">
-      <label>Thanks To Mr./Mrs/MS:</label>
-    </div>
-    <div class="col-md-9 text-center">
-      <label class="borderBottomB1 width-100" >{{lblOwnerName}}</label>
-    </div>
-  </div>
-
-
-
-
-  <!--Amount Row-->
-  <div class="row mt-3">
-    <div class="col-md-3">
-      <label>Amount:</label>
-    </div>
-    <div class="col-md-9 text-center">
-      <label class="borderBottomB1 width-100" >Rs. {{lblAmount | number}}/-</label>
-    </div>
-  </div>
-
-
-
-  <!--Installment Type Row-->
-  <div class="row mt-3">
-    <div class="col-md-3">
-      <label>Installment Type:</label>
-    </div>
-    <div class="col-md-9 text-center">
-      <label class="borderBottomB1 width-100" >{{lblInstallmentType}}</label>
-    </div>
-  </div>
-
-
-
-  <!--Payment Nature Row-->
-  <div class="row mt-3">
-    <div class="col-md-3">
-      <label>File / Plot:</label>
-    </div>
-    <div class="col-md-3 text-center">
-      <label class="borderBottomB1 width-100">{{lblFileName}}</label>
+    <!--Installment Type Row-->
+    <div class="row mt-3">
+      <div class="col-md-3">
+        <label>Installment Type:</label>
+      </div>
+      <div class="col-md-9 text-center">
+        <label class="borderBottomB1 width-100">{{ lblInstallmentType }}</label>
+      </div>
     </div>
 
-    <div class="col-md-3">
-      <label>Payment Nature:</label>
-    </div>
-    <div class="col-md-3 text-center">
-      <label class="borderBottomB1 width-100">{{lblPaymentNature}}</label>
-    </div>
+    <!--Payment Nature Row-->
+    <div class="row mt-3">
+      <div class="col-md-3">
+        <label>File / Plot:</label>
+      </div>
+      <div class="col-md-3 text-center">
+        <label class="borderBottomB1 width-100">{{ lblFileName }}</label>
+      </div>
 
-  </div>
-
-
- 
-  <!--Bank and Reference Row-->
-  <div class="row mt-3" *ngIf="lblPaymentNature == 'Bank'">
-    <div class="col-md-3">
-      <label>Bank:</label>
-    </div>
-    <div class="col-md-3 text-center">
-      <label class="borderBottomB1 width-100">{{lblBankName}}</label>
+      <div class="col-md-3">
+        <label>Payment Nature:</label>
+      </div>
+      <div class="col-md-3 text-center">
+        <label class="borderBottomB1 width-100">{{ lblPaymentNature }}</label>
+      </div>
     </div>
 
-    <div class="col-md-3">
-      <label>Bank Reference:</label>
+    <!--Bank and Reference Row-->
+    <div class="row mt-3" *ngIf="lblPaymentNature == 'Bank'">
+      <div class="col-md-3">
+        <label>Bank:</label>
+      </div>
+      <div class="col-md-3 text-center">
+        <label class="borderBottomB1 width-100">{{ lblBankName }}</label>
+      </div>
+
+      <div class="col-md-3">
+        <label>Bank Reference:</label>
+      </div>
+      <div class="col-md-3 text-center">
+        <label class="borderBottomB1 width-100">{{ lblBankReceipt }}</label>
+      </div>
     </div>
-    <div class="col-md-3 text-center">
-      <label class="borderBottomB1 width-100">{{lblBankReceipt}}</label>
+
+    <!--Description Row-->
+    <div class="row mt-3">
+      <div class="col-md-3">
+        <label>Description:</label>
+      </div>
+      <div class="col-md-9 text-center">
+        <label class="borderBottomB1 width-100">{{ lblDescription }}</label>
+      </div>
     </div>
-
-  </div>
-
-
-
-
-
-  <!--Description Row-->
-  <div class="row mt-3">
-    <div class="col-md-3">
-      <label>Description:</label>
-    </div>
-    <div class="col-md-9 text-center">
-      <label class="borderBottomB1 width-100" >{{lblDescription}}</label>
-    </div>
-  </div>
-
-
 
     <!--Stamp Row-->
     <div class="row mt-3 mb-4">
       <div class="col-md-3">
         <label>Received By:</label>
       </div>
-      <div class="col-md-3 borderBottomB1">
-      </div>
-  
+      <div class="col-md-3 borderBottomB1"></div>
+
       <div class="col-md-3">
         <label>Office Stamp:</label>
       </div>
-      <div class="col-md-3">
-      </div>
-  
+      <div class="col-md-3"></div>
     </div>
-
-
-
+  </div>
+  <div class="text-right me-2 mt-1" style="font-size: 8px">Customer Copy</div>
 </div>
-<div class="text-right me-2 mt-1" style="font-size: 8px;">Customer Copy</div> 

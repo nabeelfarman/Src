@@ -1,5 +1,9 @@
 <div class="saveUpdateBar border mat-elevation-z2">
-  <button mat-button class="save cursorPointer" (click)="save('#print-summary')">
+  <button
+    mat-button
+    class="save cursorPointer"
+    (click)="save('#print-summary')"
+  >
     <mat-icon>save</mat-icon>
     <span class="ps-2">Save</span>
   </button>
@@ -9,20 +13,24 @@
   </button>
 </div>
 
-
-
 <div class="row h-100">
   <div class="col-md-4 h-100 bg-white border">
     <h2 class="pt-3 ps-4 pe-3">Add / Modify</h2>
     <hr />
 
-
     <div class="row">
       <div class="col-md-6">
         <mat-form-field class="w-100 ms-2">
           <mat-label>Date</mat-label>
-          <input matInput [matDatepicker]="picker" [(ngModel)]="formFields[0].value" />
-          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <input
+            matInput
+            [matDatepicker]="picker"
+            [(ngModel)]="formFields[0].value"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
       </div>
@@ -30,24 +38,28 @@
       <div class="col-md-6">
         <mat-form-field class="w-100">
           <mat-label>Party Name</mat-label>
-          <mat-select [(ngModel)]="formFields[4].value" (ngModelChange)="getPartyFile(formFields[4].value);">
+          <mat-select
+            [(ngModel)]="formFields[4].value"
+            (ngModelChange)="getPartyFile(formFields[4].value)"
+          >
             <mat-option *ngFor="let item of partyList" [value]="item.partyID">
-              {{item.partyName}}
+              {{ item.partyName }}
             </mat-option>
           </mat-select>
         </mat-form-field>
       </div>
     </div>
 
-
-
     <div class="row">
       <div class="col-md-6">
         <mat-form-field class="w-100 ms-2">
           <mat-label>Party File</mat-label>
-          <mat-select [(ngModel)]="formFields[5].value" (ngModelChange)="getPaymentPlan(formFields[5].value);">
+          <mat-select
+            [(ngModel)]="formFields[5].value"
+            (ngModelChange)="getPaymentPlan(formFields[5].value)"
+          >
             <mat-option *ngFor="let item of fileList" [value]="item.fileID">
-              {{item.fileName}}
+              {{ item.fileName }}
             </mat-option>
           </mat-select>
         </mat-form-field>
@@ -55,20 +67,34 @@
       <div class="col-md-6">
         <mat-form-field class="w-100">
           <mat-label>Payment Plan</mat-label>
-          <mat-select [(ngModel)]="formFields[6].value"
-            (ngModelChange)="onPlanChange(formFields[6].value); getRemainingAmount(formFields[4].value, formFields[5].value, formFields[6].value)">
-            <mat-option *ngFor="let item of paymentPlanList" [value]="item.installmentTypeID">
-              {{item.installmentTypeName}}
+          <mat-select
+            [(ngModel)]="formFields[6].value"
+            (ngModelChange)="
+              onPlanChange(formFields[6].value);
+              getRemainingAmount(
+                formFields[4].value,
+                formFields[5].value,
+                formFields[6].value
+              )
+            "
+          >
+            <mat-option
+              *ngFor="let item of paymentPlanList"
+              [value]="item.installmentTypeID"
+            >
+              {{ item.installmentTypeName }}
             </mat-option>
           </mat-select>
         </mat-form-field>
       </div>
     </div>
 
-
-
     <mat-form-field class="w-100 ms-2">
-      <textarea matInput placeholder="Invoice Decription" [(ngModel)]="formFields[8].value"></textarea>
+      <textarea
+        matInput
+        placeholder="Narration"
+        [(ngModel)]="formFields[8].value"
+      ></textarea>
     </mat-form-field>
 
     <div class="row ms-1">
@@ -82,48 +108,72 @@
 
     <div class="row ms-1">
       <div class="col-md-7">
-        <h3>{{lblInstallmentAmount}}</h3>
+        <h3>{{ lblInstallmentAmount }}</h3>
       </div>
       <div class="col-md-5">
-        <h3>{{lblPaidAmount}}</h3>
+        <h3>{{ lblPaidAmount }}</h3>
       </div>
     </div>
 
-    <mat-radio-group aria-label="Select an option" class="ps-2" [(ngModel)]="formFields[9].value"
-      style="padding: 15px;">
+    <mat-radio-group
+      aria-label="Select an option"
+      class="ps-2"
+      [(ngModel)]="formFields[9].value"
+      (change)="getRefCOA()"
+      style="padding: 15px"
+    >
       <mat-radio-button value="1">Cash</mat-radio-button>&nbsp;&nbsp;&nbsp;
       <mat-radio-button value="2">Bank</mat-radio-button>
     </mat-radio-group>
+    <mat-form-field class="w-100 ps-3">
+      <mat-label>Reference Chart of Account</mat-label>
+      <mat-select [(ngModel)]="formFields[11].value">
+        <mat-option *ngFor="let item of refCoaList" [value]="item.coaID">
+          {{ item.coaTitle }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
 
-    <div class="row" *ngIf="formFields[9].value == 2" style="margin-top: 15px;">
+    <!-- <div class="row" *ngIf="formFields[9].value == 2" style="margin-top: 15px">
       <div class="col-md-6">
         <mat-form-field class="w-100">
           <mat-label>Bank</mat-label>
           <mat-select [(ngModel)]="formFields[7].value">
             <mat-option *ngFor="let item of bankList" [value]="item.bankID">
-              {{item.bankName}}
+              {{ item.bankName }}
             </mat-option>
           </mat-select>
         </mat-form-field>
       </div>
       <div class="col-md-6">
         <mat-form-field class="w-100">
-          <input matInput placeholder="Bank Receipt No" [(ngModel)]="formFields[11].value" />
+          <input
+            matInput
+            placeholder="Bank Receipt No"
+            [(ngModel)]="formFields[11].value"
+          />
         </mat-form-field>
       </div>
-    </div>
+    </div> -->
 
-    <mat-form-field class="w-100 ms-2" style="margin-top: 15px;">
+    <mat-form-field class="w-100 ms-2" style="margin-top: 15px">
       <input matInput placeholder="Amount" [(ngModel)]="formFields[10].value" />
     </mat-form-field>
   </div>
   <div class="col-md-8">
     <h2 class="pt-3 ps-4 pe-3">Saved Records</h2>
     <hr />
-    <perfect-scrollbar style="max-width: auto; max-height: 75%" [config]="config" class="border">
+    <perfect-scrollbar
+      style="max-width: auto; max-height: 75%"
+      [config]="config"
+      class="border"
+    >
       <society-installment-voucher-table></society-installment-voucher-table>
     </perfect-scrollbar>
   </div>
 </div>
 
-<society-installment-voucher-report class="d-none" id="print-summary"></society-installment-voucher-report>
+<society-installment-voucher-report
+  class="d-none"
+  id="print-summary"
+></society-installment-voucher-report>

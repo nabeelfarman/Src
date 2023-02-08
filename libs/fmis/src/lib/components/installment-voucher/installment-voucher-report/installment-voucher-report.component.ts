@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { SharedServicesGlobalDataModule } from '@society/shared/services/global-data';
 
 @Component({
   selector: 'society-installment-voucher-report',
   templateUrl: './installment-voucher-report.component.html',
-  styleUrls: ['./installment-voucher-report.component.scss']
+  styleUrls: ['./installment-voucher-report.component.scss'],
 })
 export class InstallmentVoucherReportComponent implements OnInit {
-
   lblInvoiceNo: any = '';
   lblInvoiceDate: any = '';
   lblFileName: any = '';
@@ -18,9 +18,7 @@ export class InstallmentVoucherReportComponent implements OnInit {
   lblBankName: any = '';
   lblDescription: any = '';
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

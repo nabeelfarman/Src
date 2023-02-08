@@ -1,7 +1,10 @@
 import { ThrowStmt } from '@angular/compiler';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { SharedHelpersFieldValidationsModule } from '@society/shared/helpers/field-validations';
-import { InstallmentVoucherInterface, MyFormField } from '@society/shared/interface';
+import {
+  InstallmentVoucherInterface,
+  MyFormField,
+} from '@society/shared/interface';
 import { SharedServicesDataModule } from '@society/shared/services/data';
 import { SharedServicesGlobalDataModule } from '@society/shared/services/global-data';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
@@ -11,11 +14,9 @@ import { InstallmentVoucherTableComponent } from './installment-voucher-table/in
 @Component({
   selector: 'society-installment-voucher',
   templateUrl: './installment-voucher.component.html',
-  styleUrls: ['./installment-voucher.component.scss']
+  styleUrls: ['./installment-voucher.component.scss'],
 })
 export class InstallmentVoucherComponent implements OnInit {
-
-  
   public config: PerfectScrollbarConfigInterface = {};
 
   lblInstallmentAmount: any = 0;
@@ -25,20 +26,19 @@ export class InstallmentVoucherComponent implements OnInit {
   @ViewChild(InstallmentVoucherReportComponent) installmentReport: any;
 
   pageFields: InstallmentVoucherInterface = {
-    InvoiceDate: '',
-    spType: '',
-    UserID: '',
-    BranchID: '',
-    PartyID: '',
-    FileID: '',
-    InstallmentTypeID: '',
-    BankID: '',
-    InvoiceDescription: '',
-    CoaID: '',
-    Amount: '',
-    BankReceiptNo: ''
+    InvoiceDate: '', //0
+    spType: '', //1
+    UserID: '', //2
+    BranchID: '', //3
+    PartyID: '', //4
+    FileID: '', //5
+    InstallmentTypeID: '', //6
+    BankID: '', //7
+    InvoiceDescription: '', //8
+    CoaID: '', //9
+    Amount: '', //10
+    RefCOAID: '', //11
   };
-
 
   formFields: MyFormField[] = [
     {
@@ -91,7 +91,7 @@ export class InstallmentVoucherComponent implements OnInit {
     },
     {
       value: this.pageFields.InvoiceDescription,
-      msg: 'enter invoice description',
+      msg: 'enter narration',
       type: 'textbox',
       required: false,
     },
@@ -108,10 +108,10 @@ export class InstallmentVoucherComponent implements OnInit {
       required: true,
     },
     {
-      value: this.pageFields.BankReceiptNo,
-      msg: 'enter amount',
-      type: 'number',
-      required: false,
+      value: this.pageFields.RefCOAID,
+      msg: 'select reference chart of account',
+      type: 'selectbox',
+      required: true,
     },
   ];
 
@@ -119,6 +119,7 @@ export class InstallmentVoucherComponent implements OnInit {
   fileList: any = [];
   paymentPlanList: any = [];
   bankList: any = [];
+  refCoaList: any = [];
 
   error: any;
 
@@ -132,9 +133,11 @@ export class InstallmentVoucherComponent implements OnInit {
     this.globalService.setHeaderTitle('Installment Voucher');
     this.formFields[2].value = this.globalService.getUserId().toString();
     this.formFields[9].value = '1';
-    
+
     this.getParty();
     this.getBank();
+
+    this.getRefCOA();
   }
 
   // getInstallmentDetail(){
@@ -145,140 +148,225 @@ export class InstallmentVoucherComponent implements OnInit {
   //   });
   // }
 
-  getBank(){
-    this.dataService.getHttp('core-api/getbank', '').subscribe((response: any) => {
-      this.bankList = response;
-    }, (error: any) => {
-      console.log(error);
-    });
+  getRefCOA() {
+    var type = '';
+    if (this.formFields[9].value == '1') {
+      type = 'Cash';
+    } else if (this.formFields[9].value == '2') {
+      type = 'Bank';
+    }
+
+    this.dataService
+      .getHttp('core-api/GetVoucherCBCOA?Type=' + type, '')
+      .subscribe(
+        (response: any) => {
+          this.refCoaList = response;
+        },
+        (error: any) => {
+          console.log(error);
+        }
+      );
   }
-  
-  getParty(){
-    this.dataService.getHttp('core-api/GetParty', '').subscribe((response: any) => {
-      this.partyList = response;
-    }, (error: any) => {
-      console.log(error);
-    });
+
+  getBank() {
+    this.dataService.getHttp('core-api/getbank', '').subscribe(
+      (response: any) => {
+        this.bankList = response;
+      },
+      (error: any) => {
+        console.log(error);
+      }
+    );
   }
-  
-  getPartyFile(item: any){
+
+  getParty() {
+    this.dataService.getHttp('core-api/GetParty', '').subscribe(
+      (response: any) => {
+        this.partyList = response;
+      },
+      (error: any) => {
+        console.log(error);
+      }
+    );
+  }
+
+  getPartyFile(item: any) {
     this.fileList = [];
     this.paymentPlanList = [];
     this.lblInstallmentAmount = 0;
     this.lblPaidAmount = 0;
-    this.formFields[5].value = "";
-    this.formFields[6].value = "";
+    this.formFields[5].value = '';
+    this.formFields[6].value = '';
 
-    this.dataService.getHttp('core-api/GetPartyFile?partyid=' + item, '').subscribe((response: any) => {
-      this.fileList = response;
-    }, (error: any) => {
-      console.log(error);
-    });
+    this.dataService
+      .getHttp('core-api/GetPartyFile?partyid=' + item, '')
+      .subscribe(
+        (response: any) => {
+          this.fileList = response;
+        },
+        (error: any) => {
+          console.log(error);
+        }
+      );
   }
-  
-  getPaymentPlan(item: any){
+
+  getPaymentPlan(item: any) {
     this.paymentPlanList = [];
-    this.formFields[6].value = "";
+    this.formFields[6].value = '';
 
-    this.dataService.getHttp('core-api/GetFilePaymentPlan?fileid=' + item, '').subscribe((response: any) => {
-      this.paymentPlanList = response;
-    }, (error: any) => {
-      console.log(error);
-    });
+    this.dataService
+      .getHttp('core-api/GetFilePaymentPlan?fileid=' + item, '')
+      .subscribe(
+        (response: any) => {
+          this.paymentPlanList = response;
+        },
+        (error: any) => {
+          console.log(error);
+        }
+      );
   }
-  
-  getRemainingAmount(partyID: any, fileID: any, paymentPlanID: any){
-    if(partyID != '' && fileID != '' && paymentPlanID != ''){
+
+  getRemainingAmount(partyID: any, fileID: any, paymentPlanID: any) {
+    if (partyID != '' && fileID != '' && paymentPlanID != '') {
       // alert(partyID)
       // alert(fileID)
       // alert(paymentPlanID)
-      this.dataService.getHttp('core-api/GetInstallmentRemainingAmount?partyid=' + partyID + '&fileid=' + fileID + '&installmenttypeid=' + paymentPlanID, '').subscribe((response: any) => {
-        //console.log(response);
-        this.lblPaidAmount = response[0].amount;
-        this.formFields[10].value = this.lblInstallmentAmount - response[0].amount;
-      }, (error: any) => {
-        console.log(error);
-      });
+      this.dataService
+        .getHttp(
+          'core-api/GetInstallmentRemainingAmount?partyid=' +
+            partyID +
+            '&fileid=' +
+            fileID +
+            '&installmenttypeid=' +
+            paymentPlanID,
+          ''
+        )
+        .subscribe(
+          (response: any) => {
+            //console.log(response);
+            this.lblPaidAmount = response[0].amount;
+            this.formFields[10].value =
+              this.lblInstallmentAmount - response[0].amount;
+          },
+          (error: any) => {
+            console.log(error);
+          }
+        );
     }
   }
 
-  onPlanChange(item: any){
+  onPlanChange(item: any) {
     this.lblInstallmentAmount = 0;
-    var data = this.paymentPlanList.filter((x: {installmentTypeID: any}) => x.installmentTypeID == item);
+    var data = this.paymentPlanList.filter(
+      (x: { installmentTypeID: any }) => x.installmentTypeID == item
+    );
     this.lblInstallmentAmount = data[0].amount;
   }
 
   save(printSection: string) {
+    // var nature = '';
+    // if (this.formFields[9].value == '1') {
+    //   nature = 'Cash';
+    // } else if (this.formFields[9].value == '2') {
+    //   nature = 'Bank';
+    // }
+
+    // var fileData = this.fileList.filter(
+    //   (x: { fileID: any }) => x.fileID == this.formFields[5].value
+    // );
+    // var ownerData = this.partyList.filter(
+    //   (x: { partyID: any }) => x.partyID == this.formFields[4].value
+    // );
+    // var installmentData = this.paymentPlanList.filter(
+    //   (x: { installmentTypeID: any }) =>
+    //     x.installmentTypeID == this.formFields[6].value
+    // );
+
+    // var itemList: any = [];
+    // itemList.push({
+    //   invNo: 4,
+    //   invDate: this.formFields[0].value,
+    //   fileName: fileData[0].fileName,
+    //   ownName: ownerData[0].partyName,
+    //   amount: this.formFields[10].value,
+    //   type: installmentData[0].installmentTypeName,
+    //   nature: nature,
+    // });
+    // // this.installmentReport.lblInvoiceNo = 4;
+    // // this.installmentReport.lblInvoiceDate = this.formFields[0].value;
+    // // this.installmentReport.lblFileName = fileData[0].fileName;
+    // // this.installmentReport.lblOwnerName = ownerData[0].partyName;
+    // // this.installmentReport.lblAmount = this.formFields[10].value;
+    // // this.installmentReport.lblInstallmentType =
+    // //   installmentData[0].installmentTypeName;
+    // // this.installmentReport.lblPaymentNature = nature;
+
+    // this.installmentReport.testFunction(itemList);
+    // // setTimeout(() => this.globalService.printData(printSection), 500);
+    // return;
 
     this.formFields[3].value = 1;
-    if(this.formFields[9].value == 2){
-      if(this.formFields[7].value == ''){
-        this.valid.apiInfoResponse('select bank');
-        return;
-      }else if(this.formFields[11].value == ''){
-        this.valid.apiInfoResponse('enter bank receipt no');
-        return;
-      }
-    }else{
-      this.formFields[7].value = '0';
-    }
-    if(this.formFields[10].value > (this.lblInstallmentAmount - this.lblPaidAmount)){
+
+    this.formFields[7].value = '0';
+    if (
+      this.formFields[10].value >
+      this.lblInstallmentAmount - this.lblPaidAmount
+    ) {
       this.valid.apiInfoResponse('enter valid amount');
       return;
     }
+
     this.dataService
-    .savetHttp(
-      this.pageFields,
-      this.formFields,
-      'core-api/InsertInstallmentInvoice'
-    )
-    .subscribe(
-      (response: any) => {
-        if (response.msg == "Data Saved Successfully") {
-          this.valid.apiInfoResponse('Record saved successfully');
-          // this.bankTable.getBankAccount();
-          
-          var nature = '';
-          if(this.formFields[9].value == '1'){
-            nature = 'Cash';
-          }else if(this.formFields[9].value == '2'){
-            nature = 'Bank';
-            var bankData = this.bankList.filter((x: {bankID: any}) => x.bankID == this.formFields[7].value);
+      .savetHttp(
+        this.pageFields,
+        this.formFields,
+        'core-api/InsertInstallmentInvoice'
+      )
+      .subscribe(
+        (response: any) => {
+          if (response.msg == 'Data Saved Successfully') {
+            this.valid.apiInfoResponse('Record saved successfully');
+
+            this.installmentTable.getSavedInstallment();
+            var nature = '';
+            if (this.formFields[9].value == '1') {
+              nature = 'Cash';
+            } else if (this.formFields[9].value == '2') {
+              nature = 'Bank';
+            }
+
+            var fileData = this.fileList.filter(
+              (x: { fileID: any }) => x.fileID == this.formFields[5].value
+            );
+            var ownerData = this.partyList.filter(
+              (x: { partyID: any }) => x.partyID == this.formFields[4].value
+            );
+            var installmentData = this.paymentPlanList.filter(
+              (x: { installmentTypeID: any }) =>
+                x.installmentTypeID == this.formFields[6].value
+            );
+
+            this.installmentReport.lblInvoiceNo = response.invNo;
+            this.installmentReport.lblInvoiceDate = this.formFields[0].value;
+            this.installmentReport.lblFileName = fileData[0].fileName;
+            this.installmentReport.lblOwnerName = ownerData[0].partyName;
+            this.installmentReport.lblAmount = this.formFields[10].value;
+            this.installmentReport.lblInstallmentType =
+              installmentData[0].installmentTypeName;
+            this.installmentReport.lblPaymentNature = nature;
+
+            setTimeout(() => this.globalService.printData(printSection), 500);
+
+            this.reset();
+          } else {
+            this.valid.apiErrorResponse(response.msg);
           }
-
-          var fileData = this.fileList.filter((x: {fileID: any}) => x.fileID == this.formFields[5].value);
-          var ownerData = this.partyList.filter((x: {partyID: any}) => x.partyID == this.formFields[4].value);
-          var installmentData = this.paymentPlanList.filter((x: {installmentTypeID: any}) => x.installmentTypeID == this.formFields[6].value);
-
-
-
-          this.installmentReport.lblInvoiceNo = response.invNo;
-          this.installmentReport.lblInvoiceDate = this.formFields[0].value;
-          this.installmentReport.lblFileName = fileData[0].fileName;
-          this.installmentReport.lblOwnerName = ownerData[0].partyName;
-          this.installmentReport.lblAmount = this.formFields[10].value;
-          this.installmentReport.lblInstallmentType = installmentData[0].installmentTypeName;
-          this.installmentReport.lblPaymentNature = nature;
-          
-          if(this.formFields[9].value == '2'){
-            this.installmentReport.lblBankReceipt = this.formFields[11].value;
-              this.installmentReport.lblBankName = bankData[0].bankName;
-
-          }
-        
-          
-          setTimeout(() => this.globalService.printData(printSection), 200);
-          this.reset();
-
-        } else {
-          this.valid.apiErrorResponse(response.msg);
+        },
+        (error: any) => {
+          this.error = error;
+          this.valid.apiErrorResponse(this.error);
         }
-      },
-      (error: any) => {
-        this.error = error;
-        this.valid.apiErrorResponse(this.error);
-      }
-    );
+      );
   }
 
   reset() {
@@ -290,9 +378,7 @@ export class InstallmentVoucherComponent implements OnInit {
     this.lblPaidAmount = 0;
     this.fileList = [];
     this.paymentPlanList = [];
-    this.formFields[11].value = "";
-    this.formFields[7].value = ''
-
-}
-  
+    this.formFields[11].value = '';
+    this.formFields[7].value = '';
+  }
 }
