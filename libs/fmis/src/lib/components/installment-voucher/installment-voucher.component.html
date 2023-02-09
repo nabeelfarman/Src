@@ -168,7 +168,9 @@
       [config]="config"
       class="border"
     >
-      <society-installment-voucher-table></society-installment-voucher-table>
+      <society-installment-voucher-table
+        (eventEmitter)="printSavedData($event)"
+      ></society-installment-voucher-table>
     </perfect-scrollbar>
   </div>
 </div>

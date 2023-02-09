@@ -264,47 +264,6 @@ export class InstallmentVoucherComponent implements OnInit {
   }
 
   save(printSection: string) {
-    // var nature = '';
-    // if (this.formFields[9].value == '1') {
-    //   nature = 'Cash';
-    // } else if (this.formFields[9].value == '2') {
-    //   nature = 'Bank';
-    // }
-
-    // var fileData = this.fileList.filter(
-    //   (x: { fileID: any }) => x.fileID == this.formFields[5].value
-    // );
-    // var ownerData = this.partyList.filter(
-    //   (x: { partyID: any }) => x.partyID == this.formFields[4].value
-    // );
-    // var installmentData = this.paymentPlanList.filter(
-    //   (x: { installmentTypeID: any }) =>
-    //     x.installmentTypeID == this.formFields[6].value
-    // );
-
-    // var itemList: any = [];
-    // itemList.push({
-    //   invNo: 4,
-    //   invDate: this.formFields[0].value,
-    //   fileName: fileData[0].fileName,
-    //   ownName: ownerData[0].partyName,
-    //   amount: this.formFields[10].value,
-    //   type: installmentData[0].installmentTypeName,
-    //   nature: nature,
-    // });
-    // // this.installmentReport.lblInvoiceNo = 4;
-    // // this.installmentReport.lblInvoiceDate = this.formFields[0].value;
-    // // this.installmentReport.lblFileName = fileData[0].fileName;
-    // // this.installmentReport.lblOwnerName = ownerData[0].partyName;
-    // // this.installmentReport.lblAmount = this.formFields[10].value;
-    // // this.installmentReport.lblInstallmentType =
-    // //   installmentData[0].installmentTypeName;
-    // // this.installmentReport.lblPaymentNature = nature;
-
-    // this.installmentReport.testFunction(itemList);
-    // // setTimeout(() => this.globalService.printData(printSection), 500);
-    // return;
-
     this.formFields[3].value = 1;
 
     this.formFields[7].value = '0';
@@ -380,5 +339,25 @@ export class InstallmentVoucherComponent implements OnInit {
     this.paymentPlanList = [];
     this.formFields[11].value = '';
     this.formFields[7].value = '';
+  }
+
+  printSavedData(item: any) {
+    // if (item.invoiceDescription == '' || item.invoiceDescription == null) {
+    //   item.invoiceDescription = '-';
+    // }
+    // if (item.bankReceiptNo == '' || item.bankReceiptNo == null) {
+    //   item.bankReceiptNo = '-';
+    // }
+    this.installmentReport.lblInvoiceNo = item.invoiceNo;
+    this.installmentReport.lblInvoiceDate = item.invoiceDate;
+    this.installmentReport.lblFileName = item.fileName;
+    this.installmentReport.lblOwnerName = item.partyName;
+    this.installmentReport.lblAmount = item.amount;
+    this.installmentReport.lblInstallmentType = item.installmentTypeName;
+    this.installmentReport.lblPaymentNature = item.paymentNature;
+    // this.installmentReport.lblBankReceipt = item.bankReceiptNo;
+    // this.installmentReport.lblBankName = item.bankName;
+    this.installmentReport.lblDescription = item.invoiceDescription;
+    setTimeout(() => this.globalService.printData('#print-summary'), 200);
   }
 }
