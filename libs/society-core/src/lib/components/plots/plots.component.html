@@ -46,7 +46,10 @@
                   <ngx-mat-select-search [(ngModel)]="searchLocation" [placeholderLabel]="'Search...'"
                     [noEntriesFoundLabel]="'Not found'" name="search"></ngx-mat-select-search>
                 </mat-option> -->
-              <mat-option *ngFor="let item of plotCategoryList" [value]="item.plotCategoryId">
+              <mat-option
+                *ngFor="let item of plotCategoryList"
+                [value]="item.plotCategoryId"
+              >
                 {{ item.plotCategoryTitle }}
               </mat-option>
             </mat-select>
@@ -58,7 +61,10 @@
                   <ngx-mat-select-search [(ngModel)]="searchLocation" [placeholderLabel]="'Search...'"
                     [noEntriesFoundLabel]="'Not found'" name="search"></ngx-mat-select-search>
                 </mat-option> -->
-              <mat-option *ngFor="let item of plotTypeList" [value]="item.plotTypeId">
+              <mat-option
+                *ngFor="let item of plotTypeList"
+                [value]="item.plotTypeId"
+              >
                 {{ item.plotTypeTitle }}
               </mat-option>
             </mat-select>
@@ -70,14 +76,22 @@
                   <ngx-mat-select-search [(ngModel)]="searchLocation" [placeholderLabel]="'Search...'"
                     [noEntriesFoundLabel]="'Not found'" name="search"></ngx-mat-select-search>
                 </mat-option> -->
-              <mat-option *ngFor="let item of plotNatureList" [value]="item.plotNatureID">
+              <mat-option
+                *ngFor="let item of plotNatureList"
+                [value]="item.plotNatureID"
+              >
                 {{ item.plotNatureTitle }}
               </mat-option>
             </mat-select>
           </mat-form-field>
           <mat-form-field class="w-100">
             <mat-label>Plot Size</mat-label>
-            <input matInput [(ngModel)]="formFields[13].value" type="number" />
+            <input
+              matInput
+              [(ngModel)]="formFields[13].value"
+              type="number"
+              min="0"
+            />
           </mat-form-field>
         </div>
       </div>

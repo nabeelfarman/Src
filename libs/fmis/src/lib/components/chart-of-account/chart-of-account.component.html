@@ -67,7 +67,9 @@
                 <mat-label>Select Level</mat-label>
                 <mat-select
                   [(ngModel)]="cmbLevelNo"
-                  (ngModelChange)="getlevel01(formFields[3].value)"
+                  (ngModelChange)="
+                    getlevel01(formFields[3].value); onLevelChange(cmbLevelNo)
+                  "
                 >
                   <mat-option
                     *ngFor="let item of levelTypeList"
@@ -184,6 +186,7 @@
                   <mat-radio-group
                     aria-label="Select an option"
                     [(ngModel)]="formFields[9].value"
+                    [disabled]="disableTrans"
                   >
                     <div class="d-flex flex-column">
                       <mat-radio-button value="true">Yes</mat-radio-button>
@@ -201,6 +204,7 @@
                       class="example-margin"
                       [(ngModel)]="formFields[10].value"
                       value="true"
+                      [disabled]="disableTrans"
                       >Yes</mat-checkbox
                     >
                   </section>

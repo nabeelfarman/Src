@@ -20,6 +20,8 @@ export class ChartOfAccountComponent implements OnInit {
   lblAccountCode: any = '';
   cmbLevelNo: any = '';
 
+  disableTrans: any = false;
+
   pageFields: ChartOfAccountInterface = {
     coaID: '0', //0
     spType: '', //1
@@ -240,6 +242,16 @@ export class ChartOfAccountComponent implements OnInit {
       );
   }
 
+  onLevelChange(item: any) {
+    if (item < 3) {
+      this.disableTrans = true;
+      this.formFields[9].value = 'false';
+    } else {
+      this.disableTrans = false;
+      this.formFields[9].value = 'true';
+    }
+  }
+
   save() {
     if (this.formFields[9].value == 'true') {
       this.formFields[9].value = true;
@@ -330,7 +342,8 @@ export class ChartOfAccountComponent implements OnInit {
     this.formFields[10].value = '';
     this.lblAccountCode = '';
     this.cmbLevelNo = '';
-
+    this.disableTrans = false;
+    this.formFields[9].value == 'true';
     this.coaLevel1List = [];
     this.coaLevel2List = [];
     this.coaLevel3List = [];

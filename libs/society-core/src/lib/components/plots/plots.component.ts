@@ -12,7 +12,6 @@ import { PlotsTableComponent } from './plots-table/plots-table.component';
   styleUrls: ['./plots.component.scss'],
 })
 export class PlotsComponent implements OnInit {
-  
   @ViewChild(PlotsTableComponent) plotsTable: any;
 
   pageFields: PlotsInterface = {
@@ -31,7 +30,6 @@ export class PlotsComponent implements OnInit {
     plotSubBlockID: '',
     plotSize: '',
   };
-
 
   formFields: MyFormField[] = [
     {
@@ -140,91 +138,98 @@ export class PlotsComponent implements OnInit {
     this.getPlotType();
     this.getPlotNature();
   }
-    
-  getPlotCategory(){
-    this.dataService.getHttp('society-api/PlotCategory/getPlotCategory', '').subscribe((response: any) => {
-      this.plotCategoryList = response;
-    }, (error: any) => {
-      console.log(error);
-    });
+
+  getPlotCategory() {
+    this.dataService
+      .getHttp('society-api/PlotCategory/getPlotCategory', '')
+      .subscribe(
+        (response: any) => {
+          this.plotCategoryList = response;
+        },
+        (error: any) => {
+          console.log(error);
+        }
+      );
   }
 
-  getPlotType(){
-    this.dataService.getHttp('society-api/PlotType/getPlotType', '').subscribe((response: any) => {
-      this.plotTypeList = response;
-    }, (error: any) => {
-      console.log(error);
-    });
+  getPlotType() {
+    this.dataService.getHttp('society-api/PlotType/getPlotType', '').subscribe(
+      (response: any) => {
+        this.plotTypeList = response;
+      },
+      (error: any) => {
+        console.log(error);
+      }
+    );
   }
 
-  getPlotNature(){
-    this.dataService.getHttp('society-api/PlotNature/getPlotNature', '').subscribe((response: any) => {
-      this.plotNatureList = response;
-    }, (error: any) => {
-      console.log(error);
-    });
+  getPlotNature() {
+    this.dataService
+      .getHttp('society-api/PlotNature/getPlotNature', '')
+      .subscribe(
+        (response: any) => {
+          this.plotNatureList = response;
+        },
+        (error: any) => {
+          console.log(error);
+        }
+      );
   }
 
   savePlots() {
     this.formFields[11].value = '1';
     this.formFields[12].value = '1';
 
+    if (this.formFields[13].value < 0) {
+      this.valid.apiInfoResponse('enter correct size');
+      return;
+    }
     if (this.formFields[0].value > 0) {
       this.dataService
-      .savetHttp(
-        this.pageFields,
-        this.formFields,
-        'core-api/updateplot'
-      )
-      .subscribe(
-        (response: any) => {
-          if (response.msg == "Data Updated Successfully") {
-            this.valid.apiInfoResponse('Record updated successfully');
-            this.plotsTable.getPlots();
-            this.reset();
-          } else {
-            this.valid.apiErrorResponse(response.msg);
+        .savetHttp(this.pageFields, this.formFields, 'core-api/updateplot')
+        .subscribe(
+          (response: any) => {
+            if (response.msg == 'Data Updated Successfully') {
+              this.valid.apiInfoResponse('Record updated successfully');
+              this.plotsTable.getPlots();
+              this.reset();
+            } else {
+              this.valid.apiErrorResponse(response.msg);
+            }
+          },
+          (error: any) => {
+            this.error = error;
+            this.valid.apiErrorResponse(this.error);
           }
-        },
-        (error: any) => {
-          this.error = error;
-          this.valid.apiErrorResponse(this.error);
-        }
-      );
-    }else{
+        );
+    } else {
       this.dataService
-      .savetHttp(
-        this.pageFields,
-        this.formFields,
-        'core-api/insertplot'
-      )
-      .subscribe(
-        (response: any) => {
-          if (response.msg == "Data Saved Successfully") {
-            this.valid.apiInfoResponse('Record saved successfully');
-            this.plotsTable.getPlots();
-            this.reset();
-          } else {
-            this.valid.apiErrorResponse(response.msg);
+        .savetHttp(this.pageFields, this.formFields, 'core-api/insertplot')
+        .subscribe(
+          (response: any) => {
+            if (response.msg == 'Data Saved Successfully') {
+              this.valid.apiInfoResponse('Record saved successfully');
+              this.plotsTable.getPlots();
+              this.reset();
+            } else {
+              this.valid.apiErrorResponse(response.msg);
+            }
+          },
+          (error: any) => {
+            this.error = error;
+            this.valid.apiErrorResponse(this.error);
           }
-        },
-        (error: any) => {
-          this.error = error;
-          this.valid.apiErrorResponse(this.error);
-        }
-      );
+        );
     }
-    
   }
 
   reset() {
     this.formFields = this.valid.resetFormFields(this.formFields);
     this.formFields[0].value = '0';
   }
-    
-  edit(item: any) {
 
-    console.log(item)
+  edit(item: any) {
+    console.log(item);
     this.formFields[0].value = item.plotID;
     this.formFields[3].value = item.plotName;
     this.formFields[4].value = item.plotShortName;
@@ -237,7 +242,5 @@ export class PlotsComponent implements OnInit {
     this.formFields[11].value = item.plotBlockID;
     this.formFields[12].value = item.plotSubBlockID;
     this.formFields[13].value = item.plotSize;
-    
   }
-
 }

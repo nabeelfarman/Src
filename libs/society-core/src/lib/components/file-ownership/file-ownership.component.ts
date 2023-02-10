@@ -10,10 +10,9 @@ import { OwnershipFilePrintComponent } from './ownership-file-print/ownership-fi
 @Component({
   selector: 'society-file-ownership',
   templateUrl: './file-ownership.component.html',
-  styleUrls: ['./file-ownership.component.scss']
+  styleUrls: ['./file-ownership.component.scss'],
 })
 export class FileOwnershipComponent implements OnInit {
-
   @ViewChild(FileOwnershipTableComponent) ownerTable: any;
   @ViewChild(OwnershipFilePrintComponent) ownerPrint: any;
 
@@ -36,7 +35,6 @@ export class FileOwnershipComponent implements OnInit {
     PaymentPlanID: '0',
     PaymentPlanDetail: '',
   };
-
 
   formFields: MyFormField[] = [
     {
@@ -92,7 +90,7 @@ export class FileOwnershipComponent implements OnInit {
       msg: 'enter payment plan detail with date',
       type: 'textBox',
       required: true,
-    }
+    },
   ];
 
   installmentList: any = [];
@@ -103,7 +101,7 @@ export class FileOwnershipComponent implements OnInit {
   paymentDetailList: any = [];
 
   error: any;
-  
+
   constructor(
     private dataService: SharedServicesDataModule,
     private globalService: SharedServicesGlobalDataModule,
@@ -112,10 +110,10 @@ export class FileOwnershipComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.globalService.setHeaderTitle("Ownership File");
+    this.globalService.setHeaderTitle('Ownership File');
 
     this.formFields[2].value = this.globalService.getUserId().toString();
-  
+
     this.dtpAllotmentDate = new Date();
     this.getOwnershipDetail();
     this.getFile();
@@ -125,7 +123,7 @@ export class FileOwnershipComponent implements OnInit {
     this.getAdvertisementCompany();
   }
 
-  getFile(){
+  getFile() {
     this.dataService.getHttp('core-api/getunsoldfile', '').subscribe(
       (response: any) => {
         this.fileList = response;
@@ -136,7 +134,7 @@ export class FileOwnershipComponent implements OnInit {
     );
   }
 
-  getOwnershipDetail(){
+  getOwnershipDetail() {
     this.dataService.getHttp('core-api/getfileownerdetail', '').subscribe(
       (response: any) => {
         this.ownerTable.tableData = response;
@@ -147,7 +145,7 @@ export class FileOwnershipComponent implements OnInit {
     );
   }
 
-  getInstallmentType(){
+  getInstallmentType() {
     this.dataService.getHttp('core-api/getinstallmenttype', '').subscribe(
       (response: any) => {
         this.installmentList = response;
@@ -193,42 +191,51 @@ export class FileOwnershipComponent implements OnInit {
 
   getPaymentDetail(item: any) {
     this.paymentDetailList = [];
-    if(item > 0){
-      this.dataService.getHttp('core-api/getpaymentplandetail?paymentplanid=' + item, '').subscribe(
-        (response: any) => {
-          this.paymentDetailList = [];
-          for(var i = 0;response.length; i++){
-            this.paymentDetailList.push({
-              installmentTypeID: response[i].installmentTypeID,
-              installmentTypeName: response[i].installmentTypeName,
-              amount: response[i].amount,
-              dueDate: '',
-            });
+    if (item > 0) {
+      this.dataService
+        .getHttp('core-api/getpaymentplandetail?paymentplanid=' + item, '')
+        .subscribe(
+          (response: any) => {
+            this.paymentDetailList = [];
+            for (var i = 0; response.length; i++) {
+              this.paymentDetailList.push({
+                installmentTypeID: response[i].installmentTypeID,
+                installmentTypeName: response[i].installmentTypeName,
+                amount: response[i].amount,
+                dueDate: '',
+              });
+            }
+          },
+          (error: any) => {
+            console.log(error);
           }
-        },
-        (error: any) => {
-          console.log(error);
-        }
-      );
+        );
     }
   }
 
-  save(){ 
-    this.formFields[4].value = this.datePipe.transform(this.dtpAllotmentDate, 'yyyy-MM-dd');
-    if(this.paymentDetailList.length > 0){
-      for(var i = 0; i < this.paymentDetailList.length;i++){
-        if(this.paymentDetailList[i].dueDate == ''){
-          this.valid.apiErrorResponse('enter plan detail date');return;
+  save() {
+    this.formFields[4].value = this.datePipe.transform(
+      this.dtpAllotmentDate,
+      'yyyy-MM-dd'
+    );
+    if (this.paymentDetailList.length > 0) {
+      for (var i = 0; i < this.paymentDetailList.length; i++) {
+        if (this.paymentDetailList[i].dueDate == '') {
+          this.valid.apiErrorResponse('enter plan detail date');
+          return;
         }
       }
       this.formFields[8].value = JSON.stringify(this.paymentDetailList);
     }
 
-    this.dataService.savetHttp(this.pageFields, this.formFields, 'core-api/InsertOwnerShip').subscribe((response: any) => {
-          if (response.msg == "Data Saved Successfully") {
+    this.dataService
+      .savetHttp(this.pageFields, this.formFields, 'core-api/InsertOwnerShip')
+      .subscribe(
+        (response: any) => {
+          if (response.msg == 'Data Saved Successfully') {
             this.valid.apiInfoResponse('Record saved successfully');
             this.getFile();
-            this.getOwnershipDetail()
+            this.getOwnershipDetail();
             this.reset();
           } else {
             this.valid.apiErrorResponse(response.msg);
@@ -241,7 +248,7 @@ export class FileOwnershipComponent implements OnInit {
       );
   }
 
-  reset(){
+  reset() {
     this.formFields = this.valid.resetFormFields(this.formFields);
     this.formFields[0].value = '0';
     this.formFields[5].value = '';
@@ -251,60 +258,79 @@ export class FileOwnershipComponent implements OnInit {
     this.txtAmount = 0;
   }
 
-  addPaymentPlan(){
-    if(this.cmbInstallment == ''){
-      this.valid.apiErrorResponse('select installment type');return;
-    }else if(this.txtAmount == '0' || this.txtAmount == '' || this.txtAmount == null){
-      this.valid.apiErrorResponse('enter amount');return;
-    }else{
-
-      var data = this.installmentList.filter((x: { installmentTypeID: any }) => x.installmentTypeID == this.cmbInstallment);
+  addPaymentPlan() {
+    if (this.cmbInstallment == '') {
+      this.valid.apiErrorResponse('select installment type');
+      return;
+    } else if (
+      this.txtAmount == '0' ||
+      this.txtAmount == '' ||
+      this.txtAmount == null
+    ) {
+      this.valid.apiErrorResponse('enter amount');
+      return;
+    } else if (
+      this.dtpDueDate == '' ||
+      this.dtpDueDate == '' ||
+      this.dtpDueDate == null
+    ) {
+      this.valid.apiErrorResponse('select due date');
+      return;
+    } else {
+      var data = this.installmentList.filter(
+        (x: { installmentTypeID: any }) =>
+          x.installmentTypeID == this.cmbInstallment
+      );
       var installmentName = data[0].installmentTypeName;
 
-      if(this.paymentDetailList.length == 0){
+      if (this.paymentDetailList.length == 0) {
         this.paymentDetailList.push({
           installmentTypeID: this.cmbInstallment,
           installmentTypeName: installmentName,
           amount: this.txtAmount,
           dueDate: this.datePipe.transform(this.dtpDueDate, 'yyyy-MM-dd'),
         });
-      }else{
+      } else {
         var found = false;
-        for(var i = 0; i < this.paymentDetailList.length; i++){
-          if(this.datePipe.transform(this.paymentDetailList[i].dueDate, 'yyyy-MM-dd') >= this.datePipe.transform(this.dtpDueDate, 'yyyy-MM-dd')){
+        for (var i = 0; i < this.paymentDetailList.length; i++) {
+          if (
+            this.datePipe.transform(
+              this.paymentDetailList[i].dueDate,
+              'yyyy-MM-dd'
+            ) >= this.datePipe.transform(this.dtpDueDate, 'yyyy-MM-dd')
+          ) {
             this.valid.apiInfoResponse('date is not correct');
             return;
           }
-          if(this.paymentDetailList[i].installmentTypeID == this.cmbInstallment){
+          if (
+            this.paymentDetailList[i].installmentTypeID == this.cmbInstallment
+          ) {
             found = true;
             i = this.paymentDetailList.length + 1;
           }
-          
         }
-        if(found == false){
+        if (found == false) {
           this.paymentDetailList.push({
             installmentTypeID: this.cmbInstallment,
             installmentTypeName: installmentName,
             amount: this.txtAmount,
             dueDate: this.dtpDueDate,
           });
-        }else{
-          this.valid.apiErrorResponse('installemnt already added');return;
+        } else {
+          this.valid.apiErrorResponse('installemnt already added');
+          return;
         }
       }
     }
   }
 
-  remove(index: any){
+  remove(index: any) {
     this.paymentDetailList.splice(index, 1);
   }
 
   printData(item: any) {
-    
     // console.log(item);return;
     this.ownerPrint.tableData = item.response;
     setTimeout(() => this.globalService.printData('#print-summary'), 200);
-    
   }
-
 }
