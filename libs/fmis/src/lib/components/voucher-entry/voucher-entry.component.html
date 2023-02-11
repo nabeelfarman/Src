@@ -111,10 +111,7 @@
       <div class="col-md-6">
         <mat-form-field class="w-100 pe-3">
           <mat-label>Party</mat-label>
-          <mat-select
-            [(ngModel)]="formFields[7].value"
-            [disabled]="formFields[0].value == 'Adj'"
-          >
+          <mat-select [(ngModel)]="formFields[7].value">
             <mat-option>
               <ngx-mat-select-search
                 [(ngModel)]="searchParty"

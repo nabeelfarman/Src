@@ -1,0 +1,121 @@
+<div class="table-responsive">
+  <div class="d-flex flex-row pe-3">
+    <div class="form-group has-search flex-grow-1">
+      <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="tblSearch"
+        placeholder="Search record"
+      />
+    </div>
+    <button mat-raised-button color="warn" (click)="tblSearch = ''">
+      Show All
+    </button>
+  </div>
+  <div class="row mb-2">
+    <div class="col-md-12">
+      <mat-radio-group
+        aria-label="Select an option"
+        [(ngModel)]="rdbStatus"
+        (change)="onStatusChange(rdbStatus)"
+      >
+        <mat-radio-button class="ps-5" value="2">All</mat-radio-button>
+        <mat-radio-button class="ms-3" value="1">Approved</mat-radio-button>
+        <mat-radio-button class="ms-3" value="0">UnApproved</mat-radio-button>
+      </mat-radio-group>
+    </div>
+  </div>
+  <table class="table table-striped table-bordered">
+    <thead>
+      <tr>
+        <th>Voucher Date</th>
+        <th>Voucher No</th>
+        <th>Payer / Payee</th>
+        <th class="text-end">Amount</th>
+        <th class="text-center">Voucher Type</th>
+        <th class="text-center">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of tableData | filter: tblSearch; let i = index">
+        <td>{{ item.invoiceDate | date: 'dd-MMM-YYYY' }}</td>
+        <td>{{ item.invoiceNo }}</td>
+        <td>{{ item.partyName }}</td>
+        <td class="text-end">{{ item.amount | number }}</td>
+        <td class="text-center">{{ item.invType }}</td>
+        <td class="text-center">
+          <span
+            class="text-primary cursorPointer ps-2 pe-2"
+            (click)="getVoucherDetail(item.invoiceNo)"
+          >
+            <mat-icon>list_alt</mat-icon>
+          </span>
+          <span
+            *ngIf="item.approvedStatus == false"
+            class="text-danger cursorPointer pe-2"
+            (click)="approveVoucher(item)"
+          >
+            <mat-icon>task_alt</mat-icon>
+          </span>
+          <span
+            *ngIf="item.approvedStatus == true"
+            class="text-success cursorPointer ps-2"
+          >
+            <mat-icon>task_alt</mat-icon>
+          </span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Modal -->
+<div
+  id="voucherModal"
+  class="modal fade"
+  role="dialog"
+  data-bs-backdrop="false"
+>
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content mat-elevation-z20">
+      <div class="modal-header bg-light">
+        <h4 class="modal-title text-primary" id="exampleModalLabel">
+          Saved Voucher Detail
+        </h4>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <perfect-scrollbar
+          style="max-width: auto; max-height: 78%"
+          [config]="config"
+        >
+          <div class="table-responsive">
+            <table class="table table-striped table-bordered">
+              <thead>
+                <tr>
+                  <th>Account Title</th>
+                  <th>Party Name</th>
+                  <th>Debit</th>
+                  <th class="text-end">Credit</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of tableDetailData; let i = index">
+                  <td>{{ item.coaTitle }}</td>
+                  <td>{{ item.partyName }}</td>
+                  <td>{{ item.debit | number }}</td>
+                  <td class="text-end">{{ item.credit | number }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </perfect-scrollbar>
+      </div>
+    </div>
+  </div>
+</div>

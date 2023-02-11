@@ -378,7 +378,13 @@ export class VoucherEntryComponent implements OnInit {
       }
     } else {
       this.formFields[6].value = '0';
-      this.formFields[7].value = '0';
+      if (
+        this.formFields[7].value == '' ||
+        this.formFields[7].value == '0' ||
+        this.formFields[7].value == undefined
+      ) {
+        this.formFields[7].value = '0';
+      }
     }
 
     this.dataService
