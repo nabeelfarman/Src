@@ -128,6 +128,8 @@ export class CustomerProfileComponent implements OnInit {
     this.globalService.setHeaderTitle("Customer Profile");
     this.formFields[2].value = this.globalService.getUserId().toString();
 
+    this.formFields[3].value = 'Customer';
+
     this.getCity();
   }
 
