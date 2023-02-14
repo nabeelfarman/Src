@@ -41,65 +41,55 @@
 
   <!--header -->
   <div class="row border-1-black mt-4">
-    <div class="col-md-2 text-center height-27">
-      <label class="mt-1"><b>Allotment Date</b></label>
-    </div>
-
-    <div class="col-md-2 border-left-black text-center">
-      <label class="mt-1"><b>File Name</b></label>
-    </div>
-
-    <div class="col-md-2 border-left-black text-center">
+    <div class="col-md-3 text-center height-27">
       <label class="mt-1"><b>Party Name</b></label>
     </div>
 
-    <div class="col-md-1 border-left-black text-center">
-      <label class="mt-1"><b>Installment Type</b></label>
+    <div class="col-md-2 border-left-black text-center">
+      <label class="mt-1"><b>Booking Date</b></label>
     </div>
 
-    <div class="col-md-1 border-left-black text-center">
+    <div class="col-md-2 border-left-black text-center">
       <label class="mt-1"><b>Booking Type</b></label>
     </div>
 
     <div class="col-md-1 border-left-black text-center">
-      <label class="mt-1"><b>Plot Title</b></label>
+      <label class="mt-1"><b>File</b></label>
     </div>
 
-    <div class="col-md-1 border-left-black text-end">
-      <label class="mt-1"><b>Amount</b></label>
+    <div class="col-md-1 border-left-black text-center">
+      <label class="mt-1"><b>Size</b></label>
     </div>
-    <div class="col-md-1 border-left-black text-end">
-      <label class="mt-1"><b>Paid</b></label>
+
+    <div class="col-md-1 border-left-black text-center">
+      <label class="mt-1"><b>Price</b></label>
     </div>
-    <div class="col-md-1 border-left-black text-end">
+
+    <div class="col-md-1 border-left-black text-center">
+      <label class="mt-1"><b>Receive</b></label>
+    </div>
+    <div class="col-md-1 border-left-black text-center">
       <label class="mt-1"><b>Balance</b></label>
     </div>
   </div>
 
   <!--detail -->
-  <div
-    class="row border-1-black"
-    *ngFor="let item of soldFileList; let i = index"
-    style="margin-top: -1"
-  >
+  <div class="row border-1-black" *ngFor="let item of soldFileList; let i = index" style="margin-top: -1" >
+
+    <div class="col-md-3 border-left-black text-center">
+      <label>{{ item.partyName }}</label>
+    </div>
+
     <div class="col-md-2 border-left-black text-center">
       <label>{{ item.allotmentDate | date }}</label>
     </div>
 
     <div class="col-md-2 border-left-black text-center">
-      <label>{{ item.fileName }}</label>
-    </div>
-
-    <div class="col-md-2 border-left-black text-center">
-      <label>{{ item.partyName }}</label>
+      <label>{{  item.plotBookingTypeName }}</label>
     </div>
 
     <div class="col-md-1 border-left-black text-end">
-      <label>{{ item.installmentTypeName }}</label>
-    </div>
-
-    <div class="col-md-1 border-left-black text-end">
-      <label>{{ item.plotBookingTypeName }}</label>
+      <label>{{  item.fileName }}</label>
     </div>
 
     <div class="col-md-1 border-left-black text-end">
@@ -107,7 +97,7 @@
     </div>
 
     <div class="col-md-1 border-left-black text-end">
-      <label>{{ item.amount | number }}</label>
+      <label>{{ item.amount }}</label>
     </div>
 
     <div class="col-md-1 border-left-black text-end">
@@ -117,6 +107,7 @@
     <div class="col-md-1 border-left-black text-end">
       <label>{{ item.amount - item.paid | number }}</label>
     </div>
+
   </div>
 
   <!--footer -->
