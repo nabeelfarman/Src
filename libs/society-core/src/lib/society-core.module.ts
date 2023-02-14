@@ -92,6 +92,7 @@ import { TransferPlotTableComponent } from './components/transfer-plot/transfer-
 import { MapPlotTableComponent } from './components/map-plot/map-plot-table/map-plot-table.component';
 import { FilePaymentDetailComponent } from './components/reports/file-payment-detail/file-payment-detail.component';
 import { OwnershipFilePrintComponent } from './components/file-ownership/ownership-file-print/ownership-file-print.component';
+import { SoldFilesDetailComponent } from './components/reports/sold-files-detail/sold-files-detail.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -128,6 +129,7 @@ export const societyCoreRoutes: Route[] = [
   { path: 'rptsoldfile', component: SoldFileReportComponent },
   { path: 'rptadvcompany', component: AdvertisementCompanyReportComponent },
   { path: 'rptfilepay', component: FilePaymentDetailComponent },
+  { path: 'rptsoldfiledet', component: SoldFilesDetailComponent },
   // {
   //   path: 'membershipPaymentRpt',
   //   component: MembershipPaymentsReportComponent,
@@ -153,7 +155,7 @@ export const societyCoreRoutes: Route[] = [
     PerfectScrollbarModule,
     NgxMatSelectSearchModule,
     NgxPrintModule,
-    SharedInterfaceModule
+    SharedInterfaceModule,
   ],
   declarations: [
     PlotCategoryComponent,
@@ -229,6 +231,7 @@ export const societyCoreRoutes: Route[] = [
     MapPlotTableComponent,
     FilePaymentDetailComponent,
     OwnershipFilePrintComponent,
+    SoldFilesDetailComponent,
   ],
   exports: [
     PlotCategoryTableComponent,
@@ -269,7 +272,7 @@ export const societyCoreRoutes: Route[] = [
     FileOwnershipTableComponent,
     TransferPlotTableComponent,
     MapPlotTableComponent,
-    OwnershipFilePrintComponent
+    OwnershipFilePrintComponent,
     // SearchPipe
   ],
   providers: [

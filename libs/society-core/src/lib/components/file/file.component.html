@@ -7,6 +7,10 @@
     <mat-icon>cached</mat-icon>
     <span class="ps-2">Reset</span>
   </button>
+  <button mat-button class="save" (click)="onLoad()">
+    <mat-icon>loop</mat-icon>
+    <span class="ps-2">Load</span>
+  </button>
 </div>
 <div class="row no-scroll">
   <!-- Add / update -->
@@ -29,7 +33,10 @@
                 <ngx-mat-select-search [(ngModel)]="searchLocation" [placeholderLabel]="'Search...'"
                   [noEntriesFoundLabel]="'Not found'" name="search"></ngx-mat-select-search>
               </mat-option> -->
-            <mat-option *ngFor="let item of plotCategoryList" [value]="item.plotCategoryId">
+            <mat-option
+              *ngFor="let item of plotCategoryList"
+              [value]="item.plotCategoryId"
+            >
               {{ item.plotCategoryTitle }}
             </mat-option>
           </mat-select>
@@ -41,7 +48,10 @@
                 <ngx-mat-select-search [(ngModel)]="searchLocation" [placeholderLabel]="'Search...'"
                   [noEntriesFoundLabel]="'Not found'" name="search"></ngx-mat-select-search>
               </mat-option> -->
-            <mat-option *ngFor="let item of plotTypeList" [value]="item.plotTypeId">
+            <mat-option
+              *ngFor="let item of plotTypeList"
+              [value]="item.plotTypeId"
+            >
               {{ item.plotTypeTitle }}
             </mat-option>
           </mat-select>
@@ -53,7 +63,10 @@
                 <ngx-mat-select-search [(ngModel)]="searchLocation" [placeholderLabel]="'Search...'"
                   [noEntriesFoundLabel]="'Not found'" name="search"></ngx-mat-select-search>
               </mat-option> -->
-            <mat-option *ngFor="let item of plotNatureList" [value]="item.plotNatureID">
+            <mat-option
+              *ngFor="let item of plotNatureList"
+              [value]="item.plotNatureID"
+            >
               {{ item.plotNatureTitle }}
             </mat-option>
           </mat-select>

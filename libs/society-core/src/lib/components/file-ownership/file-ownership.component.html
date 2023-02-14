@@ -7,6 +7,10 @@
     <mat-icon>cached</mat-icon>
     <span class="ps-2">Reset</span>
   </button>
+  <button mat-button class="save" (click)="onLoad()">
+    <mat-icon>loop</mat-icon>
+    <span class="ps-2">Load</span>
+  </button>
 </div>
 <div class="row h-100 p-0">
   <div class="col-md-3 p-0 ps-4 pe-2 border">
@@ -15,10 +19,18 @@
       <mat-label>File</mat-label>
       <mat-select [(ngModel)]="formFields[0].value">
         <mat-option>
-          <ngx-mat-select-search [(ngModel)]="searchFileName" [noEntriesFoundLabel]="'Not found'" placeholderLabel="Search..." name="search"></ngx-mat-select-search>
+          <ngx-mat-select-search
+            [(ngModel)]="searchFileName"
+            [noEntriesFoundLabel]="'Not found'"
+            placeholderLabel="Search..."
+            name="search"
+          ></ngx-mat-select-search>
         </mat-option>
-        <mat-option *ngFor="let item of fileList | search: 'fileName': searchFileName" [value]="item.fileID">
-          {{item.fileName}}
+        <mat-option
+          *ngFor="let item of fileList | search: 'fileName':searchFileName"
+          [value]="item.fileID"
+        >
+          {{ item.fileName }}
         </mat-option>
       </mat-select>
     </mat-form-field>
@@ -26,10 +38,18 @@
       <mat-label>Party</mat-label>
       <mat-select [(ngModel)]="formFields[3].value">
         <mat-option>
-          <ngx-mat-select-search [(ngModel)]="searchPartyName" [noEntriesFoundLabel]="'Not found'" placeholderLabel="Search..." name="search"></ngx-mat-select-search>
+          <ngx-mat-select-search
+            [(ngModel)]="searchPartyName"
+            [noEntriesFoundLabel]="'Not found'"
+            placeholderLabel="Search..."
+            name="search"
+          ></ngx-mat-select-search>
         </mat-option>
-        <mat-option *ngFor="let item of partyList | search: 'partyName': searchPartyName" [value]="item.partyID">
-          {{item.partyName}}
+        <mat-option
+          *ngFor="let item of partyList | search: 'partyName':searchPartyName"
+          [value]="item.partyID"
+        >
+          {{ item.partyName }}
         </mat-option>
       </mat-select>
     </mat-form-field>
@@ -47,21 +67,48 @@
       <mat-label>Referred By</mat-label>
       <mat-select [(ngModel)]="formFields[6].value">
         <mat-option *ngFor="let item of referredList" [value]="item.companyID">
-          {{item.companyName}}
+          {{ item.companyName }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="w-100">
+      <mat-label>Booking Type</mat-label>
+      <mat-select
+        [(ngModel)]="formFields[7].value"
+        (ngModelChange)="onBookingChange(formFields[7].value)"
+      >
+        <mat-option
+          *ngFor="let item of bookingList"
+          [value]="item.plotBookingTypeID"
+        >
+          {{ item.plotBookingTypeName }}
         </mat-option>
       </mat-select>
     </mat-form-field>
     <mat-form-field class="w-100">
       <mat-label>Payment Plan</mat-label>
-      <mat-select [(ngModel)]="formFields[7].value" (ngModelChange)="getPaymentDetail(formFields[7].value)">
-          <mat-option>
-            <ngx-mat-select-search [(ngModel)]="searchPaymentPlanName" [noEntriesFoundLabel]="'Not found'" placeholderLabel="Search..." name="search"></ngx-mat-select-search>
-          </mat-option>
-        <mat-option value="0">
-          Custom
+      <mat-select
+        [(ngModel)]="formFields[8].value"
+        (ngModelChange)="getPaymentDetail(formFields[8].value)"
+        [disabled]="formFields[7].value < 4"
+      >
+        <mat-option>
+          <ngx-mat-select-search
+            [(ngModel)]="searchPaymentPlanName"
+            [noEntriesFoundLabel]="'Not found'"
+            placeholderLabel="Search..."
+            name="search"
+          ></ngx-mat-select-search>
         </mat-option>
-        <mat-option *ngFor="let item of paymentList | search: 'paymentPlanName': searchPaymentPlanName" [value]="item.paymentPlanID">
-          {{item.paymentPlanName}}
+        <mat-option value="0"> Custom </mat-option>
+        <mat-option
+          *ngFor="
+            let item of paymentList
+              | search: 'paymentPlanName':searchPaymentPlanName
+          "
+          [value]="item.paymentPlanID"
+        >
+          {{ item.paymentPlanName }}
         </mat-option>
       </mat-select>
     </mat-form-field>
@@ -80,85 +127,112 @@
           </tr>
         </thead>
         <tbody>
-
-
-          <tr *ngIf="formFields[7].value == 0">
-
+          <tr *ngIf="formFields[8].value == 0">
             <td class="text-center">0</td>
 
             <td>
-              <select class="form-control" [(ngModel)]="cmbInstallment">
-                <option *ngFor="let inst of installmentList" [value]="inst.installmentTypeID">
+              <select
+                class="form-control"
+                [(ngModel)]="cmbInstallment"
+                [disabled]="formFields[7].value < 4"
+              >
+                <option
+                  *ngFor="let inst of installmentList"
+                  [value]="inst.installmentTypeID"
+                >
                   {{ inst.installmentTypeName }}
                 </option>
               </select>
             </td>
 
             <td>
-              <input type="number" class="form-control" [(ngModel)]="txtAmount" />
+              <input
+                type="number"
+                class="form-control"
+                [(ngModel)]="txtAmount"
+              />
             </td>
 
             <td>
               <mat-form-field class="text-center">
-                <input matInput [matDatepicker]="picker" [(ngModel)]="dtpDueDate" />
-                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <input
+                  matInput
+                  [matDatepicker]="picker"
+                  [(ngModel)]="dtpDueDate"
+                />
+                <mat-datepicker-toggle
+                  matSuffix
+                  [for]="picker"
+                ></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
               </mat-form-field>
             </td>
 
             <td class="text-center">
-              <span class="text-primary cursorPointer" (click)="addPaymentPlan()">
+              <span
+                class="text-primary cursorPointer"
+                (click)="addPaymentPlan()"
+              >
                 <mat-icon>save</mat-icon>
               </span>
             </td>
-
           </tr>
 
-
-
           <tr *ngFor="let item of paymentDetailList; let i = index">
-
             <td class="text-center">{{ i + 1 }}</td>
 
             <td>
-              {{item.installmentTypeName}}
+              {{ item.installmentTypeName }}
             </td>
 
             <td class="text-right">
-              {{item.amount | number}}
+              {{ item.amount | number }}
             </td>
 
-            <td class="text-center" *ngIf="formFields[7].value > 0">
+            <td class="text-center" *ngIf="formFields[8].value > 0">
               <mat-form-field class="text-center">
-                <input matInput [matDatepicker]="picker" [(ngModel)]="item.dueDate" />
-                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <input
+                  matInput
+                  [matDatepicker]="picker"
+                  [(ngModel)]="item.dueDate"
+                />
+                <mat-datepicker-toggle
+                  matSuffix
+                  [for]="picker"
+                ></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
               </mat-form-field>
             </td>
 
-            <td class="text-center" *ngIf="formFields[7].value == 0">
-              {{item.dueDate | date: 'dd-MM-yyyy'}}
+            <td class="text-center" *ngIf="formFields[8].value == 0">
+              {{ item.dueDate | date: 'dd-MM-yyyy' }}
             </td>
 
             <td class="text-center">
-              <span class="text-danger cursorPointer" *ngIf="formFields[7].value == 0" (click)="remove(i)">
+              <span
+                class="text-danger cursorPointer"
+                *ngIf="formFields[8].value == 0"
+                (click)="remove(i)"
+              >
                 <mat-icon>delete</mat-icon>
               </span>
             </td>
-
           </tr>
         </tbody>
       </table>
     </div>
-
   </div>
   <div class="col-md-4">
     <h2 class="pt-2 pb-2 ps-2 border-bottom">Saved Files</h2>
     <div class="d-flex flex-column">
-      <society-file-ownership-table (eventEmitterPrint)="printData($event)"></society-file-ownership-table>
+      <society-file-ownership-table
+        (eventEmitterPrint)="printData($event)"
+      ></society-file-ownership-table>
     </div>
   </div>
 </div>
 
-
-<society-ownership-file-print class="d-none" id="print-summary"></society-ownership-file-print>
+<society-ownership-file-print
+  class="d-none"
+  id="print-summary"
+></society-ownership-file-print>

@@ -25,15 +25,16 @@ export class FileOwnershipComponent implements OnInit {
   searchPaymentPlanName: string = '';
 
   pageFields: OwnershipFileInterface = {
-    FileID: '0',
-    spType: '',
-    UserID: '',
-    PartyID: '',
-    AllotmentDate: '',
-    FosDescription: '',
-    ReferredBy: '',
-    PaymentPlanID: '0',
-    PaymentPlanDetail: '',
+    FileID: '0', //0
+    spType: '', //1
+    UserID: '', //2
+    PartyID: '', //3
+    AllotmentDate: '', //4
+    FosDescription: '', //5
+    ReferredBy: '', //6
+    PlotBookingTypeID: '', //7
+    PaymentPlanID: '0', //8
+    PaymentPlanDetail: '', //9
   };
 
   formFields: MyFormField[] = [
@@ -80,6 +81,12 @@ export class FileOwnershipComponent implements OnInit {
       required: true,
     },
     {
+      value: this.pageFields.PlotBookingTypeID,
+      msg: 'select booking type',
+      type: 'selectBox',
+      required: true,
+    },
+    {
       value: this.pageFields.PaymentPlanID,
       msg: 'select payment plan',
       type: 'selectbox',
@@ -98,6 +105,7 @@ export class FileOwnershipComponent implements OnInit {
   partyList: any = [];
   referredList: any = [];
   paymentList: any = [];
+  bookingList: any = [];
   paymentDetailList: any = [];
 
   error: any;
@@ -116,11 +124,33 @@ export class FileOwnershipComponent implements OnInit {
 
     this.dtpAllotmentDate = new Date();
     this.getOwnershipDetail();
+    this.getPlotBookingType();
     this.getFile();
     this.getParty();
     this.getPayment();
     this.getInstallmentType();
     this.getAdvertisementCompany();
+  }
+
+  onLoad() {
+    this.getOwnershipDetail();
+    this.getPlotBookingType();
+    this.getFile();
+    this.getParty();
+    this.getPayment();
+    this.getInstallmentType();
+    this.getAdvertisementCompany();
+  }
+
+  getPlotBookingType() {
+    this.dataService.getHttp('core-api/getPlotBookingType', '').subscribe(
+      (response: any) => {
+        this.bookingList = response;
+      },
+      (error: any) => {
+        console.log(error);
+      }
+    );
   }
 
   getFile() {
@@ -213,6 +243,14 @@ export class FileOwnershipComponent implements OnInit {
     }
   }
 
+  onBookingChange(item: any) {
+    if (item < 4) {
+      this.cmbInstallment = item;
+    } else {
+      this.cmbInstallment = '';
+    }
+  }
+
   save() {
     this.formFields[4].value = this.datePipe.transform(
       this.dtpAllotmentDate,
@@ -225,7 +263,7 @@ export class FileOwnershipComponent implements OnInit {
           return;
         }
       }
-      this.formFields[8].value = JSON.stringify(this.paymentDetailList);
+      this.formFields[9].value = JSON.stringify(this.paymentDetailList);
     }
 
     this.dataService
@@ -252,7 +290,7 @@ export class FileOwnershipComponent implements OnInit {
     this.formFields = this.valid.resetFormFields(this.formFields);
     this.formFields[0].value = '0';
     this.formFields[5].value = '';
-    this.formFields[7].value = '0';
+    this.formFields[8].value = '0';
     this.paymentDetailList = [];
     this.cmbInstallment = '';
     this.txtAmount = 0;

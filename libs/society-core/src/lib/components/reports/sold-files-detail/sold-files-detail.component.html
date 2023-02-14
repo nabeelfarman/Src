@@ -1,0 +1,146 @@
+<div class="saveUpdateBar border mat-elevation-z2">
+  <button mat-button class="save" (click)="printReport('#print-summary')">
+    <mat-icon>print</mat-icon>
+    <span class="ps-2">Report</span>
+  </button>
+</div>
+
+<div class="container">
+  <mat-form-field class="w-25">
+    <mat-label>Booking Type</mat-label>
+    <mat-select [(ngModel)]="cmbBooking" (ngModelChange)="getFileSaleDetail()">
+      <mat-option value="0"> All </mat-option>
+      <mat-option
+        *ngFor="let item of bookingList"
+        [value]="item.plotBookingTypeID"
+      >
+        {{ item.plotBookingTypeName }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+
+<div class="container bg-white mt-4" id="print-summary">
+  <div class="row mb-2">
+    <div class="col-md-6 text-left">
+      <img class="mt-1" src="assets/ui/company/shama.png" width="125px" />
+    </div>
+
+    <div class="col-md-6 text-right">
+      <div class="d-flex flex-column align-items-center">
+        <div class="h2Report"><b>SHAMA ROYAL CITY</b></div>
+        <div class="h4Report">A Project of: SARDAR ASSOCIATES</div>
+        <h2 class="h3Report txtDarkGrey mt-1">Sold File Detail Report</h2>
+      </div>
+    </div>
+  </div>
+
+  <hr />
+
+  <!---------------------------- table start --------------------------->
+
+  <!--header -->
+  <div class="row border-1-black mt-4">
+    <div class="col-md-2 text-center height-27">
+      <label class="mt-1"><b>Allotment Date</b></label>
+    </div>
+
+    <div class="col-md-2 border-left-black text-center">
+      <label class="mt-1"><b>File Name</b></label>
+    </div>
+
+    <div class="col-md-2 border-left-black text-center">
+      <label class="mt-1"><b>Party Name</b></label>
+    </div>
+
+    <div class="col-md-1 border-left-black text-center">
+      <label class="mt-1"><b>Installment Type</b></label>
+    </div>
+
+    <div class="col-md-1 border-left-black text-center">
+      <label class="mt-1"><b>Booking Type</b></label>
+    </div>
+
+    <div class="col-md-1 border-left-black text-center">
+      <label class="mt-1"><b>Plot Title</b></label>
+    </div>
+
+    <div class="col-md-1 border-left-black text-end">
+      <label class="mt-1"><b>Amount</b></label>
+    </div>
+    <div class="col-md-1 border-left-black text-end">
+      <label class="mt-1"><b>Paid</b></label>
+    </div>
+    <div class="col-md-1 border-left-black text-end">
+      <label class="mt-1"><b>Balance</b></label>
+    </div>
+  </div>
+
+  <!--detail -->
+  <div
+    class="row border-1-black"
+    *ngFor="let item of soldFileList; let i = index"
+    style="margin-top: -1"
+  >
+    <div class="col-md-2 border-left-black text-center">
+      <label>{{ item.allotmentDate | date }}</label>
+    </div>
+
+    <div class="col-md-2 border-left-black text-center">
+      <label>{{ item.fileName }}</label>
+    </div>
+
+    <div class="col-md-2 border-left-black text-center">
+      <label>{{ item.partyName }}</label>
+    </div>
+
+    <div class="col-md-1 border-left-black text-end">
+      <label>{{ item.installmentTypeName }}</label>
+    </div>
+
+    <div class="col-md-1 border-left-black text-end">
+      <label>{{ item.plotBookingTypeName }}</label>
+    </div>
+
+    <div class="col-md-1 border-left-black text-end">
+      <label>{{ item.plostSizeTitle }}</label>
+    </div>
+
+    <div class="col-md-1 border-left-black text-end">
+      <label>{{ item.amount | number }}</label>
+    </div>
+
+    <div class="col-md-1 border-left-black text-end">
+      <label>{{ item.paid | number }}</label>
+    </div>
+
+    <div class="col-md-1 border-left-black text-end">
+      <label>{{ item.amount - item.paid | number }}</label>
+    </div>
+  </div>
+
+  <!--footer -->
+  <div class="row border-1-black mt-2">
+    <div class="col-md-1 text-center height-27">
+      <label class="mt-1"></label>
+    </div>
+
+    <div class="col-md-8 text-left">
+      <label class="mt-1">TOTAL</label>
+    </div>
+
+    <div class="col-md-1 border-left-black text-end">
+      <label class="mt-1">{{ lblAmount | number }}</label>
+    </div>
+
+    <div class="col-md-1 border-left-black text-end">
+      <label class="mt-1">{{ lblPaid | number }}</label>
+    </div>
+
+    <div class="col-md-1 border-left-black text-end">
+      <label class="mt-1">{{ lblBalance | number }}</label>
+    </div>
+  </div>
+
+  <!------------------------------------- Table END -------------------------------------------------->
+</div>

@@ -8,10 +8,9 @@ import { FileTableComponent } from './file-table/file-table.component';
 @Component({
   selector: 'society-file',
   templateUrl: './file.component.html',
-  styleUrls: ['./file.component.scss']
+  styleUrls: ['./file.component.scss'],
 })
 export class FileComponent implements OnInit {
-
   @ViewChild(FileTableComponent) fileTable: any;
 
   pageFields: FileInterface = {
@@ -25,7 +24,7 @@ export class FileComponent implements OnInit {
     fileNatureID: '',
     IsActive: '',
   };
-  
+
   formFields: MyFormField[] = [
     {
       value: this.pageFields.fileID,
@@ -106,41 +105,64 @@ export class FileComponent implements OnInit {
     this.getPlotType();
     this.getPlotNature();
   }
-    
-  getPlotCategory(){
-    this.dataService.getHttp('society-api/PlotCategory/getPlotCategory', '').subscribe((response: any) => {
-      this.plotCategoryList = response;
-    }, (error: any) => {
-      console.log(error);
-    });
+
+  onLoad() {
+    this.getPlots();
+
+    this.getPlotCategory();
+    this.getPlotType();
+    this.getPlotNature();
   }
 
-  getPlotType(){
-    this.dataService.getHttp('society-api/PlotType/getPlotType', '').subscribe((response: any) => {
-      this.plotTypeList = response;
-    }, (error: any) => {
-      console.log(error);
-    });
+  getPlotCategory() {
+    this.dataService
+      .getHttp('society-api/PlotCategory/getPlotCategory', '')
+      .subscribe(
+        (response: any) => {
+          this.plotCategoryList = response;
+        },
+        (error: any) => {
+          console.log(error);
+        }
+      );
   }
 
-  getPlotNature(){
-    this.dataService.getHttp('society-api/PlotNature/getPlotNature', '').subscribe((response: any) => {
-      this.plotNatureList = response;
-    }, (error: any) => {
-      console.log(error);
-    });
+  getPlotType() {
+    this.dataService.getHttp('society-api/PlotType/getPlotType', '').subscribe(
+      (response: any) => {
+        this.plotTypeList = response;
+      },
+      (error: any) => {
+        console.log(error);
+      }
+    );
   }
 
-  getPlots(){
-    this.dataService.getHttp('core-api/getPlot', '').subscribe((response: any) => {
-      this.plotList = response;
-    }, (error: any) => {
-      console.log(error);
-    });
+  getPlotNature() {
+    this.dataService
+      .getHttp('society-api/PlotNature/getPlotNature', '')
+      .subscribe(
+        (response: any) => {
+          this.plotNatureList = response;
+        },
+        (error: any) => {
+          console.log(error);
+        }
+      );
   }
 
-  save(){
-    
+  getPlots() {
+    this.dataService.getHttp('core-api/getPlot', '').subscribe(
+      (response: any) => {
+        this.plotList = response;
+      },
+      (error: any) => {
+        console.log(error);
+      }
+    );
+  }
+
+  save() {
     // if(this.formFields[5].value == ''){
     //   this.formFields[5].value = '';
     // }
@@ -148,50 +170,41 @@ export class FileComponent implements OnInit {
 
     if (this.formFields[0].value > 0) {
       this.dataService
-      .savetHttp(
-        this.pageFields,
-        this.formFields,
-        'core-api/updatefile'
-      )
-      .subscribe(
-        (response: any) => {
-          if (response.msg == "Data Updated Successfully") {
-            this.valid.apiInfoResponse('Record updated successfully');
-            this.fileTable.getFile();
-            this.reset();
-          } else {
-            this.valid.apiErrorResponse(response.msg);
+        .savetHttp(this.pageFields, this.formFields, 'core-api/updatefile')
+        .subscribe(
+          (response: any) => {
+            if (response.msg == 'Data Updated Successfully') {
+              this.valid.apiInfoResponse('Record updated successfully');
+              this.fileTable.getFile();
+              this.reset();
+            } else {
+              this.valid.apiErrorResponse(response.msg);
+            }
+          },
+          (error: any) => {
+            this.error = error;
+            this.valid.apiErrorResponse(this.error);
           }
-        },
-        (error: any) => {
-          this.error = error;
-          this.valid.apiErrorResponse(this.error);
-        }
-      );
-    }else{
+        );
+    } else {
       this.dataService
-      .savetHttp(
-        this.pageFields,
-        this.formFields,
-        'core-api/insertfile'
-      )
-      .subscribe(
-        (response: any) => {
-          if (response.msg == "Data Saved Successfully") {
-            this.valid.apiInfoResponse('Record saved successfully');
-            this.fileTable.getFile();
-            this.reset();
-          } else {
-            this.valid.apiErrorResponse(response.msg);
+        .savetHttp(this.pageFields, this.formFields, 'core-api/insertfile')
+        .subscribe(
+          (response: any) => {
+            if (response.msg == 'Data Saved Successfully') {
+              this.valid.apiInfoResponse('Record saved successfully');
+              this.fileTable.getFile();
+              this.reset();
+            } else {
+              this.valid.apiErrorResponse(response.msg);
+            }
+          },
+          (error: any) => {
+            this.error = error;
+            this.valid.apiErrorResponse(this.error);
           }
-        },
-        (error: any) => {
-          this.error = error;
-          this.valid.apiErrorResponse(this.error);
-        }
-      );
+        );
     }
-    
   }
 
   reset() {
@@ -199,7 +212,7 @@ export class FileComponent implements OnInit {
     this.formFields[0].value = '0';
     this.formFields[4].value = '';
   }
-    
+
   edit(item: any) {
     this.formFields[0].value = item.fileID;
     this.formFields[3].value = item.fileName;
@@ -207,6 +220,5 @@ export class FileComponent implements OnInit {
     this.formFields[5].value = item.fileCatagoryID;
     this.formFields[6].value = item.fileTypeID;
     this.formFields[7].value = item.fileNatureID;
-    
   }
 }
