@@ -54,15 +54,16 @@ export class TrialBalanceComponent implements OnInit {
       this.dataService
         .getHttp(
           'core-api/GetTrailBalanceRpt?fromDate=' +
-            this.datePipe.transform(this.fromDate, 'yyy-MM-dd') +
-            'toDate=' +
-            this.datePipe.transform(this.toDate, 'yyy-MM-dd'),
+            this.datePipe.transform(this.fromDate, 'yyyy-MM-dd') +
+            '&toDate=' +
+            this.datePipe.transform(this.toDate, 'yyyy-MM-dd'),
           ''
         )
         .subscribe(
           (response: any) => {
             this.trialTable.tableData = response;
 
+            console.log(response);
             this.trialTable.lblDebit = 0;
             this.trialTable.lblCredit = 0;
             this.trialTable.lblODebit = 0;
