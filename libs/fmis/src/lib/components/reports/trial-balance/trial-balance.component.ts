@@ -3,7 +3,7 @@ import { SharedHelpersFieldValidationsModule } from '@society/shared/helpers/fie
 import { SharedServicesDataModule } from '@society/shared/services/data';
 import { SharedServicesGlobalDataModule } from '@society/shared/services/global-data';
 import { TrialBalanceTableComponent } from './trial-balance-table/trial-balance-table.component';
-
+import { DatePipe } from '@angular/common';
 @Component({
   selector: 'society-trial-balance',
   templateUrl: './trial-balance.component.html',
@@ -12,7 +12,8 @@ import { TrialBalanceTableComponent } from './trial-balance-table/trial-balance-
 export class TrialBalanceComponent implements OnInit {
   @ViewChild(TrialBalanceTableComponent) trialTable: any;
 
-  cmbYear: any = '';
+  fromDate: any = '';
+  toDate: any = '';
   yearList: any = [];
 
   error: any;
@@ -20,34 +21,44 @@ export class TrialBalanceComponent implements OnInit {
   constructor(
     private dataService: SharedServicesDataModule,
     private globalService: SharedServicesGlobalDataModule,
-    private valid: SharedHelpersFieldValidationsModule
+    private valid: SharedHelpersFieldValidationsModule,
+    private datePipe: DatePipe
   ) {}
 
   ngOnInit(): void {
     this.globalService.setHeaderTitle('Trial Balance Report');
 
-    this.getDateYears();
+    this.fromDate = new Date();
+    this.toDate = new Date();
+
+    // this.getDateYears();
   }
 
-  getDateYears() {
-    this.dataService.getHttp('core-api/GetDateYears', '').subscribe(
-      (response: any) => {
-        this.yearList = response;
-        console.log(response);
-      },
-      (error: any) => {
-        console.log(error);
-      }
-    );
-  }
+  // getDateYears() {
+  //   this.dataService.getHttp('core-api/GetDateYears', '').subscribe(
+  //     (response: any) => {
+  //       this.yearList = response;
+  //       console.log(response);
+  //     },
+  //     (error: any) => {
+  //       console.log(error);
+  //     }
+  //   );
+  // }
 
   showReport() {
-    if (this.cmbYear == '') {
-      this.valid.apiInfoResponse('select year');
+    if (this.fromDate > this.toDate) {
+      this.valid.apiInfoResponse('incorrect date');
       return;
     } else {
       this.dataService
-        .getHttp('core-api/GetTrailBalanceRpt?Year=' + this.cmbYear, '')
+        .getHttp(
+          'core-api/GetTrailBalanceRpt?fromDate=' +
+            this.datePipe.transform(this.fromDate, 'yyy-MM-dd') +
+            'toDate=' +
+            this.datePipe.transform(this.toDate, 'yyy-MM-dd'),
+          ''
+        )
         .subscribe(
           (response: any) => {
             this.trialTable.tableData = response;

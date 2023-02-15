@@ -14,12 +14,24 @@
   <div class="row pt-2 bg-white border">
     <div class="offset-md-4 col-md-2">
       <mat-form-field class="pull-right w-100">
-        <mat-label>Year</mat-label>
-        <mat-select [(ngModel)]="cmbYear">
-          <mat-option *ngFor="let item of yearList" [value]="item.yearID">{{
-            item.yearTitle
-          }}</mat-option>
-        </mat-select>
+        <mat-label>From Date</mat-label>
+        <input matInput [matDatepicker]="fromPicker" [(ngModel)]="fromDate" />
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="fromPicker"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #fromPicker></mat-datepicker>
+      </mat-form-field>
+    </div>
+    <div class="col-md-2">
+      <mat-form-field class="pull-right w-100">
+        <mat-label>To Date</mat-label>
+        <input matInput [matDatepicker]="toPicker" [(ngModel)]="toDate" />
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="toPicker"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #toPicker></mat-datepicker>
       </mat-form-field>
     </div>
   </div>
