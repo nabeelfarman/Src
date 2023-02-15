@@ -18,9 +18,7 @@
             <mat-form-field class="w-100">
               <mat-label>Party Type</mat-label>
               <mat-select [(ngModel)]="formFields[3].value">
-                <mat-option value="Customer">
-                  Customer
-                </mat-option>
+                <mat-option value="Customer"> Customer </mat-option>
               </mat-select>
             </mat-form-field>
             <mat-form-field class="w-100">
@@ -28,16 +26,29 @@
               <input matInput [(ngModel)]="formFields[4].value" />
             </mat-form-field>
             <mat-form-field class="w-100">
-              <input matInput placeholder="CNIC" [(ngModel)]="formFields[5].value" maxlength="15"
-                (keyup)="setCnicData()" />
+              <input
+                matInput
+                placeholder="CNIC"
+                [(ngModel)]="formFields[5].value"
+                maxlength="15"
+                (keyup)="setCnicData()"
+              />
             </mat-form-field>
             <mat-form-field class="w-100">
               <mat-label>Mobile No.</mat-label>
-              <input matInput [(ngModel)]="formFields[6].value" [textMask]="{ mask: mobileMask }" />
+              <input
+                matInput
+                [(ngModel)]="formFields[6].value"
+                [textMask]="{ mask: mobileMask }"
+              />
             </mat-form-field>
             <mat-form-field class="w-100">
               <mat-label>Mobile No. 2</mat-label>
-              <input matInput [(ngModel)]="formFields[7].value" [textMask]="{ mask: mobileMask }" />
+              <input
+                matInput
+                [(ngModel)]="formFields[7].value"
+                [textMask]="{ mask: mobileMask }"
+              />
             </mat-form-field>
             <mat-form-field class="w-100">
               <mat-label>Email</mat-label>
@@ -53,11 +64,18 @@
               <mat-label>City</mat-label>
               <mat-select [(ngModel)]="formFields[9].value">
                 <mat-option>
-                  <ngx-mat-select-search [(ngModel)]="searchCity" [noEntriesFoundLabel]="'Not found'"
-                    placeholderLabel="Search..." name="search">
+                  <ngx-mat-select-search
+                    [(ngModel)]="searchCity"
+                    [noEntriesFoundLabel]="'Not found'"
+                    placeholderLabel="Search..."
+                    name="search"
+                  >
                   </ngx-mat-select-search>
                 </mat-option>
-                <mat-option *ngFor="let item of cityList | search: 'cityName': searchCity" [value]="item.cityId">
+                <mat-option
+                  *ngFor="let item of cityList | search: 'cityName':searchCity"
+                  [value]="item.cityId"
+                >
                   {{ item.cityName }}
                 </mat-option>
               </mat-select>
@@ -67,7 +85,15 @@
               <textarea matInput [(ngModel)]="formFields[10].value"></textarea>
             </mat-form-field>
             <mat-form-field class="w-100">
-              <input matInput placeholder="Next to Kin" [(ngModel)]="formFields[11].value" />
+              <input
+                matInput
+                placeholder="Next to Kin"
+                [(ngModel)]="formFields[11].value"
+              />
+            </mat-form-field>
+            <mat-form-field class="w-100">
+              <mat-label>Description</mat-label>
+              <textarea matInput [(ngModel)]="formFields[13].value"></textarea>
             </mat-form-field>
           </div>
         </div>
@@ -77,7 +103,9 @@
   <div class="col-md-6">
     <h2 class="pt-2 pb-2 ps-2 border-bottom">Saved Parties</h2>
     <div class="d-flex flex-column">
-      <society-customer-profile-table (eventEmitter)="edit($event)"></society-customer-profile-table>
+      <society-customer-profile-table
+        (eventEmitter)="edit($event)"
+      ></society-customer-profile-table>
     </div>
   </div>
 </div>

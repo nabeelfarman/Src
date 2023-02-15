@@ -23,6 +23,7 @@ export class FileOwnershipComponent implements OnInit {
   searchFileName: string = '';
   searchPartyName: string = '';
   searchPaymentPlanName: string = '';
+  lblTotal: any = 0;
 
   pageFields: OwnershipFileInterface = {
     FileID: '0', //0
@@ -357,6 +358,12 @@ export class FileOwnershipComponent implements OnInit {
         } else {
           this.valid.apiErrorResponse('installemnt already added');
           return;
+        }
+      }
+      if (this.paymentDetailList.length > 0) {
+        this.lblTotal = 0;
+        for (var i = 0; i < this.paymentDetailList.length; i++) {
+          this.lblTotal += this.paymentDetailList[i].amount;
         }
       }
     }

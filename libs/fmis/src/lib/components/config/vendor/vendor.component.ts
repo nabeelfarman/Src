@@ -8,10 +8,9 @@ import { VendorTableComponent } from './vendor-table/vendor-table.component';
 @Component({
   selector: 'society-vendor',
   templateUrl: './vendor.component.html',
-  styleUrls: ['./vendor.component.scss']
+  styleUrls: ['./vendor.component.scss'],
 })
 export class VendorComponent implements OnInit {
-
   @ViewChild(VendorTableComponent) vendorTable: any;
 
   searchCity: any = '';
@@ -30,6 +29,7 @@ export class VendorComponent implements OnInit {
     partyAddress: '',
     NextToKin: '',
     BranchID: '',
+    Description: '',
   };
 
   formFields: MyFormField[] = [
@@ -111,10 +111,16 @@ export class VendorComponent implements OnInit {
       type: '',
       required: false,
     },
+    {
+      value: this.pageFields.Description,
+      msg: '',
+      type: '',
+      required: false,
+    },
   ];
 
   error: any;
-  cityList:any = [];
+  cityList: any = [];
 
   mobileMask = this.globalService.mobileMask();
 
@@ -125,7 +131,7 @@ export class VendorComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.globalService.setHeaderTitle("Customer Profile");
+    this.globalService.setHeaderTitle('Customer Profile');
     this.formFields[2].value = this.globalService.getUserId().toString();
 
     this.getCity();
@@ -142,58 +148,49 @@ export class VendorComponent implements OnInit {
     );
   }
 
-  save(){
+  save() {
     this.formFields[12].value = '1';
 
     if (this.formFields[0].value > 0) {
       this.dataService
-      .savetHttp(
-        this.pageFields,
-        this.formFields,
-        'core-api/updateparty'
-      )
-      .subscribe(
-        (response: any) => {
-          if (response.msg == "Data Updated Successfully") {
-            this.valid.apiInfoResponse('Record updated successfully');
-            this.vendorTable.getParty();
-            this.reset();
-          } else {
-            this.valid.apiErrorResponse(response.msg);
+        .savetHttp(this.pageFields, this.formFields, 'core-api/updateparty')
+        .subscribe(
+          (response: any) => {
+            if (response.msg == 'Data Updated Successfully') {
+              this.valid.apiInfoResponse('Record updated successfully');
+              this.vendorTable.getParty();
+              this.reset();
+            } else {
+              this.valid.apiErrorResponse(response.msg);
+            }
+          },
+          (error: any) => {
+            this.error = error;
+            this.valid.apiErrorResponse(this.error);
           }
-        },
-        (error: any) => {
-          this.error = error;
-          this.valid.apiErrorResponse(this.error);
-        }
-      );
-    }else{
+        );
+    } else {
       this.dataService
-      .savetHttp(
-        this.pageFields,
-        this.formFields,
-        'core-api/insertparty'
-      )
-      .subscribe(
-        (response: any) => {
-          if (response.msg == "Data Saved Successfully") {
-            this.valid.apiInfoResponse('Record saved successfully');
-            this.vendorTable.getParty();
-            this.reset();
-          } else {
-            this.valid.apiErrorResponse(response.msg);
+        .savetHttp(this.pageFields, this.formFields, 'core-api/insertparty')
+        .subscribe(
+          (response: any) => {
+            if (response.msg == 'Data Saved Successfully') {
+              this.valid.apiInfoResponse('Record saved successfully');
+              this.vendorTable.getParty();
+              this.reset();
+            } else {
+              this.valid.apiErrorResponse(response.msg);
+            }
+          },
+          (error: any) => {
+            this.error = error;
+            this.valid.apiErrorResponse(this.error);
           }
-        },
-        (error: any) => {
-          this.error = error;
-          this.valid.apiErrorResponse(this.error);
-        }
-      );
+        );
     }
-    
   }
 
-  reset(){
+  reset() {
     this.formFields = this.valid.resetFormFields(this.formFields);
     this.formFields[0].value = '0';
     this.formFields[7].value = '';
@@ -202,18 +199,20 @@ export class VendorComponent implements OnInit {
   }
 
   setCnicData() {
-    if(this.formFields[5].value.length == 5 || this.formFields[5].value.length == 13 )
-    {
+    if (
+      this.formFields[5].value.length == 5 ||
+      this.formFields[5].value.length == 13
+    ) {
       this.formFields[5].value = this.formFields[5].value + '-';
     }
   }
 
-  edit(item: any){
+  edit(item: any) {
     this.formFields[0].value = item.partyID;
     this.formFields[3].value = item.partyType;
     this.formFields[4].value = item.partyName;
     this.formFields[5].value = item.partyCNIC;
-    this.formFields[6].value = item.mobile
+    this.formFields[6].value = item.mobile;
     this.formFields[7].value = item.mobile2;
     this.formFields[8].value = item.email;
     this.formFields[9].value = item.cityID;

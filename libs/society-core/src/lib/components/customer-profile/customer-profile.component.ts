@@ -8,28 +8,28 @@ import { CustomerProfileTableComponent } from './customer-profile-table/customer
 @Component({
   selector: 'society-customer-profile',
   templateUrl: './customer-profile.component.html',
-  styleUrls: ['./customer-profile.component.scss']
+  styleUrls: ['./customer-profile.component.scss'],
 })
 export class CustomerProfileComponent implements OnInit {
-
   @ViewChild(CustomerProfileTableComponent) customerTable: any;
 
   searchCity: any = '';
 
   pageFields: CustomerInterface = {
-    partyID: '0',
-    spType: '',
-    userID: '',
-    partyType: '',
-    partyName: '',
-    partyCNIC: '',
-    mobile: '',
-    Mobile2: '',
-    Email: '',
-    cityID: '',
-    partyAddress: '',
-    NextToKin: '',
-    BranchID: '',
+    partyID: '0', //0
+    spType: '', //1
+    userID: '', //2
+    partyType: '', //3
+    partyName: '', //4
+    partyCNIC: '', //5
+    mobile: '', //6
+    Mobile2: '', //7
+    Email: '', //8
+    cityID: '', //9
+    partyAddress: '', //10
+    NextToKin: '', //11
+    BranchID: '', //12
+    Description: '', //13
   };
 
   formFields: MyFormField[] = [
@@ -111,10 +111,16 @@ export class CustomerProfileComponent implements OnInit {
       type: '',
       required: false,
     },
+    {
+      value: this.pageFields.Description,
+      msg: 'enter description',
+      type: 'textbox',
+      required: true,
+    },
   ];
 
   error: any;
-  cityList:any = [];
+  cityList: any = [];
 
   mobileMask = this.globalService.mobileMask();
 
@@ -125,7 +131,7 @@ export class CustomerProfileComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.globalService.setHeaderTitle("Customer Profile");
+    this.globalService.setHeaderTitle('Customer Profile');
     this.formFields[2].value = this.globalService.getUserId().toString();
 
     this.formFields[3].value = 'Customer';
@@ -144,58 +150,49 @@ export class CustomerProfileComponent implements OnInit {
     );
   }
 
-  save(){
+  save() {
     this.formFields[12].value = '1';
 
     if (this.formFields[0].value > 0) {
       this.dataService
-      .savetHttp(
-        this.pageFields,
-        this.formFields,
-        'core-api/updateparty'
-      )
-      .subscribe(
-        (response: any) => {
-          if (response.msg == "Data Updated Successfully") {
-            this.valid.apiInfoResponse('Record updated successfully');
-            this.customerTable.getParty();
-            this.reset();
-          } else {
-            this.valid.apiErrorResponse(response.msg);
+        .savetHttp(this.pageFields, this.formFields, 'core-api/updateparty')
+        .subscribe(
+          (response: any) => {
+            if (response.msg == 'Data Updated Successfully') {
+              this.valid.apiInfoResponse('Record updated successfully');
+              this.customerTable.getParty();
+              this.reset();
+            } else {
+              this.valid.apiErrorResponse(response.msg);
+            }
+          },
+          (error: any) => {
+            this.error = error;
+            this.valid.apiErrorResponse(this.error);
           }
-        },
-        (error: any) => {
-          this.error = error;
-          this.valid.apiErrorResponse(this.error);
-        }
-      );
-    }else{
+        );
+    } else {
       this.dataService
-      .savetHttp(
-        this.pageFields,
-        this.formFields,
-        'core-api/insertparty'
-      )
-      .subscribe(
-        (response: any) => {
-          if (response.msg == "Data Saved Successfully") {
-            this.valid.apiInfoResponse('Record saved successfully');
-            this.customerTable.getParty();
-            this.reset();
-          } else {
-            this.valid.apiErrorResponse(response.msg);
+        .savetHttp(this.pageFields, this.formFields, 'core-api/insertparty')
+        .subscribe(
+          (response: any) => {
+            if (response.msg == 'Data Saved Successfully') {
+              this.valid.apiInfoResponse('Record saved successfully');
+              this.customerTable.getParty();
+              this.reset();
+            } else {
+              this.valid.apiErrorResponse(response.msg);
+            }
+          },
+          (error: any) => {
+            this.error = error;
+            this.valid.apiErrorResponse(this.error);
           }
-        },
-        (error: any) => {
-          this.error = error;
-          this.valid.apiErrorResponse(this.error);
-        }
-      );
+        );
     }
-    
   }
 
-  reset(){
+  reset() {
     this.formFields = this.valid.resetFormFields(this.formFields);
     this.formFields[0].value = '0';
     this.formFields[7].value = '';
@@ -204,23 +201,26 @@ export class CustomerProfileComponent implements OnInit {
   }
 
   setCnicData() {
-    if(this.formFields[5].value.length == 5 || this.formFields[5].value.length == 13 )
-    {
+    if (
+      this.formFields[5].value.length == 5 ||
+      this.formFields[5].value.length == 13
+    ) {
       this.formFields[5].value = this.formFields[5].value + '-';
     }
   }
 
-  edit(item: any){
+  edit(item: any) {
     this.formFields[0].value = item.partyID;
     this.formFields[3].value = item.partyType;
     this.formFields[4].value = item.partyName;
     this.formFields[5].value = item.partyCNIC;
-    this.formFields[6].value = item.mobile
+    this.formFields[6].value = item.mobile;
     this.formFields[7].value = item.mobile2;
     this.formFields[8].value = item.email;
     this.formFields[9].value = item.cityID;
     this.formFields[10].value = item.partyAddress;
     this.formFields[11].value = item.nextToKin;
     this.formFields[12].value = item.branchID;
+    this.formFields[13].value = item.description;
   }
 }

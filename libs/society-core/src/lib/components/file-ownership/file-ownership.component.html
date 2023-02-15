@@ -169,11 +169,14 @@
             </td>
 
             <td class="text-center">
-              <span
-                class="text-primary cursorPointer"
-                (click)="addPaymentPlan()"
-              >
-                <mat-icon>save</mat-icon>
+              <span class="cursorPointer" (click)="addPaymentPlan()">
+                <button
+                  class="primary-color text-white"
+                  mat-mini-fab
+                  aria-label="Example icon button with a menu icon"
+                >
+                  <mat-icon>save</mat-icon>
+                </button>
               </span>
             </td>
           </tr>
@@ -185,7 +188,7 @@
               {{ item.installmentTypeName }}
             </td>
 
-            <td class="text-right">
+            <td class="text-center">
               {{ item.amount | number }}
             </td>
 
@@ -217,6 +220,13 @@
                 <mat-icon>delete</mat-icon>
               </span>
             </td>
+          </tr>
+          <tr *ngIf="paymentDetailList.length > 0">
+            <th colspan="1"></th>
+            <th colspan="1" class="text-center">Total</th>
+            <th colspan="1" class="text-center">{{ lblTotal }}</th>
+            <th colspan="1"></th>
+            <th colspan="1"></th>
           </tr>
         </tbody>
       </table>

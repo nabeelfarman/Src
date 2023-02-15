@@ -12,6 +12,7 @@
   // --nha-blue: #0041C2;
   --royal-blue: #0041c2;
   --nha-light-blue: #dff2fa;
+  --primary-color: #4758b8;
   // --nha-light-blue: green;
 }
 body,
@@ -420,6 +421,10 @@ button.mat-raised-button.uploadbtn {
 }
 .nha-orange-bg {
   background-color: var(--nha-orange) !important;
+}
+
+.primary-color {
+  background-color: var(--primary-color) !important;
 }
 
 .nha-orange-text {

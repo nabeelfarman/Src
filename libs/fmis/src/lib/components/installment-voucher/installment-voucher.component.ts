@@ -310,6 +310,7 @@ export class InstallmentVoucherComponent implements OnInit {
             this.installmentReport.lblFileName = fileData[0].fileName;
             this.installmentReport.lblOwnerName = ownerData[0].partyName;
             this.installmentReport.lblAmount = this.formFields[10].value;
+            this.installmentReport.lblDescription = this.formFields[8].value;
             this.installmentReport.lblInstallmentType =
               installmentData[0].installmentTypeName;
             this.installmentReport.lblCoaTitle = coaData[0].coaTitle;
