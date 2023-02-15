@@ -42,7 +42,19 @@
             [(ngModel)]="formFields[4].value"
             (ngModelChange)="getPartyFile(formFields[4].value)"
           >
-            <mat-option *ngFor="let item of partyList" [value]="item.partyID">
+            <mat-option>
+              <ngx-mat-select-search
+                [(ngModel)]="searchParty"
+                [noEntriesFoundLabel]="'Not found'"
+                placeholderLabel="Search..."
+                name="search"
+              >
+              </ngx-mat-select-search>
+            </mat-option>
+            <mat-option
+              *ngFor="let item of partyList | filter: searchParty"
+              [value]="item.partyID"
+            >
               {{ item.partyName }}
             </mat-option>
           </mat-select>
@@ -66,7 +78,7 @@
       </div>
       <div class="col-md-6">
         <mat-form-field class="w-100">
-          <mat-label>Payment Plan</mat-label>
+          <mat-label>Installments</mat-label>
           <mat-select
             [(ngModel)]="formFields[6].value"
             (ngModelChange)="
@@ -78,8 +90,17 @@
               )
             "
           >
+            <mat-option>
+              <ngx-mat-select-search
+                [(ngModel)]="searchInstallment"
+                [noEntriesFoundLabel]="'Not found'"
+                placeholderLabel="Search..."
+                name="search"
+              >
+              </ngx-mat-select-search>
+            </mat-option>
             <mat-option
-              *ngFor="let item of paymentPlanList"
+              *ngFor="let item of paymentPlanList | filter: searchInstallment"
               [value]="item.installmentTypeID"
             >
               {{ item.installmentTypeName }}

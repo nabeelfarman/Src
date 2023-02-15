@@ -19,6 +19,9 @@ import { InstallmentVoucherTableComponent } from './installment-voucher-table/in
 export class InstallmentVoucherComponent implements OnInit {
   public config: PerfectScrollbarConfigInterface = {};
 
+  searchParty: any = '';
+  searchInstallment: any = '';
+
   lblInstallmentAmount: any = 0;
   lblPaidAmount: any = 0;
 
