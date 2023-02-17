@@ -17,7 +17,7 @@
     <h2 class="pt-2 ps-3 pe-3">General Info</h2>
     <mat-form-field class="w-100">
       <mat-label>File</mat-label>
-      <mat-select [(ngModel)]="formFields[0].value" id="autoFocus">
+      <mat-select [(ngModel)]="formFields[0].value" #myInput>
         <mat-option>
           <ngx-mat-select-search
             [(ngModel)]="searchFileName"
@@ -46,8 +46,10 @@
           ></ngx-mat-select-search>
         </mat-option>
         <mat-option
-          *ngFor="let item of partyList | search: 'partyName':searchPartyName" [value]="item.partyID">
-          {{ item.partyName }} ({{item.partyCNIC}})
+          *ngFor="let item of partyList | search: 'partyName':searchPartyName"
+          [value]="item.partyID"
+        >
+          {{ item.partyName }} ({{ item.partyCNIC }})
         </mat-option>
       </mat-select>
     </mat-form-field>
@@ -71,7 +73,10 @@
     </mat-form-field>
     <mat-form-field class="w-100">
       <mat-label>Booking Type</mat-label>
-      <mat-select [(ngModel)]="formFields[7].value" (ngModelChange)="onBookingChange(formFields[7].value)">
+      <mat-select
+        [(ngModel)]="formFields[7].value"
+        (ngModelChange)="onBookingChange(formFields[7].value)"
+      >
         <mat-option
           *ngFor="let item of bookingList"
           [value]="item.plotBookingTypeID"
@@ -81,15 +86,29 @@
       </mat-select>
     </mat-form-field>
 
-
     <mat-form-field class="w-100">
       <mat-label>Payment Plan</mat-label>
-      <mat-select [(ngModel)]="formFields[8].value" (ngModelChange)="getPaymentDetail(formFields[8].value)" [disabled]="formFields[7].value < 4">
+      <mat-select
+        [(ngModel)]="formFields[8].value"
+        (ngModelChange)="getPaymentDetail(formFields[8].value)"
+        [disabled]="formFields[7].value < 4"
+      >
         <mat-option>
-          <ngx-mat-select-search [(ngModel)]="searchPaymentPlanName" [noEntriesFoundLabel]="'Not found'" placeholderLabel="Search..." name="search" ></ngx-mat-select-search>
+          <ngx-mat-select-search
+            [(ngModel)]="searchPaymentPlanName"
+            [noEntriesFoundLabel]="'Not found'"
+            placeholderLabel="Search..."
+            name="search"
+          ></ngx-mat-select-search>
         </mat-option>
         <mat-option value="0"> Custom </mat-option>
-        <mat-option *ngFor="let item of paymentList | search: 'paymentPlanName':searchPaymentPlanName" [value]="item.paymentPlanID">
+        <mat-option
+          *ngFor="
+            let item of paymentList
+              | search: 'paymentPlanName':searchPaymentPlanName
+          "
+          [value]="item.paymentPlanID"
+        >
           {{ item.paymentPlanName }}
         </mat-option>
       </mat-select>
@@ -111,14 +130,26 @@
         <tbody>
           <tr *ngIf="formFields[8].value <= 0">
             <td class="text-center">
-              <span class="cursorPointer" (click)="swapList()" >
-                  <mat-icon style="padding-top: 8px !important;">swap_vert</mat-icon>
+              <span class="cursorPointer" (click)="swapList()">
+                <mat-icon style="padding-top: 8px !important"
+                  >swap_vert</mat-icon
+                >
               </span>
             </td>
 
             <td>
-              <select class="form-control" [(ngModel)]="cmbInstallment" [disabled]="formFields[7].value < 4">
-                <option *ngFor="let inst of installmentList" [value]="inst.installmentTypeID" [disabled]="formFields[7].value >= 4 && inst.installmentTypeID < 4">
+              <select
+                class="form-control"
+                [(ngModel)]="cmbInstallment"
+                [disabled]="formFields[7].value < 4"
+              >
+                <option
+                  *ngFor="let inst of installmentList"
+                  [value]="inst.installmentTypeID"
+                  [disabled]="
+                    formFields[7].value >= 4 && inst.installmentTypeID < 4
+                  "
+                >
                   {{ inst.installmentTypeName }}
                 </option>
               </select>
@@ -148,8 +179,17 @@
             </td>
 
             <td class="text-center">
-              <span class="cursorPointer" (click)="addPaymentPlan()" title="Add Row">
-                <button class="primary-color text-white" mat-mini-fab aria-label="Example icon button with a menu icon" accesskey="a">
+              <span
+                class="cursorPointer"
+                (click)="addPaymentPlan()"
+                title="Add Row"
+              >
+                <button
+                  class="primary-color text-white"
+                  mat-mini-fab
+                  aria-label="Example icon button with a menu icon"
+                  accesskey="a"
+                >
                   <mat-icon>save</mat-icon>
                 </button>
               </span>

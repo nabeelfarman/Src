@@ -1,0 +1,150 @@
+<div class="saveUpdateBar border mat-elevation-z2">
+  <button mat-button class="save cursorPointer" (click)="showReport()">
+    <mat-icon>insert_drive_file</mat-icon>
+    <span class="ps-2">Report</span>
+  </button>
+  <button
+    mat-button
+    class="save cursorPointer"
+    (click)="printReport('#print-summary')"
+  >
+    <mat-icon>print</mat-icon>
+    <span class="ps-2">Print</span>
+  </button>
+</div>
+
+<div class="container">
+  <div class="row pt-2">
+    <div class="offset-md-4 col-md-2">
+      <mat-form-field>
+        <mat-label>From Date</mat-label>
+        <input matInput [matDatepicker]="fromDate" [(ngModel)]="dtpFromDate" />
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="fromDate"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #fromDate></mat-datepicker>
+      </mat-form-field>
+    </div>
+    <div class="col-md-2">
+      <mat-form-field>
+        <mat-label>To Date</mat-label>
+        <input matInput [matDatepicker]="toDate" [(ngModel)]="dtpToDate" />
+        <mat-datepicker-toggle matSuffix [for]="toDate"></mat-datepicker-toggle>
+        <mat-datepicker #toDate></mat-datepicker>
+      </mat-form-field>
+    </div>
+  </div>
+</div>
+
+<div class="container bg-white mt-4" id="print-summary">
+  <div class="row mb-2">
+    <div class="col-md-6 text-left">
+      <img class="mt-1" src="assets/ui/company/shama.png" width="125px" />
+    </div>
+
+    <div class="col-md-6 text-right">
+      <div class="d-flex flex-column align-items-center">
+        <div class="h2Report"><b>SHAMA ROYAL CITY</b></div>
+        <div class="h4Report">A Project of: SARDAR ASSOCIATES</div>
+        <h2 class="h3Report txtDarkGrey mt-1">Remaining Installment Report</h2>
+        <h2 class="h3Report txtDarkGrey mt-1">
+          {{ dtpFromDate | date }} - {{ dtpToDate | date }}
+        </h2>
+      </div>
+    </div>
+  </div>
+
+  <hr />
+
+  <!---------------------------- table start --------------------------->
+
+  <!--header -->
+  <div class="row border-1-black mt-4 ml-1 me-1">
+    <div class="col-md-2 border-left-black text-center">
+      <label class="mt-1"><b>Particulars</b></label>
+    </div>
+
+    <div class="col-md-2 border-left-black text-center">
+      <label class="mt-1"><b>Due Date</b></label>
+    </div>
+
+    <div class="col-md-2 border-left-black text-center">
+      <label class="mt-1"><b>Amount</b></label>
+    </div>
+
+    <div class="col-md-2 border-left-black text-center">
+      <label class="mt-1"><b>Paid</b></label>
+    </div>
+
+    <div class="col-md-2 border-left-black text-center">
+      <label class="mt-1"><b>Payment Date</b></label>
+    </div>
+
+    <div class="col-md-2 border-left-black text-center">
+      <label class="mt-1"><b>Balance</b></label>
+    </div>
+  </div>
+
+  <!--detail -->
+  <div
+    class="row border-1-black ml-1 me-1"
+    *ngFor="let item of remInstallmentList; let i = index"
+    style="margin-top: -1"
+  >
+    <div class="col-md-2 border-left-black">
+      <label>{{ i + 1 }} ... {{ item.installmentTypeName }}</label>
+    </div>
+
+    <div class="col-md-2 border-left-black">
+      <label>{{ item.dueDate | date }}</label>
+    </div>
+
+    <div class="col-md-2 border-left-black text-right">
+      <label>{{ item.amount | number }}</label>
+    </div>
+
+    <div class="col-md-2 border-left-black text-right">
+      <label>{{ item.paid | number }}</label>
+    </div>
+
+    <div class="col-md-2 border-left-black">
+      <label>{{ item.invoiceDate | date }}</label>
+    </div>
+
+    <div class="col-md-2 border-left-black text-right">
+      <label>{{ item.amount - item.paid | number }}</label>
+    </div>
+  </div>
+
+  <!--footer -->
+  <div class="row border-1-black mt-2 ml-1 me-1">
+    <div class="col-md-4 text-left">
+      <label class="mt-1"><b>TOTAL</b></label>
+    </div>
+
+    <div class="col-md-2 border-left-black text-right">
+      <label class="mt-1"
+        ><b>{{ lblAmount | number }}</b></label
+      >
+    </div>
+
+    <div class="col-md-2 border-left-black text-right">
+      <label class="mt-1"
+        ><b>{{ lblPaid | number }}</b></label
+      >
+    </div>
+
+    <div class="col-md-2 border-left-black text-right">
+      <label class="mt-1"></label>
+    </div>
+
+    <div class="col-md-2 border-left-black text-right">
+      <label class="mt-1"
+        ><b>{{ lblBalance | number }}</b></label
+      >
+    </div>
+  </div>
+
+  <!------------------------------------- Table END -------------------------------------------------->
+</div>

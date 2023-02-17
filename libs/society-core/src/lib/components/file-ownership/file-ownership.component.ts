@@ -1,5 +1,13 @@
 import { DatePipe } from '@angular/common';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  OnInit,
+  QueryList,
+  ViewChild,
+  ViewChildren,
+} from '@angular/core';
 import { SharedHelpersFieldValidationsModule } from '@society/shared/helpers/field-validations';
 import { MyFormField, OwnershipFileInterface } from '@society/shared/interface';
 import { SharedServicesDataModule } from '@society/shared/services/data';
@@ -12,9 +20,12 @@ import { OwnershipFilePrintComponent } from './ownership-file-print/ownership-fi
   templateUrl: './file-ownership.component.html',
   styleUrls: ['./file-ownership.component.scss'],
 })
-export class FileOwnershipComponent implements OnInit {
+export class FileOwnershipComponent implements OnInit, AfterViewInit {
   @ViewChild(FileOwnershipTableComponent) ownerTable: any;
   @ViewChild(OwnershipFilePrintComponent) ownerPrint: any;
+
+  // @ViewChildren('myInput') myInput!: QueryList<ElementRef>;
+  @ViewChild('myInput', { static: false }) nameField!: ElementRef;
 
   dtpAllotmentDate: any = '';
   cmbInstallment: any = '';
@@ -133,7 +144,15 @@ export class FileOwnershipComponent implements OnInit {
     this.getAdvertisementCompany();
 
     //$("#autoFocus").focus();
+  }
 
+  ngAfterViewInit() {
+    // this.nameField.focused = true;
+    // const inputEl = this.myInput.first;
+    // console.log(inputEl);
+    // if (inputEl) {
+    //   setTimeout(() => inputEl.nativeElement.focus(), 500);
+    // }
   }
 
   onLoad() {
@@ -226,7 +245,10 @@ export class FileOwnershipComponent implements OnInit {
   getPaymentDetail(item: any) {
     this.paymentDetailList = [];
     if (item > 0) {
-      this.dataService.getHttp('core-api/getpaymentplandetail?paymentplanid=' + item, '').subscribe((response: any) => {
+      this.dataService
+        .getHttp('core-api/getpaymentplandetail?paymentplanid=' + item, '')
+        .subscribe(
+          (response: any) => {
             this.paymentDetailList = [];
             this.lblTotal = 0;
 
@@ -238,11 +260,8 @@ export class FileOwnershipComponent implements OnInit {
                 dueDate: '',
               });
 
-                
               this.lblTotal += response[i].amount; //this.paymentDetailList[i].amount;
-              
             }
-
           },
           (error: any) => {
             console.log(error);
@@ -306,13 +325,9 @@ export class FileOwnershipComponent implements OnInit {
     this.txtAmount = 0;
   }
 
-
   swapList() {
-
     this.paymentDetailList.reverse();
-    
   }
-  
 
   addPaymentPlan() {
     if (this.cmbInstallment == '') {

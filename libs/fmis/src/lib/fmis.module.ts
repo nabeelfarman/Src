@@ -98,7 +98,7 @@ export const fmisRoutes: Route[] = [
   // { path: 'sch', component: FmisSchedulesComponent },
   { path: 'instvouch', component: InstallmentVoucherComponent },
   { path: 'incStat', component: IncomeStatementComponent },
-  // { path: 'balSheet', component: BalanceSheetComponent },
+  { path: 'balSheet', component: BalanceSheetComponent },
   { path: 'cashFlow', component: CashFlowComponent },
   { path: 'bankRecon', component: BankReconciliationComponent },
   // { path: 'taxYearRate', component: TaxYearRatesComponent },
@@ -106,7 +106,7 @@ export const fmisRoutes: Route[] = [
   // { path: 'parties', component: ExternalPartiesComponent },
   { path: 'sup', component: VoucherSupervisionComponent },
   { path: 'dashboard', component: FmisDashboardComponent },
-  { path: 'balSheet', component: CustomerBalanceSheetComponent },
+  { path: 'custbalSheet', component: CustomerBalanceSheetComponent },
   { path: 'fixedasset', component: FixedAssetComponent },
   { path: 'vendor', component: VendorComponent },
 ];
