@@ -13,17 +13,9 @@
       (ngModelChange)="getCustomerSaleDetail()"
     >
       <mat-option>
-        <ngx-mat-select-search
-          [(ngModel)]="searchPartyName"
-          [noEntriesFoundLabel]="'Not found'"
-          placeholderLabel="Search..."
-          name="search"
-        ></ngx-mat-select-search>
+        <ngx-mat-select-search [(ngModel)]="searchPartyName" [noEntriesFoundLabel]="'Not found'" placeholderLabel="Search..." name="search"></ngx-mat-select-search>
       </mat-option>
-      <mat-option
-        *ngFor="let item of partyList | filter: searchPartyName"
-        [value]="item.partyID"
-      >
+      <mat-option *ngFor="let item of partyList | filter: searchPartyName" [value]="item.partyID">
         {{ item.partyName }}
       </mat-option>
     </mat-select>

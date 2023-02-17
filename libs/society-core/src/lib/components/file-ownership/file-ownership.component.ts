@@ -131,6 +131,9 @@ export class FileOwnershipComponent implements OnInit {
     this.getPayment();
     this.getInstallmentType();
     this.getAdvertisementCompany();
+
+    //$("#autoFocus").focus();
+
   }
 
   onLoad() {
@@ -223,19 +226,23 @@ export class FileOwnershipComponent implements OnInit {
   getPaymentDetail(item: any) {
     this.paymentDetailList = [];
     if (item > 0) {
-      this.dataService
-        .getHttp('core-api/getpaymentplandetail?paymentplanid=' + item, '')
-        .subscribe(
-          (response: any) => {
+      this.dataService.getHttp('core-api/getpaymentplandetail?paymentplanid=' + item, '').subscribe((response: any) => {
             this.paymentDetailList = [];
-            for (var i = 0; response.length; i++) {
+            this.lblTotal = 0;
+
+            for (let i = 0; response.length; i++) {
               this.paymentDetailList.push({
                 installmentTypeID: response[i].installmentTypeID,
                 installmentTypeName: response[i].installmentTypeName,
                 amount: response[i].amount,
                 dueDate: '',
               });
+
+                
+              this.lblTotal += response[i].amount; //this.paymentDetailList[i].amount;
+              
             }
+
           },
           (error: any) => {
             console.log(error);
@@ -247,6 +254,8 @@ export class FileOwnershipComponent implements OnInit {
   onBookingChange(item: any) {
     if (item < 4) {
       this.cmbInstallment = item;
+      this.formFields[8].value = '0';
+      this.paymentDetailList = [];
     } else {
       this.cmbInstallment = '';
     }
@@ -297,6 +306,14 @@ export class FileOwnershipComponent implements OnInit {
     this.txtAmount = 0;
   }
 
+
+  swapList() {
+
+    this.paymentDetailList.reverse();
+    
+  }
+  
+
   addPaymentPlan() {
     if (this.cmbInstallment == '') {
       this.valid.apiErrorResponse('select installment type');
@@ -316,11 +333,11 @@ export class FileOwnershipComponent implements OnInit {
       this.valid.apiErrorResponse('select due date');
       return;
     } else {
-      var data = this.installmentList.filter(
+      let data = this.installmentList.filter(
         (x: { installmentTypeID: any }) =>
           x.installmentTypeID == this.cmbInstallment
       );
-      var installmentName = data[0].installmentTypeName;
+      let installmentName = data[0].installmentTypeName;
 
       if (this.paymentDetailList.length == 0) {
         this.paymentDetailList.push({
@@ -371,6 +388,12 @@ export class FileOwnershipComponent implements OnInit {
 
   remove(index: any) {
     this.paymentDetailList.splice(index, 1);
+    if (this.paymentDetailList.length > 0) {
+      this.lblTotal = 0;
+      for (let i = 0; i < this.paymentDetailList.length; i++) {
+        this.lblTotal += this.paymentDetailList[i].amount;
+      }
+    }
   }
 
   printData(item: any) {

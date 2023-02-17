@@ -20,6 +20,8 @@ export class LedgerComponent implements OnInit {
   lblBalance: any = 0;
   lblAccountHead: any = '';
 
+  searchAccHead: any = '';
+
   cmbCOA: any = '';
   dtpFromDate: any = '';
   dtpToDate: any = '';

@@ -14,8 +14,11 @@
     <mat-form-field class="w-100 ps-3">
       <mat-label>Head of Account</mat-label>
       <mat-select [(ngModel)]="cmbCOA">
-        <mat-option *ngFor="let item of coaList" [value]="item.coaID">
-          {{ item.coaTitle }}
+        <mat-option>
+          <ngx-mat-select-search [(ngModel)]="searchAccHead" [noEntriesFoundLabel]="'Not found'" placeholderLabel="Search..." name="search"></ngx-mat-select-search>
+        </mat-option>
+        <mat-option *ngFor="let item of coaList | filter: searchAccHead" [value]="item.coaID">
+         ({{item.accountCode}}) ... {{ item.coaTitle }}
         </mat-option>
       </mat-select>
     </mat-form-field>

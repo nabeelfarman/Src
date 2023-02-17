@@ -99,11 +99,8 @@
 
 <!--header -->
 <div class="row border-1-black mt-4 ml-1 me-1">
-  <div class="col-md-1 text-center height-27">
-    <label class="mt-1"><b>Sr. #</b></label>
-  </div>
 
-  <div class="col-md-3 border-left-black text-center">
+  <div class="col-md-2 border-left-black text-center">
     <label class="mt-1"><b>Particulars</b></label>
   </div>
 
@@ -120,6 +117,10 @@
   </div>
 
   <div class="col-md-2 border-left-black text-center">
+    <label class="mt-1"><b>Payment Date</b></label>
+  </div>
+
+  <div class="col-md-2 border-left-black text-center">
     <label class="mt-1"><b>Balance</b></label>
   </div>
 
@@ -127,12 +128,9 @@
 
 <!--detail -->
 <div class="row border-1-black ml-1 me-1" *ngFor="let item of filePaymentList; let i = index;" style="margin-top: -1;">
-  <div class="col-md-1 text-center ">
-    <label>{{i + 1}}</label>
-  </div>
 
-  <div class="col-md-3 border-left-black">
-    <label>{{item.installmentTypeName}}</label>
+  <div class="col-md-2 border-left-black">
+    <label>{{i + 1}} ... {{item.installmentTypeName}}</label>
   </div>
 
   <div class="col-md-2 border-left-black">
@@ -147,6 +145,10 @@
     <label>{{item.paid | number}}</label>
   </div>
 
+  <div class="col-md-2 border-left-black">
+    <label>{{item.invoiceDate | date}}</label>
+  </div>
+
   <div class="col-md-2 border-left-black text-right">
     <label>{{item.amount - item.paid | number}}</label>
   </div>
@@ -156,25 +158,25 @@
 
 <!--footer -->
 <div class="row border-1-black mt-2 ml-1 me-1">
-  <div class="col-md-1 text-center height-27">
-    <label class="mt-1"></label>
-  </div>
 
-
-  <div class="col-md-5 text-left">
-    <label class="mt-1">TOTAL</label>
+  <div class="col-md-4 text-left">
+    <label class="mt-1"><b>TOTAL</b></label>
   </div>
   
   <div class="col-md-2 border-left-black text-right">
-    <label class="mt-1">{{lblAmount | number}}</label>
+    <label class="mt-1"><b>{{lblAmount | number}}</b></label>
   </div>
 
   <div class="col-md-2 border-left-black text-right">
-    <label class="mt-1">{{lblPaid | number}}</label>
+    <label class="mt-1"><b>{{lblPaid | number}}</b></label>
   </div>
 
   <div class="col-md-2 border-left-black text-right">
-    <label class="mt-1">{{lblBalance | number}}</label>
+    <label class="mt-1"></label>
+  </div>
+
+  <div class="col-md-2 border-left-black text-right">
+    <label class="mt-1"><b>{{lblBalance | number}}</b></label>
   </div>
 
 </div>
