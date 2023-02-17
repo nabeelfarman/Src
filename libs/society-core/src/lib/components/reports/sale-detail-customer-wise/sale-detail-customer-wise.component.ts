@@ -4,19 +4,22 @@ import { SharedServicesDataModule } from '@society/shared/services/data';
 import { SharedServicesGlobalDataModule } from '@society/shared/services/global-data';
 
 @Component({
-  selector: 'society-sold-files-detail',
-  templateUrl: './sold-files-detail.component.html',
-  styleUrls: ['./sold-files-detail.component.scss'],
+  selector: 'society-sale-detail-customer-wise',
+  templateUrl: './sale-detail-customer-wise.component.html',
+  styleUrls: ['./sale-detail-customer-wise.component.scss'],
 })
-export class SoldFilesDetailComponent implements OnInit {
+export class SaleDetailCustomerWiseComponent implements OnInit {
   lblAmount: any = 0;
   lblPaid: any = 0;
   lblBalance: any = 0;
+  lblCustomer: any = '';
 
-  cmbBooking: any = '';
+  searchPartyName: any = '';
 
-  bookingList: any = [];
-  soldFileList: any = [];
+  cmbParty: any = '';
+
+  partyList: any = [];
+  soldFileCustomerList: any = [];
 
   constructor(
     private authService: SharedServicesAuthModule,
@@ -25,34 +28,40 @@ export class SoldFilesDetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.global.setHeaderTitle('Sold Files Detail Report');
+    this.global.setHeaderTitle('Sold Files Detail Customer Wise Report');
 
-    this.getPlotBookingType();
+    this.getParty();
   }
 
-  getPlotBookingType() {
-    this.dataService.getHttp('core-api/getPlotBookingType', '').subscribe(
+  getParty() {
+    this.dataService.getHttp('core-api/getparty', '').subscribe(
       (response: any) => {
-        this.bookingList = response;
+        this.partyList = response;
       },
       (error: any) => {
         console.log(error);
       }
     );
   }
-
-  getFileSaleDetail() {
-    this.soldFileList = [];
+  getCustomerSaleDetail() {
+    this.soldFileCustomerList = [];
 
     this.lblAmount = 0;
     this.lblPaid = 0;
     this.lblBalance = 0;
+    this.lblCustomer = '';
+
+    var data = this.partyList.filter(
+      (x: { partyID: any }) => x.partyID == this.cmbParty
+    );
+
+    this.lblCustomer = data[0].partyName;
 
     this.dataService
-      .getHttp('core-api/getFileSaleDetail?BookingType=' + this.cmbBooking, '')
+      .getHttp('core-api/getCustomerSaleDetail?PartyID=' + this.cmbParty, '')
       .subscribe(
         (response: any) => {
-          this.soldFileList = response;
+          this.soldFileCustomerList = response;
 
           for (var i = 0; i < response.length; i++) {
             this.lblAmount =

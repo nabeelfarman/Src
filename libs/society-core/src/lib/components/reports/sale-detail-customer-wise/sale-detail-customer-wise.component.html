@@ -7,14 +7,24 @@
 
 <div class="container">
   <mat-form-field class="w-25">
-    <mat-label>Booking Type</mat-label>
-    <mat-select [(ngModel)]="cmbBooking" (ngModelChange)="getFileSaleDetail()">
-      <mat-option value="0"> All </mat-option>
+    <mat-label>Party Name</mat-label>
+    <mat-select
+      [(ngModel)]="cmbParty"
+      (ngModelChange)="getCustomerSaleDetail()"
+    >
+      <mat-option>
+        <ngx-mat-select-search
+          [(ngModel)]="searchPartyName"
+          [noEntriesFoundLabel]="'Not found'"
+          placeholderLabel="Search..."
+          name="search"
+        ></ngx-mat-select-search>
+      </mat-option>
       <mat-option
-        *ngFor="let item of bookingList"
-        [value]="item.plotBookingTypeID"
+        *ngFor="let item of partyList | filter: searchPartyName"
+        [value]="item.partyID"
       >
-        {{ item.plotBookingTypeName }}
+        {{ item.partyName }}
       </mat-option>
     </mat-select>
   </mat-form-field>
@@ -30,7 +40,12 @@
       <div class="d-flex flex-column align-items-center">
         <div class="h2Report"><b>SHAMA ROYAL CITY</b></div>
         <div class="h4Report">A Project of: SARDAR ASSOCIATES</div>
-        <h2 class="h3Report txtDarkGrey mt-1">Sold File Detail Report</h2>
+        <h2 class="h3Report txtDarkGrey mt-1">
+          Sold File Detail Customer Wise Report
+        </h2>
+        <div class="h4Report" *ngIf="lblCustomer != ''">
+          ({{ lblCustomer }})
+        </div>
       </div>
     </div>
   </div>
@@ -68,7 +83,7 @@
   <!--detail -->
   <div
     class="row border-1-black"
-    *ngFor="let item of soldFileList; let i = index"
+    *ngFor="let item of soldFileCustomerList; let i = index"
     style="margin-top: -1"
   >
     <div class="col-md-2 border-left-black">

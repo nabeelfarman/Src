@@ -93,6 +93,8 @@ import { MapPlotTableComponent } from './components/map-plot/map-plot-table/map-
 import { FilePaymentDetailComponent } from './components/reports/file-payment-detail/file-payment-detail.component';
 import { OwnershipFilePrintComponent } from './components/file-ownership/ownership-file-print/ownership-file-print.component';
 import { SoldFilesDetailComponent } from './components/reports/sold-files-detail/sold-files-detail.component';
+import { SaleDetailCustomerWiseComponent } from './components/reports/sale-detail-customer-wise/sale-detail-customer-wise.component';
+import { SaleDetailDealerWiseComponent } from './components/reports/sale-detail-dealer-wise/sale-detail-dealer-wise.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -130,6 +132,8 @@ export const societyCoreRoutes: Route[] = [
   { path: 'rptadvcompany', component: AdvertisementCompanyReportComponent },
   { path: 'rptfilepay', component: FilePaymentDetailComponent },
   { path: 'rptsoldfiledet', component: SoldFilesDetailComponent },
+  { path: 'rptsaledetcustomer', component: SaleDetailCustomerWiseComponent },
+  { path: 'rptsaledetadvcomp', component: SaleDetailDealerWiseComponent },
   // {
   //   path: 'membershipPaymentRpt',
   //   component: MembershipPaymentsReportComponent,
@@ -232,6 +236,8 @@ export const societyCoreRoutes: Route[] = [
     FilePaymentDetailComponent,
     OwnershipFilePrintComponent,
     SoldFilesDetailComponent,
+    SaleDetailCustomerWiseComponent,
+    SaleDetailDealerWiseComponent,
   ],
   exports: [
     PlotCategoryTableComponent,

@@ -7,14 +7,13 @@
 
 <div class="container">
   <mat-form-field class="w-25">
-    <mat-label>Booking Type</mat-label>
-    <mat-select [(ngModel)]="cmbBooking" (ngModelChange)="getFileSaleDetail()">
-      <mat-option value="0"> All </mat-option>
-      <mat-option
-        *ngFor="let item of bookingList"
-        [value]="item.plotBookingTypeID"
-      >
-        {{ item.plotBookingTypeName }}
+    <mat-label>Referred By</mat-label>
+    <mat-select
+      [(ngModel)]="cmbReferred"
+      (ngModelChange)="getDealerCompanySaleDetail()"
+    >
+      <mat-option *ngFor="let item of referredList" [value]="item.companyID">
+        {{ item.companyName }}
       </mat-option>
     </mat-select>
   </mat-form-field>
@@ -30,7 +29,10 @@
       <div class="d-flex flex-column align-items-center">
         <div class="h2Report"><b>SHAMA ROYAL CITY</b></div>
         <div class="h4Report">A Project of: SARDAR ASSOCIATES</div>
-        <h2 class="h3Report txtDarkGrey mt-1">Sold File Detail Report</h2>
+        <h2 class="h3Report txtDarkGrey mt-1">
+          Sold File Detail Dealer Wise Report
+        </h2>
+        <div class="h4Report" *ngIf="lblDealer != ''">({{ lblDealer }})</div>
       </div>
     </div>
   </div>
@@ -68,7 +70,7 @@
   <!--detail -->
   <div
     class="row border-1-black"
-    *ngFor="let item of soldFileList; let i = index"
+    *ngFor="let item of soldFileCompanyList; let i = index"
     style="margin-top: -1"
   >
     <div class="col-md-2 border-left-black">

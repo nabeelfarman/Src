@@ -4,19 +4,22 @@ import { SharedServicesDataModule } from '@society/shared/services/data';
 import { SharedServicesGlobalDataModule } from '@society/shared/services/global-data';
 
 @Component({
-  selector: 'society-sold-files-detail',
-  templateUrl: './sold-files-detail.component.html',
-  styleUrls: ['./sold-files-detail.component.scss'],
+  selector: 'society-sale-detail-dealer-wise',
+  templateUrl: './sale-detail-dealer-wise.component.html',
+  styleUrls: ['./sale-detail-dealer-wise.component.scss'],
 })
-export class SoldFilesDetailComponent implements OnInit {
+export class SaleDetailDealerWiseComponent implements OnInit {
   lblAmount: any = 0;
   lblPaid: any = 0;
   lblBalance: any = 0;
+  lblDealer: any = '';
 
-  cmbBooking: any = '';
+  searchPartyName: any = '';
 
-  bookingList: any = [];
-  soldFileList: any = [];
+  cmbReferred: any = '';
+
+  referredList: any = [];
+  soldFileCompanyList: any = [];
 
   constructor(
     private authService: SharedServicesAuthModule,
@@ -25,15 +28,15 @@ export class SoldFilesDetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.global.setHeaderTitle('Sold Files Detail Report');
+    this.global.setHeaderTitle('Sold Files Detail Dealer Wise Report');
 
-    this.getPlotBookingType();
+    this.getAdvertisementCompany();
   }
 
-  getPlotBookingType() {
-    this.dataService.getHttp('core-api/getPlotBookingType', '').subscribe(
+  getAdvertisementCompany() {
+    this.dataService.getHttp('core-api/getadvertisementcompany', '').subscribe(
       (response: any) => {
-        this.bookingList = response;
+        this.referredList = response;
       },
       (error: any) => {
         console.log(error);
@@ -41,18 +44,29 @@ export class SoldFilesDetailComponent implements OnInit {
     );
   }
 
-  getFileSaleDetail() {
-    this.soldFileList = [];
+  getDealerCompanySaleDetail() {
+    this.soldFileCompanyList = [];
 
     this.lblAmount = 0;
     this.lblPaid = 0;
     this.lblBalance = 0;
+    this.lblDealer = '';
+
+    var data = this.referredList.filter(
+      (x: { companyID: any }) => x.companyID == this.cmbReferred
+    );
+
+    this.lblDealer = data[0].companyName;
 
     this.dataService
-      .getHttp('core-api/getFileSaleDetail?BookingType=' + this.cmbBooking, '')
+      .getHttp(
+        'core-api/GetDealerCompanySaleDetail?DealerCompanyID=' +
+          this.cmbReferred,
+        ''
+      )
       .subscribe(
         (response: any) => {
-          this.soldFileList = response;
+          this.soldFileCompanyList = response;
 
           for (var i = 0; i < response.length; i++) {
             this.lblAmount =
