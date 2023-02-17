@@ -57,7 +57,7 @@
   <!--header -->
   <div class="row border-1-black mt-4">
     <div class="col-md-2 text-center height-27">
-      <label class="mt-1"><b>Party Name</b></label>
+      <label class="mt-1"><b>File Name</b></label>
     </div>
 
     <div class="col-md-2 border-left-black text-center">
@@ -87,7 +87,7 @@
     style="margin-top: -1"
   >
     <div class="col-md-2 border-left-black">
-      <label>{{ item.partyName }}</label>
+      <label><b>{{ item.fileName }}</b> ({{ item.plostSizeTitle }})</label>
     </div>
 
     <div class="col-md-2 border-left-black">
@@ -95,10 +95,7 @@
     </div>
 
     <div class="col-md-2 border-left-black">
-      <label
-        ><b>{{ item.plotBookingTypeName }}</b> ({{ item.fileName }} -
-        {{ item.plostSizeTitle }})</label
-      >
+      <label>{{ item.plotBookingTypeName }}</label>
     </div>
 
     <div class="col-md-2 border-left-black text-end">

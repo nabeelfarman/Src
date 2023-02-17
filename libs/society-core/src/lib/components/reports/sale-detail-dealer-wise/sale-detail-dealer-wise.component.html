@@ -68,11 +68,7 @@
   </div>
 
   <!--detail -->
-  <div
-    class="row border-1-black"
-    *ngFor="let item of soldFileCompanyList; let i = index"
-    style="margin-top: -1"
-  >
+  <div class="row border-1-black" *ngFor="let item of soldFileCompanyList; let i = index" style="margin-top: -1">
     <div class="col-md-2 border-left-black">
       <label>{{ item.partyName }}</label>
     </div>
@@ -82,10 +78,7 @@
     </div>
 
     <div class="col-md-2 border-left-black">
-      <label
-        ><b>{{ item.plotBookingTypeName }}</b> ({{ item.fileName }} -
-        {{ item.plostSizeTitle }})</label
-      >
+      <label><b>{{ item.plotBookingTypeName }}</b> ({{ item.fileName }} / {{ item.plostSizeTitle }})</label>
     </div>
 
     <div class="col-md-2 border-left-black text-end">
