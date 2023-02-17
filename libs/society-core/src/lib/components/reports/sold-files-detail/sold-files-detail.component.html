@@ -41,7 +41,7 @@
 
   <!--header -->
   <div class="row border-1-black mt-4">
-    <div class="col-md-3 text-center height-27">
+    <div class="col-md-2 text-center height-27">
       <label class="mt-1"><b>Party Name</b></label>
     </div>
 
@@ -53,22 +53,14 @@
       <label class="mt-1"><b>Booking Type</b></label>
     </div>
 
-    <div class="col-md-1 border-left-black text-center">
-      <label class="mt-1"><b>File</b></label>
-    </div>
-
-    <div class="col-md-1 border-left-black text-center">
-      <label class="mt-1"><b>Size</b></label>
-    </div>
-
-    <div class="col-md-1 border-left-black text-center">
+    <div class="col-md-2 border-left-black text-center">
       <label class="mt-1"><b>Price</b></label>
     </div>
 
-    <div class="col-md-1 border-left-black text-center">
-      <label class="mt-1"><b>Receive</b></label>
+    <div class="col-md-2 border-left-black text-center">
+      <label class="mt-1"><b>Paid</b></label>
     </div>
-    <div class="col-md-1 border-left-black text-center">
+    <div class="col-md-2 border-left-black text-center">
       <label class="mt-1"><b>Balance</b></label>
     </div>
   </div>
@@ -76,39 +68,34 @@
   <!--detail -->
   <div class="row border-1-black" *ngFor="let item of soldFileList; let i = index" style="margin-top: -1" >
 
-    <div class="col-md-3 border-left-black text-center">
+    <div class="col-md-2 border-left-black">
       <label>{{ item.partyName }}</label>
     </div>
 
-    <div class="col-md-2 border-left-black text-center">
+    <div class="col-md-1 border-left-black">
       <label>{{ item.allotmentDate | date }}</label>
     </div>
 
-    <div class="col-md-2 border-left-black text-center">
-      <label>{{  item.plotBookingTypeName }}</label>
+    <div class="col-md-2 border-left-black">
+      <label>{{  item.plotBookingTypeName }} {{  item.fileName }} {{ item.plostSizeTitle }}</label>
     </div>
 
-    <div class="col-md-1 border-left-black text-end">
-      <label>{{  item.fileName }}</label>
+    <div class="col-md-2 border-left-black text-end">
+      <label>{{ item.amount | number }}</label>
     </div>
 
-    <div class="col-md-1 border-left-black text-end">
-      <label>{{ item.plostSizeTitle }}</label>
-    </div>
-
-    <div class="col-md-1 border-left-black text-end">
-      <label>{{ item.amount }}</label>
-    </div>
-
-    <div class="col-md-1 border-left-black text-end">
+    <div class="col-md-2 border-left-black text-end">
       <label>{{ item.paid | number }}</label>
     </div>
 
-    <div class="col-md-1 border-left-black text-end">
+    <div class="col-md-2 border-left-black text-end">
       <label>{{ item.amount - item.paid | number }}</label>
     </div>
 
   </div>
+
+
+
 
   <!--footer -->
   <div class="row border-1-black mt-2">
@@ -116,20 +103,20 @@
       <label class="mt-1"></label>
     </div>
 
-    <div class="col-md-8 text-left">
-      <label class="mt-1">TOTAL</label>
+    <div class="col-md-5 text-left">
+      <label class="mt-1"><b>TOTAL</b></label>
     </div>
 
-    <div class="col-md-1 border-left-black text-end">
-      <label class="mt-1">{{ lblAmount | number }}</label>
+    <div class="col-md-2 border-left-black text-end">
+      <label class="mt-1"><b>{{ lblAmount | number }}</b></label>
     </div>
 
-    <div class="col-md-1 border-left-black text-end">
-      <label class="mt-1">{{ lblPaid | number }}</label>
+    <div class="col-md-2 border-left-black text-end">
+      <label class="mt-1"><b>{{ lblPaid | number }}</b></label>
     </div>
 
-    <div class="col-md-1 border-left-black text-end">
-      <label class="mt-1">{{ lblBalance | number }}</label>
+    <div class="col-md-2 border-left-black text-end">
+      <label class="mt-1"><b>{{ lblBalance | number }}</b></label>
     </div>
   </div>
 
