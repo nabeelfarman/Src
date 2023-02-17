@@ -72,12 +72,12 @@
       <label>{{ item.partyName }}</label>
     </div>
 
-    <div class="col-md-1 border-left-black">
+    <div class="col-md-2 border-left-black">
       <label>{{ item.allotmentDate | date }}</label>
     </div>
 
     <div class="col-md-2 border-left-black">
-      <label>{{  item.plotBookingTypeName }} {{  item.fileName }} {{ item.plostSizeTitle }}</label>
+      <label><b>{{  item.plotBookingTypeName }}</b> ({{  item.fileName }} - {{ item.plostSizeTitle }})</label>
     </div>
 
     <div class="col-md-2 border-left-black text-end">
