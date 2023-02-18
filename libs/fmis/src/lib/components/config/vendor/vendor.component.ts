@@ -131,7 +131,7 @@ export class VendorComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.globalService.setHeaderTitle('Customer Profile');
+    this.globalService.setHeaderTitle('Vendor Profile');
     this.formFields[2].value = this.globalService.getUserId().toString();
 
     this.getCity();
