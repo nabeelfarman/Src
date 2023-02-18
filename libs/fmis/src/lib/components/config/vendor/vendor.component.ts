@@ -16,20 +16,20 @@ export class VendorComponent implements OnInit {
   searchCity: any = '';
 
   pageFields: CustomerInterface = {
-    partyID: '0',
-    spType: '',
-    userID: '',
-    partyType: '',
-    partyName: '',
-    partyCNIC: '',
-    mobile: '',
-    Mobile2: '',
-    Email: '',
-    cityID: '',
-    partyAddress: '',
-    NextToKin: '',
-    BranchID: '',
-    Description: '',
+    partyID: '0', //0
+    spType: '', //1
+    userID: '', //2
+    partyType: '', //3
+    partyName: '', //4
+    partyCNIC: '', //5
+    mobile: '', //6
+    Mobile2: '', //7
+    Email: '', //8
+    cityID: '', //9
+    partyAddress: '', //10
+    NextToKin: '', //11
+    BranchID: '', //12
+    Description: '', //13
   };
 
   formFields: MyFormField[] = [
@@ -113,9 +113,9 @@ export class VendorComponent implements OnInit {
     },
     {
       value: this.pageFields.Description,
-      msg: '',
-      type: '',
-      required: false,
+      msg: 'enter description',
+      type: 'textbox',
+      required: true,
     },
   ];
 
