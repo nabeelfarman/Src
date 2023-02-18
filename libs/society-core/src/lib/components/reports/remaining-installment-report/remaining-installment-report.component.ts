@@ -45,8 +45,8 @@ export class RemainingInstallmentReportComponent implements OnInit {
     if (this.dtpFromDate > this.dtpToDate) {
       this.valid.apiInfoResponse('select correct date');
     } else {
-      alert(this.datePipe.transform(this.dtpFromDate, 'yyyy-MM-dd'));
-      alert(this.datePipe.transform(this.dtpToDate, 'yyyy-MM-dd'));
+      //alert(this.datePipe.transform(this.dtpFromDate, 'yyyy-MM-dd'));
+      //alert(this.datePipe.transform(this.dtpToDate, 'yyyy-MM-dd'));
       this.dataService
         .getHttp(
           'core-api/GetDueInstallmentDetail?FromDate=' +
