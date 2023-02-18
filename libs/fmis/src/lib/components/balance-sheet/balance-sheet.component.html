@@ -1,9 +1,13 @@
 <div class="saveUpdateBar border mat-elevation-z2">
-  <button mat-button class="save cursorPointer">
+  <button mat-button class="save cursorPointer" (click)="showReport()">
     <mat-icon>insert_drive_file</mat-icon>
     <span class="ps-2">Report</span>
   </button>
-  <button mat-button class="save cursorPointer">
+  <button
+    mat-button
+    class="save cursorPointer"
+    (click)="printReport('#print-summary')"
+  >
     <mat-icon>print</mat-icon>
     <span class="ps-2">Print</span>
   </button>
@@ -14,7 +18,7 @@
     <div class="col-md-12 text-center">
       <strong>For the year Ended</strong>&nbsp;&nbsp;&nbsp;<mat-form-field>
         <mat-label>From Date</mat-label>
-        <input matInput [matDatepicker]="fromDate" />
+        <input matInput [matDatepicker]="fromDate" [(ngModel)]="dtpDate" />
         <mat-datepicker-toggle
           matSuffix
           [for]="fromDate"
@@ -23,5 +27,5 @@
       </mat-form-field>
     </div>
   </div>
-  <society-balance-sheet-table></society-balance-sheet-table>
+  <society-balance-sheet-table id="print-summary"></society-balance-sheet-table>
 </div>
