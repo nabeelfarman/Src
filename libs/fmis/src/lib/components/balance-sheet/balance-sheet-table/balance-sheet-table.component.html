@@ -24,42 +24,50 @@
             <th class="col-6"></th>
             <th class="col-1 text-center"><u>Notes</u></th>
             <th class="col-2 text-center">
-              {{ lblCurrentYear }} <br />
-              Rupees
+              {{ lblCurrentYear }}<br />Rupees
             </th>
+
             <th class="col-1"></th>
             <th class="col-2 text-center">
-              {{ lblOldYear }} <br />
-              Rupees
+              {{ lblOldYear }}<br />Rupees
             </th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td colspan="12">
-              <strong><u>NON-CURRENT ASSETS </u></strong>
+              <strong><u>NON-CURRENT ASSETS</u></strong>
             </td>
           </tr>
           <tr *ngFor="let item of nonCurAssetList">
             <td class="col-6">{{ item.noteTitle }}</td>
             <td class="col-1 text-center">{{ item.noteID }}</td>
-            <td class="col-2 text-center">{{ item.nTotal | number }}</td>
+            <td class="col-2 text-end">{{ item.nTotal | number }}</td>
             <td class="col-1"></td>
-            <td class="col-2 text-center">{{ item.oTotal | number }}</td>
+            <td class="col-2 text-end">{{ item.oTotal | number }}</td>
           </tr>
+
+
+
           <tr>
             <td class="col-6">
-              <strong>Total NON-CURRENT ASSETS</strong>
+              <strong>TOTAL NON-CURRENT ASSETS</strong>
             </td>
             <td class="col-1"></td>
-            <td class="col-2 text-center">
+            <td class="col-2 border-bottom border-secondary text-end">
               <strong>{{ lblNNonCurAssetTotal | number }}</strong>
             </td>
             <td class="col-1"></td>
-            <td class="col-2 text-center">
+            <td class="col-2 border-bottom border-secondary text-end">
               <strong>{{ lblONonCurAssetTotal | number }}</strong>
             </td>
           </tr>
+
+
+
+
+
+
           <tr>
             <td colspan="12">
               <strong><u>CURRENT ASSETS</u></strong>
@@ -68,34 +76,37 @@
           <tr *ngFor="let item of curAssetList">
             <td class="col-6">{{ item.noteTitle }}</td>
             <td class="col-1 text-center">{{ item.noteID }}</td>
-            <td class="col-2 text-center">{{ item.nTotal | number }}</td>
+            <td class="col-2 text-end">{{ item.nTotal | number }}</td>
             <td class="col-1"></td>
-            <td class="col-2 text-center">{{ item.oTotal | number }}</td>
+            <td class="col-2 text-end">{{ item.oTotal | number }}</td>
           </tr>
           <tr>
             <td class="col-6">
-              <strong>Total CURRENT ASSETS</strong>
+              <strong>TOTAL CURRENT ASSETS</strong>
             </td>
             <td class="col-1"></td>
-            <td class="col-2 text-center">
+            <td class="col-2 border-bottom border-secondary text-end">
               <strong>{{ lblNCurAssetTotal | number }}</strong>
             </td>
             <td class="col-1"></td>
-            <td class="col-2 text-center">
+            <td class="col-2 border-bottom border-secondary text-end">
               <strong>{{ lblOCurAssetTotal | number }}</strong>
             </td>
           </tr>
           <tr>
             <td class="col-6"><strong>TOTAL ASSETS</strong></td>
             <td class="col-1"></td>
-            <td class="col-2 border-secondary border-bottom text-center">
+            <td class="col-2 border-secondary border-bottom text-end">
               <strong>{{ lblNAssetTotal | number }}</strong>
             </td>
             <td class="col-1"></td>
-            <td class="col-2 border-bottom border-secondary text-center">
+            <td class="col-2 border-bottom border-secondary text-right">
               <strong>{{ lblOAssetTotal | number }}</strong>
             </td>
           </tr>
+
+
+
           <tr>
             <td colspan="12">
               <strong><u>CAPITAL AND LIABILITIES </u></strong>
@@ -103,50 +114,52 @@
           </tr>
           <tr>
             <td colspan="12">
-              <strong><u>Share Capital</u></strong>
+              <strong><u>SHARE CAPITAL</u></strong>
             </td>
           </tr>
+
+
           <tr *ngFor="let item of shareCapList">
             <td class="col-6">{{ item.noteTitle }}</td>
             <td class="col-1 text-center">{{ item.noteID }}</td>
-            <td class="col-2 text-center">{{ item.nTotal | number }}</td>
+            <td class="col-2 text-end">{{ item.nTotal | number }}</td>
             <td class="col-1"></td>
-            <td class="col-2 text-center">{{ item.oTotal | number }}</td>
+            <td class="col-2 text-end">{{ item.oTotal | number }}</td>
           </tr>
           <tr>
             <td colspan="12">
-              <strong><u>NON-Current Liabilities</u></strong>
+              <strong><u>NON-CURRENT LIABILITIES</u></strong>
             </td>
           </tr>
           <tr *ngFor="let item of nonCurliabilityList">
             <td class="col-6">{{ item.noteTitle }}</td>
             <td class="col-1 text-center">{{ item.noteID }}</td>
-            <td class="col-2 text-center">{{ item.nTotal | number }}</td>
+            <td class="col-2 text-end">{{ item.nTotal | number }}</td>
             <td class="col-1"></td>
-            <td class="col-2 text-center">{{ item.oTotal | number }}</td>
+            <td class="col-2 text-end">{{ item.oTotal | number }}</td>
           </tr>
           <tr>
             <td colspan="12">
-              <strong><u>Current Liabilities</u></strong>
+              <strong><u>CURRENT LIABILITIES</u></strong>
             </td>
           </tr>
           <tr *ngFor="let item of curLiabilityList">
             <td class="col-6">{{ item.noteTitle }}</td>
             <td class="col-1 text-center">{{ item.noteID }}</td>
-            <td class="col-2 text-center">{{ item.nTotal | number }}</td>
+            <td class="col-2 text-end">{{ item.nTotal | number }}</td>
             <td class="col-1"></td>
-            <td class="col-2 text-center">{{ item.oTotal | number }}</td>
+            <td class="col-2 text-end">{{ item.oTotal | number }}</td>
           </tr>
           <tr>
             <td class="col-6">
               <strong>TOTAL EQUITY AND LIABILITIES </strong>
             </td>
             <td class="col-1"></td>
-            <td class="col-2 border-secondary border-bottom text-center">
+            <td class="col-2 border-secondary border-bottom text-end">
               <strong>{{ lblNTotalLiability | number }}</strong>
             </td>
             <td class="col-1"></td>
-            <td class="col-2 border-bottom border-secondary text-center">
+            <td class="col-2 border-bottom border-secondary text-end">
               <strong>{{ lblOTotalLiability | number }}</strong>
             </td>
           </tr>

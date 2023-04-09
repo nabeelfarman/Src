@@ -70,7 +70,7 @@
   <!--detail -->
   <div class="row border-1-black" *ngFor="let item of soldFileCompanyList; let i = index" style="margin-top: -1">
     <div class="col-md-2 border-left-black">
-      <label>{{ item.partyName }}</label>
+      <label>{{i + 1}} ... {{ item.partyName }}</label>
     </div>
 
     <div class="col-md-2 border-left-black">
