@@ -21,18 +21,8 @@
           <mat-form-field class="w-50">
             <mat-label>Voucher Type</mat-label>
             <mat-select
-              [(ngModel)]="formFields[0].value"
-              (ngModelChange)="
-                getChartOfAccount();
-                getExternalParties();
-                onTypeChange(formFields[0].value)
-              "
-              [disabled]="lblTableLength > 0"
-            >
-              <mat-option
-                *ngFor="let item of voucherTypeList"
-                [value]="item.trnTypeId"
-              >
+              [(ngModel)]="formFields[0].value" (ngModelChange)="getChartOfAccount();getExternalParties();onTypeChange(formFields[0].value)" [disabled]="lblTableLength > 0">
+              <mat-option *ngFor="let item of voucherTypeList" [value]="item.trnTypeId" >
                 {{ item.trnType }}
               </mat-option>
             </mat-select>
@@ -42,14 +32,7 @@
 
       <div class="col-md-2">
         <div class="d-flex flex-row justify-content-center">
-          <mat-radio-group
-            aria-label="Select an option"
-            [(ngModel)]="rdbType"
-            class="ps-2"
-            style="padding: 15px"
-            [disabled]="lblTableLength > 0"
-            (change)="getChartOfAccount(); getRefCOA()"
-          >
+          <mat-radio-group aria-label="Select an option" [(ngModel)]="rdbType" class="ps-2" style="padding: 15px" [disabled]="lblTableLength > 0" (change)="getChartOfAccount(); getRefCOA()">
             <mat-radio-button value="Cash">Cash</mat-radio-button>
             &nbsp;&nbsp;&nbsp;
             <mat-radio-button value="Bank">Bank</mat-radio-button>

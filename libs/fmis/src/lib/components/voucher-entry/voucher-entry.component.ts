@@ -338,6 +338,9 @@ export class VoucherEntryComponent implements OnInit {
     this.lblTableLength = item;
   }
 
+
+
+  
   save(printSection: any) {
     this.voucherPrint.tableData = [];
     // this.lblTax = "Success";
@@ -387,10 +390,7 @@ export class VoucherEntryComponent implements OnInit {
       }
     }
 
-    this.dataService
-      .savetHttp(this.pageFields, this.formFields, 'core-api/InsertVoucher')
-      .subscribe(
-        (response: any) => {
+    this.dataService.savetHttp(this.pageFields, this.formFields, 'core-api/InsertVoucher').subscribe((response: any) => {
           console.log(response);
           if (response.msg == 'Data Saved Successfully') {
             this.valid.apiInfoResponse('record added successfully');
