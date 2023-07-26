@@ -10,4 +10,5 @@ export class VoucherInterface {
   InvoiceDetail = '';
   spType = '';
   UserID = '';
+  pType = '';
 }

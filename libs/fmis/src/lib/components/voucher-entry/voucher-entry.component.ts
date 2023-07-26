@@ -57,6 +57,7 @@ export class VoucherEntryComponent implements OnInit {
     InvoiceDetail: '', //8
     InvoiceDescription: '', //9
     Amount: '', //10
+    pType:'',//11
   };
 
   formFields: MyFormField[] = [
@@ -124,6 +125,12 @@ export class VoucherEntryComponent implements OnInit {
       value: this.pageFields.Amount,
       msg: 'Please enter amount',
       type: 'textbox',
+      required: false,
+    },
+    {
+      value: this.pageFields.pType,
+      msg: '',
+      type: 'hidden',
       required: false,
     },
   ];
@@ -389,6 +396,8 @@ export class VoucherEntryComponent implements OnInit {
         this.formFields[7].value = '0';
       }
     }
+
+    this.formFields[11].value = this.rdbType;
 
     this.dataService.savetHttp(this.pageFields, this.formFields, 'core-api/InsertVoucher').subscribe((response: any) => {
           console.log(response);
