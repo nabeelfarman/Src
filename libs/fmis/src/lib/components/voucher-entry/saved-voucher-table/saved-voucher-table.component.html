@@ -11,6 +11,7 @@
     <thead>
       <tr>
         <th>Voucher Date</th>
+        <th>Inv No</th>
         <th>Voucher No</th>
         <th>Payer / Payee</th>
         <th class="text-end">Amount</th>
@@ -22,17 +23,18 @@
       <tr *ngFor="let item of tableData | filter : tblSearch; let i = index">
         <td>{{ item.invoiceDate | date:'dd-MMM-YYYY' }}</td>
         <td>{{ item.invoiceNo }}</td>
+        <td>{{ item.voucherNo }} </td>
         <td>{{ item.partyName }}</td>
         <td class="text-end">{{ item.amount | number }}</td>
         <td class="text-center">{{ item.invType }}</td>
         <td class="text-center">
-          <span class="text-primary cursorPointer ps-2 pe-2" (click)="getVoucherDetail(item.invoiceNo)">
+          <span class="text-primary cursorPointer ps-2 pe-2" (click)="getVoucherDetail(item.invoiceNo)" >
             <mat-icon>list_alt</mat-icon>
           </span>
-          <span class="text-danger cursorPointer ps-2 pe-2" (click)="delete(item)" *ngIf="item.approvedStatus == false">
+          <span class="text-danger cursorPointer ps-2 pe-2" (click)="delete(item)" *ngIf="item.approvedStatus == false && item.invSubType != 'Rec Installment'">
             <mat-icon>delete</mat-icon>
           </span>
-          <span class="text-success cursorPointer ps-2 pe-2" (click)="printData(item)">
+          <span class="text-success cursorPointer ps-2 pe-2" (click)="printData(item)" *ngIf="item.invSubType != 'Rec Installment'">
             <mat-icon>print</mat-icon>
           </span>
         </td>

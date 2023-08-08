@@ -11,4 +11,5 @@ export class InstallmentVoucherInterface {
   UserID = '';
   spType = '';
   RefCOAID = '';
+  pType = '';
 }

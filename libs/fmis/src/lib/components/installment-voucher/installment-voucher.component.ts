@@ -41,6 +41,7 @@ export class InstallmentVoucherComponent implements OnInit {
     CoaID: '', //9
     Amount: '', //10
     RefCOAID: '', //11
+    pType: '' //12
   };
 
   formFields: MyFormField[] = [
@@ -116,6 +117,12 @@ export class InstallmentVoucherComponent implements OnInit {
       type: 'selectbox',
       required: true,
     },
+    {
+      value: this.pageFields.pType,
+      msg: 'select type',
+      type: 'selectbox',
+      required: false,
+    }
   ];
 
   partyList: any = [];
@@ -267,6 +274,7 @@ export class InstallmentVoucherComponent implements OnInit {
   }
 
   save(printSection: string) {
+    
     this.formFields[3].value = 1;
 
     this.formFields[7].value = '0';
@@ -278,8 +286,16 @@ export class InstallmentVoucherComponent implements OnInit {
       return;
     }
 
-    this.dataService
-      .savetHttp(
+
+    if (this.formFields[9].value == '1') {
+      this.formFields[12].value = 'Cash';
+    } else if (this.formFields[9].value == '2') {
+      this.formFields[12].value = 'Bank';
+    }
+
+
+
+    this.dataService.savetHttp(
         this.pageFields,
         this.formFields,
         'core-api/InsertInstallmentInvoice'
@@ -305,14 +321,13 @@ export class InstallmentVoucherComponent implements OnInit {
                 x.installmentTypeID == this.formFields[6].value
             );
 
-            this.installmentReport.lblInvoiceNo = response.invNo;
+            this.installmentReport.lblInvoiceNo = response.invNo + " / " + response.vchrNo;
             this.installmentReport.lblInvoiceDate = this.formFields[0].value;
             this.installmentReport.lblFileName = fileData[0].fileName;
             this.installmentReport.lblOwnerName = ownerData[0].partyName;
             this.installmentReport.lblAmount = this.formFields[10].value;
             this.installmentReport.lblDescription = this.formFields[8].value;
-            this.installmentReport.lblInstallmentType =
-              installmentData[0].installmentTypeName;
+            this.installmentReport.lblInstallmentType = installmentData[0].installmentTypeName;
             this.installmentReport.lblCoaTitle = coaData[0].coaTitle;
 
             setTimeout(() => this.globalService.printData(printSection), 500);
@@ -340,6 +355,7 @@ export class InstallmentVoucherComponent implements OnInit {
     this.paymentPlanList = [];
     this.formFields[11].value = '';
     this.formFields[7].value = '';
+    this.formFields[12].value = 'Cash';
   }
 
   printSavedData(item: any) {
@@ -349,7 +365,7 @@ export class InstallmentVoucherComponent implements OnInit {
     // if (item.bankReceiptNo == '' || item.bankReceiptNo == null) {
     //   item.bankReceiptNo = '-';
     // }
-    this.installmentReport.lblInvoiceNo = item.invoiceNo;
+    this.installmentReport.lblInvoiceNo = item.invoiceNo + " / " + item.voucherNo;
     this.installmentReport.lblInvoiceDate = item.invoiceDate;
     this.installmentReport.lblFileName = item.fileName;
     this.installmentReport.lblOwnerName = item.partyName;

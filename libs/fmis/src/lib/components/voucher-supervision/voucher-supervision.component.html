@@ -44,15 +44,9 @@
       <div class="col-md-2">
         <mat-form-field class="w-100">
           <mat-label>Voucher No</mat-label>
-          <mat-select
-            [(ngModel)]="formFields[0].value"
-            (ngModelChange)="getVoucherDetail(formFields[0].value)"
-          >
-            <mat-option
-              *ngFor="let item of voucherList"
-              [value]="item.invoiceNo"
-            >
-              {{ item.invoiceNo }}
+          <mat-select [(ngModel)]="formFields[0].value" (ngModelChange)="getVoucherDetail(formFields[0].value)">
+            <mat-option *ngFor="let item of voucherList" [value]="item.invoiceNo">
+              {{ item.invoiceNo }} / {{ item.voucherNo }}
             </mat-option>
           </mat-select>
         </mat-form-field>

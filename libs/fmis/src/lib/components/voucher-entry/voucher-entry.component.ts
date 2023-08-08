@@ -399,6 +399,7 @@ export class VoucherEntryComponent implements OnInit {
 
     this.formFields[11].value = this.rdbType;
 
+    
     this.dataService.savetHttp(this.pageFields, this.formFields, 'core-api/InsertVoucher').subscribe((response: any) => {
           console.log(response);
           if (response.msg == 'Data Saved Successfully') {
@@ -563,7 +564,7 @@ export class VoucherEntryComponent implements OnInit {
       this.voucherPrint.lblAccountType = 'Cash';
     }
 
-    this.voucherPrint.lblInvoiceNo = item.item.invoiceNo;
+    this.voucherPrint.lblInvoiceNo = item.item.invoiceNo + " / " + item.item.voucherNo;
     this.voucherPrint.lblVoucherType = item.item.invType;
     this.voucherPrint.lblVoucherDate = item.item.invoiceDate;
     this.voucherPrint.lblParty = item.item.partyName;
@@ -622,11 +623,8 @@ export class VoucherEntryComponent implements OnInit {
       (m: { projectID: any }) => m.projectID == data[0].projectID
     );
 
-    this.dataService
-      .getHttp('core-api/GetSpecificVocherDetail?InvoiceNo=' + item, '')
-      .subscribe(
-        (response: any) => {
-          this.voucherPrint.lblInvoiceNo = item;
+    this.dataService.getHttp('core-api/GetSpecificVocherDetail?InvoiceNo=' + item, '').subscribe((response: any) => {
+          this.voucherPrint.lblInvoiceNo = item + " / " + data[0].voucherNo;
           this.voucherPrint.lblVoucherType = data[0].invType;
           this.voucherPrint.lblVoucherDate = data[0].invoiceDate;
           // this.voucherPrint.lblAccountType = this.rdbType;
