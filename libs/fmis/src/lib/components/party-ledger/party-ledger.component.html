@@ -26,7 +26,7 @@
           *ngFor="let item of partyList | filter: searchParty"
           [value]="item.partyID"
         >
-          {{ item.partyName }}
+          {{ item.partyName }} ({{item.partyType}})
         </mat-option>
       </mat-select>
     </mat-form-field>

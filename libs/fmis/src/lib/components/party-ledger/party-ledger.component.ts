@@ -58,7 +58,7 @@ export class PartyLedgerComponent implements OnInit {
   }
 
   getParty() {
-    this.dataService.getHttp('core-api/getChartOfAccount', '').subscribe(
+    this.dataService.getHttp('core-api/GetVoucherParty?VoucherType=rec', '').subscribe(
       (response: any) => {
         this.partyList = response;
       },
@@ -71,11 +71,11 @@ export class PartyLedgerComponent implements OnInit {
   showReport() {
     this.lblAccountHead = '';
 
-    if (this.cmbCOA == '') {
-      this.valid.apiInfoResponse('select head of account');
-      return;
-    } else if (this.cmbParty == '') {
+    if (this.cmbParty == '') {
       this.valid.apiInfoResponse('select party');
+      return;
+    } else if (this.cmbCOA == '') {
+      this.valid.apiInfoResponse('select head of account');
       return;
     } else if (this.dtpFromDate == '') {
       this.valid.apiInfoResponse('select from date');
@@ -95,7 +95,7 @@ export class PartyLedgerComponent implements OnInit {
 
       this.dataService
         .getHttp(
-          'core-api/GetLedgerRpt?coaid=' +
+          'core-api/GetPartyLedgerRpt?coaid=' +
             this.cmbCOA +
             '&partyID=' +
             this.cmbParty +
@@ -107,6 +107,7 @@ export class PartyLedgerComponent implements OnInit {
         )
         .subscribe(
           (response: any) => {
+            alert(response.length);
             this.partyLedgerTable.tableData = response;
             this.lblDebit = 0;
             this.lblCredit = 0;
