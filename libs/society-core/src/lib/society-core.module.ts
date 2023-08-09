@@ -96,6 +96,7 @@ import { SoldFilesDetailComponent } from './components/reports/sold-files-detail
 import { SaleDetailCustomerWiseComponent } from './components/reports/sale-detail-customer-wise/sale-detail-customer-wise.component';
 import { SaleDetailDealerWiseComponent } from './components/reports/sale-detail-dealer-wise/sale-detail-dealer-wise.component';
 import { RemainingInstallmentReportComponent } from './components/reports/remaining-installment-report/remaining-installment-report.component';
+import { CustomerProfileReportComponent } from './components/reports/customer-profile-report/customer-profile-report.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -136,6 +137,7 @@ export const societyCoreRoutes: Route[] = [
   { path: 'rptsaledetcustomer', component: SaleDetailCustomerWiseComponent },
   { path: 'rptsaledetadvcomp', component: SaleDetailDealerWiseComponent },
   { path: 'rptremaininst', component: RemainingInstallmentReportComponent },
+  { path: 'customerprofilerpt', component: CustomerProfileReportComponent },
   // {
   //   path: 'membershipPaymentRpt',
   //   component: MembershipPaymentsReportComponent,
@@ -241,6 +243,7 @@ export const societyCoreRoutes: Route[] = [
     SaleDetailCustomerWiseComponent,
     SaleDetailDealerWiseComponent,
     RemainingInstallmentReportComponent,
+    CustomerProfileReportComponent,
   ],
   exports: [
     PlotCategoryTableComponent,

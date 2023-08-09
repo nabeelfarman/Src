@@ -78,6 +78,8 @@ import { VendorTableComponent } from './components/config/vendor/vendor-table/ve
 import { DepreciationTableComponent } from './components/config/fixed-asset/fixed-asset-table/depreciation-table/depreciation-table.component';
 import { CashBookSummaryPrintComponent } from './components/reports/cash-book/cash-book-summary-print/cash-book-summary-print.component';
 import { VoucherSupervisionTableComponent } from './components/voucher-supervision/voucher-supervision-table/voucher-supervision-table.component';
+import { PartyLedgerComponent } from './components/party-ledger/party-ledger.component';
+import { PartyLedgerTableComponent } from './components/party-ledger/party-ledger-table/party-ledger-table.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -109,6 +111,7 @@ export const fmisRoutes: Route[] = [
   { path: 'custbalSheet', component: CustomerBalanceSheetComponent },
   { path: 'fixedasset', component: FixedAssetComponent },
   { path: 'vendor', component: VendorComponent },
+  { path: 'partyledger', component: PartyLedgerComponent },
 ];
 
 @NgModule({
@@ -189,6 +192,8 @@ export const fmisRoutes: Route[] = [
     DepreciationTableComponent,
     CashBookSummaryPrintComponent,
     VoucherSupervisionTableComponent,
+    PartyLedgerComponent,
+    PartyLedgerTableComponent,
     // SearchPipe
   ],
   exports: [

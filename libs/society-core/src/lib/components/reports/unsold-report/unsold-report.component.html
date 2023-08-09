@@ -5,10 +5,52 @@
   </button>
 </div>
 
+<div class="container mt-5">
+  <div class="d-flex">
+    <mat-form-field class="w-100">
+      <mat-label>Category</mat-label>
+      <mat-select [(ngModel)]="cmbCategory" (ngModelChange)="getUnSoldFile()">
+        <mat-option>
+          <ngx-mat-select-search
+            [(ngModel)]="searchCategory"
+            [noEntriesFoundLabel]="'Not found'"
+            placeholderLabel="Search..."
+            name="search"
+          >
+          </ngx-mat-select-search>
+        </mat-option>
+        <mat-option
+          *ngFor="let item of categoryList | filter: searchCategory"
+          [value]="item.categoryId"
+        >
+          {{ item.categoryName }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="w-100 ms-2">
+      <mat-label>Block</mat-label>
+      <mat-select [(ngModel)]="cmbBlock" (ngModelChange)="getUnSoldFile()">
+        <mat-option>
+          <ngx-mat-select-search
+            [(ngModel)]="searchBlock"
+            [noEntriesFoundLabel]="'Not found'"
+            placeholderLabel="Search..."
+            name="search"
+          >
+          </ngx-mat-select-search>
+        </mat-option>
+        <mat-option
+          *ngFor="let item of blockList | filter: searchBlock"
+          [value]="item.blockId"
+        >
+          {{ item.blockName }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+</div>
 
-<div class="container bg-white mt-4" id="print-summary">
-  
-
+<div class="container bg-white mt-2" id="print-summary">
   <div class="row">
     <div class="col-md-12 text-center">
       <img [src]="logoImg" alt="Logo Loading" width="125px" />
@@ -21,14 +63,9 @@
     </div>
   </div>
 
-
-
   <hr />
-  
-  
-  
-  <!---------------------------- table start --------------------------->
 
+  <!---------------------------- table start --------------------------->
 
   <!--header -->
   <div class="row border-1-black mt-4 ml-1 me-1">
@@ -47,7 +84,7 @@
     <div class="col-md-2 border-left-black text-center">
       <label class="mt-1"><b>Type</b></label>
     </div>
-    
+
     <div class="col-md-2 border-left-black text-center">
       <label class="mt-1"><b>Size</b></label>
     </div>
@@ -55,39 +92,38 @@
     <div class="col-md-3 border-left-black text-center">
       <label class="mt-1"><b>Description</b></label>
     </div>
-
   </div>
 
   <!--detail -->
-  <div class="row border-1-black ml-1 me-1" *ngFor="let item of unSoldFileList; let i = index;" style="margin-top: -1 !important;">
+  <div
+    class="row border-1-black ml-1 me-1"
+    *ngFor="let item of unSoldFileList; let i = index"
+    style="margin-top: -1 !important"
+  >
     <div class="col-md-1 text-center height-27">
-      <label class="mt-1">{{i + 1}}</label>
+      <label class="mt-1">{{ i + 1 }}</label>
     </div>
 
     <div class="col-md-2 border-left-black">
-      <label class="mt-1">{{item.fileName}}</label>
+      <label class="mt-1">{{ item.fileName }}</label>
     </div>
 
     <div class="col-md-2 border-left-black">
-      <label class="mt-1">{{item.plotNatureTitle}}</label>
+      <label class="mt-1">{{ item.plotNatureTitle }}</label>
     </div>
 
     <div class="col-md-2 border-left-black">
-      <label class="mt-1">{{item.plotTypeTitle}}</label>
+      <label class="mt-1">{{ item.plotTypeTitle }}</label>
     </div>
 
     <div class="col-md-2 border-left-black">
-      <label class="mt-1">{{item.plotCategoryTitle}}</label>
+      <label class="mt-1">{{ item.plotCategoryTitle }}</label>
     </div>
 
     <div class="col-md-3 border-left-black">
-      <label class="mt-1">{{item.fileDescription}}</label>
+      <label class="mt-1">{{ item.fileDescription }}</label>
     </div>
-
   </div>
 
-
   <!------------------------------------- Table END -------------------------------------------------->
-
-
 </div>

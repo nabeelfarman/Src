@@ -1,0 +1,60 @@
+<!--Header -->
+<div class="row border-1-black mt-4 ml-1 me-1">
+  <div class="col-md-2 text-center height-27">
+    <label class="mt-1"><b>Date</b></label>
+  </div>
+
+  <div class="col-md-2 border-left-black text-center">
+    <label class="mt-1"><b>Party</b></label>
+  </div>
+
+  <div class="col-md-2 border-left-black text-center">
+    <label class="mt-1"><b>Narration</b></label>
+  </div>
+
+  <div class="col-md-2 border-left-black text-center">
+    <label class="mt-1"><b>Debit</b></label>
+  </div>
+
+  <div class="col-md-2 border-left-black text-center">
+    <label class="mt-1"><b>Credit</b></label>
+  </div>
+
+  <div class="col-md-2 border-left-black text-center">
+    <label class="mt-1"><b>Balance</b></label>
+  </div>
+</div>
+
+<!--Detail -->
+<div
+  class="row border-1-black ml-1 me-1"
+  *ngFor="let item of tableData; let i = index"
+  style="margin-top: -1"
+>
+  <div class="col-md-2 height-27">
+    <label class="mt-1"
+      >{{ item.invoiceDate | date }} ({{ item.invoiceNo }} /
+      {{ item.voucherNo }})</label
+    >
+  </div>
+
+  <div class="col-md-2 border-left-black">
+    <label class="mt-1">{{ item.partyName }}</label>
+  </div>
+
+  <div class="col-md-2 border-left-black">
+    <label class="mt-1">{{ item.invoiceDescription }}</label>
+  </div>
+
+  <div class="col-md-2 border-left-black text-right">
+    <label class="mt-1">{{ item.debit | number }}</label>
+  </div>
+
+  <div class="col-md-2 border-left-black text-right">
+    <label class="mt-1">{{ item.credit | number }}</label>
+  </div>
+
+  <div class="col-md-2 border-left-black text-right">
+    <label class="mt-1">{{ item.balance | number }}</label>
+  </div>
+</div>

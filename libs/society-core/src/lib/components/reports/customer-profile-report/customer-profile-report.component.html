@@ -1,0 +1,107 @@
+<div class="saveUpdateBar border mat-elevation-z2">
+  <button mat-button class="save" (click)="printReport('#print-summary')">
+    <mat-icon>print</mat-icon>
+    <span class="ps-2">Report</span>
+  </button>
+</div>
+
+<div class="container mt-5">
+  <mat-form-field class="w-50">
+    <mat-label>Party</mat-label>
+    <mat-select [(ngModel)]="cmbParty" (ngModelChange)="getReportList()">
+      <mat-option>
+        <ngx-mat-select-search
+          [(ngModel)]="searchParty"
+          [noEntriesFoundLabel]="'Not found'"
+          placeholderLabel="Search..."
+          name="search"
+        >
+        </ngx-mat-select-search>
+      </mat-option>
+      <mat-option
+        *ngFor="let item of partyList | filter: searchParty"
+        [value]="item.partyId"
+      >
+        {{ item.partyName }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+
+<div class="container bg-white mt-2" id="print-summary">
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <img [src]="logoImg" alt="Logo Loading" width="125px" />
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <h2 class="pt-1 clrBlack">SHAMA ROYAL CITY</h2>
+      <h4 class="clrBlack">Custommer Profile Report</h4>
+    </div>
+  </div>
+
+  <hr />
+
+  <!---------------------------- table start --------------------------->
+
+  <!--header -->
+  <div class="row border-1-black mt-4 ml-1 me-1">
+    <div class="col-md-1 text-center height-27">
+      <label class="mt-1"><b>Sr. #</b></label>
+    </div>
+
+    <div class="col-md-2 border-left-black text-center">
+      <label class="mt-1"><b>Customer Name</b></label>
+    </div>
+
+    <div class="col-md-2 border-left-black text-center">
+      <label class="mt-1"><b>CNIC</b></label>
+    </div>
+
+    <div class="col-md-2 border-left-black text-center">
+      <label class="mt-1"><b>Contact No.</b></label>
+    </div>
+
+    <!-- <div class="col-md-1 border-left-black text-center">
+        <label class="mt-1"><b>Heir</b></label>
+      </div> -->
+
+    <div class="col-md-5 border-left-black text-center">
+      <label class="mt-1"><b>Address</b></label>
+    </div>
+  </div>
+
+  <!--detail -->
+  <div
+    class="row border-1-black ml-1 me-1"
+    *ngFor="let item of tableData; let i = index"
+    style="margin-top: -1 !important"
+  >
+    <div class="col-md-1 text-center height-27">
+      <label class="mt-1">{{ i + 1 }}</label>
+    </div>
+
+    <div class="col-md-2 border-left-black">
+      <label class="mt-1">{{ item.partyName }}</label>
+    </div>
+
+    <div class="col-md-2 border-left-black">
+      <label class="mt-1">{{ item.partyCNIC }}</label>
+    </div>
+
+    <div class="col-md-2 border-left-black">
+      <label class="mt-1">{{ item.mobile }}</label>
+    </div>
+
+    <!-- <div class="col-md-1 border-left-black">
+        <label class="mt-1">{{item.nextToKin}}</label>
+      </div> -->
+
+    <div class="col-md-5 border-left-black">
+      <label class="mt-1">{{ item.partyAddress }}</label>
+    </div>
+  </div>
+
+  <!------------------------------------- Table END -------------------------------------------------->
+</div>

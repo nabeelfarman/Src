@@ -1,0 +1,113 @@
+<div class="saveUpdateBar border mat-elevation-z2">
+  <button mat-button class="save cursorPointer" (click)="showReport()">
+    <mat-icon>insert_drive_file</mat-icon>
+    <span class="ps-2">Report</span>
+  </button>
+  <button mat-button class="save cursorPointer" (click)="printData()">
+    <mat-icon>print</mat-icon>
+    <span class="ps-2">Print</span>
+  </button>
+</div>
+
+<div class="row pt-2 bg-white border">
+  <div class="col-md-3">
+    <mat-form-field class="w-100 ps-3">
+      <mat-label>Party</mat-label>
+      <mat-select [(ngModel)]="cmbParty">
+        <mat-option>
+          <ngx-mat-select-search
+            [(ngModel)]="searchParty"
+            [noEntriesFoundLabel]="'Not found'"
+            placeholderLabel="Search..."
+            name="search"
+          ></ngx-mat-select-search>
+        </mat-option>
+        <mat-option
+          *ngFor="let item of partyList | filter: searchParty"
+          [value]="item.partyID"
+        >
+          {{ item.partyName }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div class="col-md-3">
+    <mat-form-field class="w-100 ps-3">
+      <mat-label>Head of Account</mat-label>
+      <mat-select [(ngModel)]="cmbCOA">
+        <mat-option>
+          <ngx-mat-select-search
+            [(ngModel)]="searchAccHead"
+            [noEntriesFoundLabel]="'Not found'"
+            placeholderLabel="Search..."
+            name="search"
+          ></ngx-mat-select-search>
+        </mat-option>
+        <mat-option
+          *ngFor="let item of coaList | filter: searchAccHead"
+          [value]="item.coaID"
+        >
+          ({{ item.accountCode }}) ... {{ item.coaTitle }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div class="col-md-2">
+    <mat-form-field>
+      <mat-label>From Date</mat-label>
+      <input matInput [matDatepicker]="fromDate" [(ngModel)]="dtpFromDate" />
+      <mat-datepicker-toggle matSuffix [for]="fromDate"></mat-datepicker-toggle>
+      <mat-datepicker #fromDate></mat-datepicker>
+    </mat-form-field>
+  </div>
+  <div class="col-md-2">
+    <mat-form-field>
+      <mat-label>To Date</mat-label>
+      <input matInput [matDatepicker]="toDate" [(ngModel)]="dtpToDate" />
+      <mat-datepicker-toggle matSuffix [for]="toDate"></mat-datepicker-toggle>
+      <mat-datepicker #toDate></mat-datepicker>
+    </mat-form-field>
+  </div>
+</div>
+
+<div id="print-summary">
+  <div class="row mb-2 d-none">
+    <div class="col-md-6 text-left">
+      <img class="mt-1" src="assets/ui/company/shama.png" width="125px" />
+    </div>
+
+    <div class="col-md-6 text-right">
+      <div class="d-flex flex-column align-items-center">
+        <div class="h2Report"><b>SHAMA ROYAL CITY</b></div>
+        <div class="h4Report">A Project of: SARDAR ASSOCIATES</div>
+        <h2 class="h3Report txtDarkGrey mt-1">Party Ledger Report</h2>
+        <div class="h4Report" *ngIf="lblAccountHead != ''">
+          ({{ lblAccountHead }})
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr />
+
+  <society-ledger-table></society-ledger-table>
+  <!-- ledger summary footer -->
+
+  <div class="row bg-white border-1-black mt-2 ml-1 me-1">
+    <div class="col-md-6 text-left height-27">
+      <label class="mt-1">TOTAL</label>
+    </div>
+
+    <div class="col-md-2 border-left-black text-right">
+      <label class="mt-1">{{ lblDebit | number }}</label>
+    </div>
+
+    <div class="col-md-2 border-left-black text-right">
+      <label class="mt-1">{{ lblCredit | number }}</label>
+    </div>
+
+    <div class="col-md-2 border-left-black text-right">
+      <label class="mt-1">{{ lblDebit - lblCredit | number }}</label>
+    </div>
+  </div>
+</div>
