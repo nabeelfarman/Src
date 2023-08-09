@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PartyLedgerTableComponent implements OnInit {
   tableData: any = [];
+
   constructor() {}
 
   ngOnInit(): void {}

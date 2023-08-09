@@ -88,6 +88,7 @@ export class LedgerComponent implements OnInit {
   }
 
   showReport() {
+    console.log(this.ledgerTable);
     this.lblAccountHead = '';
 
     if (this.cmbCOA == '') {

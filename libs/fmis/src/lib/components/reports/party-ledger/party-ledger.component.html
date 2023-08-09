@@ -26,7 +26,7 @@
           *ngFor="let item of partyList | filter: searchParty"
           [value]="item.partyID"
         >
-          {{ item.partyName }} ({{item.partyType}})
+          {{ item.partyName }} ({{ item.partyType }})
         </mat-option>
       </mat-select>
     </mat-form-field>
@@ -90,7 +90,7 @@
 
   <hr />
 
-  <society-ledger-table></society-ledger-table>
+  <society-party-ledger-table></society-party-ledger-table>
   <!-- ledger summary footer -->
 
   <div class="row bg-white border-1-black mt-2 ml-1 me-1">

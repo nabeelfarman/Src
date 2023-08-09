@@ -32,6 +32,7 @@ export class PartyLedgerComponent implements OnInit {
   partyList: any = [];
 
   error: any;
+
   constructor(
     private dataService: SharedServicesDataModule,
     private globalService: SharedServicesGlobalDataModule,
@@ -58,14 +59,16 @@ export class PartyLedgerComponent implements OnInit {
   }
 
   getParty() {
-    this.dataService.getHttp('core-api/GetVoucherParty?VoucherType=rec', '').subscribe(
-      (response: any) => {
-        this.partyList = response;
-      },
-      (error: any) => {
-        console.log(error);
-      }
-    );
+    this.dataService
+      .getHttp('core-api/GetVoucherParty?VoucherType=rec', '')
+      .subscribe(
+        (response: any) => {
+          this.partyList = response;
+        },
+        (error: any) => {
+          console.log(error);
+        }
+      );
   }
 
   showReport() {
@@ -107,7 +110,6 @@ export class PartyLedgerComponent implements OnInit {
         )
         .subscribe(
           (response: any) => {
-            alert(response.length);
             this.partyLedgerTable.tableData = response;
             this.lblDebit = 0;
             this.lblCredit = 0;
