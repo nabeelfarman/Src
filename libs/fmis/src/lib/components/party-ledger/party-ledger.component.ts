@@ -109,6 +109,7 @@ export class PartyLedgerComponent implements OnInit {
           (response: any) => {
             alert(response.length);
             this.partyLedgerTable.tableData = response;
+
             this.lblDebit = 0;
             this.lblCredit = 0;
             this.lblBalance = 0;
